@@ -84,7 +84,7 @@ export class Parser {
     const body: Statement[] = [];
     const first = this.peek();
     while (!this.atEnd()) {
-      this.skipTrivia();
+      this.skipBlankLines();
       if (this.atEnd()) break;
       const stmt = this.parseStatement();
       if (stmt) body.push(stmt);
@@ -132,16 +132,17 @@ export class Parser {
     return this.next();
   }
 
-  /** Skip NEWLINE and COMMENT tokens. */
+  /** Skip NEWLINE and COMMENT tokens (used inside constructs where standalone
+   * comments need not be preserved, e.g. config/param/import lists). */
   private skipNewlines(): void {
     while (this.check(TokenType.NEWLINE) || this.check(TokenType.COMMENT)) {
       this.next();
     }
   }
 
-  /** Skip only leading NEWLINEs/COMMENTs (alias kept for readability). */
-  private skipTrivia(): void {
-    this.skipNewlines();
+  /** Skip only NEWLINE tokens, leaving COMMENTs to be preserved as passthrough. */
+  private skipBlankLines(): void {
+    while (this.check(TokenType.NEWLINE)) this.next();
   }
 
   /* ── statement dispatch ────────────────────────────────────────────── */
@@ -152,10 +153,21 @@ export class Parser {
    * @returns The parsed statement, or `null` if only trivia was consumed.
    */
   private parseStatement(): Statement | null {
-    this.skipTrivia();
+    this.skipBlankLines();
     if (this.atEnd()) return null;
 
     const t = this.peek();
+
+    // Preserve a standalone comment as a passthrough chunk.
+    if (t.type === TokenType.COMMENT) {
+      this.next();
+      return {
+        type: "TSPassthrough",
+        line: t.line,
+        col: t.col,
+        raw: t.value,
+      };
+    }
 
     // Decorators.
     if (t.type === TokenType.DECORATOR) {
@@ -313,8 +325,17 @@ export class Parser {
    * Collect source text from the current position until `stop` returns true at
    * bracket depth 0 (the stopping token is NOT consumed). Returns the trimmed
    * verbatim source slice.
+   *
+   * @param stop Predicate evaluated (at depth 0) to decide where to stop.
+   * @param opts.angles When true, `<`/`>` (including `<<`, `>>`, `>>>`) also
+   *   contribute to depth — needed when collecting type annotations so that
+   *   generic commas/braces (e.g. `Map<string, number>`, `Promise<{x:1}>`) are
+   *   not mistaken for separators or block openers.
    */
-  private rawUntil(stop: (t: Token, depth: number) => boolean): string {
+  private rawUntil(
+    stop: (t: Token, depth: number) => boolean,
+    opts: { angles?: boolean } = {},
+  ): string {
     let startOffset = -1;
     let endOffset = -1;
     let depth = 0;
@@ -327,12 +348,33 @@ export class Parser {
       }
       if (this.isOpen(tk)) depth++;
       else if (this.isClose(tk)) depth--;
+      else if (opts.angles) depth += this.angleDelta(tk);
+      if (depth < 0) depth = 0;
       if (startOffset < 0) startOffset = tk.start;
       endOffset = tk.end;
       this.next();
     }
     if (startOffset < 0) return "";
     return this.src.slice(startOffset, endOffset).trim();
+  }
+
+  /** Depth contribution of a token when angle-bracket tracking is enabled. */
+  private angleDelta(t: Token): number {
+    if (t.type !== TokenType.OPERATOR) return 0;
+    switch (t.value) {
+      case "<":
+        return 1;
+      case "<<":
+        return 2;
+      case ">":
+        return -1;
+      case ">>":
+        return -2;
+      case ">>>":
+        return -3;
+      default:
+        return 0;
+    }
   }
 
   /* ── Layer 2: atom ─────────────────────────────────────────────────── */
@@ -349,6 +391,7 @@ export class Parser {
         (t) =>
           (t.type === TokenType.OPERATOR && t.value === "=") ||
           t.type === TokenType.NEWLINE,
+        { angles: true },
       );
     }
 
@@ -394,7 +437,7 @@ export class Parser {
     let returnType: string | undefined;
     if (this.check(TokenType.ARROW)) {
       this.next();
-      returnType = this.rawUntil((t) => t.type === TokenType.LBRACE);
+      returnType = this.rawUntil((t) => t.type === TokenType.LBRACE, { angles: true });
     }
 
     const body = this.parseBraceBody();
@@ -429,6 +472,7 @@ export class Parser {
           (t) =>
             (t.type === TokenType.PUNCTUATION && (t.value === "," || t.value === ")")) ||
             (t.type === TokenType.OPERATOR && t.value === "="),
+          { angles: true },
         );
       }
 
@@ -465,11 +509,11 @@ export class Parser {
   private parseBraceBody(): Statement[] {
     this.expect(TokenType.LBRACE);
     const body: Statement[] = [];
-    this.skipNewlines();
+    this.skipBlankLines();
     while (!this.check(TokenType.RBRACE) && !this.atEnd()) {
       const stmt = this.parseStatement();
       if (stmt) body.push(stmt);
-      this.skipNewlines();
+      this.skipBlankLines();
     }
     this.expect(TokenType.RBRACE);
     return body;

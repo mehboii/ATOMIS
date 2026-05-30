@@ -242,15 +242,16 @@ export class Transformer {
 
   private emitMatch(stmt: MatchExpr, indent: number): void {
     const disc = rewriteResultSugar(stmt.discriminant);
-    let first = true;
+    let emittedIf = false;
     for (const arm of stmt.arms) {
       const body = `{ ${rewriteResultSugar(arm.result.trim())} }`;
       const pattern = rewriteResultSugar(arm.pattern.trim());
       if (arm.isWildcard) {
-        this.emit(`else ${body}`, indent, arm.line);
-      } else if (first) {
+        // A wildcard with no preceding branch is a standalone block, not `else`.
+        this.emit(emittedIf ? `else ${body}` : body, indent, arm.line);
+      } else if (!emittedIf) {
         this.emit(`if (${disc} === ${pattern}) ${body}`, indent, arm.line);
-        first = false;
+        emittedIf = true;
       } else {
         this.emit(`else if (${disc} === ${pattern}) ${body}`, indent, arm.line);
       }
