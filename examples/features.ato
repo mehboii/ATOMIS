@@ -1,0 +1,14 @@
+pure fn classify(n: number) -> Result<string, Error> {
+  guard n >= 0 else { return Err(new Error("negative")) }
+  return Ok("ok")
+}
+
+fn label(x: number) -> string {
+  match x {
+    0 => "zero",
+    1 => "one",
+    _ => "many"
+  }
+}
+
+let parsed: Result<number, string> = Ok(42)

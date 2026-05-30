@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Atomis transpiler artifacts
+*.ts.ato.map
+*.__atomis__.ts
+
+# Logs / OS
+npm-debug.log*
+*.log
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/

@@ -1,0 +1,26 @@
+@import { mesh, GhostChannel } from "ghostnet/core"
+
+atom activeNodes: Node[] = []
+
+node relay "node-01" {
+  type: esp32
+  transport: [bluetooth, tcp]
+  encrypt: aes256
+}
+
+channel "ghostchat" {
+  peers: ["node-01"]
+  e2e: true
+  persist: false
+}
+
+connect "ghostchat" -> "node-01" via bluetooth
+
+@cell #scan
+activeNodes = await mesh.scan()
+output(`Found ${activeNodes.length} peers`)
+
+fn sendMsg(text: string) -> void {
+  guard text.length > 0 else { return }
+  channel.send("ghostchat", text)
+}

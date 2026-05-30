@@ -1,0 +1,27 @@
+{
+  "name": "atomis",
+  "version": "0.1.0",
+  "description": "Atomis — a transpiled language that compiles to TypeScript with GhostNet network primitives.",
+  "license": "MIT",
+  "bin": {
+    "atomis": "dist/cli.js"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node dist/tests/lexer.test.js && node dist/tests/parser.test.js",
+    "atomis": "node dist/cli.js"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "chokidar": "^3.5.3"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0",
+    "@types/node": "^20.11.0"
+  }
+}

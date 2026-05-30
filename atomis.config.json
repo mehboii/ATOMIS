@@ -1,0 +1,14 @@
+{
+  "target": "ghostnet",
+  "outDir": "./dist",
+  "srcDir": "./src",
+  "ghostnet": {
+    "sdkPath": "./ghostnet-sdk",
+    "platform": "node"
+  },
+  "notebook": {
+    "runtime": "atomis-notebook",
+    "outputFormat": "html"
+  },
+  "strict": true
+}
