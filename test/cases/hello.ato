@@ -1,0 +1,7 @@
+fn greet(name: string) -> string {
+  guard name.length > 0 else { return "anonymous" }
+  return `hello ${name}`
+}
+
+let msg: string = greet("atomis")
+output(msg)
