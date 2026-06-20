@@ -1,0 +1,7 @@
+pure fn bad() -> void {
+  output("hi")
+  console.log("x")
+}
+async pure fn slow() -> void {
+  await thing()
+}

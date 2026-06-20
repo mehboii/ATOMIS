@@ -8,6 +8,9 @@ dist/
 *.ts.ato.map
 *.__atomis__.ts
 
+# Parity harness temp output (run-parity.ps1)
+.parity-tmp/
+
 # Logs / OS
 npm-debug.log*
 *.log

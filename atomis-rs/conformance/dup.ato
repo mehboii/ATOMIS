@@ -1,0 +1,4 @@
+atom x = 1
+atom x = 2
+fn foo() -> void {}
+fn foo() -> void {}

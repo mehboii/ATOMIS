@@ -1,0 +1,5 @@
+node "n1" {}
+node "n1" {}
+channel "c1" {}
+channel "c1" {}
+connect "cX" -> "nX" via bogus

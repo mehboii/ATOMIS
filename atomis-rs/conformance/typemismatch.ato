@@ -1,0 +1,4 @@
+atom a: string = 42
+atom b: number = "hi"
+atom c: boolean = 3
+atom d: Node[] = something

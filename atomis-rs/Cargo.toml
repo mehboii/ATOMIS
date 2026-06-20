@@ -1,0 +1,30 @@
+[package]
+name = "atomis"
+version = "0.1.0"
+description = "Atomis — a transpiled language that compiles to TypeScript with GhostNet network primitives. (Rust port of the TypeScript reference transpiler.)"
+license = "MIT"
+edition = "2021"
+
+[[bin]]
+name = "atomis"
+path = "src/main.rs"
+
+# Dependencies: intentionally NONE.
+#
+# The whole pipeline is hand-written, so the only third-party temptations were
+# (a) a CLI parser (clap) and (b) a file watcher (notify). Both were declined on
+# purpose:
+#   * clap would change `--help`/error text and flag-parsing semantics; the port
+#     must mirror cli.ts's tiny custom arg parser byte-for-byte, so it is
+#     reproduced by hand instead.
+#   * `notify` was replaced with a small std-only polling watcher (functionally
+#     equivalent to chokidar's add/change → rebuild behaviour).
+#   * The few JS regexes (word-boundary purity/await checks) are replicated as
+#     explicit code so there is zero risk of a regex-engine discrepancy breaking
+#     byte-identical diagnostics.
+# Net effect: `cargo build` needs no network and has no supply-chain surface.
+
+[dependencies]
+
+[profile.release]
+opt-level = 3
