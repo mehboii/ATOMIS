@@ -1,0 +1,34 @@
+[package]
+# Package name is `proto` so the vendored Node package and the `.ato` import are
+# simply `proto` (the directory keeps the full `ghostnet-proto` identity).
+name = "proto"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "ghostnet-proto: the shared GhostNet wire format. Canonical CBOR over plain serde types. No crypto."
+
+[lib]
+# cdylib: required by wasm-pack. rlib: lets native tests/consumers link it.
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# The Rust types ARE the spec; serde derives turn them into the wire format.
+serde = { version = "1", features = ["derive"] }
+# CBOR codec. We do NOT hand-roll CBOR.
+ciborium = "0.2"
+# Makes opaque byte fields (ciphertext) encode as a CBOR byte string, not an
+# array of integers. Pure encoding helper — not crypto.
+serde_bytes = "0.11"
+
+# wasm-only: bindgen + a JS<->serde bridge so `.ato`/JS can pass plain objects.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+serde-wasm-bindgen = "0.6"
+
+[target.'cfg(target_arch = "wasm32")'.dev-dependencies]
+wasm-bindgen-test = "0.3"
+
+[profile.release]
+panic = "abort"
+opt-level = 3
+lto = true

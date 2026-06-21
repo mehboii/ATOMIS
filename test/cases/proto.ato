@@ -1,0 +1,29 @@
+// proto.ato — proves ghostnet-proto is importable and usable from ATOMIS code.
+// Run it with:  atomis run test/cases/proto.ato
+@import { encode, decode } from "proto"
+
+// Build a message: an Envelope (version, id, body) wrapping a Hello.
+const message = {
+  version: 1,
+  id: 7,
+  body: {
+    Hello: {
+      node_id: "node-A",
+      proto_version: 1,
+      capabilities: ["relay", "store"],
+      sent_at: 1718000000000
+    }
+  }
+}
+
+// Encode to canonical CBOR bytes, then decode back.
+const bytes = encode(message)
+const back = decode(bytes)
+
+output(`encoded ${bytes.length} bytes`)
+output(`decoded node_id: ${back.body.Hello.node_id}`)
+
+// Assert the round-trip; `guard` is ATOMIS sugar for `if (!(...)) { ... }`.
+guard back.body.Hello.node_id === "node-A" else { throw new Error("proto round-trip MISMATCH") }
+guard back.id === 7 else { throw new Error("proto id mismatch") }
+output("proto round-trip OK")
