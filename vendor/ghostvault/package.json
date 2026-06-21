@@ -1,0 +1,13 @@
+{
+  "name": "ghostvault",
+  "description": "Sealed-secret vault for ATOMIS (native + wasm). AES-256-GCM AEAD, Argon2id KDF, self-describing portable sealed-blob format.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "ghostvault_bg.wasm",
+    "ghostvault.js",
+    "ghostvault.d.ts"
+  ],
+  "main": "ghostvault.js",
+  "types": "ghostvault.d.ts"
+}
