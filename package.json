@@ -19,7 +19,8 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
-    "ghostvault": "file:vendor/ghostvault"
+    "ghostvault": "file:vendor/ghostvault",
+    "proto": "file:vendor/proto"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
