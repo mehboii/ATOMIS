@@ -20,6 +20,10 @@ if (cases.length === 0) {
 let passed = 0;
 let failed = 0;
 
+// Normalize line endings so a run can't pass on Windows (CRLF) yet fail on
+// Linux/macOS CI (LF), or vice-versa. Applied to BOTH expected and actual.
+const normalize = (s) => s.replace(/\r\n/g, '\n').replace(/\r/g, '\n').trim();
+
 for (const caseName of cases) {
   const inputPath = join(casesDir, caseName);
   const stem = basename(caseName, '.ato');
@@ -31,14 +35,14 @@ for (const caseName of cases) {
     continue;
   }
 
-  const expected = readFileSync(expectedPath, 'utf8').trim();
+  const expected = normalize(readFileSync(expectedPath, 'utf8'));
 
   let actual;
   try {
-    actual = execFileSync(process.execPath, [cli, 'run', inputPath], {
+    actual = normalize(execFileSync(process.execPath, [cli, 'run', inputPath], {
       encoding: 'utf8',
       timeout: 15000,
-    }).trim();
+    }));
   } catch (err) {
     const msg = err.stdout ? err.stdout.trim() : err.message;
     console.log(`✗ ${caseName} — execution error: ${msg}`);

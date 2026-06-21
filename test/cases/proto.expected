@@ -1,0 +1,3 @@
+encoded 100 bytes
+decoded node_id: node-A
+proto round-trip OK
