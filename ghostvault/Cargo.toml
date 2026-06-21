@@ -1,0 +1,41 @@
+[package]
+name = "ghostvault"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Sealed-secret vault for ATOMIS (native + wasm). AES-256-GCM AEAD, Argon2id KDF, self-describing portable sealed-blob format."
+
+[lib]
+# cdylib: required by wasm-pack. rlib: lets native tests/consumers link it.
+crate-type = ["cdylib", "rlib"]
+
+[features]
+# Exactly one KDF profile must be enabled. It only selects the DEFAULT sealing
+# parameters; opening always honours the parameters recorded in the blob header,
+# so blobs remain portable across profiles/targets.
+default = ["kdf-strong"]
+kdf-strong = []     # Argon2id high-memory  (native default)
+kdf-portable = []   # Argon2id low-memory   (wasm default; meets documented floor)
+
+[dependencies]
+# Crypto comes from vetted RustCrypto crates behind the `CryptoProvider` trait in
+# lib.rs. A future Rust `ghostnet-crypto` can be swapped in by implementing that
+# trait — no call site changes. (The existing ghostnet-crypto is TypeScript and
+# cannot be a Rust dependency; see README.)
+aes-gcm = { version = "0.10", default-features = false, features = ["aes", "alloc"] }
+argon2 = { version = "0.5", default-features = false, features = ["alloc"] }
+zeroize = { version = "1.7", features = ["derive"] }
+getrandom = "0.2"
+
+# wasm-only: bindgen + getrandom's browser/Node entropy backend.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+getrandom = { version = "0.2", features = ["js"] }
+
+[target.'cfg(target_arch = "wasm32")'.dev-dependencies]
+wasm-bindgen-test = "0.3"
+
+[profile.release]
+panic = "abort"     # required: no unwinding through crypto/secret state
+opt-level = 3
+lto = true
