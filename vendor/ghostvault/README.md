@@ -119,26 +119,13 @@ The wasm test suite includes `opens_native_sealed_blob`, which opens a blob
 sealed by the native build (`tests/vectors/native.blob`, produced by
 `examples/gen_vector.rs`) — the cross-target round-trip.
 
-## ATOMIS integration (wired)
+## ATOMIS integration (deferred, by decision)
 
 ATOMIS is a **transpiler**: `atomis run foo.ato` compiles `.ato` → TypeScript and
-shells out to `ts-node`/Node (proof: `cmdRun` in `src/cli.ts`). `@import { x }
-from "ghostvault"` is emitted verbatim as a Node `import` resolved at runtime.
-
-So the vault is wired by building the **Node target** of this crate and vendoring
-it as a Node-resolvable package:
-
-```sh
-wasm-pack build --target nodejs --release --out-dir ../vendor/ghostvault \
-  -- --no-default-features --features kdf-portable
-# repo package.json: "ghostvault": "file:vendor/ghostvault"  → npm install
-```
-
-`.ato` code then imports it directly (see `test/cases/vault.ato`):
-
-```
-@import { vault_unlock, vault_seal, vault_open_sealed, vault_free } from "ghostvault"
-```
-
-Note: because Node executes the transpiled output, the vault runs as wasm under
-Node — the wasm caveats above apply, not the native hardening.
+shells out to `ts-node`/Node (proof: `cmdRun` in `src/cli.ts`). It has no
+binary-embedded runtime or builtin table, and `@import { x } from "vault"` is
+emitted verbatim as a Node `import` resolved at runtime. So "shipped inside the
+atomis binary" is not achievable under the current architecture without changing
+the execution model. This crate is therefore delivered standalone; the chosen
+wiring path (e.g. vendoring the wasm `pkg` as a Node-resolvable module the
+generated TS imports) is a separate, follow-up step.

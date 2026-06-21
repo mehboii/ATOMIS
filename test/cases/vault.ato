@@ -1,0 +1,20 @@
+// vault.ato — proves ghostvault is importable and usable from ATOMIS code.
+// Run it with:  atomis run test/cases/vault.ato
+@import { vault_unlock, vault_seal, vault_open_sealed, vault_free } from "ghostvault"
+
+const secret = "attack at dawn"
+
+// Unlock a vault (returns an opaque handle), seal a string, open it back.
+const handle = vault_unlock(Buffer.from("correct horse battery staple", "utf8"))
+const blob = vault_seal(handle, Buffer.from(secret, "utf8"))
+const opened = Buffer.from(vault_open_sealed(handle, blob)).toString("utf8")
+
+output(`sealed ${blob.length} bytes`)
+output(`opened: ${opened}`)
+
+// Assert the round-trip; `guard` is ATOMIS sugar for `if (!(...)) { ... }`.
+guard opened === secret else { throw new Error("round-trip MISMATCH") }
+output("vault round-trip OK")
+
+// Free/zeroize the vault; the handle is now stale.
+vault_free(handle)
