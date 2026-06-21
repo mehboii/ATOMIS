@@ -1,0 +1,4 @@
+# Keep test fixtures LF on every OS so CI comparisons are stable.
+# (The case runner also normalizes line endings at compare time.)
+*.expected text eol=lf
+*.ato text eol=lf

@@ -9,7 +9,10 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "node dist/tests/lexer.test.js && node dist/tests/parser.test.js",
+    "test": "npm run test:unit && npm run test:cases",
+    "test:unit": "node dist/tests/lexer.test.js && node dist/tests/parser.test.js",
+    "test:cases": "node test/run-cases.js",
+    "test:cases:update": "node test/run-cases.js --update",
     "atomis": "node dist/cli.js"
   },
   "engines": {
