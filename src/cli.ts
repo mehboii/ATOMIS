@@ -16,7 +16,7 @@
  * Configuration is read from `atomis.config.json` when present.
  */
 
-import { spawn, spawnSync } from "child_process";
+import { spawnSync } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
 import * as readline from "readline";
@@ -50,8 +50,26 @@ const DEFAULT_CONFIG: AtomisConfig = {
  * @param argv Raw process arguments (excluding `node` and script path).
  */
 export function main(argv: string[]): void {
+  try { dispatch(argv); }
+  catch (err) { console.error(chalk.red((err as Error).message)); process.exitCode = 1; }
+}
+
+function dispatch(argv: string[]): void {
   const [command, ...rest] = argv;
+  if (["build", "watch", "run", "check"].includes(command)) {
+    let positionals = 0;
+    for (let i = 0; i < rest.length; i++) {
+      if (rest[i].startsWith("-")) {
+        if (!["build", "watch"].includes(command) || rest[i] !== "--out" || !rest[i+1] || rest[i+1].startsWith("-")) throw new Error(`Invalid or incomplete option: ${rest[i]}`);
+        i++;
+      } else positionals++;
+    }
+    if (positionals > 1) throw new Error("Expected at most one source path");
+  }
   switch (command) {
+    case "--version":
+    case "-V":
+      console.log(require("../package.json").version); break;
     case "build":
       cmdBuild(rest);
       break;
@@ -139,6 +157,7 @@ function cmdBuild(args: string[]): void {
  * @returns Whether the build succeeded (no error diagnostics).
  */
 function buildFile(inputPath: string, outputPath: string): boolean {
+  if (!inputPath.endsWith(".ato")) throw new Error("Source file must have .ato extension");
   const source = fs.readFileSync(inputPath, "utf8");
   const result = compile(source, {
     fileName: inputPath,
@@ -204,8 +223,9 @@ function cmdRun(args: string[]): void {
     process.exitCode = 1;
     return;
   }
+  if (!file.endsWith(".ato")) throw new Error("Source file must have .ato extension");
   const source = fs.readFileSync(file, "utf8");
-  const tmpPath = file.replace(/\.ato$/, ".__atomis__.ts");
+  const tmpPath = path.join(path.dirname(file), `.${path.basename(file)}.${process.pid}.${require("crypto").randomBytes(8).toString("hex")}.ts`);
   const result = compile(source, {
     fileName: file,
     outputFile: tmpPath,
@@ -216,18 +236,13 @@ function cmdRun(args: string[]): void {
     process.exitCode = 1;
     return;
   }
-  fs.writeFileSync(tmpPath, result.code, "utf8");
-
-  const tsNode = resolveBin("ts-node");
-  const child = spawn(tsNode, [tmpPath], { stdio: "inherit", shell: process.platform === "win32" });
-  child.on("exit", (code) => {
-    try {
-      fs.unlinkSync(tmpPath);
-    } catch {
-      /* ignore cleanup failure */
-    }
-    process.exitCode = code ?? 0;
-  });
+  fs.writeFileSync(tmpPath, result.code, { encoding: "utf8", flag: "wx" });
+  try {
+    const tsNode = require.resolve("ts-node/dist/bin.js");
+    const result = spawnSync(process.execPath, [tsNode, tmpPath], { stdio: "inherit" });
+    if (result.error) throw result.error;
+    process.exitCode = result.status ?? 1;
+  } finally { fs.unlinkSync(tmpPath); }
 }
 
 /* ── check ─────────────────────────────────────────────────────────── */
@@ -241,6 +256,7 @@ function cmdCheck(args: string[]): void {
     process.exitCode = 1;
     return;
   }
+  if (!file.endsWith(".ato")) throw new Error("Source file must have .ato extension");
   const source = fs.readFileSync(file, "utf8");
   const result = compile(source, { fileName: file, outputFile: file + ".ts", sourceMap: false });
   printDiagnostics(file, result.analysis.diagnostics);
@@ -303,7 +319,7 @@ function findAtoFiles(dir: string): string[] {
     if (entry.isDirectory()) out.push(...findAtoFiles(full));
     else if (entry.name.endsWith(".ato")) out.push(full);
   }
-  return out;
+  return out.sort();
 }
 
 /** Parse `--flag value` / `--flag` style arguments and positionals. */
@@ -326,13 +342,6 @@ function parseArgs(args: string[]): { positionals: string[]; flags: Record<strin
     }
   }
   return { positionals, flags };
-}
-
-/** Resolve a binary from local node_modules/.bin, falling back to PATH. */
-function resolveBin(name: string): string {
-  const binName = process.platform === "win32" ? `${name}.cmd` : name;
-  const local = path.join(process.cwd(), "node_modules", ".bin", binName);
-  return fs.existsSync(local) ? local : name;
 }
 
 /** Print CLI usage. */

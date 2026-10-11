@@ -5,8 +5,8 @@
  * Hand-written lexer (tokenizer) for the Atomis language.
  *
  * It converts `.ato` source text into a flat {@link Token} stream consumed by
- * the parser. The lexer understands the full set of TypeScript lexical tokens
- * needed for passthrough plus the additional Atomis / GhostNet keywords and
+ * the parser. The lexer recognizes a subset of TypeScript lexical forms
+ * plus additional Atomis / GhostNet keywords and
  * the `->` arrow operator.
  *
  * Notable handling:
@@ -33,6 +33,7 @@ export enum TokenType {
   NEWLINE = "NEWLINE",
   COMMENT = "COMMENT",
   EOF = "EOF",
+  INVALID = "INVALID",
 }
 
 /** A single lexical token with source position. */
@@ -342,6 +343,10 @@ export class Lexer {
     while (!this.atEnd() && !(this.peek() === "*" && this.peek(1) === "/")) {
       text += this.advance();
     }
+    if (this.atEnd()) {
+      this.push(TokenType.INVALID, "Unterminated block comment", line, col);
+      return;
+    }
     if (!this.atEnd()) {
       text += this.advance(); // *
       text += this.advance(); // /
@@ -360,9 +365,11 @@ export class Lexer {
       if (this.peek() === "\n") break; // unterminated; stop at newline
       text += this.advance();
     }
-    if (!this.atEnd() && this.peek() === quote) {
-      text += this.advance(); // closing quote
+    if (this.atEnd() || this.peek() !== quote) {
+      this.push(TokenType.INVALID, "Unterminated string", line, col);
+      return;
     }
+    text += this.advance(); // closing quote
     this.push(TokenType.STRING, text, line, col);
   }
 
@@ -371,35 +378,44 @@ export class Lexer {
    * interpolation regions (including nested braces) as a single STRING token.
    */
   private scanTemplate(line: number, col: number): void {
-    let text = this.advance(); // opening backtick
-    while (!this.atEnd() && this.peek() !== "`") {
-      if (this.peek() === "\\") {
-        text += this.advance();
-        if (!this.atEnd()) text += this.advance();
-        continue;
-      }
-      if (this.peek() === "$" && this.peek(1) === "{") {
-        text += this.advance(); // $
-        text += this.advance(); // {
-        let depth = 1;
-        while (!this.atEnd() && depth > 0) {
-          const c = this.peek();
-          if (c === "{") depth++;
-          else if (c === "}") depth--;
-          if (depth === 0) {
-            text += this.advance(); // closing }
-            break;
+    const start = this.pos;
+    this.advance();
+    const contexts = [0]; // 0 = template text, positive = interpolation braces
+    while (!this.atEnd() && contexts.length) {
+      const mode = contexts[contexts.length - 1], c = this.peek();
+      if (mode === 0) {
+        if (c === "\\") { this.advance(); if (!this.atEnd()) this.advance(); }
+        else if (c === "`") { this.advance(); contexts.pop(); }
+        else if (c === "$" && this.peek(1) === "{") { this.advance(); this.advance(); contexts.push(1); }
+        else this.advance();
+      } else {
+        if (c === '"' || c === "'") {
+          const quote = this.advance(); let closed = false;
+          while (!this.atEnd()) {
+            const c = this.advance();
+            if (c === "\\") { if (!this.atEnd()) this.advance(); }
+            else if (c === quote) { closed = true; break; }
+            else if (c === "\n") break;
           }
-          text += this.advance();
-        }
-        continue;
+          if (!closed) break;
+        } else if (c === "`") { this.advance(); contexts.push(0); }
+        else if (c === "/" && this.peek(1) === "/") {
+          while (!this.atEnd() && this.peek() !== "\n") this.advance();
+        } else if (c === "/" && this.peek(1) === "*") {
+          this.advance(); this.advance();
+          while (!(this.atEnd() || this.peek() === "*" && this.peek(1) === "/")) this.advance();
+          if (this.atEnd()) break;
+          this.advance(); this.advance();
+        } else if (c === "{") { this.advance(); contexts[contexts.length-1]++; }
+        else if (c === "}") { this.advance(); if (--contexts[contexts.length-1] === 0) contexts.pop(); }
+        else this.advance();
       }
-      text += this.advance();
+      if (contexts.length > 64 || (contexts[contexts.length-1] ?? 0) > 64) {
+        this.push(TokenType.INVALID, "Maximum template nesting depth (64) exceeded", line, col); return;
+      }
     }
-    if (!this.atEnd() && this.peek() === "`") {
-      text += this.advance(); // closing backtick
-    }
-    this.push(TokenType.STRING, text, line, col);
+    if (contexts.length) this.push(TokenType.INVALID, "Unterminated template literal", line, col);
+    else this.push(TokenType.STRING, this.src.slice(start, this.pos), line, col);
   }
 
   private scanDecorator(line: number, col: number): void {

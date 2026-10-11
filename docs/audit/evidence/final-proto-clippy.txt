@@ -1,0 +1,2 @@
+    Checking proto v0.1.0 (C:\Users\novtw\Music\atomis\ghostnet-proto)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.77s

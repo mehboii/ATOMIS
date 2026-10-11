@@ -1,0 +1,29 @@
+   Compiling ghostvault v0.1.0 (C:\Users\novtw\Music\atomis\ghostvault)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.42s
+     Running unittests src\lib.rs (ghostvault\target\debug\deps\ghostvault-854a6380b4bdc6bf.exe)
+
+running 9 tests
+test tests::cross_profile_blobs_open_either_way ... ok
+test tests::downgraded_mem_cost_rejected ... ok
+test tests::empty_passphrase_rejected ... ok
+test tests::empty_plaintext_roundtrips ... ok
+test tests::header_layout_is_stable ... ok
+test tests::oversize_and_truncated_rejected ... ok
+test tests::roundtrip ... ok
+test tests::tamper_is_rejected ... ok
+test tests::wrong_passphrase_fails_generically ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 36.73s
+
+     Running tests\wasm.rs (ghostvault\target\debug\deps\wasm-8b1a2b2595661c48.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\gen_vector.rs (ghostvault\target\debug\examples\gen_vector-bb33bdf157246c16.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

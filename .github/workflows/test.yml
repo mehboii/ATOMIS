@@ -20,7 +20,19 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci --ignore-scripts
+
+      - name: Rust toolchain
+        run: rustup toolchain install 1.96.0 --profile minimal --component rustfmt --component clippy
+
+      - name: Rust formatting
+        run: cargo +1.96.0 fmt --manifest-path atomis-rs/Cargo.toml --all -- --check
+
+      - name: Rust checks and tests
+        run: |
+          cargo +1.96.0 check --manifest-path atomis-rs/Cargo.toml --all-targets --locked
+          cargo +1.96.0 test --manifest-path atomis-rs/Cargo.toml --all-targets --locked
+          cargo +1.96.0 clippy --manifest-path atomis-rs/Cargo.toml --all-targets --all-features --locked -- -D warnings
 
       - name: Build
         run: npm run build

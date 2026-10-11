@@ -1,0 +1,280 @@
+cargo :    Compiling atomis v0.1.0 (C:\Users\novtw\Music\atomis\atomis-rs)
+At line:2 char:1
++ cargo build --manifest-path atomis-rs/Cargo.toml *> docs/audit/eviden ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (   Compiling at...omis\atomis-rs):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+warning: fields `name`, `type_annotation`, and `line` are never read
+  --> src\analyzer.rs:33:9
+   |
+32 | pub struct AtomInfo {
+   |            -------- fields in this struct
+33 |     pub name: String,
+   |         ^^^^
+34 |     pub type_annotation: Option<String>,
+   |         ^^^^^^^^^^^^^^^
+35 |     pub line: usize,
+   |         ^^^^
+   |
+   = note: `AtomInfo` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during 
+dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: fields `atoms`, `node_ids`, `channel_ids`, and `mesh_ids` are never read
+  --> src\analyzer.rs:42:9
+   |
+40 | pub struct AnalysisResult {
+   |            -------------- fields in this struct
+41 |     pub diagnostics: Vec<Diagnostic>,
+42 |     pub atoms: Vec<AtomInfo>,
+   |         ^^^^^
+43 |     pub node_ids: Vec<String>,
+   |         ^^^^^^^^
+44 |     pub channel_ids: Vec<String>,
+   |         ^^^^^^^^^^^
+45 |     pub mesh_ids: Vec<String>,
+   |         ^^^^^^^^
+   |
+   = note: `AnalysisResult` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: field `col` is never read
+  --> src\ast.rs:58:9
+   |
+56 | pub struct MatchArm {
+   |            -------- field in this struct
+57 |     pub line: usize,
+58 |     pub col: usize,
+   |         ^^^
+   |
+   = note: `MatchArm` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during 
+dead code analysis
+
+warning: fields `line` and `col` are never read
+  --> src\ast.rs:67:9
+   |
+66 | pub struct MatchExpr {
+   |            --------- fields in this struct
+67 |     pub line: usize,
+   |         ^^^^
+68 |     pub col: usize,
+   |         ^^^
+   |
+   = note: `MatchExpr` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: field `col` is never read
+  --> src\ast.rs:77:9
+   |
+75 | pub struct GuardStmt {
+   |            --------- field in this struct
+76 |     pub line: usize,
+77 |     pub col: usize,
+   |         ^^^
+   |
+   = note: `GuardStmt` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: field `col` is never read
+  --> src\ast.rs:86:9
+   |
+84 | pub struct CellBlock {
+   |            --------- field in this struct
+85 |     pub line: usize,
+86 |     pub col: usize,
+   |         ^^^
+   |
+   = note: `CellBlock` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: field `col` is never read
+  --> src\ast.rs:96:9
+   |
+94 | pub struct ViewDecl {
+   |            -------- field in this struct
+95 |     pub line: usize,
+96 |     pub col: usize,
+   |         ^^^
+   |
+   = note: `ViewDecl` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during 
+dead code analysis
+
+warning: fields `line` and `col` are never read
+   --> src\ast.rs:104:9
+    |
+103 | pub struct RenderBlock {
+    |            ----------- fields in this struct
+104 |     pub line: usize,
+    |         ^^^^
+105 |     pub col: usize,
+    |         ^^^
+    |
+    = note: `RenderBlock` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: field `col` is never read
+   --> src\ast.rs:121:9
+    |
+119 | pub struct ImportDecl {
+    |            ---------- field in this struct
+120 |     pub line: usize,
+121 |     pub col: usize,
+    |         ^^^
+    |
+    = note: `ImportDecl` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: field `col` is never read
+   --> src\ast.rs:130:9
+    |
+128 | pub struct ConfigEntry {
+    |            ----------- field in this struct
+129 |     pub line: usize,
+130 |     pub col: usize,
+    |         ^^^
+    |
+    = note: `ConfigEntry` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: field `col` is never read
+   --> src\ast.rs:140:9
+    |
+138 | pub struct MetaBlock {
+    |            --------- field in this struct
+139 |     pub line: usize,
+140 |     pub col: usize,
+    |         ^^^
+    |
+    = note: `MetaBlock` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: field `kind` is never read
+   --> src\ast.rs:149:9
+    |
+146 | pub struct NodeDecl {
+    |            -------- field in this struct
+...
+149 |     pub kind: Option<String>,
+    |         ^^^^
+    |
+    = note: `NodeDecl` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: field `col` is never read
+   --> src\ast.rs:186:9
+    |
+184 | pub struct EncryptDecl {
+    |            ----------- field in this struct
+185 |     pub line: usize,
+186 |     pub col: usize,
+    |         ^^^
+    |
+    = note: `EncryptDecl` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: method `line` is never used
+   --> src\ast.rs:217:12
+    |
+215 | impl Statement {
+    | -------------- method in this implementation
+216 |     /// 1-based source line where the node begins.
+217 |     pub fn line(&self) -> usize {
+    |            ^^^^
+
+warning: fields `line` and `col` are never read
+   --> src\ast.rs:242:9
+    |
+241 | pub struct Program {
+    |            ------- fields in this struct
+242 |     pub line: usize,
+    |         ^^^^
+243 |     pub col: usize,
+    |         ^^^
+    |
+    = note: `Program` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during 
+dead code analysis
+
+warning: field `0` is never read
+   --> src\cli.rs:596:14
+    |
+596 |         Bool(bool),
+    |         ---- ^^^^
+    |         |
+    |         field in this variant
+    |
+help: consider changing the field to be of unit type to suppress this warning while preserving the field numbering, or 
+remove the field
+    |
+596 -         Bool(bool),
+596 +         Bool(()),
+    |
+
+warning: field `0` is never read
+   --> src\cli.rs:597:13
+    |
+597 |         Num(f64),
+    |         --- ^^^
+    |         |
+    |         field in this variant
+    |
+help: consider changing the field to be of unit type to suppress this warning while preserving the field numbering, or 
+remove the field
+    |
+597 -         Num(f64),
+597 +         Num(()),
+    |
+
+warning: field `0` is never read
+   --> src\cli.rs:599:13
+    |
+599 |         Arr(Vec<Value>),
+    |         --- ^^^^^^^^^^
+    |         |
+    |         field in this variant
+    |
+help: consider changing the field to be of unit type to suppress this warning while preserving the field numbering, or 
+remove the field
+    |
+599 -         Arr(Vec<Value>),
+599 +         Arr(()),
+    |
+
+warning: field `map` is never read
+  --> src\compiler.rs:23:9
+   |
+21 | pub struct CompileResult {
+   |            ------------- field in this struct
+22 |     pub code: String,
+23 |     pub map: Option<String>,
+   |         ^^^
+
+warning: fields `generated_line` and `original_line` are never read
+  --> src\transformer.rs:14:9
+   |
+13 | pub struct LineMapping {
+   |            ----------- fields in this struct
+14 |     pub generated_line: usize,
+   |         ^^^^^^^^^^^^^^
+15 |     pub original_line: usize,
+   |         ^^^^^^^^^^^^^
+   |
+   = note: `LineMapping` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: fields `mappings` and `atoms` are never read
+  --> src\transformer.rs:22:9
+   |
+20 | pub struct TransformResult {
+   |            --------------- fields in this struct
+21 |     pub code: String,
+22 |     pub mappings: Vec<LineMapping>,
+   |         ^^^^^^^^
+23 |     pub atoms: Vec<String>,
+   |         ^^^^^
+   |
+   = note: `TransformResult` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored 
+during dead code analysis
+
+warning: `atomis` (bin "atomis") generated 21 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.78s

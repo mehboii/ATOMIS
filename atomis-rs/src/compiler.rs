@@ -26,9 +26,23 @@ pub struct CompileResult {
 
 /// Compile Atomis source text to TypeScript.
 pub fn compile(source: &str, options: &CompileOptions) -> Result<CompileResult, ParseError> {
+    if source.len() > 8 * 1024 * 1024 {
+        return Err(ParseError {
+            message: "Source exceeds 8 MiB limit".into(),
+            line: 1,
+            col: 1,
+        });
+    }
     let tokens = tokenize(source);
     let program = parse(tokens, source)?;
     let analysis = analyze(&program);
+    if analysis.has_errors {
+        return Ok(CompileResult {
+            code: String::new(),
+            map: None,
+            analysis,
+        });
+    }
     let transformed = transform(&program);
 
     let map_file_name = format!("{}.ato.map", base_name(&options.output_file));
@@ -52,8 +66,5 @@ pub fn compile(source: &str, options: &CompileOptions) -> Result<CompileResult, 
 
 /// Return the basename of a path-like string (cross-platform).
 fn base_name(p: &str) -> String {
-    p.rsplit(|c| c == '/' || c == '\\')
-        .next()
-        .unwrap_or(p)
-        .to_string()
+    p.rsplit(['/', '\\']).next().unwrap_or(p).to_string()
 }

@@ -1,0 +1,187 @@
+[
+  {
+    "crate": "compiler",
+    "check": "fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--manifest-path",
+      "atomis-rs/Cargo.toml",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.32
+  },
+  {
+    "crate": "compiler",
+    "check": "check",
+    "command": [
+      "cargo",
+      "check",
+      "--manifest-path",
+      "atomis-rs/Cargo.toml",
+      "--all-targets",
+      "--locked"
+    ],
+    "exit": 0,
+    "seconds": 0.22
+  },
+  {
+    "crate": "compiler",
+    "check": "test",
+    "command": [
+      "cargo",
+      "test",
+      "--manifest-path",
+      "atomis-rs/Cargo.toml",
+      "--all-targets",
+      "--locked"
+    ],
+    "exit": 0,
+    "seconds": 0.25
+  },
+  {
+    "crate": "compiler",
+    "check": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--manifest-path",
+      "atomis-rs/Cargo.toml",
+      "--all-targets",
+      "--all-features",
+      "--locked",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 0.24
+  },
+  {
+    "crate": "proto",
+    "check": "fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--manifest-path",
+      "ghostnet-proto/Cargo.toml",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.19
+  },
+  {
+    "crate": "proto",
+    "check": "check",
+    "command": [
+      "cargo",
+      "check",
+      "--manifest-path",
+      "ghostnet-proto/Cargo.toml",
+      "--all-targets",
+      "--locked"
+    ],
+    "exit": 0,
+    "seconds": 1.14
+  },
+  {
+    "crate": "proto",
+    "check": "test",
+    "command": [
+      "cargo",
+      "test",
+      "--manifest-path",
+      "ghostnet-proto/Cargo.toml",
+      "--all-targets",
+      "--locked"
+    ],
+    "exit": 0,
+    "seconds": 1.87
+  },
+  {
+    "crate": "proto",
+    "check": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--manifest-path",
+      "ghostnet-proto/Cargo.toml",
+      "--all-targets",
+      "--all-features",
+      "--locked",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 0.91
+  },
+  {
+    "crate": "vault",
+    "check": "fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--manifest-path",
+      "ghostvault/Cargo.toml",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.17
+  },
+  {
+    "crate": "vault",
+    "check": "check",
+    "command": [
+      "cargo",
+      "check",
+      "--manifest-path",
+      "ghostvault/Cargo.toml",
+      "--all-targets",
+      "--locked"
+    ],
+    "exit": 0,
+    "seconds": 0.86
+  },
+  {
+    "crate": "vault",
+    "check": "test",
+    "command": [
+      "cargo",
+      "test",
+      "--manifest-path",
+      "ghostvault/Cargo.toml",
+      "--all-targets",
+      "--locked",
+      "--",
+      "--test-threads=1"
+    ],
+    "exit": 0,
+    "seconds": 38.71
+  },
+  {
+    "crate": "vault",
+    "check": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--manifest-path",
+      "ghostvault/Cargo.toml",
+      "--all-targets",
+      "--all-features",
+      "--locked",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 2.93
+  }
+]

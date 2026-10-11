@@ -121,7 +121,37 @@ pub fn main(argv: &[String]) -> i32 {
     let c = Colors::new();
     let command = argv.first().map(|s| s.as_str());
     let rest: Vec<String> = argv.iter().skip(1).cloned().collect();
+    if let Some(command) = command {
+        if matches!(command, "build" | "watch" | "run" | "check") {
+            let mut i = 0;
+            let mut positional_count = 0;
+            while i < rest.len() {
+                if rest[i].starts_with('-') {
+                    if !matches!(command, "build" | "watch")
+                        || rest[i] != "--out"
+                        || i + 1 >= rest.len()
+                        || rest[i + 1].starts_with('-')
+                    {
+                        eprintln!("Invalid or incomplete option: {}", rest[i]);
+                        return 1;
+                    }
+                    i += 2;
+                } else {
+                    positional_count += 1;
+                    i += 1;
+                }
+            }
+            if positional_count > 1 {
+                eprintln!("Expected at most one source path");
+                return 1;
+            }
+        }
+    }
     match command {
+        Some("--version") | Some("-V") => {
+            println!("{}", env!("CARGO_PKG_VERSION"));
+            0
+        }
         Some("build") => cmd_build(&rest, &c),
         Some("watch") => cmd_watch(&rest, &c),
         Some("run") => cmd_run(&rest, &c),
@@ -156,7 +186,10 @@ fn cmd_build(args: &[String], c: &Colors) -> i32 {
     let config = load_config(c);
     let target_path = Path::new(&target);
     if !target_path.exists() {
-        eprintln!("{}", c.red(&format!("No such file or directory: {}", target)));
+        eprintln!(
+            "{}",
+            c.red(&format!("No such file or directory: {}", target))
+        );
         return 1;
     }
 
@@ -194,6 +227,10 @@ fn cmd_build(args: &[String], c: &Colors) -> i32 {
 
 /// Compile a single `.ato` file to a `.ts` file. Returns success.
 fn build_file(input_path: &str, output_path: &str, c: &Colors) -> bool {
+    if !input_path.ends_with(".ato") {
+        eprintln!("Source file must have .ato extension");
+        return false;
+    }
     let source = match std::fs::read_to_string(input_path) {
         Ok(s) => s,
         Err(e) => {
@@ -242,10 +279,16 @@ fn build_file(input_path: &str, output_path: &str, c: &Colors) -> bool {
         eprintln!("{}", c.red(&format!("Cannot write {}", output_path)));
         return false;
     }
-    // NOTE: source map (.ato.map) generation is out of scope for this port, so
-    // unlike the TS reference no companion map file is written. The emitted .ts
-    // is byte-identical regardless.
-    println!("{}", c.green(&format!("✓ {} → {}", input_path, output_path)));
+    if let Some(map) = result.map {
+        if let Err(e) = std::fs::write(format!("{}.ato.map", output_path), map) {
+            eprintln!("Cannot write source map: {}", e);
+            return false;
+        }
+    }
+    println!(
+        "{}",
+        c.green(&format!("✓ {} → {}", input_path, output_path))
+    );
     true
 }
 
@@ -260,7 +303,10 @@ fn cmd_watch(args: &[String], c: &Colors) -> i32 {
         .unwrap_or_else(|| config.src_dir.clone());
     let out_dir = flags.get("out").cloned().unwrap_or(config.out_dir);
 
-    println!("{}", c.cyan(&format!("Watching {} for .ato changes...", dir)));
+    println!(
+        "{}",
+        c.cyan(&format!("Watching {} for .ato changes...", dir))
+    );
 
     let rebuild = |file: &str, c: &Colors| {
         if !file.ends_with(".ato") {
@@ -306,6 +352,10 @@ fn cmd_run(args: &[String], c: &Colors) -> i32 {
             return 1;
         }
     };
+    if !file.ends_with(".ato") {
+        eprintln!("Source file must have .ato extension");
+        return 1;
+    }
     let source = match std::fs::read_to_string(&file) {
         Ok(s) => s,
         Err(e) => {
@@ -313,7 +363,11 @@ fn cmd_run(args: &[String], c: &Colors) -> i32 {
             return 1;
         }
     };
-    let tmp_path = replace_suffix(&file, ".ato", ".__atomis__.ts");
+    let nonce = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap_or_default()
+        .as_nanos();
+    let tmp_path = format!("{}.{}.{}.ts", file, std::process::id(), nonce);
     let result = match compile(
         &source,
         &CompileOptions {
@@ -332,22 +386,27 @@ fn cmd_run(args: &[String], c: &Colors) -> i32 {
     if result.analysis.has_errors {
         return 1;
     }
-    if std::fs::write(&tmp_path, &result.code).is_err() {
+    let write_result = std::fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(&tmp_path)
+        .and_then(|mut f| f.write_all(result.code.as_bytes()));
+    if write_result.is_err() {
         eprintln!("{}", c.red(&format!("Cannot write {}", tmp_path)));
         return 1;
     }
 
-    let ts_node = resolve_bin("ts-node");
-    let status = if cfg!(windows) {
-        std::process::Command::new("cmd")
-            .args(["/C", &ts_node, &tmp_path])
-            .status()
-    } else {
-        std::process::Command::new(&ts_node).arg(&tmp_path).status()
-    };
+    let status = std::process::Command::new("node")
+        .args([
+            "-e",
+            "const file=process.argv[1];const bin=require.resolve('ts-node/dist/bin.js',{paths:[process.cwd(),require('path').dirname(file)]});process.argv=[process.argv[0],bin,file];require(bin).main([file])",
+            "--",
+            &tmp_path,
+        ])
+        .status();
     let _ = std::fs::remove_file(&tmp_path);
     match status {
-        Ok(s) => s.code().unwrap_or(0),
+        Ok(s) => s.code().unwrap_or(1),
         Err(e) => {
             eprintln!("{}", c.red(&format!("Failed to run ts-node: {}", e)));
             1
@@ -366,6 +425,10 @@ fn cmd_check(args: &[String], c: &Colors) -> i32 {
             return 1;
         }
     };
+    if !file.ends_with(".ato") {
+        eprintln!("Source file must have .ato extension");
+        return 1;
+    }
     let source = match std::fs::read_to_string(&file) {
         Ok(s) => s,
         Err(e) => {
@@ -480,12 +543,16 @@ fn find_ato_files(dir: &Path) -> Vec<PathBuf> {
             continue;
         }
         let full = entry.path();
+        if entry.file_type().map(|ty| ty.is_symlink()).unwrap_or(true) {
+            continue;
+        }
         if full.is_dir() {
             out.extend(find_ato_files(&full));
         } else if name.ends_with(".ato") {
             out.push(full);
         }
     }
+    out.sort();
     out
 }
 
@@ -515,21 +582,6 @@ fn parse_args(args: &[String]) -> (Vec<String>, HashMap<String, String>) {
     (positionals, flags)
 }
 
-/// Resolve a binary from local node_modules/.bin, falling back to PATH.
-fn resolve_bin(name: &str) -> String {
-    let bin_name = if cfg!(windows) {
-        format!("{}.cmd", name)
-    } else {
-        name.to_string()
-    };
-    let local = Path::new("node_modules").join(".bin").join(&bin_name);
-    if local.exists() {
-        local.to_string_lossy().to_string()
-    } else {
-        name.to_string()
-    }
-}
-
 fn print_help(c: &Colors) {
     println!(
         "{} — the Atomis transpiler
@@ -550,10 +602,7 @@ fn print_help(c: &Colors) {
 /* ── path helpers (mirroring node `path`) ────────────────────────────────── */
 
 fn base_name(p: &str) -> String {
-    p.rsplit(|ch| ch == '/' || ch == '\\')
-        .next()
-        .unwrap_or(p)
-        .to_string()
+    p.rsplit(['/', '\\']).next().unwrap_or(p).to_string()
 }
 
 fn join(a: &str, b: &str) -> String {
@@ -593,16 +642,23 @@ mod json {
     /// A parsed JSON value (subset sufficient for the config file).
     pub enum Value {
         Null,
-        Bool(bool),
-        Num(f64),
+        Bool,
+        Num,
         Str(String),
-        Arr(Vec<Value>),
+        Arr,
         Obj(Vec<(String, Value)>),
     }
 
     pub fn parse(input: &str) -> Result<Value, String> {
+        if input.len() > 64 * 1024 {
+            return Err("Config exceeds 64 KiB limit".into());
+        }
         let chars: Vec<char> = input.chars().collect();
-        let mut p = P { chars, pos: 0 };
+        let mut p = P {
+            chars,
+            pos: 0,
+            depth: 0,
+        };
         p.skip_ws();
         let v = p.value()?;
         p.skip_ws();
@@ -615,6 +671,7 @@ mod json {
     struct P {
         chars: Vec<char>,
         pos: usize,
+        depth: usize,
     }
 
     impl P {
@@ -627,6 +684,15 @@ mod json {
             }
         }
         fn value(&mut self) -> Result<Value, String> {
+            if self.depth >= 64 {
+                return Err("Maximum config nesting depth (64) exceeded".into());
+            }
+            self.depth += 1;
+            let result = self.value_inner();
+            self.depth -= 1;
+            result
+        }
+        fn value_inner(&mut self) -> Result<Value, String> {
             self.skip_ws();
             match self.peek() {
                 '{' => self.object(),
@@ -675,15 +741,15 @@ mod json {
         }
         fn array(&mut self) -> Result<Value, String> {
             self.pos += 1; // [
-            let mut items = Vec::new();
+
             self.skip_ws();
             if self.peek() == ']' {
                 self.pos += 1;
-                return Ok(Value::Arr(items));
+                return Ok(Value::Arr);
             }
             loop {
                 let val = self.value()?;
-                items.push(val);
+                let _ = val;
                 self.skip_ws();
                 match self.peek() {
                     ',' => {
@@ -696,7 +762,7 @@ mod json {
                     _ => return Err("Expected ',' or ']'".to_string()),
                 }
             }
-            Ok(Value::Arr(items))
+            Ok(Value::Arr)
         }
         fn string(&mut self) -> Result<String, String> {
             self.pos += 1; // opening quote
@@ -726,8 +792,7 @@ mod json {
                                 for _ in 0..4 {
                                     let h = self.peek();
                                     self.pos += 1;
-                                    code = code * 16
-                                        + h.to_digit(16).ok_or("Bad \\u escape")?;
+                                    code = code * 16 + h.to_digit(16).ok_or("Bad \\u escape")?;
                                 }
                                 if let Some(ch) = char::from_u32(code) {
                                     out.push(ch);
@@ -744,10 +809,10 @@ mod json {
         fn boolean(&mut self) -> Result<Value, String> {
             if self.chars[self.pos..].starts_with(&['t', 'r', 'u', 'e']) {
                 self.pos += 4;
-                Ok(Value::Bool(true))
+                Ok(Value::Bool)
             } else if self.chars[self.pos..].starts_with(&['f', 'a', 'l', 's', 'e']) {
                 self.pos += 5;
-                Ok(Value::Bool(false))
+                Ok(Value::Bool)
             } else {
                 Err("Invalid literal".to_string())
             }
@@ -785,8 +850,21 @@ mod json {
             }
             let s: String = self.chars[start..self.pos].iter().collect();
             s.parse::<f64>()
-                .map(Value::Num)
+                .map(|_| Value::Num)
                 .map_err(|_| "Invalid number".to_string())
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn config_input_is_bounded_and_valid_nested_values_parse() {
+        assert!(super::json::parse(&("[".repeat(300) + &"]".repeat(300))).is_err());
+        assert!(super::json::parse(&" ".repeat(64 * 1024 + 1)).is_err());
+        assert!(super::json::parse(
+            r#"{"outDir":"out","strict":true,"nested":[null,1,{"x":false}]}"#
+        )
+        .is_ok());
     }
 }

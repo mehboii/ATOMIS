@@ -1,0 +1,2 @@
+    Checking ghostvault v0.1.0 (C:\Users\novtw\Music\atomis\ghostvault)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.19s

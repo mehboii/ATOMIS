@@ -4,9 +4,12 @@ A sealed-secret vault for ATOMIS. Unlock a vault with a passphrase, seal a
 secret into a self-describing blob, open it back. Builds for **native Rust** and
 **wasm32** from one source; blobs are portable between the two.
 
-> Status: **library crate, standalone.** The `.ato` import wiring is deliberately
-> deferred ("build crate first, wire later"). See *ATOMIS integration* below for
-> why that step is non-trivial in this repo.
+> Status: **library crate with a vendored Node/WASM package.** The `.ato`
+> import is exercised by `test/cases/vault.ato`; see *ATOMIS integration* below.
+
+Freed WASM handles cannot be revived after generation rollover: exhausted slots
+are retired. Host quotas are still needed: accepted blob parameters can demand
+up to 1 GiB of Argon2 memory and 16 iterations before authentication.
 
 ## Public surface (intentionally narrow)
 

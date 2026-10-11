@@ -1,0 +1,76 @@
+wasm-pack : [INFO]: Checking for the Wasm target...
+At line:2 char:1
++ wasm-pack test --node --no-default-features --features kdf-portable * ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([INFO]: Checking for the Wasm target...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+   Compiling ghostvault v0.1.0 (C:\Users\novtw\Music\atomis\ghostvault)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.22s
+[INFO]: Installing wasm-bindgen...
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.23s
+     Running unittests src\lib.rs (target\wasm32-unknown-unknown\debug\deps\ghostvault-95c41faf0927c9f0.wasm)
+no tests to run!
+     Running tests\wasm.rs (target\wasm32-unknown-unknown\debug\deps\wasm-490212fa84349319.wasm)
+running 3 tests
+test wasm_roundtrip_and_stale_handle ... ok
+test stale_handle_never_reappears_after_generation_exhaustion ... FAIL
+test opens_native_sealed_blob ... ok
+
+failures:
+
+---- stale_handle_never_reappears_after_generation_exhaustion output ----
+    error output:
+        panicked at tests\wasm.rs:48:9:
+        assertion `left != right` failed: a freed handle must never refer to a later vault
+          left: 65536
+         right: 65536
+        
+        Stack:
+        
+        Error
+            at C:\Users\novtw\AppData\Local\Temp\.tmpQ1Gtoq\wasm-bindgen-test.js:432:25
+            at logError (C:\Users\novtw\AppData\Local\Temp\.tmpQ1Gtoq\wasm-bindgen-test.js:800:18)
+            at __wbg_new_1fa154f0a1a83111 (C:\Users\novtw\AppData\Local\Temp\.tmpQ1Gtoq\wasm-bindgen-test.js:431:57)
+            at wasm-490212fa84349319.wasm.wasm_bindgen_test::__rt::Context::new::panic_handling::Error::new::__wbg_new_1fa154f0a1a83111::h177710c7f940a714 externref shim (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[4166]:0xf5433)
+            at wasm-490212fa84349319.wasm.wasm_bindgen_test::__rt::Context::new::panic_handling::Error::new::hbbfe430a1f475ef5 (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[2218]:0xdf8fd)
+            at wasm-490212fa84349319.wasm.wasm_bindgen_test::__rt::Context::new::panic_handling::hcc5453a56e7a6457 (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[916]:0xb7ed8)
+            at wasm-490212fa84349319.wasm.wasm_bindgen_test::__rt::Context::new::{{closure}}::{{closure}}::hdfc2ccbdea77d8f6 (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[2583]:0xe57af)
+            at wasm-490212fa84349319.wasm.std[f839c7267e543978]::panicking::panic_with_hook (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[764]:0xaf786)
+            at wasm-490212fa84349319.wasm.std[f839c7267e543978]::panicking::panic_handler::{closure#0} (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[1461]:0xcd623)
+            at wasm-490212fa84349319.wasm.std[f839c7267e543978]::sys::backtrace::__rust_end_short_backtrace::<std[f839c7267e543978]::panicking::panic_handler::{closure#0}, !> (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[4300]:0xf5b91)
+        
+        
+    
+    JS exception that was thrown:
+        RuntimeError: unreachable
+            at wasm-490212fa84349319.wasm.__rustc[8068f81614cfe5c]::__rust_abort (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[4354]:0xf5d02)
+            at wasm-490212fa84349319.wasm.__rustc[8068f81614cfe5c]::__rust_start_panic (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[4335]:0xf5ca4)
+            at wasm-490212fa84349319.wasm.__rustc[8068f81614cfe5c]::rust_panic (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[4212]:0xf570d)
+            at wasm-490212fa84349319.wasm.std[f839c7267e543978]::panicking::panic_with_hook (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[764]:0xaf7f7)
+            at wasm-490212fa84349319.wasm.std[f839c7267e543978]::panicking::panic_handler::{closure#0} (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[1461]:0xcd623)
+            at wasm-490212fa84349319.wasm.std[f839c7267e543978]::sys::backtrace::__rust_end_short_backtrace::<std[f839c7267e543978]::panicking::panic_handler::{closure#0}, !> (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[4300]:0xf5b91)
+            at wasm-490212fa84349319.wasm.__rustc[8068f81614cfe5c]::rust_begin_unwind (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[3218]:0xed5f8)
+            at wasm-490212fa84349319.wasm.core[2c5ad5f686fcca5c]::panicking::panic_fmt (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[2575]:0xe55d2)
+            at wasm-490212fa84349319.wasm.core[2c5ad5f686fcca5c]::panicking::assert_failed_inner (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[661]:0xa8e94)
+            at wasm-490212fa84349319.wasm.core::panicking::assert_failed::h46e525eab9a56a5f (wasm://wasm/wasm-490212fa84349319.wasm-028e4f5e:wasm-function[1993]:0xdb066)
+
+failures:
+
+    stale_handle_never_reappears_after_generation_exhaustion
+
+test result: FAILED. 2 passed; 1 failed; 0 ignored; 0 filtered out; finished in 3.09s
+
+Error: Node failed with exit_code 1
+error: test failed, to rerun pass `--test wasm`
+
+Caused by:
+  process didn't exit successfully: 
+`C:\Users\novtw\AppData\Local\.wasm-pack\wasm-bindgen-3a59e71185d3ef0f\wasm-bindgen-test-runner.exe 
+C:\Users\novtw\Music\atomis\ghostvault\target\wasm32-unknown-unknown\debug\deps\wasm-490212fa84349319.wasm` (exit 
+code: 1)
+note: test exited abnormally; to see the full output pass --no-capture to the harness.
+Error: Running Wasm tests with wasm-bindgen-test failed
+Caused by: Running Wasm tests with wasm-bindgen-test failed
+Caused by: failed to execute `cargo test`: exited with exit code: 1
+  full command: "cargo" "test" "--target" "wasm32-unknown-unknown" "--no-default-features" "--features" "kdf-portable"

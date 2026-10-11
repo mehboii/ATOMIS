@@ -31,7 +31,7 @@ use aes_gcm::aead::{Aead, Payload};
 use aes_gcm::{Aes256Gcm, KeyInit, Nonce};
 use argon2::{Algorithm, Argon2, Params, Version};
 use std::sync::Once;
-use zeroize::{Zeroizing, ZeroizeOnDrop};
+use zeroize::{ZeroizeOnDrop, Zeroizing};
 
 /* ── format constants ────────────────────────────────────────────────────── */
 
@@ -139,12 +139,27 @@ fn fill_random(buf: &mut [u8]) -> VResult<()> {
 /* ── crypto provider boundary (swap point for a future Rust ghostnet-crypto)  */
 
 trait CryptoProvider {
-    fn kdf_derive(&self, passphrase: &[u8], salt: &[u8], mem_kib: u32, iters: u32)
-        -> VResult<DerivedKey>;
-    fn aead_seal(&self, key: &[u8; KEY_LEN], nonce: &[u8; NONCE_LEN], pt: &[u8], aad: &[u8])
-        -> VResult<Vec<u8>>;
-    fn aead_open(&self, key: &[u8; KEY_LEN], nonce: &[u8; NONCE_LEN], ct: &[u8], aad: &[u8])
-        -> VResult<Vec<u8>>;
+    fn kdf_derive(
+        &self,
+        passphrase: &[u8],
+        salt: &[u8],
+        mem_kib: u32,
+        iters: u32,
+    ) -> VResult<DerivedKey>;
+    fn aead_seal(
+        &self,
+        key: &[u8; KEY_LEN],
+        nonce: &[u8; NONCE_LEN],
+        pt: &[u8],
+        aad: &[u8],
+    ) -> VResult<Vec<u8>>;
+    fn aead_open(
+        &self,
+        key: &[u8; KEY_LEN],
+        nonce: &[u8; NONCE_LEN],
+        ct: &[u8],
+        aad: &[u8],
+    ) -> VResult<Vec<u8>>;
 }
 
 /// Default provider: Argon2id (RustCrypto `argon2`) + AES-256-GCM (`aes-gcm`).
@@ -206,7 +221,12 @@ struct Header {
     nonce: [u8; NONCE_LEN],
 }
 
-fn build_header(mem_kib: u32, iters: u32, salt: &[u8; SALT_LEN], nonce: &[u8; NONCE_LEN]) -> Vec<u8> {
+fn build_header(
+    mem_kib: u32,
+    iters: u32,
+    salt: &[u8; SALT_LEN],
+    nonce: &[u8; NONCE_LEN],
+) -> Vec<u8> {
     let mut h = Vec::with_capacity(HEADER_LEN);
     h.extend_from_slice(&MAGIC);
     h.push(VERSION);
@@ -285,7 +305,8 @@ impl Vault {
     /// Open a sealed blob, returning the plaintext in a zeroize-on-drop buffer.
     pub fn open_sealed(&self, blob: &[u8]) -> VResult<Zeroizing<Vec<u8>>> {
         let header = parse_header(blob)?;
-        let key = PROVIDER.kdf_derive(&self.secret.0, &header.salt, header.mem_kib, header.iters)?;
+        let key =
+            PROVIDER.kdf_derive(&self.secret.0, &header.salt, header.mem_kib, header.iters)?;
         let aad = &blob[..HEADER_LEN];
         let ct = &blob[HEADER_LEN..];
         let pt = PROVIDER.aead_open(&key.0, &header.nonce, ct, aad)?;
@@ -339,6 +360,7 @@ pub mod wasmapi {
 
     struct Slot {
         generation: u16,
+        retired: bool,
         vault: Option<Vault>,
     }
 
@@ -370,7 +392,7 @@ pub mod wasmapi {
         let v = Vault::unlock(passphrase).map_err(|_| err())?;
         TABLE.with(|t| {
             let mut t = t.borrow_mut();
-            let idx = (0..t.len()).find(|&i| t[i].vault.is_none());
+            let idx = (0..t.len()).find(|&i| t[i].vault.is_none() && !t[i].retired);
             let i = match idx {
                 Some(i) => i,
                 None => {
@@ -379,6 +401,7 @@ pub mod wasmapi {
                     }
                     t.push(Slot {
                         generation: 0,
+                        retired: false,
                         vault: None,
                     });
                     t.len() - 1
@@ -412,7 +435,12 @@ pub mod wasmapi {
             if let Some(slot) = t.get_mut(idx) {
                 if slot.generation == generation && slot.vault.is_some() {
                     slot.vault = None; // Vault drop → Secret zeroized
-                    slot.generation = slot.generation.wrapping_add(1);
+                    if let Some(next) = slot.generation.checked_add(1) {
+                        slot.generation = next;
+                    } else {
+                        // Retire exhausted slots: no stale handle can become valid again.
+                        slot.retired = true;
+                    }
                 }
             }
         });

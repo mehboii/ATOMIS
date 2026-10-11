@@ -1,0 +1,254 @@
+[
+  {
+    "id": "atomis@0.1.0",
+    "name": "atomis",
+    "version": "0.1.0",
+    "size": 149544,
+    "unpackedSize": 503401,
+    "shasum": "6183c0937c4678bf0358d79d59832023d46919db",
+    "integrity": "sha512-Y9ehJE/ynVjTRhEDkJajpp99y8jECeMRgHSkykUt9Oc6FP3F6zVpGM2zyHNe8S8eyPwwqiXJAxN178DTpgJVMA==",
+    "filename": "atomis-0.1.0.tgz",
+    "files": [
+      {
+        "path": "README.md",
+        "size": 3984,
+        "mode": 420
+      },
+      {
+        "path": "dist/analyzer.d.ts",
+        "size": 3670,
+        "mode": 420
+      },
+      {
+        "path": "dist/analyzer.js",
+        "size": 12485,
+        "mode": 420
+      },
+      {
+        "path": "dist/analyzer.js.map",
+        "size": 10106,
+        "mode": 420
+      },
+      {
+        "path": "dist/ast.d.ts",
+        "size": 9234,
+        "mode": 420
+      },
+      {
+        "path": "dist/ast.js",
+        "size": 642,
+        "mode": 420
+      },
+      {
+        "path": "dist/ast.js.map",
+        "size": 120,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli.d.ts",
+        "size": 786,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli.js",
+        "size": 15252,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli.js.map",
+        "size": 12147,
+        "mode": 420
+      },
+      {
+        "path": "dist/compiler.d.ts",
+        "size": 1315,
+        "mode": 420
+      },
+      {
+        "path": "dist/compiler.js",
+        "size": 1842,
+        "mode": 420
+      },
+      {
+        "path": "dist/compiler.js.map",
+        "size": 1228,
+        "mode": 420
+      },
+      {
+        "path": "dist/emitter.d.ts",
+        "size": 1932,
+        "mode": 420
+      },
+      {
+        "path": "dist/emitter.js",
+        "size": 4873,
+        "mode": 420
+      },
+      {
+        "path": "dist/emitter.js.map",
+        "size": 2517,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.d.ts",
+        "size": 242,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.js",
+        "size": 367,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.js.map",
+        "size": 151,
+        "mode": 420
+      },
+      {
+        "path": "dist/lexer.d.ts",
+        "size": 3409,
+        "mode": 420
+      },
+      {
+        "path": "dist/lexer.js",
+        "size": 15741,
+        "mode": 420
+      },
+      {
+        "path": "dist/lexer.js.map",
+        "size": 13451,
+        "mode": 420
+      },
+      {
+        "path": "dist/parser.d.ts",
+        "size": 6778,
+        "mode": 420
+      },
+      {
+        "path": "dist/parser.js",
+        "size": 39353,
+        "mode": 420
+      },
+      {
+        "path": "dist/parser.js.map",
+        "size": 32562,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/lexer.test.d.ts",
+        "size": 198,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/lexer.test.js",
+        "size": 6466,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/lexer.test.js.map",
+        "size": 6043,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/parser.test.d.ts",
+        "size": 202,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/parser.test.js",
+        "size": 7253,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/parser.test.js.map",
+        "size": 6614,
+        "mode": 420
+      },
+      {
+        "path": "dist/transformer.d.ts",
+        "size": 4656,
+        "mode": 420
+      },
+      {
+        "path": "dist/transformer.js",
+        "size": 16531,
+        "mode": 420
+      },
+      {
+        "path": "dist/transformer.js.map",
+        "size": 15376,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/ghostvault/ghostvault_bg.wasm",
+        "size": 65359,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/ghostvault/ghostvault.d.ts",
+        "size": 869,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/ghostvault/ghostvault.js",
+        "size": 8632,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/ghostvault/LICENSE",
+        "size": 1089,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/ghostvault/package.json",
+        "size": 358,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/ghostvault/README.md",
+        "size": 6523,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/proto/LICENSE",
+        "size": 1089,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/proto/package.json",
+        "size": 306,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/proto/proto_bg.wasm",
+        "size": 143302,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/proto/proto.d.ts",
+        "size": 249,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/proto/proto.js",
+        "size": 15281,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/proto/README.md",
+        "size": 1578,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 1240,
+        "mode": 420
+      }
+    ],
+    "entryCount": 47,
+    "bundled": [
+      "ghostvault",
+      "proto"
+    ]
+  }
+]

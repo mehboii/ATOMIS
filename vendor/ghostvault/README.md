@@ -4,9 +4,12 @@ A sealed-secret vault for ATOMIS. Unlock a vault with a passphrase, seal a
 secret into a self-describing blob, open it back. Builds for **native Rust** and
 **wasm32** from one source; blobs are portable between the two.
 
-> Status: **library crate, standalone.** The `.ato` import wiring is deliberately
-> deferred ("build crate first, wire later"). See *ATOMIS integration* below for
-> why that step is non-trivial in this repo.
+> Status: **library crate with a vendored Node/WASM package.** The `.ato`
+> import is exercised by `test/cases/vault.ato`; see *ATOMIS integration* below.
+
+Freed WASM handles cannot be revived after generation rollover: exhausted slots
+are retired. Host quotas are still needed: accepted blob parameters can demand
+up to 1 GiB of Argon2 memory and 16 iterations before authentication.
 
 ## Public surface (intentionally narrow)
 
@@ -119,13 +122,26 @@ The wasm test suite includes `opens_native_sealed_blob`, which opens a blob
 sealed by the native build (`tests/vectors/native.blob`, produced by
 `examples/gen_vector.rs`) — the cross-target round-trip.
 
-## ATOMIS integration (deferred, by decision)
+## ATOMIS integration (wired)
 
 ATOMIS is a **transpiler**: `atomis run foo.ato` compiles `.ato` → TypeScript and
-shells out to `ts-node`/Node (proof: `cmdRun` in `src/cli.ts`). It has no
-binary-embedded runtime or builtin table, and `@import { x } from "vault"` is
-emitted verbatim as a Node `import` resolved at runtime. So "shipped inside the
-atomis binary" is not achievable under the current architecture without changing
-the execution model. This crate is therefore delivered standalone; the chosen
-wiring path (e.g. vendoring the wasm `pkg` as a Node-resolvable module the
-generated TS imports) is a separate, follow-up step.
+shells out to `ts-node`/Node (proof: `cmdRun` in `src/cli.ts`). `@import { x }
+from "ghostvault"` is emitted verbatim as a Node `import` resolved at runtime.
+
+So the vault is wired by building the **Node target** of this crate and vendoring
+it as a Node-resolvable package:
+
+```sh
+wasm-pack build --target nodejs --release --out-dir ../vendor/ghostvault \
+  -- --no-default-features --features kdf-portable
+# repo package.json: "ghostvault": "file:vendor/ghostvault"  → npm install
+```
+
+`.ato` code then imports it directly (see `test/cases/vault.ato`):
+
+```
+@import { vault_unlock, vault_seal, vault_open_sealed, vault_free } from "ghostvault"
+```
+
+Note: because Node executes the transpiled output, the vault runs as wasm under
+Node — the wasm caveats above apply, not the native hardening.

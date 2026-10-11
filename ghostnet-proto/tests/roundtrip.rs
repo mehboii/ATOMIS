@@ -109,7 +109,10 @@ fn encodes_deterministically() {
         }),
     );
     assert_eq!(encode(&msg), encode(&msg));
-    println!("golden Ack(id=7,Rejected,sent_at=42) -> {}", hex(&encode(&msg)));
+    println!(
+        "golden Ack(id=7,Rejected,sent_at=42) -> {}",
+        hex(&encode(&msg))
+    );
 
     // Regression guard against an accidental field reorder: these exact bytes
     // are documented as a worked example in SCHEMA.md.
@@ -144,4 +147,33 @@ fn garbage_is_rejected() {
     // Not valid CBOR for an Envelope -> a clear error, not a panic.
     assert!(decode(&[0xff, 0x00, 0x13, 0x37]).is_err());
     assert!(decode(&[]).is_err());
+}
+
+#[test]
+fn unsupported_version_is_rejected() {
+    let mut message = Envelope::new(
+        1,
+        Message::Ack(Ack {
+            ack_of: 1,
+            status: AckStatus::Received,
+            sent_at: 0,
+        }),
+    );
+    message.version = PROTO_VERSION + 1;
+    assert!(decode(&encode(&message)).is_err());
+}
+
+#[test]
+fn trailing_bytes_are_rejected() {
+    let message = Envelope::new(
+        1,
+        Message::Ack(Ack {
+            ack_of: 1,
+            status: AckStatus::Received,
+            sent_at: 0,
+        }),
+    );
+    let mut bytes = encode(&message);
+    bytes.push(0);
+    assert!(decode(&bytes).is_err());
 }

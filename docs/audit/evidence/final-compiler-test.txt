@@ -1,0 +1,76 @@
+cargo :    Compiling atomis v0.1.0 (C:\Users\novtw\Music\atomis\atomis-rs)
+At line:2 char:193
++ ... s --locked; cargo test --manifest-path atomis-rs/Cargo.toml --all-tar ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (   Compiling at...omis\atomis-rs):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.39s
+     Running unittests src\lib.rs (atomis-rs\target\debug\deps\atomis-37d6f272c3a02bd8.exe)
+
+running 29 tests
+test lexer::tests::always_terminates_with_eof ... ok
+test lexer::tests::captures_double_and_single_quoted_strings ... ok
+test lexer::tests::captures_template_literals_as_one_token ... ok
+test lexer::tests::emits_newline_tokens ... ok
+test lexer::tests::handles_nested_braces_inside_interpolation ... ok
+test lexer::tests::distinguishes_arrow_from_fat_arrow ... ok
+test lexer::tests::recognizes_atomis_keywords ... ok
+test lexer::tests::recognizes_braces ... ok
+test lexer::tests::records_source_positions_and_offsets ... ok
+test lexer::tests::tokenizes_a_simple_atom_declaration ... ok
+test lexer::tests::skips_line_and_block_comments_as_comment_tokens ... ok
+test lexer::tests::tokenizes_decorators ... ok
+test lexer::tests::tokenizes_multi_char_operators_greedily ... ok
+test lexer::tests::tokenizes_numbers_including_floats_and_hex ... ok
+test parser::tests::does_not_treat_channel_send_as_channel_decl ... ok
+test parser::tests::parses_atom_with_type_and_initializer ... ok
+test parser::tests::parses_channel_preserving_booleans ... ok
+test parser::tests::parses_connect ... ok
+test parser::tests::parses_encrypt ... ok
+test parser::tests::parses_guard_statement ... ok
+test parser::tests::parses_fn_with_params_and_return_type ... ok
+test parser::tests::parses_match_with_wildcard ... ok
+test parser::tests::parses_import_decorator ... ok
+test parser::tests::parses_inline_cell_until_blank_line ... ok
+test parser::tests::parses_mesh ... ok
+test parser::tests::parses_node_with_kind_id_config ... ok
+test parser::tests::parses_output_as_output_call ... ok
+test parser::tests::parses_pure_fn ... ok
+test parser::tests::treats_unknown_typescript_as_passthrough ... ok
+
+test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\main.rs (atomis-rs\target\debug\deps\atomis-08e51ed612b49562.exe)
+
+running 1 test
+test cli::tests::config_input_is_bounded_and_valid_nested_values_parse ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\audit.rs (atomis-rs\target\debug\deps\audit-26e10d8ecd580fc4.exe)
+
+running 20 tests
+test empty_and_missing_eof_token_streams_return_errors ... ok
+test atom_before_closing_brace_and_semicolon_type ... ok
+test generated_ghost_identifiers_cannot_collide ... ok
+test duplicate_names_warn_and_ghost_ids_and_transports_error ... ok
+test analyzer_does_not_infer_type_from_expression_prefix ... ok
+test malformed_constructs_are_rejected ... ok
+test nested_scopes_and_purity_warnings ... ok
+test nested_cell_await_requires_async_but_literal_await_does_not ... ok
+test import_escapes_are_not_double_escaped ... ok
+test result_rewriting_respects_literals_comments_and_nesting ... ok
+test golden_examples_match_exactly_except_checkout_line_endings ... ok
+test templates_ignore_braces_in_strings_comments_and_nested_templates ... ok
+test nesting_and_source_size_have_limits ... ok
+test semantic_errors_do_not_emit_code ... ok
+test token_spans_are_unicode_scalar_offsets ... ok
+test result_generic_recursion_is_bounded ... ok
+test vlq_encodes_signed_line_deltas_and_extremes ... ok
+test unterminated_literals_and_comments_are_rejected ... ok
+test bounded_generated_input_never_panics_and_spans_stay_valid ... ok
+test preserves_trailing_comments ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.52s
+

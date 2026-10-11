@@ -1,6 +1,6 @@
 {
   "name": "proto",
-  "description": "ghostnet-proto: the shared GhostNet wire format. Canonical CBOR over plain serde types. No crypto.",
+  "description": "ghostnet-proto: the shared GhostNet wire format. Deterministic CBOR over plain serde types. No crypto.",
   "version": "0.1.0",
   "license": "MIT",
   "files": [

@@ -8,16 +8,14 @@ shells out to `ts-node`/Node to execute the emitted TS.
 The TypeScript implementation is the reference and is left untouched. This crate
 exists alongside it so the two can be diffed directly.
 
-## Parity guarantee
+## Parity scope
 
-For any `.ato` input, this port emits **byte-identical TypeScript** and
-**byte-identical diagnostics** (errors + warnings) versus the TS reference.
-Proven by `parity.sh` and the ported unit tests.
+The parity harness compares selected example/conformance outputs and diagnostics.
+Matching that corpus does not prove equivalence for arbitrary input, target
+correctness, or complete TypeScript passthrough compatibility.
 
-Source maps (`.ato.map` / VLQ) are intentionally **out of scope** for now: the
-`//# sourceMappingURL=…` comment is still emitted (so the `.ts` stays
-byte-identical), but no companion `.ato.map` file is written. The hook to
-reinstate it is documented in [`src/emitter.rs`](src/emitter.rs).
+Source maps (`.ato.map` / VLQ) now map generated lines back to source lines in
+both implementations. Columns and full AST spans are not mapped.
 
 ## Module map (mirrors the TS pipeline)
 
@@ -45,19 +43,21 @@ network.
 
 ```sh
 cargo build --release          # produces target/release/atomis
-cargo test                     # 29 ported unit tests (14 lexer + 15 parser)
-bash atomis-rs/parity.sh        # byte-for-byte diff vs the TS reference
+cargo test --all-targets        # unit + public pipeline integration/golden tests
+# From the repository root:
+npm test                       # both implementations and trusted runtime fixtures
+bash atomis-rs/parity.sh        # selected corpus; also needs release build
 ```
 
-## Known intentional divergences
+## Known differences and limits
 
-1. **Source map file** — not written (see above). Emitted `.ts` is unaffected.
-2. **Parse-error reporting** — the TS reference lets a `ParseError` propagate as
-   an uncaught exception (Node stack trace, exit 1). This port prints the same
-   `[line:col] message` cleanly to stderr and exits 1 — same failure, tidier
-   output. None of the conformance inputs trigger this path.
-3. **`watch`** — implemented as a std polling watcher (300 ms) rather than
-   chokidar's inotify/ReadDirectoryChangesW events. Same add/change → rebuild
-   behaviour; only the change-detection mechanism differs.
-4. **Directory-build file ordering** — both implementations use the OS directory
-   iteration order; on a given platform they agree, but neither sorts.
+Rust offsets/columns count Unicode scalar values; TypeScript uses UTF-16 units.
+Astral Unicode can therefore produce different columns. Parse token category
+spellings and filesystem errors can differ. Rust watch polls at 300 ms; TS uses
+chokidar. Both directory builds sort file paths. Rust resolves ts-node from the
+working directory or source ancestry; TS resolves from its installed package.
+
+The library entry point is `atomis::compiler::compile`. It performs no execution
+and returns empty output on semantic errors. Source is limited to 8 MiB and
+parsed nesting to 64 levels. Low-level AST/transform APIs require trusted input.
+See ../docs/audit/ for coverage, security boundaries and limitations.

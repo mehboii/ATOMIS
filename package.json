@@ -1,15 +1,24 @@
 {
   "name": "atomis",
   "version": "0.1.0",
-  "description": "Atomis — a transpiled language that compiles to TypeScript with GhostNet network primitives.",
+  "description": "Atomis \u00e2\u20ac\u201d a transpiled language that compiles to TypeScript with GhostNet network primitives.",
   "license": "MIT",
   "bin": {
     "atomis": "dist/cli.js"
   },
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "vendor",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "node test/run-tests.mjs",
+    "prepack": "npm run build",
+    "test": "npm run build && npm run test:unit && npm run test:runtime && npm run test:audit",
+    "test:runtime": "node test/run-tests.mjs",
+    "test:audit": "cargo build --manifest-path atomis-rs/Cargo.toml && node test/audit-tests.mjs && node test/audit-parity.mjs",
     "test:unit": "node dist/tests/lexer.test.js && node dist/tests/parser.test.js",
     "atomis": "node dist/cli.js"
   },
@@ -18,13 +27,17 @@
   },
   "dependencies": {
     "chalk": "^4.1.2",
-    "chokidar": "^3.5.3",
+    "chokidar": "^4.0.3",
     "ghostvault": "file:vendor/ghostvault",
-    "proto": "file:vendor/proto"
+    "proto": "file:vendor/proto",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0"
   },
   "devDependencies": {
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.0",
     "@types/node": "^20.11.0"
-  }
+  },
+  "bundleDependencies": [
+    "proto",
+    "ghostvault"
+  ]
 }

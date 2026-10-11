@@ -1,0 +1,375 @@
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\analyzer.rs:72:
+             node_ids: Vec::new(),
+             channel_ids: Vec::new(),
+             mesh_ids: Vec::new(),
+-            scopes: vec![Scope { names: HashMap::new() }],
++            scopes: vec![Scope {
++                names: HashMap::new(),
++            }],
+         }
+     }
+ 
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\analyzer.rs:80:
+         self.visit_block(&program.body);
+         self.validate_connects(program);
+ 
+-        let has_errors = self.diagnostics.iter().any(|d| d.severity == Severity::Error);
++        let has_errors = self
++            .diagnostics
++            .iter()
++            .any(|d| d.severity == Severity::Error);
+         AnalysisResult {
+             diagnostics: self.diagnostics,
+             atoms: self.atoms,
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\analyzer.rs:114:
+     /* ── scope helpers ─────────────────────────────────────────────────── */
+ 
+     fn push_scope(&mut self) {
+-        self.scopes.push(Scope { names: HashMap::new() });
++        self.scopes.push(Scope {
++            names: HashMap::new(),
++        });
+     }
+ 
+     fn pop_scope(&mut self) {
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\analyzer.rs:155:
+     fn preregister(&mut self, stmt: &Statement) {
+         match stmt {
+             Statement::AtomDecl(s) => self.declare(&s.name, s.line, s.col),
+-            Statement::FnDecl(s) | Statement::PureFnDecl(s) => {
+-                self.declare(&s.name, s.line, s.col)
+-            }
++            Statement::FnDecl(s) | Statement::PureFnDecl(s) => self.declare(&s.name, s.line, s.col),
+             _ => {}
+         }
+     }
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\cli.rs:156:
+     let config = load_config(c);
+     let target_path = Path::new(&target);
+     if !target_path.exists() {
+-        eprintln!("{}", c.red(&format!("No such file or directory: {}", target)));
++        eprintln!(
++            "{}",
++            c.red(&format!("No such file or directory: {}", target))
++        );
+         return 1;
+     }
+ 
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\cli.rs:245:
+     // NOTE: source map (.ato.map) generation is out of scope for this port, so
+     // unlike the TS reference no companion map file is written. The emitted .ts
+     // is byte-identical regardless.
+-    println!("{}", c.green(&format!("✓ {} → {}", input_path, output_path)));
++    println!(
++        "{}",
++        c.green(&format!("✓ {} → {}", input_path, output_path))
++    );
+     true
+ }
+ 
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\cli.rs:260:
+         .unwrap_or_else(|| config.src_dir.clone());
+     let out_dir = flags.get("out").cloned().unwrap_or(config.out_dir);
+ 
+-    println!("{}", c.cyan(&format!("Watching {} for .ato changes...", dir)));
++    println!(
++        "{}",
++        c.cyan(&format!("Watching {} for .ato changes...", dir))
++    );
+ 
+     let rebuild = |file: &str, c: &Colors| {
+         if !file.ends_with(".ato") {
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\cli.rs:726:
+                                 for _ in 0..4 {
+                                     let h = self.peek();
+                                     self.pos += 1;
+-                                    code = code * 16
+-                                        + h.to_digit(16).ok_or("Bad \\u escape")?;
++                                    code = code * 16 + h.to_digit(16).ok_or("Bad \\u escape")?;
+                                 }
+                                 if let Some(ch) = char::from_u32(code) {
+                                     out.push(ch);
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\emitter.rs:42:
+     // / `options.output_file`. The TS reference's `buildSourceMap` + `encodeVlq`
+     // can be ported 1:1 when source maps are reinstated. Returning `None` does
+     // not affect the emitted `.ts` bytes (only the companion `.ato.map` file).
+-    let _ = (&options.source_file, &options.source_content, &options.output_file);
++    let _ = (
++        &options.source_file,
++        &options.source_content,
++        &options.output_file,
++    );
+ 
+     EmitResult { code, map: None }
+ }
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\lexer.rs:61:
+ /// Multi-character operators, longest first so the scanner is greedy.
+ /// Order is significant and must match `MULTI_OPERATORS` in lexer.ts.
+ const MULTI_OPERATORS: &[&str] = &[
+-    "===", "!==", "**=", "...", "&&=", "||=", "??=", ">>>", "==", "!=", "<=",
+-    ">=", "&&", "||", "??", "?.", "+=", "-=", "*=", "/=", "%=", "++", "--",
+-    "=>", "<<", ">>",
++    "===", "!==", "**=", "...", "&&=", "||=", "??=", ">>>", "==", "!=", "<=", ">=", "&&", "||",
++    "??", "?.", "+=", "-=", "*=", "/=", "%=", "++", "--", "=>", "<<", ">>",
+ ];
+ 
+ /// Single-character operators.
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\lexer.rs:70:
+-const SINGLE_OPERATORS: &[char] =
+-    &['+', '-', '*', '/', '%', '=', '<', '>', '!', '&', '|', '^', '~'];
++const SINGLE_OPERATORS: &[char] = &[
++    '+', '-', '*', '/', '%', '=', '<', '>', '!', '&', '|', '^', '~',
++];
+ 
+ /// The Atomis lexer. Construct with source text, then call [`Lexer::tokenize`].
+ pub struct Lexer {
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\lexer.rs:221:
+                 for _ in 0..op.chars().count() {
+                     self.advance();
+                 }
+-                self.push(TokenType::Operator, (*op).to_string(), start_line, start_col);
++                self.push(
++                    TokenType::Operator,
++                    (*op).to_string(),
++                    start_line,
++                    start_col,
++                );
+                 return;
+             }
+         }
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\lexer.rs:236:
+         // Punctuation.
+         if PUNCTUATION.contains(&ch) {
+             self.advance();
+-            self.push(TokenType::Punctuation, ch.to_string(), start_line, start_col);
++            self.push(
++                TokenType::Punctuation,
++                ch.to_string(),
++                start_line,
++                start_col,
++            );
+             return;
+         }
+ 
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\lexer.rs:243:
+         // Unknown character — emit as punctuation to keep scanning resilient.
+         self.advance();
+-        self.push(TokenType::Punctuation, ch.to_string(), start_line, start_col);
++        self.push(
++            TokenType::Punctuation,
++            ch.to_string(),
++            start_line,
++            start_col,
++        );
+     }
+ 
+     /* ── sub-scanners ──────────────────────────────────────────────────── */
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\lexer.rs:468:
+ 
+     #[test]
+     fn recognizes_atomis_keywords() {
+-        for kw in ["fn", "pure", "match", "guard", "node", "channel", "mesh", "connect", "encrypt"] {
++        for kw in [
++            "fn", "pure", "match", "guard", "node", "channel", "mesh", "connect", "encrypt",
++        ] {
+             let toks = meaningful(kw);
+-            assert_eq!(toks[0].ttype, TokenType::Keyword, "{} should be a KEYWORD", kw);
++            assert_eq!(
++                toks[0].ttype,
++                TokenType::Keyword,
++                "{} should be a KEYWORD",
++                kw
++            );
+         }
+     }
+ 
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\lexer.rs:517:
+     #[test]
+     fn skips_line_and_block_comments_as_comment_tokens() {
+         let all = tokenize("// hi\n/* block */ atom");
+-        let comments: Vec<&Token> =
+-            all.iter().filter(|t| t.ttype == TokenType::Comment).collect();
++        let comments: Vec<&Token> = all
++            .iter()
++            .filter(|t| t.ttype == TokenType::Comment)
++            .collect();
+         assert_eq!(comments.len(), 2);
+         let kw = all.iter().find(|t| t.value == "atom").unwrap();
+         assert_eq!(kw.ttype, TokenType::Keyword);
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\parser.rs:105:
+                 None => format!("{:?}", ttype),
+             };
+             return Err(ParseError {
+-                message: format!(
+-                    "Expected {} but found {:?} '{}'",
+-                    want, t.ttype, t.value
+-                ),
++                message: format!("Expected {} but found {:?} '{}'", want, t.ttype, t.value),
+                 line: t.line,
+                 col: t.col,
+             });
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\parser.rs:424:
+                 self.next();
+                 let ta = self.raw_until(
+                     |t| {
+-                        (t.ttype == TokenType::Punctuation
+-                            && (t.value == "," || t.value == ")"))
++                        (t.ttype == TokenType::Punctuation && (t.value == "," || t.value == ")"))
+                             || (t.ttype == TokenType::Operator && t.value == "=")
+                     },
+                     true,
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\parser.rs:437:
+             if self.check(TokenType::Operator, Some("=")) {
+                 self.next();
+                 let dv = self.raw_until(
+-                    |t| {
+-                        t.ttype == TokenType::Punctuation
+-                            && (t.value == "," || t.value == ")")
+-                    },
++                    |t| t.ttype == TokenType::Punctuation && (t.value == "," || t.value == ")"),
+                     false,
+                 );
+                 default_value = non_empty(dv);
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\parser.rs:482:
+ 
+     fn parse_guard(&mut self) -> PResult<Statement> {
+         let kw = self.expect(TokenType::Keyword, Some("guard"))?;
+-        let condition =
+-            self.raw_until(|t| t.ttype == TokenType::Keyword && t.value == "else", false);
++        let condition = self.raw_until(
++            |t| t.ttype == TokenType::Keyword && t.value == "else",
++            false,
++        );
+         self.expect(TokenType::Keyword, Some("else"))?;
+         let else_body = self.parse_brace_body()?;
+         Ok(Statement::GuardStmt(GuardStmt {
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\parser.rs:542:
+     fn parse_output(&mut self) -> PResult<Statement> {
+         let kw = self.expect(TokenType::Keyword, Some("output"))?;
+         self.expect(TokenType::Punctuation, Some("("))?;
+-        let argument =
+-            self.raw_until(|t| t.ttype == TokenType::Punctuation && t.value == ")", false);
++        let argument = self.raw_until(
++            |t| t.ttype == TokenType::Punctuation && t.value == ")",
++            false,
++        );
+         self.expect(TokenType::Punctuation, Some(")"))?;
+         if self.check(TokenType::Punctuation, Some(";")) {
+             self.next();
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\parser.rs:996:
+             || prev == "["
+             || prev == "("
+             || prev == ".";
+-        parts.push(if no_space {
+-            text
+-        } else {
+-            format!(" {}", text)
+-        });
++        parts.push(if no_space { text } else { format!(" {}", text) });
+         prev = tk.value.clone();
+     }
+     parts.join("").trim().to_string()
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\transformer.rs:130:
+             None => String::new(),
+         };
+         self.emit(
+-            &format!("{}function {}({}){} {{", async_kw, stmt.name, params.join(", "), ret),
++            &format!(
++                "{}function {}({}){} {{",
++                async_kw,
++                stmt.name,
++                params.join(", "),
++                ret
++            ),
+             indent,
+             stmt.line,
+         );
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\transformer.rs:170:
+                 };
+                 self.emit(&line, indent, arm.line);
+             } else if !emitted_if {
+-                self.emit(&format!("if ({} === {}) {}", disc, pattern, body), indent, arm.line);
++                self.emit(
++                    &format!("if ({} === {}) {}", disc, pattern, body),
++                    indent,
++                    arm.line,
++                );
+                 emitted_if = true;
+             } else {
+                 self.emit(
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\transformer.rs:192:
+ 
+     fn emit_import(&mut self, stmt: &ImportDecl, indent: usize) {
+         self.emit(
+-            &format!("import {{ {} }} from \"{}\"", stmt.names.join(", "), stmt.module),
++            &format!(
++                "import {{ {} }} from \"{}\"",
++                stmt.names.join(", "),
++                stmt.module
++            ),
+             indent,
+             stmt.line,
+         );
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\transformer.rs:207:
+     /* ── decorators / cells / render ───────────────────────────────────── */
+ 
+     fn emit_cell(&mut self, stmt: &CellBlock, indent: usize) {
+-        let arrow = if stmt.is_async { "async () =>" } else { "() =>" };
++        let arrow = if stmt.is_async {
++            "async () =>"
++        } else {
++            "() =>"
++        };
+         self.emit(
+             &format!("__atomis_cell({}, {} {{", json_string(&stmt.name), arrow),
+             indent,
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\transformer.rs:236:
+ 
+     fn emit_node(&mut self, stmt: &NodeDecl, indent: usize) {
+         let ident = id_to_ident(&stmt.id);
+-        self.emit(&format!("const {} = new GhostNode({{", ident), indent, stmt.line);
++        self.emit(
++            &format!("const {} = new GhostNode({{", ident),
++            indent,
++            stmt.line,
++        );
+         let mut props = vec![id_entry(&stmt.id, stmt.line)];
+         props.extend(stmt.config.iter().cloned());
+         self.emit_entries(&props, indent + 1);
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\transformer.rs:245:
+ 
+     fn emit_channel(&mut self, stmt: &ChannelDecl, indent: usize) {
+         let ident = id_to_ident(&stmt.id);
+-        self.emit(&format!("const {} = new GhostChannel({{", ident), indent, stmt.line);
++        self.emit(
++            &format!("const {} = new GhostChannel({{", ident),
++            indent,
++            stmt.line,
++        );
+         let mut props = vec![id_entry(&stmt.id, stmt.line)];
+         props.extend(stmt.config.iter().cloned());
+         self.emit_entries(&props, indent + 1);
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\transformer.rs:254:
+ 
+     fn emit_mesh(&mut self, stmt: &MeshDecl, indent: usize) {
+         let ident = id_to_ident(&stmt.id);
+-        self.emit(&format!("const {} = new GhostMesh({{", ident), indent, stmt.line);
++        self.emit(
++            &format!("const {} = new GhostMesh({{", ident),
++            indent,
++            stmt.line,
++        );
+         let mut props = vec![id_entry(&stmt.id, stmt.line)];
+         props.extend(stmt.config.iter().cloned());
+         self.emit_entries(&props, indent + 1);
+Diff in \\?\C:\Users\novtw\Music\atomis\atomis-rs\src\transformer.rs:343:
+ pub fn rewrite_result_sugar(text: &str) -> String {
+     let mut out = text.to_string();
+     out = rewrite_call(&out, "Ok", |arg| format!("{{ ok: true, value: {} }}", arg));
+-    out = rewrite_call(&out, "Err", |arg| format!("{{ ok: false, error: {} }}", arg));
++    out = rewrite_call(&out, "Err", |arg| {
++        format!("{{ ok: false, error: {} }}", arg)
++    });
+     out = rewrite_result_type(&out);
+     out
+ }

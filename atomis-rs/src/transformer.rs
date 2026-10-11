@@ -6,6 +6,7 @@
 //! `emitter.rs`.)
 
 use crate::ast::*;
+use crate::lexer::{tokenize, TokenType};
 use crate::util::json_string;
 
 /// A single generated line mapped back to its originating source line.
@@ -130,7 +131,13 @@ impl Transformer {
             None => String::new(),
         };
         self.emit(
-            &format!("{}function {}({}){} {{", async_kw, stmt.name, params.join(", "), ret),
+            &format!(
+                "{}function {}({}){} {{",
+                async_kw,
+                stmt.name,
+                params.join(", "),
+                ret
+            ),
             indent,
             stmt.line,
         );
@@ -170,7 +177,11 @@ impl Transformer {
                 };
                 self.emit(&line, indent, arm.line);
             } else if !emitted_if {
-                self.emit(&format!("if ({} === {}) {}", disc, pattern, body), indent, arm.line);
+                self.emit(
+                    &format!("if ({} === {}) {}", disc, pattern, body),
+                    indent,
+                    arm.line,
+                );
                 emitted_if = true;
             } else {
                 self.emit(
@@ -192,7 +203,11 @@ impl Transformer {
 
     fn emit_import(&mut self, stmt: &ImportDecl, indent: usize) {
         self.emit(
-            &format!("import {{ {} }} from \"{}\"", stmt.names.join(", "), stmt.module),
+            &format!(
+                "import {{ {} }} from {}",
+                stmt.names.join(", "),
+                crate::util::quote_source_string(&stmt.module)
+            ),
             indent,
             stmt.line,
         );
@@ -207,7 +222,11 @@ impl Transformer {
     /* ── decorators / cells / render ───────────────────────────────────── */
 
     fn emit_cell(&mut self, stmt: &CellBlock, indent: usize) {
-        let arrow = if stmt.is_async { "async () =>" } else { "() =>" };
+        let arrow = if stmt.is_async {
+            "async () =>"
+        } else {
+            "() =>"
+        };
         self.emit(
             &format!("__atomis_cell({}, {} {{", json_string(&stmt.name), arrow),
             indent,
@@ -236,7 +255,11 @@ impl Transformer {
 
     fn emit_node(&mut self, stmt: &NodeDecl, indent: usize) {
         let ident = id_to_ident(&stmt.id);
-        self.emit(&format!("const {} = new GhostNode({{", ident), indent, stmt.line);
+        self.emit(
+            &format!("const {} = new GhostNode({{", ident),
+            indent,
+            stmt.line,
+        );
         let mut props = vec![id_entry(&stmt.id, stmt.line)];
         props.extend(stmt.config.iter().cloned());
         self.emit_entries(&props, indent + 1);
@@ -245,7 +268,11 @@ impl Transformer {
 
     fn emit_channel(&mut self, stmt: &ChannelDecl, indent: usize) {
         let ident = id_to_ident(&stmt.id);
-        self.emit(&format!("const {} = new GhostChannel({{", ident), indent, stmt.line);
+        self.emit(
+            &format!("const {} = new GhostChannel({{", ident),
+            indent,
+            stmt.line,
+        );
         let mut props = vec![id_entry(&stmt.id, stmt.line)];
         props.extend(stmt.config.iter().cloned());
         self.emit_entries(&props, indent + 1);
@@ -254,7 +281,11 @@ impl Transformer {
 
     fn emit_mesh(&mut self, stmt: &MeshDecl, indent: usize) {
         let ident = id_to_ident(&stmt.id);
-        self.emit(&format!("const {} = new GhostMesh({{", ident), indent, stmt.line);
+        self.emit(
+            &format!("const {} = new GhostMesh({{", ident),
+            indent,
+            stmt.line,
+        );
         let mut props = vec![id_entry(&stmt.id, stmt.line)];
         props.extend(stmt.config.iter().cloned());
         self.emit_entries(&props, indent + 1);
@@ -343,7 +374,9 @@ pub fn id_to_ident(id: &str) -> String {
 pub fn rewrite_result_sugar(text: &str) -> String {
     let mut out = text.to_string();
     out = rewrite_call(&out, "Ok", |arg| format!("{{ ok: true, value: {} }}", arg));
-    out = rewrite_call(&out, "Err", |arg| format!("{{ ok: false, error: {} }}", arg));
+    out = rewrite_call(&out, "Err", |arg| {
+        format!("{{ ok: false, error: {} }}", arg)
+    });
     out = rewrite_result_type(&out);
     out
 }
@@ -354,6 +387,7 @@ where
     F: Fn(&str) -> String,
 {
     let chars: Vec<char> = text.chars().collect();
+    let protected = protected_offsets(text);
     let name_chars: Vec<char> = name.chars().collect();
     let needle: Vec<char> = format!("{}(", name).chars().collect();
     let mut result = String::new();
@@ -366,7 +400,7 @@ where
             }
             Some(idx) => {
                 let prev = if idx == 0 { '\0' } else { chars[idx - 1] };
-                let is_boundary = !is_call_boundary_char(prev);
+                let is_boundary = !protected[idx] && !is_call_boundary_char(prev);
                 if !is_boundary {
                     result.extend(&chars[i..idx + name_chars.len()]);
                     i = idx + name_chars.len();
@@ -376,6 +410,10 @@ where
                 let mut depth = 0i64;
                 let mut j = idx + name_chars.len();
                 while j < chars.len() {
+                    if protected[j] {
+                        j += 1;
+                        continue;
+                    }
                     if chars[j] == '(' {
                         depth += 1;
                     } else if chars[j] == ')' {
@@ -393,7 +431,7 @@ where
                 let arg: String = chars[idx + name_chars.len() + 1..j].iter().collect();
                 let arg = arg.trim();
                 result.extend(&chars[i..idx]);
-                result.push_str(&build(arg));
+                result.push_str(&build(&rewrite_result_sugar(arg)));
                 i = j + 1;
             }
         }
@@ -404,6 +442,7 @@ where
 /// Replace `Result<T, E>` type references with the structural union type.
 fn rewrite_result_type(text: &str) -> String {
     let chars: Vec<char> = text.chars().collect();
+    let protected = protected_offsets(text);
     let needle: Vec<char> = "Result<".chars().collect();
     let mut result = String::new();
     let mut i = 0usize;
@@ -415,7 +454,7 @@ fn rewrite_result_type(text: &str) -> String {
             }
             Some(idx) => {
                 let prev = if idx == 0 { '\0' } else { chars[idx - 1] };
-                if is_call_boundary_char(prev) {
+                if protected[idx] || is_call_boundary_char(prev) {
                     result.extend(&chars[i..idx + 7]);
                     i = idx + 7;
                     continue;
@@ -424,6 +463,10 @@ fn rewrite_result_type(text: &str) -> String {
                 let mut depth = 0i64;
                 let mut j = idx + 6; // points at '<'
                 while j < chars.len() {
+                    if protected[j] {
+                        j += 1;
+                        continue;
+                    }
                     if chars[j] == '<' {
                         depth += 1;
                     } else if chars[j] == '>' {
@@ -440,10 +483,12 @@ fn rewrite_result_type(text: &str) -> String {
                 }
                 let inner: String = chars[idx + 7..j].iter().collect();
                 let (t, e) = split_top_level_comma(&inner);
+                let t = rewrite_result_sugar(&t);
                 let t_type = t.trim();
                 let t_type = if t_type.is_empty() { "unknown" } else { t_type };
                 let e_type = match e {
                     Some(e) => {
+                        let e = rewrite_result_sugar(&e);
                         let e = e.trim();
                         if e.is_empty() {
                             "Error".to_string()
@@ -455,7 +500,7 @@ fn rewrite_result_type(text: &str) -> String {
                 };
                 result.extend(&chars[i..idx]);
                 result.push_str(&format!(
-                    "{{ ok: true, value: {} }} | {{ ok: false, error: {} }}",
+                    "({{ ok: true, value: {} }} | {{ ok: false, error: {} }})",
                     t_type, e_type
                 ));
                 i = j + 1;
@@ -463,6 +508,19 @@ fn rewrite_result_type(text: &str) -> String {
         }
     }
     result
+}
+
+fn protected_offsets(text: &str) -> Vec<bool> {
+    let mut protected = vec![false; text.chars().count()];
+    for token in tokenize(text) {
+        if matches!(
+            token.ttype,
+            TokenType::String | TokenType::Comment | TokenType::Invalid
+        ) {
+            protected[token.start..token.end].fill(true);
+        }
+    }
+    protected
 }
 
 /// `/[A-Za-z0-9_$.]/` — the "not a boundary" character class used by the TS

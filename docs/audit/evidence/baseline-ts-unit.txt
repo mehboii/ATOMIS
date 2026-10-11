@@ -1,0 +1,39 @@
+
+> atomis@0.1.0 test:unit
+> node dist/tests/lexer.test.js && node dist/tests/parser.test.js
+
+lexer.test.ts
+  ✓ tokenizes a simple atom declaration
+  ✓ recognizes Atomis keywords
+  ✓ distinguishes -> (ARROW) from => (OPERATOR)
+  ✓ tokenizes decorators
+  ✓ captures double and single quoted strings
+  ✓ captures template literals with interpolation as one token
+  ✓ handles nested braces inside interpolation
+  ✓ skips line and block comments as COMMENT tokens
+  ✓ emits NEWLINE tokens
+  ✓ recognizes braces as LBRACE/RBRACE
+  ✓ tokenizes multi-character operators greedily
+  ✓ tokenizes numbers including floats and hex
+  ✓ records source positions and offsets
+  ✓ always terminates with an EOF token
+
+lexer: 14 passed, 0 failed
+parser.test.ts
+  ✓ parses an atom declaration with type and initializer
+  ✓ parses a fn declaration with params and return type
+  ✓ parses a pure fn
+  ✓ parses a guard statement
+  ✓ parses a match expression with a wildcard arm
+  ✓ parses a node declaration with kind, id and config
+  ✓ parses a channel declaration and preserves boolean values
+  ✓ parses a mesh declaration
+  ✓ parses a connect statement
+  ✓ parses an encrypt declaration
+  ✓ parses an @import decorator
+  ✓ parses an inline @cell block until a blank line
+  ✓ treats unknown TypeScript as passthrough
+  ✓ does not treat channel.send(...) as a channel declaration
+  ✓ parses output() as an OutputCall
+
+parser: 15 passed, 0 failed

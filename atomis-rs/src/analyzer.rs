@@ -8,6 +8,7 @@
 //! statements are validated last.
 
 use crate::ast::*;
+use crate::lexer::{tokenize, TokenType};
 use crate::parser::contains_word;
 use std::collections::HashMap;
 
@@ -62,6 +63,7 @@ pub struct Analyzer {
     channel_ids: Vec<(String, usize)>,
     mesh_ids: Vec<(String, usize)>,
     scopes: Vec<Scope>,
+    generated_names: HashMap<String, String>,
 }
 
 impl Analyzer {
@@ -72,7 +74,10 @@ impl Analyzer {
             node_ids: Vec::new(),
             channel_ids: Vec::new(),
             mesh_ids: Vec::new(),
-            scopes: vec![Scope { names: HashMap::new() }],
+            generated_names: HashMap::new(),
+            scopes: vec![Scope {
+                names: HashMap::new(),
+            }],
         }
     }
 
@@ -80,7 +85,10 @@ impl Analyzer {
         self.visit_block(&program.body);
         self.validate_connects(program);
 
-        let has_errors = self.diagnostics.iter().any(|d| d.severity == Severity::Error);
+        let has_errors = self
+            .diagnostics
+            .iter()
+            .any(|d| d.severity == Severity::Error);
         AnalysisResult {
             diagnostics: self.diagnostics,
             atoms: self.atoms,
@@ -114,7 +122,9 @@ impl Analyzer {
     /* ── scope helpers ─────────────────────────────────────────────────── */
 
     fn push_scope(&mut self) {
-        self.scopes.push(Scope { names: HashMap::new() });
+        self.scopes.push(Scope {
+            names: HashMap::new(),
+        });
     }
 
     fn pop_scope(&mut self) {
@@ -155,9 +165,7 @@ impl Analyzer {
     fn preregister(&mut self, stmt: &Statement) {
         match stmt {
             Statement::AtomDecl(s) => self.declare(&s.name, s.line, s.col),
-            Statement::FnDecl(s) | Statement::PureFnDecl(s) => {
-                self.declare(&s.name, s.line, s.col)
-            }
+            Statement::FnDecl(s) | Statement::PureFnDecl(s) => self.declare(&s.name, s.line, s.col),
             _ => {}
         }
     }
@@ -208,9 +216,22 @@ impl Analyzer {
             return;
         }
 
+        let literal_tokens: Vec<_> = tokenize(&init)
+            .into_iter()
+            .filter(|t| {
+                !matches!(
+                    t.ttype,
+                    TokenType::Eof | TokenType::Comment | TokenType::Newline
+                )
+            })
+            .collect();
+        let is_literal = literal_tokens.len() == 1
+            || (literal_tokens.len() == 2
+                && literal_tokens[0].value == "-"
+                && literal_tokens[1].ttype == TokenType::Number);
         let first = init.chars().next().unwrap_or('\0');
-        let is_string_literal = first == '"' || first == '\'' || first == '`';
-        let is_number_literal = {
+        let is_string_literal = is_literal && (first == '"' || first == '\'' || first == '`');
+        let is_number_literal = is_literal && {
             // /^-?\d/
             let mut cs = init.chars();
             let c0 = cs.next().unwrap_or('\0');
@@ -318,7 +339,27 @@ impl Analyzer {
 
     /* ── GhostNet checks ───────────────────────────────────────────────── */
 
+    fn check_generated_name(&mut self, id: &str, kind: &str, line: usize, col: usize) {
+        let name = crate::transformer::id_to_ident(id);
+        let identity = format!("{}:{}", kind, id);
+        if let Some(existing) = self.generated_names.get(&name) {
+            if existing != &identity {
+                self.error(
+                    format!(
+                        "Generated identifier '{}' for {} collides with {}",
+                        name, identity, existing
+                    ),
+                    line,
+                    col,
+                );
+            }
+        } else {
+            self.generated_names.insert(name, identity);
+        }
+    }
+
     fn visit_node(&mut self, stmt: &NodeDecl) {
+        self.check_generated_name(&stmt.id, "node", stmt.line, stmt.col);
         if let Some(line) = find_id(&self.node_ids, &stmt.id) {
             self.error(
                 format!(
@@ -334,6 +375,7 @@ impl Analyzer {
     }
 
     fn visit_channel(&mut self, stmt: &ChannelDecl) {
+        self.check_generated_name(&stmt.id, "channel", stmt.line, stmt.col);
         if let Some(line) = find_id(&self.channel_ids, &stmt.id) {
             self.error(
                 format!(
@@ -349,6 +391,7 @@ impl Analyzer {
     }
 
     fn visit_mesh(&mut self, stmt: &MeshDecl) {
+        self.check_generated_name(&stmt.id, "mesh", stmt.line, stmt.col);
         if let Some(line) = find_id(&self.mesh_ids, &stmt.id) {
             self.error(
                 format!(

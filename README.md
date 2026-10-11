@@ -5,14 +5,14 @@ A transpiled language that compiles to **TypeScript**, with first-class
 
 Atomis has three syntax layers:
 
-1. **Layer 1 — Passthrough:** all valid TypeScript is valid Atomis.
+1. **Layer 1 — Passthrough:** unrecognized statements are preserved as TypeScript text. Compatibility is partial; regex literals and other lexical ambiguities are not reliably supported.
 2. **Layer 2 — Sugar:** `fn`, `atom`, `match`, `guard`, `pure`, `Result` / `Ok` / `Err`.
 3. **Layer 3 — GhostNet:** `node`, `channel`, `mesh`, `connect`, `encrypt`.
 
 ## Install
 
 ```bash
-npm install
+npm ci --ignore-scripts
 npm run build      # compiles src/*.ts -> dist/
 ```
 
@@ -63,6 +63,20 @@ fn sendMsg(text: string) -> void {
 Transpiles to clean TypeScript (`new GhostNode(...)`, `new GhostChannel(...)`,
 `__atomis_cell(...)`, `if (!(...)) { ... }`, etc.) plus a `.ato.map` source map.
 
+The networking example demonstrates emitted syntax, not a runnable standalone
+program. GhostNet constructors and notebook helpers require external bindings
+that this repository does not provide. `atom` currently emits plain `let`;
+reactivity is not implemented. `pure` produces heuristic warnings and a comment,
+not an enforced effect system. `match` emits statement branches, not returned
+values; `examples/features.ato` fails strict TS checking because `label` has no return.
+
+`check` validates selected Atomis rules, not all TypeScript syntax, imports,
+names or types. Compile emitted TypeScript separately with the target toolchain.
+`run` executes trusted source through ts-node with normal user permissions.
+The REPL displays transpiled text. Compilation accepts at most 8 MiB of UTF-8
+source and 64 levels of parsed bracket/Result/template nesting. Errors carry
+1-based coordinates; source maps currently map lines only.
+
 ## Architecture
 
 | File | Role |
@@ -80,6 +94,21 @@ Transpiles to clean TypeScript (`new GhostNode(...)`, `new GhostChannel(...)`,
 ```bash
 npm test
 ```
+
+## Rust and library API
+
+The complete `npm test` suite requires Node, npm and Rust/Cargo. It rebuilds TS,
+runs unit/runtime tests, then exercises both compilers. The Rust crate is separate:
+
+```bash
+cargo build --manifest-path atomis-rs/Cargo.toml
+cargo test --manifest-path atomis-rs/Cargo.toml --all-targets
+```
+
+The npm entry point exposes `compile`; Rust exposes `atomis::compiler::compile`.
+Both return diagnostics and omit code on semantic errors. They produce TypeScript,
+not native executables. See [verification](docs/audit/verification-report.md),
+[capabilities](docs/audit/language-capabilities.md) and [tests](docs/audit/test-plan.md).
 
 ## License
 

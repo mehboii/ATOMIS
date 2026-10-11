@@ -1,0 +1,185 @@
+
+> atomis@0.1.0 test
+> npm run build && npm run test:unit && npm run test:runtime && npm run test:audit
+
+
+> atomis@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> atomis@0.1.0 test:unit
+> node dist/tests/lexer.test.js && node dist/tests/parser.test.js
+
+lexer.test.ts
+  ✓ tokenizes a simple atom declaration
+  ✓ recognizes Atomis keywords
+  ✓ distinguishes -> (ARROW) from => (OPERATOR)
+  ✓ tokenizes decorators
+  ✓ captures double and single quoted strings
+  ✓ captures template literals with interpolation as one token
+  ✓ handles nested braces inside interpolation
+  ✓ skips line and block comments as COMMENT tokens
+  ✓ emits NEWLINE tokens
+  ✓ recognizes braces as LBRACE/RBRACE
+  ✓ tokenizes multi-character operators greedily
+  ✓ tokenizes numbers including floats and hex
+  ✓ records source positions and offsets
+  ✓ always terminates with an EOF token
+
+lexer: 14 passed, 0 failed
+parser.test.ts
+  ✓ parses an atom declaration with type and initializer
+  ✓ parses a fn declaration with params and return type
+  ✓ parses a pure fn
+  ✓ parses a guard statement
+  ✓ parses a match expression with a wildcard arm
+  ✓ parses a node declaration with kind, id and config
+  ✓ parses a channel declaration and preserves boolean values
+  ✓ parses a mesh declaration
+  ✓ parses a connect statement
+  ✓ parses an encrypt declaration
+  ✓ parses an @import decorator
+  ✓ parses an inline @cell block until a blank line
+  ✓ treats unknown TypeScript as passthrough
+  ✓ does not treat channel.send(...) as a channel declaration
+  ✓ parses output() as an OutputCall
+
+parser: 15 passed, 0 failed
+
+> atomis@0.1.0 test:runtime
+> node test/run-tests.mjs
+
+✓ hello.ato
+✓ proto.ato
+✓ proto_demo.ato
+✓ vault.ato
+
+4 passed, 0 failed
+
+> atomis@0.1.0 test:audit
+> cargo build --manifest-path atomis-rs/Cargo.toml && node test/audit-tests.mjs && node test/audit-parity.mjs
+
+npm.cmd :     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.66s
+At line:2 char:214
++ ... rage).Path; npm.cmd test *> docs/audit/evidence/final-npm-test.txt; W ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (    Finished `d...get(s) in 0.66s:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+PASS npm entry point exports the compiler
+PASS compile blocks semantic errors
+PASS Result preserves "Ok(1) Result<T,E>"
+PASS Result preserves 'Err(2)'
+PASS Result preserves `Ok(3)`
+PASS Result preserves // Ok(4)
+PASS Result preserves /* Err(5) */
+PASS Result balances strings in arguments
+PASS nested Result calls
+PASS Result type nested and array grouping
+PASS import literal retains escaping
+PASS import source escape meanings are preserved
+PASS empty source
+PASS whole-expression literal type checks
+PASS trailing comments are preserved
+PASS nested cell await and literal await
+PASS atom terminates at enclosing brace
+PASS deterministic output and map
+PASS Unicode token spans and CRLF
+PASS templates ignore braces in interpolation strings and comments
+PASS generated GhostNet names cannot collide
+PASS Result generic recursion is bounded
+PASS vendored protocol validates version and trailing bytes
+PASS vendored vault handle does not resurrect
+PASS reject malformed construct atom x =
+PASS reject malformed construct atom x:
+PASS reject malformed construct fn f(a b) {}
+PASS reject malformed construct fn f(1) {}
+PASS reject malformed construct fn f() -> {}
+PASS reject malformed construct guard else {}
+PASS reject malformed construct match x { => 1 }
+PASS reject malformed construct node "x" { key: }
+PASS reject malformed construct @render { rubbish }
+PASS conformance function f
+PASS conformance async function
+PASS conformance /** @pure */
+PASS conformance if (!(true))
+PASS conformance else
+PASS conformance __atomis_meta
+PASS conformance __atomis_cell
+PASS conformance function Hello
+PASS conformance setEncryptionPolicy
+PASS conformance for (const x
+PASS TS help
+PASS TS missing file
+PASS TS version and invalid flags
+FAIL TS trusted run with spaces and shell metacharacters: Expected values to be strictly equal:
++ actual - expected
+
++ Error: spawnSync C:\Program Files\nodejs\node.exe ETIMEDOUT
++     at Object.spawnSync (node:internal/child_process:1120:20)
++     at spawnSync (node:child_process:902:24)
++     at cli (file:///C:/Users/novtw/Music/atomis/test/audit-tests.mjs:29:10)
++     at file:///C:/Users/novtw/Music/atomis/test/audit-tests.mjs:130:22
++     at test (file:///C:/Users/novtw/Music/atomis/test/audit-tests.mjs:19:9)
++     at file:///C:/Users/novtw/Music/atomis/test/audit-tests.mjs:124:5
++     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
++     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
++     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
++   code: 'ETIMEDOUT',
++   errno: -4039,
++   path: 'C:\\Program Files\\nodejs\\node.exe',
++   spawnargs: [
++     'C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js',
++     'run',
++     'C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\audit runtime\\TS & trusted.ato'
++   ],
++   syscall: 'spawnSync C:\\Program Files\\nodejs\\node.exe'
++ }
+- undefined
+
+PASS TS rejects source overwrite
+PASS TS rejects "}" without hanging
+PASS TS rejects "@cell #x\n}" without hanging
+PASS TS rejects "\"unterminated" without hanging
+PASS TS rejects "/* unterminated" without hanging
+PASS TS rejects "`unterminated" without hanging
+PASS TS bounded nesting
+PASS TS paths with spaces, map and target execution
+PASS Rust help
+PASS Rust missing file
+PASS Rust version and invalid flags
+FAIL Rust trusted run with spaces and shell metacharacters: Expected values to be strictly equal:
++ actual - expected
+
++ Error: spawnSync C:\Users\novtw\Music\atomis\atomis-rs\target\debug\atomis.exe ETIMEDOUT
++     at Object.spawnSync (node:internal/child_process:1120:20)
++     at spawnSync (node:child_process:902:24)
++     at cli (file:///C:/Users/novtw/Music/atomis/test/audit-tests.mjs:29:10)
++     at file:///C:/Users/novtw/Music/atomis/test/audit-tests.mjs:130:22
++     at test (file:///C:/Users/novtw/Music/atomis/test/audit-tests.mjs:19:9)
++     at file:///C:/Users/novtw/Music/atomis/test/audit-tests.mjs:124:5
++     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
++     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
++     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
++   code: 'ETIMEDOUT',
++   errno: -4039,
++   path: 'C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe',
++   spawnargs: [
++     'run',
++     'C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\audit runtime\\Rust & trusted.ato'
++   ],
++   syscall: 'spawnSync C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe'
++ }
+- undefined
+
+PASS Rust rejects source overwrite
+PASS Rust rejects "}" without hanging
+PASS Rust rejects "@cell #x\n}" without hanging
+PASS Rust rejects "\"unterminated" without hanging
+PASS Rust rejects "/* unterminated" without hanging
+PASS Rust rejects "`unterminated" without hanging
+PASS Rust bounded nesting
+PASS Rust paths with spaces, map and target execution
+PASS TS watch add/change
+PASS Rust watch add/change
+67 passed, 2 failed

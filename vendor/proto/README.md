@@ -3,7 +3,7 @@
 The shared **wire format** for GhostNet: how messages are turned into bytes and
 back. Everything in GhostNet uses it.
 
-- **Encoding:** canonical/deterministic **CBOR** (via `ciborium`). Same message
+- **Encoding:** deterministic **CBOR** (via `ciborium`). Same message
   → same bytes, every time.
 - **The Rust types ARE the spec.** Plain `serde` structs/enums; no schema
   language, no codegen. Read [`src/lib.rs`](src/lib.rs) and
@@ -16,7 +16,7 @@ back. Everything in GhostNet uses it.
 
 ```rust
 let env = Envelope::new(1, Message::Hello(Hello { /* ... */ }));
-let bytes: Vec<u8>           = encode(&env);   // -> canonical CBOR
+let bytes: Vec<u8>           = encode(&env);   // -> deterministic CBOR
 let back:  Envelope          = decode(&bytes)?; // -> Result<Envelope, ProtoError>
 ```
 

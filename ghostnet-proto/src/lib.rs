@@ -12,7 +12,7 @@
 //! [`PeerAnnounce`], [`Secure`], [`Ack`]. You turn an envelope into bytes with
 //! [`encode`] and bytes back into an envelope with [`decode`].
 //!
-//! ## Encoding: canonical / deterministic CBOR
+//! ## Encoding: deterministic CBOR
 //! We use **CBOR** (via the `ciborium` crate — we never hand-roll it). Encoding
 //! is **deterministic**: the same message always produces the same bytes. That
 //! holds because every type here is a `struct`/`enum`/`Vec` (no `HashMap`), so
@@ -171,7 +171,7 @@ impl std::error::Error for ProtoError {}
 
 /* ── the only two functions you need ──────────────────────────────────────── */
 
-/// Encode an envelope to canonical CBOR bytes. Infallible for these types
+/// Encode an envelope to deterministic CBOR bytes. Infallible for these types
 /// (writing to a `Vec` cannot fail and every field is CBOR-representable).
 pub fn encode(envelope: &Envelope) -> Vec<u8> {
     let mut buf = Vec::new();
@@ -182,7 +182,16 @@ pub fn encode(envelope: &Envelope) -> Vec<u8> {
 
 /// Decode CBOR bytes back into an envelope, or report why they were invalid.
 pub fn decode(bytes: &[u8]) -> Result<Envelope, ProtoError> {
-    ciborium::de::from_reader(bytes).map_err(|e| ProtoError(e.to_string()))
+    let mut remaining = bytes;
+    let envelope: Envelope =
+        ciborium::de::from_reader(&mut remaining).map_err(|e| ProtoError(e.to_string()))?;
+    if envelope.version != PROTO_VERSION {
+        return Err(ProtoError("unsupported protocol version".into()));
+    }
+    if !remaining.is_empty() {
+        return Err(ProtoError("trailing data after envelope".into()));
+    }
+    Ok(envelope)
 }
 
 /* ── wasm / JS boundary (mirrors the ghostvault wiring pattern) ───────────── */
