@@ -10,7 +10,7 @@
 import { analyze, AnalysisResult } from "./analyzer";
 import { emit, EmitResult } from "./emitter";
 import { tokenize } from "./lexer";
-import { parse } from "./parser";
+import { parse, ParseError } from "./parser";
 import { transform } from "./transformer";
 
 /** Options for compiling a single source string. */
@@ -40,9 +40,11 @@ export interface CompileResult {
  * @returns The compile result (code + map + diagnostics).
  */
 export function compile(source: string, options: CompileOptions): CompileResult {
+  if (Buffer.byteLength(source, "utf8") > 8 * 1024 * 1024) throw new ParseError("Source exceeds 8 MiB limit", 1, 1);
   const tokens = tokenize(source);
   const program = parse(tokens, source);
   const analysis = analyze(program);
+  if (analysis.hasErrors) return { code: "", analysis };
   const transformed = transform(program);
 
   const mapFileName = baseName(options.outputFile) + ".ato.map";

@@ -22,7 +22,8 @@ path = "src/main.rs"
 #   * The few JS regexes (word-boundary purity/await checks) are replicated as
 #     explicit code so there is zero risk of a regex-engine discrepancy breaking
 #     byte-identical diagnostics.
-# Net effect: `cargo build` needs no network and has no supply-chain surface.
+# The compiler needs no third-party crates. Toolchain trust and Node/ts-node
+# runtime dependencies remain separate concerns.
 
 [dependencies]
 

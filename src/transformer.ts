@@ -1,3 +1,4 @@
+import { tokenize, TokenType } from "./lexer";
 /**
  * @file transformer.ts
  * @module atomis/transformer
@@ -263,7 +264,7 @@ export class Transformer {
   }
 
   private emitImport(stmt: ImportDecl, indent: number): void {
-    this.emit(`import { ${stmt.names.join(", ")} } from "${stmt.module}"`, indent, stmt.line);
+    this.emit(`import { ${stmt.names.join(", ")} } from ${quoteSourceString(stmt.module)}`, indent, stmt.line);
   }
 
   private emitMeta(stmt: MetaBlock, indent: number): void {
@@ -390,6 +391,7 @@ export function rewriteResultSugar(text: string): string {
  * Only matches when `Name` is not part of a larger identifier.
  */
 function rewriteCall(text: string, name: string, build: (arg: string) => string): string {
+  const protectedOffsets = protectedMask(text);
   let result = "";
   let i = 0;
   while (i < text.length) {
@@ -399,7 +401,7 @@ function rewriteCall(text: string, name: string, build: (arg: string) => string)
       break;
     }
     const prev = text[idx - 1] ?? "";
-    const isBoundary = !/[A-Za-z0-9_$.]/.test(prev);
+    const isBoundary = !protectedOffsets[idx] && !/[A-Za-z0-9_$.]/.test(prev);
     if (!isBoundary) {
       result += text.slice(i, idx + name.length);
       i = idx + name.length;
@@ -409,6 +411,7 @@ function rewriteCall(text: string, name: string, build: (arg: string) => string)
     let depth = 0;
     let j = idx + name.length;
     for (; j < text.length; j++) {
+      if (protectedOffsets[j]) continue;
       if (text[j] === "(") depth++;
       else if (text[j] === ")") {
         depth--;
@@ -420,7 +423,7 @@ function rewriteCall(text: string, name: string, build: (arg: string) => string)
       break;
     }
     const arg = text.slice(idx + name.length + 1, j).trim();
-    result += text.slice(i, idx) + build(arg);
+    result += text.slice(i, idx) + build(rewriteResultSugar(arg));
     i = j + 1;
   }
   return result;
@@ -428,6 +431,7 @@ function rewriteCall(text: string, name: string, build: (arg: string) => string)
 
 /** Replace `Result<T, E>` type references with the structural union type. */
 function rewriteResultType(text: string): string {
+  const protectedOffsets = protectedMask(text);
   let result = "";
   let i = 0;
   while (i < text.length) {
@@ -437,7 +441,7 @@ function rewriteResultType(text: string): string {
       break;
     }
     const prev = text[idx - 1] ?? "";
-    if (/[A-Za-z0-9_$.]/.test(prev)) {
+    if (protectedOffsets[idx] || /[A-Za-z0-9_$.]/.test(prev)) {
       result += text.slice(i, idx + 7);
       i = idx + 7;
       continue;
@@ -446,6 +450,7 @@ function rewriteResultType(text: string): string {
     let depth = 0;
     let j = idx + 6; // points at '<'
     for (; j < text.length; j++) {
+      if (protectedOffsets[j]) continue;
       if (text[j] === "<") depth++;
       else if (text[j] === ">") {
         depth--;
@@ -458,14 +463,33 @@ function rewriteResultType(text: string): string {
     }
     const inner = text.slice(idx + 7, j);
     const [t, e] = splitTopLevelComma(inner);
-    const tType = (t ?? "unknown").trim();
-    const eType = (e ?? "Error").trim();
+    const tType = rewriteResultSugar((t ?? "unknown").trim());
+    const eType = rewriteResultSugar((e ?? "Error").trim());
     result +=
       text.slice(i, idx) +
-      `{ ok: true, value: ${tType} } | { ok: false, error: ${eType} }`;
+      `({ ok: true, value: ${tType} } | { ok: false, error: ${eType} })`;
     i = j + 1;
   }
   return result;
+}
+
+function protectedMask(text: string): boolean[] {
+  const mask = Array<boolean>(text.length).fill(false);
+  for (const t of tokenize(text)) {
+    if ([TokenType.STRING, TokenType.COMMENT, TokenType.INVALID].includes(t.type)) mask.fill(true, t.start, t.end);
+  }
+  return mask;
+}
+
+/** Import AST fields retain source escapes; do not JSON-escape them twice. */
+function quoteSourceString(text: string): string {
+  let result = '"', escaped = false;
+  for (const c of text) {
+    if (c === '"' && !escaped) result += "\\";
+    result += c;
+    escaped = c === "\\" && !escaped;
+  }
+  return result + '"';
 }
 
 /** Split `T, E` at the top-level comma, respecting nested generics. */

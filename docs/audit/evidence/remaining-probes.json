@@ -1,0 +1,212 @@
+[
+  {
+    "name": "regex brace passthrough",
+    "source": "const re = /}/;",
+    "error": "[1:13] Unexpected closing brace"
+  },
+  {
+    "name": "regex Result corruption",
+    "source": "const re = /Ok(1)/;",
+    "atomisDiagnostics": [],
+    "generated": "const re = /{ ok: true, value: 1 }/;\n",
+    "targetDiagnostics": []
+  },
+  {
+    "name": "Result whitespace",
+    "source": "output(Ok (1))",
+    "atomisDiagnostics": [],
+    "generated": "console.log(Ok (1))\n",
+    "targetDiagnostics": [
+      {
+        "code": 2304,
+        "message": "Cannot find name 'Ok'."
+      }
+    ]
+  },
+  {
+    "name": "Result template interpolation",
+    "source": "output(`${Ok(1)}`)",
+    "atomisDiagnostics": [],
+    "generated": "console.log(`${Ok(1)}`)\n",
+    "targetDiagnostics": [
+      {
+        "code": 2304,
+        "message": "Cannot find name 'Ok'."
+      }
+    ]
+  },
+  {
+    "name": "GhostNet lexical scope",
+    "source": "fn setup() { node \"n\" {} }\nchannel \"c\" {}\nconnect \"c\" -> \"n\" via tcp",
+    "atomisDiagnostics": [],
+    "generated": "function setup() {\n  const __n = new GhostNode({\n    id: \"n\"\n  })\n}\nconst __c = new GhostChannel({\n  id: \"c\"\n})\n__c.connect(__n, \"tcp\")\n",
+    "targetDiagnostics": [
+      {
+        "code": 2304,
+        "message": "Cannot find name 'GhostNode'."
+      },
+      {
+        "code": 2304,
+        "message": "Cannot find name 'GhostChannel'."
+      },
+      {
+        "code": 2304,
+        "message": "Cannot find name '__n'."
+      }
+    ]
+  },
+  {
+    "name": "match repeated evaluation",
+    "source": "match get() { 0 => output(0), 1 => output(1) }",
+    "atomisDiagnostics": [],
+    "generated": "if (get() === 0) { output(0) }\nelse if (get() === 1) { output(1) }\n",
+    "targetDiagnostics": [
+      {
+        "code": 2304,
+        "message": "Cannot find name 'get'."
+      },
+      {
+        "code": 2304,
+        "message": "Cannot find name 'output'."
+      },
+      {
+        "code": 2304,
+        "message": "Cannot find name 'get'."
+      },
+      {
+        "code": 2304,
+        "message": "Cannot find name 'output'."
+      }
+    ]
+  },
+  {
+    "name": "match wildcard ordering",
+    "source": "match x { _ => output(0), 1 => output(1) }",
+    "atomisDiagnostics": [],
+    "generated": "{ output(0) }\nif (x === 1) { output(1) }\n",
+    "targetDiagnostics": [
+      {
+        "code": 2304,
+        "message": "Cannot find name 'output'."
+      },
+      {
+        "code": 2304,
+        "message": "Cannot find name 'x'."
+      },
+      {
+        "code": 2304,
+        "message": "Cannot find name 'output'."
+      }
+    ]
+  },
+  {
+    "name": "cell nested await",
+    "source": "@cell #x { guard true else { await Promise.resolve() } }",
+    "atomisDiagnostics": [],
+    "generated": "__atomis_cell(\"x\", async () => {\n  if (!(true)) { await Promise.resolve() }\n})\n",
+    "targetDiagnostics": [
+      {
+        "code": 2304,
+        "message": "Cannot find name '__atomis_cell'."
+      }
+    ]
+  },
+  {
+    "name": "passthrough undefined name",
+    "source": "const x = missingName + 1",
+    "atomisDiagnostics": [],
+    "generated": "const x = missingName + 1\n",
+    "targetDiagnostics": [
+      {
+        "code": 2304,
+        "message": "Cannot find name 'missingName'."
+      }
+    ]
+  },
+  {
+    "name": "invalid numeric literal",
+    "source": "atom x = 0b2",
+    "atomisDiagnostics": [],
+    "generated": "let x = 0b2\n",
+    "targetDiagnostics": [
+      {
+        "code": 1177,
+        "message": "Binary digit expected."
+      }
+    ]
+  },
+  {
+    "name": "invalid string escape",
+    "source": "output(\"\\xZZ\")",
+    "atomisDiagnostics": [],
+    "generated": "console.log(\"\\xZZ\")\n",
+    "targetDiagnostics": [
+      {
+        "code": 1125,
+        "message": "Hexadecimal digit expected."
+      }
+    ]
+  },
+  {
+    "name": "import alias",
+    "source": "@import { encode as enc } from \"proto\"",
+    "atomisDiagnostics": [],
+    "generated": "import { encode, as, enc } from \"proto\"\n",
+    "targetDiagnostics": [
+      {
+        "code": 2307,
+        "message": "Cannot find module 'proto' or its corresponding type declarations."
+      }
+    ]
+  },
+  {
+    "name": "reactivity",
+    "source": "atom x = 1",
+    "atomisDiagnostics": [],
+    "generated": "let x = 1\n",
+    "targetDiagnostics": []
+  },
+  {
+    "name": "example hello",
+    "source": "fn greet(name: string) -> string {\n  guard name.length > 0 else { return \"anonymous\" }\n  return `hello ${name}`\n}\n\nlet msg: string = greet(\"atomis\")\noutput(msg)\n",
+    "atomisDiagnostics": [],
+    "generated": "function greet(name: string): string {\n  if (!(name.length > 0)) { return \"anonymous\" }\n  return `hello ${name}`\n}\nlet msg: string = greet(\"atomis\")\nconsole.log(msg)\n",
+    "targetDiagnostics": []
+  },
+  {
+    "name": "example features",
+    "source": "pure fn classify(n: number) -> Result<string, Error> {\n  guard n >= 0 else { return Err(new Error(\"negative\")) }\n  return Ok(\"ok\")\n}\n\nfn label(x: number) -> string {\n  match x {\n    0 => \"zero\",\n    1 => \"one\",\n    _ => \"many\"\n  }\n}\n\nlet parsed: Result<number, string> = Ok(42)\n",
+    "atomisDiagnostics": [],
+    "generated": "/** @pure */\nfunction classify(n: number): ({ ok: true, value: string } | { ok: false, error: Error }) {\n  if (!(n >= 0)) { return { ok: false, error: new Error(\"negative\") } }\n  return { ok: true, value: \"ok\" }\n}\nfunction label(x: number): string {\n  if (x === 0) { \"zero\" }\n  else if (x === 1) { \"one\" }\n  else { \"many\" }\n}\nlet parsed: ({ ok: true, value: number } | { ok: false, error: string }) = { ok: true, value: 42 }\n",
+    "targetDiagnostics": [
+      {
+        "code": 2355,
+        "message": "A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value."
+      }
+    ]
+  },
+  {
+    "name": "example network",
+    "source": "@import { mesh, GhostChannel } from \"ghostnet/core\"\n\natom activeNodes: Node[] = []\n\nnode relay \"node-01\" {\n  type: esp32\n  transport: [bluetooth, tcp]\n  encrypt: aes256\n}\n\nchannel \"ghostchat\" {\n  peers: [\"node-01\"]\n  e2e: true\n  persist: false\n}\n\nconnect \"ghostchat\" -> \"node-01\" via bluetooth\n\n@cell #scan\nactiveNodes = await mesh.scan()\noutput(`Found ${activeNodes.length} peers`)\n\nfn sendMsg(text: string) -> void {\n  guard text.length > 0 else { return }\n  channel.send(\"ghostchat\", text)\n}\n",
+    "atomisDiagnostics": [],
+    "generated": "import { mesh, GhostChannel } from \"ghostnet/core\"\nlet activeNodes: Node[] = []\nconst __node_01 = new GhostNode({\n  id: \"node-01\",\n  type: \"esp32\",\n  transport: [\"bluetooth\", \"tcp\"],\n  encrypt: \"aes256\"\n})\nconst __ghostchat = new GhostChannel({\n  id: \"ghostchat\",\n  peers: [\"node-01\"],\n  e2e: true,\n  persist: false\n})\n__ghostchat.connect(__node_01, \"bluetooth\")\n__atomis_cell(\"scan\", async () => {\n  activeNodes = await mesh.scan()\n  console.log(`Found ${activeNodes.length} peers`)\n})\nfunction sendMsg(text: string): void {\n  if (!(text.length > 0)) { return }\n  channel.send(\"ghostchat\", text)\n}\n",
+    "targetDiagnostics": [
+      {
+        "code": 2307,
+        "message": "Cannot find module 'ghostnet/core' or its corresponding type declarations."
+      },
+      {
+        "code": 2304,
+        "message": "Cannot find name 'GhostNode'."
+      },
+      {
+        "code": 2304,
+        "message": "Cannot find name '__atomis_cell'."
+      },
+      {
+        "code": 2304,
+        "message": "Cannot find name 'channel'."
+      }
+    ]
+  }
+]

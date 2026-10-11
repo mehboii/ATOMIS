@@ -1,5 +1,6 @@
-The Atomis is the programming language created by the N11X Collective. It is a part of the N11X architecture as well as the environment. 
-Right now, the language is in development, and only a few changes have been made. Yet the programming language has not been tested by any means. 
-In the future, after completing the main project, the file will be tested and will be ready to ship for public use. 
-Right now, all the changes are subject to use only by enterprises, 
-not for public use. In the next update, the Atomis programming language will be ready to use for the public as well. 
+Atomis is an experimental TypeScript-targeting language in the Kryptos ecosystem.
+Both the TypeScript reference and Rust port have automated tests; these do not
+establish production readiness or full language conformance.
+
+See README.md and docs/audit/verification-report.md for current status.
+No release or publication was performed during this audit.

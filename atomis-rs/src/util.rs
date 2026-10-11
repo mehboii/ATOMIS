@@ -28,3 +28,19 @@ pub fn json_string(s: &str) -> String {
     out.push('"');
     out
 }
+
+/// Quote already escaped source-literal contents without double escaping.
+/// Used for import specifiers, whose AST field preserves source escapes.
+pub fn quote_source_string(s: &str) -> String {
+    let mut out = String::from("\"");
+    let mut escaped = false;
+    for c in s.chars() {
+        if c == '"' && !escaped {
+            out.push('\\');
+        }
+        out.push(c);
+        escaped = c == '\\' && !escaped;
+    }
+    out.push('"');
+    out
+}

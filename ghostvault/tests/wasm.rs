@@ -38,3 +38,17 @@ fn opens_native_sealed_blob() {
     assert_eq!(pt, b"sealed-on-native-opened-on-wasm");
     vault_free(h);
 }
+
+#[wasm_bindgen_test]
+fn stale_handle_never_reappears_after_generation_exhaustion() {
+    let stale = vault_unlock(b"first").unwrap();
+    vault_free(stale);
+    for _ in 0..=u16::MAX {
+        let current = vault_unlock(b"later").unwrap();
+        assert_ne!(
+            current, stale,
+            "a freed handle must never refer to a later vault"
+        );
+        vault_free(current);
+    }
+}

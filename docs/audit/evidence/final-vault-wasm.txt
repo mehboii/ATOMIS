@@ -1,0 +1,28 @@
+wasm-pack : [INFO]: Checking for the Wasm target...
+At line:2 char:213
++ ... TEXITCODE"; wasm-pack test --node --no-default-features --features kd ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([INFO]: Checking for the Wasm target...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+   Compiling ghostvault v0.1.0 (C:\Users\novtw\Music\atomis\ghostvault)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.58s
+[INFO]: Installing wasm-bindgen...
+   Compiling ghostvault v0.1.0 (C:\Users\novtw\Music\atomis\ghostvault)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.88s
+     Running unittests src\lib.rs (target\wasm32-unknown-unknown\debug\deps\ghostvault-95c41faf0927c9f0.wasm)
+no tests to run!
+     Running tests\wasm.rs (target\wasm32-unknown-unknown\debug\deps\wasm-490212fa84349319.wasm)
+running 3 tests
+test wasm_roundtrip_and_stale_handle ... ok
+test stale_handle_never_reappears_after_generation_exhaustion ... ok
+test opens_native_sealed_blob ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 filtered out; finished in 3.45s
+
+   Doc-tests ghostvault
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

@@ -41,7 +41,7 @@ import {
   TSPassthrough,
   ViewDecl,
 } from "./ast";
-import { Token, TokenType } from "./lexer";
+import { Token, TokenType, tokenize } from "./lexer";
 
 /** A parse error carrying source coordinates. */
 export class ParseError extends Error {
@@ -81,6 +81,17 @@ export class Parser {
    * @returns The root {@link Program} node.
    */
   public parse(): Program {
+    if (this.tokens[this.tokens.length - 1]?.type !== TokenType.EOF) throw new ParseError("Token stream must end with EOF", 1, 1);
+    let depth = 0, genericDepth = 0;
+    for (let i = 0; i < this.tokens.length; i++) {
+      const t = this.tokens[i];
+      if (t.type === TokenType.INVALID) throw new ParseError(t.value, t.line, t.col);
+      if (this.isOpen(t)) depth++;
+      if (this.isClose(t)) depth = Math.max(0, depth - 1);
+      if (t.value === "<" && (genericDepth > 0 || this.tokens[i-1]?.value === "Result")) genericDepth++;
+      else if (genericDepth > 0 && [">", ">>", ">>>"].includes(t.value)) genericDepth = Math.max(0, genericDepth - t.value.length);
+      if (depth > 64 || genericDepth > 64) throw new ParseError("Maximum nesting depth (64) exceeded", t.line, t.col);
+    }
     const body: Statement[] = [];
     const first = this.peek();
     while (!this.atEnd()) {
@@ -98,6 +109,10 @@ export class Parser {
   }
 
   /* ── cursor helpers ────────────────────────────────────────────────── */
+
+  private requireText(text: string, description: string): void {
+    if (!text.trim()) { const t = this.peek(); throw new ParseError(`Expected ${description}`, t.line, t.col); }
+  }
 
   private peek(offset = 0): Token {
     const i = this.pos + offset;
@@ -237,6 +252,7 @@ export class Parser {
       }
     }
 
+    if (t.type === TokenType.RBRACE) throw new ParseError("Unexpected closing brace", t.line, t.col);
     // Everything else: raw TypeScript passthrough.
     return this.parseRawStatement();
   }
@@ -252,13 +268,14 @@ export class Parser {
     const start = this.peek();
     const startOffset = start.start;
     let endOffset = start.end;
+    let continuationOffset = start.end;
     let depth = 0;
 
     while (!this.atEnd()) {
       const tk = this.peek();
 
       if (tk.type === TokenType.NEWLINE) {
-        if (depth === 0 && !this.continues(endOffset)) {
+        if (depth === 0 && !this.continues(continuationOffset)) {
           this.next();
           break;
         }
@@ -266,6 +283,7 @@ export class Parser {
         continue;
       }
       if (tk.type === TokenType.COMMENT) {
+        endOffset = tk.end;
         this.next();
         continue;
       }
@@ -280,6 +298,7 @@ export class Parser {
       }
 
       endOffset = tk.end;
+      continuationOffset = tk.end;
       this.next();
 
       if (depth === 0 && tk.type === TokenType.PUNCTUATION && tk.value === ";") {
@@ -390,7 +409,7 @@ export class Parser {
       typeAnnotation = this.rawUntil(
         (t) =>
           (t.type === TokenType.OPERATOR && t.value === "=") ||
-          t.type === TokenType.NEWLINE,
+          t.type === TokenType.NEWLINE || t.type === TokenType.RBRACE || t.value === ";",
         { angles: true },
       );
     }
@@ -400,10 +419,12 @@ export class Parser {
       this.next();
       initializer = this.rawUntil(
         (t) =>
-          t.type === TokenType.NEWLINE ||
+          t.type === TokenType.NEWLINE || t.type === TokenType.RBRACE ||
           (t.type === TokenType.PUNCTUATION && t.value === ";"),
       );
     }
+    if (typeAnnotation !== undefined) this.requireText(typeAnnotation, "type annotation");
+    if (initializer !== undefined) this.requireText(initializer, "initializer");
     // Consume an optional trailing semicolon.
     if (this.check(TokenType.PUNCTUATION, ";")) this.next();
 
@@ -438,6 +459,7 @@ export class Parser {
     if (this.check(TokenType.ARROW)) {
       this.next();
       returnType = this.rawUntil((t) => t.type === TokenType.LBRACE, { angles: true });
+      this.requireText(returnType, "return type");
     }
 
     const body = this.parseBraceBody();
@@ -463,7 +485,7 @@ export class Parser {
     this.skipNewlines();
     while (!this.check(TokenType.PUNCTUATION, ")") && !this.atEnd()) {
       const nameTok = this.peek();
-      const name = this.next().value;
+      const name = this.expect(TokenType.IDENT).value;
 
       let typeAnnotation: string | undefined;
       if (this.check(TokenType.PUNCTUATION, ":")) {
@@ -484,6 +506,8 @@ export class Parser {
         );
       }
 
+      if (typeAnnotation !== undefined) this.requireText(typeAnnotation, "type annotation");
+      if (defaultValue !== undefined) this.requireText(defaultValue, "default value");
       params.push({
         type: "Param",
         line: nameTok.line,
@@ -497,6 +521,8 @@ export class Parser {
       if (this.check(TokenType.PUNCTUATION, ",")) {
         this.next();
         this.skipNewlines();
+      } else if (!this.check(TokenType.PUNCTUATION, ")")) {
+        this.expect(TokenType.PUNCTUATION, ",");
       }
     }
     this.expect(TokenType.PUNCTUATION, ")");
@@ -508,6 +534,17 @@ export class Parser {
    */
   private parseBraceBody(): Statement[] {
     this.expect(TokenType.LBRACE);
+    if (this.tokens[this.tokens.length - 1]?.type !== TokenType.EOF) throw new ParseError("Token stream must end with EOF", 1, 1);
+    let depth = 0, genericDepth = 0;
+    for (let i = 0; i < this.tokens.length; i++) {
+      const t = this.tokens[i];
+      if (t.type === TokenType.INVALID) throw new ParseError(t.value, t.line, t.col);
+      if (this.isOpen(t)) depth++;
+      if (this.isClose(t)) depth = Math.max(0, depth - 1);
+      if (t.value === "<" && (genericDepth > 0 || this.tokens[i-1]?.value === "Result")) genericDepth++;
+      else if (genericDepth > 0 && [">", ">>", ">>>"].includes(t.value)) genericDepth = Math.max(0, genericDepth - t.value.length);
+      if (depth > 64 || genericDepth > 64) throw new ParseError("Maximum nesting depth (64) exceeded", t.line, t.col);
+    }
     const body: Statement[] = [];
     this.skipBlankLines();
     while (!this.check(TokenType.RBRACE) && !this.atEnd()) {
@@ -527,6 +564,7 @@ export class Parser {
     const condition = this.rawUntil(
       (t) => t.type === TokenType.KEYWORD && t.value === "else",
     );
+    this.requireText(condition, "guard condition");
     this.expect(TokenType.KEYWORD, "else");
     const elseBody = this.parseBraceBody();
     return {
@@ -552,6 +590,7 @@ export class Parser {
       const pattern = this.rawUntil(
         (t) => t.type === TokenType.OPERATOR && t.value === "=>",
       );
+      this.requireText(pattern, "match pattern");
       this.expect(TokenType.OPERATOR, "=>");
       const result = this.rawUntil(
         (t) =>
@@ -673,6 +712,17 @@ export class Parser {
    * (two or more consecutive newlines), a new top-level construct, or EOF.
    */
   private parseInlineBlock(): Statement[] {
+    if (this.tokens[this.tokens.length - 1]?.type !== TokenType.EOF) throw new ParseError("Token stream must end with EOF", 1, 1);
+    let depth = 0, genericDepth = 0;
+    for (let i = 0; i < this.tokens.length; i++) {
+      const t = this.tokens[i];
+      if (t.type === TokenType.INVALID) throw new ParseError(t.value, t.line, t.col);
+      if (this.isOpen(t)) depth++;
+      if (this.isClose(t)) depth = Math.max(0, depth - 1);
+      if (t.value === "<" && (genericDepth > 0 || this.tokens[i-1]?.value === "Result")) genericDepth++;
+      else if (genericDepth > 0 && [">", ">>", ">>>"].includes(t.value)) genericDepth = Math.max(0, genericDepth - t.value.length);
+      if (depth > 64 || genericDepth > 64) throw new ParseError("Maximum nesting depth (64) exceeded", t.line, t.col);
+    }
     const body: Statement[] = [];
     // Skip the single newline immediately after the header.
     if (this.check(TokenType.NEWLINE)) this.next();
@@ -707,9 +757,12 @@ export class Parser {
 
   /** Heuristically determine whether a statement contains `await`. */
   private statementUsesAwait(s: Statement): boolean {
-    const raw = (s as TSPassthrough).raw;
-    if (typeof raw === "string") return /\bawait\b/.test(raw);
-    if (s.type === "OutputCall") return /\bawait\b/.test(s.argument);
+    const uses = (raw: string): boolean => tokenize(raw).some(t => t.type === TokenType.IDENT && t.value === "await");
+    if (s.type === "TSPassthrough") return uses(s.raw);
+    if (s.type === "OutputCall") return uses(s.argument);
+    if (s.type === "AtomDecl") return uses(s.initializer ?? "");
+    if (s.type === "GuardStmt") return uses(s.condition) || s.elseBody.some(x => this.statementUsesAwait(x));
+    if (s.type === "MatchExpr") return uses(s.discriminant) || s.arms.some(a => uses(a.result));
     return false;
   }
 
@@ -724,8 +777,7 @@ export class Parser {
       if (this.check(TokenType.KEYWORD, "view")) {
         views.push(this.parseView());
       } else {
-        // Tolerate stray tokens.
-        this.next();
+        this.expect(TokenType.KEYWORD, "view");
       }
       this.skipNewlines();
     }
@@ -908,6 +960,7 @@ export class Parser {
       const key = this.next().value;
       this.expect(TokenType.PUNCTUATION, ":");
       const value = this.parseConfigValue();
+      this.requireText(value, "config value");
       entries.push({
         type: "ConfigEntry",
         line: keyTok.line,

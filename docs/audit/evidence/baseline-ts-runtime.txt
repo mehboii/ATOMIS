@@ -1,0 +1,10 @@
+
+> atomis@0.1.0 test
+> node test/run-tests.mjs
+
+✓ hello.ato
+✓ proto.ato
+✓ proto_demo.ato
+✓ vault.ato
+
+4 passed, 0 failed

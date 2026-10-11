@@ -1,0 +1,711 @@
+[
+  {
+    "id": "atomis@0.1.0",
+    "name": "atomis",
+    "version": "0.1.0",
+    "size": 261360,
+    "unpackedSize": 1076913,
+    "shasum": "8b0c8f2d85f6d16d2a3c496a6cf9c4824110fb95",
+    "integrity": "sha512-fNxh+DENWZ7I9NNocv+JDxVBxfWwH8oWF0YxqLjyQS0JN55m+za6iosT9kxyXpk7OoziI9nUVydxTQ65KsZq1w==",
+    "filename": "atomis-0.1.0.tgz",
+    "files": [
+      {
+        "path": ".audit-fix.py",
+        "size": 11822,
+        "mode": 420
+      },
+      {
+        "path": ".audit-fix2.py",
+        "size": 9529,
+        "mode": 420
+      },
+      {
+        "path": ".audit-fix3.py",
+        "size": 6408,
+        "mode": 420
+      },
+      {
+        "path": ".claude/settings.local.json",
+        "size": 727,
+        "mode": 420
+      },
+      {
+        "path": ".gitattributes",
+        "size": 173,
+        "mode": 420
+      },
+      {
+        "path": ".github/workflows/test.yml",
+        "size": 527,
+        "mode": 420
+      },
+      {
+        "path": "IMPORTANT README.MD",
+        "size": 592,
+        "mode": 420
+      },
+      {
+        "path": "PARITY.md",
+        "size": 789,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 2161,
+        "mode": 420
+      },
+      {
+        "path": "Untitled-1.ts",
+        "size": 264,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/Cargo.lock",
+        "size": 157,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/Cargo.toml",
+        "size": 1182,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/conformance/dup.ato",
+        "size": 66,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/conformance/ghost.ato",
+        "size": 94,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/conformance/pure.ato",
+        "size": 116,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/conformance/typemismatch.ato",
+        "size": 93,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/golden/features.ts",
+        "size": 478,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/golden/hello.ts",
+        "size": 211,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/golden/network.ts",
+        "size": 663,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/parity.sh",
+        "size": 1910,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/README.md",
+        "size": 3308,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/src/analyzer.rs",
+        "size": 15510,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/src/ast.rs",
+        "size": 6899,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/src/cli.rs",
+        "size": 28106,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/src/compiler.rs",
+        "size": 2066,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/src/emitter.rs",
+        "size": 2909,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/src/lexer.rs",
+        "size": 19192,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/src/lib.rs",
+        "size": 221,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/src/main.rs",
+        "size": 316,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/src/parser.rs",
+        "size": 42556,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/src/transformer.rs",
+        "size": 20209,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/src/util.rs",
+        "size": 1172,
+        "mode": 420
+      },
+      {
+        "path": "atomis-rs/tests/audit.rs",
+        "size": 5831,
+        "mode": 420
+      },
+      {
+        "path": "atomis.config.json",
+        "size": 247,
+        "mode": 420
+      },
+      {
+        "path": "dist/analyzer.d.ts",
+        "size": 3610,
+        "mode": 420
+      },
+      {
+        "path": "dist/analyzer.js",
+        "size": 11799,
+        "mode": 420
+      },
+      {
+        "path": "dist/analyzer.js.map",
+        "size": 9310,
+        "mode": 420
+      },
+      {
+        "path": "dist/ast.d.ts",
+        "size": 9203,
+        "mode": 420
+      },
+      {
+        "path": "dist/ast.js",
+        "size": 642,
+        "mode": 420
+      },
+      {
+        "path": "dist/ast.js.map",
+        "size": 120,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli.d.ts",
+        "size": 786,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli.js",
+        "size": 15245,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli.js.map",
+        "size": 12131,
+        "mode": 420
+      },
+      {
+        "path": "dist/compiler.d.ts",
+        "size": 1315,
+        "mode": 420
+      },
+      {
+        "path": "dist/compiler.js",
+        "size": 1842,
+        "mode": 420
+      },
+      {
+        "path": "dist/compiler.js.map",
+        "size": 1228,
+        "mode": 420
+      },
+      {
+        "path": "dist/emitter.d.ts",
+        "size": 1932,
+        "mode": 420
+      },
+      {
+        "path": "dist/emitter.js",
+        "size": 4873,
+        "mode": 420
+      },
+      {
+        "path": "dist/emitter.js.map",
+        "size": 2517,
+        "mode": 420
+      },
+      {
+        "path": "dist/lexer.d.ts",
+        "size": 3442,
+        "mode": 420
+      },
+      {
+        "path": "dist/lexer.js",
+        "size": 13878,
+        "mode": 420
+      },
+      {
+        "path": "dist/lexer.js.map",
+        "size": 11847,
+        "mode": 420
+      },
+      {
+        "path": "dist/parser.d.ts",
+        "size": 6778,
+        "mode": 420
+      },
+      {
+        "path": "dist/parser.js",
+        "size": 37730,
+        "mode": 420
+      },
+      {
+        "path": "dist/parser.js.map",
+        "size": 30447,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/lexer.test.d.ts",
+        "size": 198,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/lexer.test.js",
+        "size": 6466,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/lexer.test.js.map",
+        "size": 6043,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/parser.test.d.ts",
+        "size": 202,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/parser.test.js",
+        "size": 7253,
+        "mode": 420
+      },
+      {
+        "path": "dist/tests/parser.test.js.map",
+        "size": 6614,
+        "mode": 420
+      },
+      {
+        "path": "dist/transformer.d.ts",
+        "size": 4656,
+        "mode": 420
+      },
+      {
+        "path": "dist/transformer.js",
+        "size": 16188,
+        "mode": 420
+      },
+      {
+        "path": "dist/transformer.js.map",
+        "size": 15057,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/architecture.md",
+        "size": 3834,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-build.txt",
+        "size": 17818,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-check.txt",
+        "size": 17856,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-clippy.txt",
+        "size": 25476,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-extra-0.txt",
+        "size": 2162,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-extra-1.txt",
+        "size": 3110,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-extra-2.txt",
+        "size": 3422,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-fmt.txt",
+        "size": 31784,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-package.json",
+        "size": 0,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-proto-regressions.txt",
+        "size": 3278,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-regressions.txt",
+        "size": 18220,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-test.txt",
+        "size": 20824,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-ts-build.txt",
+        "size": 102,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-ts-runtime.txt",
+        "size": 264,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-ts-unit.txt",
+        "size": 2930,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-vault-regression.txt",
+        "size": 11880,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/baseline-wasm-vault.txt",
+        "size": 2258,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/final-proto-test.txt",
+        "size": 2478,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/evidence/final-vault-wasm.txt",
+        "size": 2690,
+        "mode": 420
+      },
+      {
+        "path": "docs/audit/language-capabilities.md",
+        "size": 2508,
+        "mode": 420
+      },
+      {
+        "path": "examples/features.ato",
+        "size": 278,
+        "mode": 420
+      },
+      {
+        "path": "examples/hello.ato",
+        "size": 161,
+        "mode": 420
+      },
+      {
+        "path": "examples/network.ato",
+        "size": 495,
+        "mode": 420
+      },
+      {
+        "path": "ghostnet-proto/Cargo.lock",
+        "size": 12677,
+        "mode": 420
+      },
+      {
+        "path": "ghostnet-proto/Cargo.toml",
+        "size": 1141,
+        "mode": 420
+      },
+      {
+        "path": "ghostnet-proto/LICENSE",
+        "size": 1089,
+        "mode": 420
+      },
+      {
+        "path": "ghostnet-proto/README.md",
+        "size": 1541,
+        "mode": 420
+      },
+      {
+        "path": "ghostnet-proto/SCHEMA.md",
+        "size": 6169,
+        "mode": 420
+      },
+      {
+        "path": "ghostnet-proto/src/lib.rs",
+        "size": 9829,
+        "mode": 420
+      },
+      {
+        "path": "ghostnet-proto/tests/roundtrip.rs",
+        "size": 5065,
+        "mode": 420
+      },
+      {
+        "path": "ghostvault/Cargo.lock",
+        "size": 17015,
+        "mode": 420
+      },
+      {
+        "path": "ghostvault/Cargo.toml",
+        "size": 1659,
+        "mode": 420
+      },
+      {
+        "path": "ghostvault/examples/gen_vector.rs",
+        "size": 703,
+        "mode": 420
+      },
+      {
+        "path": "ghostvault/LICENSE",
+        "size": 1089,
+        "mode": 420
+      },
+      {
+        "path": "ghostvault/README.md",
+        "size": 6346,
+        "mode": 420
+      },
+      {
+        "path": "ghostvault/src/lib.rs",
+        "size": 20402,
+        "mode": 420
+      },
+      {
+        "path": "ghostvault/tests/vectors/native.blob",
+        "size": 89,
+        "mode": 420
+      },
+      {
+        "path": "ghostvault/tests/wasm.rs",
+        "size": 1889,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 796,
+        "mode": 420
+      },
+      {
+        "path": "run-parity.ps1",
+        "size": 7118,
+        "mode": 420
+      },
+      {
+        "path": "src/analyzer.ts",
+        "size": 12798,
+        "mode": 420
+      },
+      {
+        "path": "src/ast.ts",
+        "size": 11454,
+        "mode": 420
+      },
+      {
+        "path": "src/cli.ts",
+        "size": 13620,
+        "mode": 420
+      },
+      {
+        "path": "src/compiler.ts",
+        "size": 2408,
+        "mode": 420
+      },
+      {
+        "path": "src/emitter.ts",
+        "size": 4428,
+        "mode": 420
+      },
+      {
+        "path": "src/lexer.ts",
+        "size": 13278,
+        "mode": 420
+      },
+      {
+        "path": "src/parser.ts",
+        "size": 34300,
+        "mode": 420
+      },
+      {
+        "path": "src/tests/lexer.test.ts",
+        "size": 4737,
+        "mode": 420
+      },
+      {
+        "path": "src/tests/parser.test.ts",
+        "size": 5979,
+        "mode": 420
+      },
+      {
+        "path": "src/transformer.ts",
+        "size": 18092,
+        "mode": 420
+      },
+      {
+        "path": "test/audit-tests.mjs",
+        "size": 7745,
+        "mode": 420
+      },
+      {
+        "path": "test/cases/hello.ato",
+        "size": 161,
+        "mode": 420
+      },
+      {
+        "path": "test/cases/hello.expected",
+        "size": 13,
+        "mode": 420
+      },
+      {
+        "path": "test/cases/proto_demo.ato",
+        "size": 254,
+        "mode": 420
+      },
+      {
+        "path": "test/cases/proto_demo.expected",
+        "size": 3,
+        "mode": 420
+      },
+      {
+        "path": "test/cases/proto.ato",
+        "size": 913,
+        "mode": 420
+      },
+      {
+        "path": "test/cases/proto.expected",
+        "size": 62,
+        "mode": 420
+      },
+      {
+        "path": "test/cases/vault.ato",
+        "size": 860,
+        "mode": 420
+      },
+      {
+        "path": "test/cases/vault.expected",
+        "size": 59,
+        "mode": 420
+      },
+      {
+        "path": "test/run-tests.mjs",
+        "size": 1984,
+        "mode": 420
+      },
+      {
+        "path": "tsconfig.json",
+        "size": 514,
+        "mode": 420
+      },
+      {
+        "path": "vendor/ghostvault/ghostvault_bg.wasm",
+        "size": 65322,
+        "mode": 420
+      },
+      {
+        "path": "vendor/ghostvault/ghostvault_bg.wasm.d.ts",
+        "size": 846,
+        "mode": 420
+      },
+      {
+        "path": "vendor/ghostvault/ghostvault.d.ts",
+        "size": 869,
+        "mode": 420
+      },
+      {
+        "path": "vendor/ghostvault/ghostvault.js",
+        "size": 8632,
+        "mode": 420
+      },
+      {
+        "path": "vendor/ghostvault/LICENSE",
+        "size": 1089,
+        "mode": 420
+      },
+      {
+        "path": "vendor/ghostvault/package.json",
+        "size": 358,
+        "mode": 420
+      },
+      {
+        "path": "vendor/ghostvault/README.md",
+        "size": 6084,
+        "mode": 420
+      },
+      {
+        "path": "vendor/proto/LICENSE",
+        "size": 1089,
+        "mode": 420
+      },
+      {
+        "path": "vendor/proto/package.json",
+        "size": 302,
+        "mode": 420
+      },
+      {
+        "path": "vendor/proto/proto_bg.wasm",
+        "size": 142570,
+        "mode": 420
+      },
+      {
+        "path": "vendor/proto/proto_bg.wasm.d.ts",
+        "size": 718,
+        "mode": 420
+      },
+      {
+        "path": "vendor/proto/proto.d.ts",
+        "size": 249,
+        "mode": 420
+      },
+      {
+        "path": "vendor/proto/proto.js",
+        "size": 15281,
+        "mode": 420
+      },
+      {
+        "path": "vendor/proto/README.md",
+        "size": 1541,
+        "mode": 420
+      }
+    ],
+    "entryCount": 139,
+    "bundled": []
+  }
+]

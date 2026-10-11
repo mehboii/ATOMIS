@@ -1,0 +1,42 @@
+cargo :    Compiling proto v0.1.0 (C:\Users\novtw\Music\atomis\ghostnet-proto)
+At line:2 char:1
++ cargo test --manifest-path ghostnet-proto/Cargo.toml --test roundtrip ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (   Compiling pr...ghostnet-proto):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.97s
+     Running tests\roundtrip.rs (ghostnet-proto\target\debug\deps\roundtrip-b91a6e6d41c48f2b.exe)
+
+running 9 tests
+test encodes_deterministically ... ok
+test garbage_is_rejected ... ok
+test ack_roundtrip ... ok
+test unknown_scheme_still_decodes ... ok
+test unsupported_version_is_rejected ... FAILED
+test trailing_bytes_are_rejected ... FAILED
+test peer_announce_roundtrip ... ok
+test secure_roundtrip ... ok
+test hello_roundtrip ... ok
+
+failures:
+
+---- unsupported_version_is_rejected stdout ----
+
+thread 'unsupported_version_is_rejected' (4292) panicked at tests\roundtrip.rs:153:5:
+assertion failed: decode(&encode(&message)).is_err()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- trailing_bytes_are_rejected stdout ----
+
+thread 'trailing_bytes_are_rejected' (50084) panicked at tests\roundtrip.rs:160:5:
+assertion failed: decode(&bytes).is_err()
+
+
+failures:
+    trailing_bytes_are_rejected
+    unsupported_version_is_rejected
+
+test result: FAILED. 7 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+error: test failed, to rerun pass `--test roundtrip`

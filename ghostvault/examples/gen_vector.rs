@@ -9,9 +9,7 @@ use std::fs;
 
 fn main() {
     let v = Vault::unlock(b"cross-target-pass").expect("unlock");
-    let blob = v
-        .seal(b"sealed-on-native-opened-on-wasm")
-        .expect("seal");
+    let blob = v.seal(b"sealed-on-native-opened-on-wasm").expect("seal");
     fs::create_dir_all("tests/vectors").expect("mkdir");
     fs::write("tests/vectors/native.blob", &blob).expect("write");
     eprintln!("wrote tests/vectors/native.blob ({} bytes)", blob.len());

@@ -1,0 +1,69 @@
+[
+  {
+    "module": "analyzer",
+    "observedFunctions": 25,
+    "executedFunctions": 24,
+    "unexecutedFunctions": [
+      "warn@2234"
+    ]
+  },
+  {
+    "module": "cli",
+    "observedFunctions": 24,
+    "executedFunctions": 17,
+    "unexecutedFunctions": [
+      "@1043",
+      "__setModuleDefault@1299",
+      "ownKeys@1487",
+      "cmdWatch@7680",
+      "cmdRepl@11092",
+      "countErrors@12444",
+      "findAtoFiles@12610"
+    ]
+  },
+  {
+    "module": "compiler",
+    "observedFunctions": 3,
+    "executedFunctions": 3,
+    "unexecutedFunctions": []
+  },
+  {
+    "module": "emitter",
+    "observedFunctions": 13,
+    "executedFunctions": 10,
+    "unexecutedFunctions": [
+      "@942",
+      "__setModuleDefault@1198",
+      "ownKeys@1386"
+    ]
+  },
+  {
+    "module": "index",
+    "observedFunctions": 2,
+    "executedFunctions": 2,
+    "unexecutedFunctions": []
+  },
+  {
+    "module": "lexer",
+    "observedFunctions": 21,
+    "executedFunctions": 21,
+    "unexecutedFunctions": []
+  },
+  {
+    "module": "parser",
+    "observedFunctions": 60,
+    "executedFunctions": 59,
+    "unexecutedFunctions": [
+      "@27892"
+    ]
+  },
+  {
+    "module": "transformer",
+    "observedFunctions": 39,
+    "executedFunctions": 37,
+    "unexecutedFunctions": [
+      "blank@1588",
+      "@11352"
+    ]
+  }
+]

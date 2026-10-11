@@ -14,4 +14,7 @@ Source maps (`.ato.map` / VLQ) are out of scope.
 | network.ato | 639 | 639 | Y | Y |
 | **cargo test** | | | \- | **29/29 passing (0 failed)** |
 
-**Verdict:** FULL PARITY: byte-identical .ts and diagnostics on all examples; unit tests green.
+**Historical result:** byte-identical .ts and diagnostics on the three listed
+examples at that time. This does not guarantee arbitrary-source parity,
+source-map fidelity or target correctness. See
+[the current audit](docs/audit/verification-report.md).

@@ -1,0 +1,23 @@
+   Compiling proto v0.1.0 (C:\Users\novtw\Music\atomis\ghostnet-proto)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.78s
+     Running unittests src\lib.rs (ghostnet-proto\target\debug\deps\proto-d25b00ef267ea9a7.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\roundtrip.rs (ghostnet-proto\target\debug\deps\roundtrip-b91a6e6d41c48f2b.exe)
+
+running 9 tests
+test encodes_deterministically ... ok
+test ack_roundtrip ... ok
+test peer_announce_roundtrip ... ok
+test secure_roundtrip ... ok
+test garbage_is_rejected ... ok
+test hello_roundtrip ... ok
+test trailing_bytes_are_rejected ... ok
+test unknown_scheme_still_decodes ... ok
+test unsupported_version_is_rejected ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

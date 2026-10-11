@@ -88,7 +88,7 @@ export interface TSPassthrough extends ASTNode {
 
 /**
  * A reactive variable declaration: `atom name: Type = initializer`.
- * Transpiles to a plain `let` plus reactivity registration.
+ * Transpiles to plain `let`; reactivity registration is not implemented.
  */
 export interface AtomDecl extends ASTNode {
   type: "AtomDecl";
@@ -133,7 +133,7 @@ export interface FnDecl extends ASTNode {
 
 /**
  * A pure function declaration: `pure fn name(...) -> T { ... }`.
- * Structurally identical to {@link FnDecl}; the analyzer enforces purity
+ * Structurally identical to {@link FnDecl}; the analyzer warns about selected side effects
  * and the transformer adds a `@pure` JSDoc marker.
  */
 export interface PureFnDecl extends ASTNode {

@@ -46,6 +46,44 @@ impl Parser {
 
     /// Parse the whole token stream into a program.
     pub fn parse(&mut self) -> PResult<Program> {
+        if self.tokens.last().map(|t| t.ttype) != Some(TokenType::Eof) {
+            return Err(ParseError {
+                message: "Token stream must end with EOF".into(),
+                line: 1,
+                col: 1,
+            });
+        }
+        let mut depth = 0usize;
+        let mut generic_depth = 0i64;
+        for (i, t) in self.tokens.iter().enumerate() {
+            if t.ttype == TokenType::Invalid {
+                return Err(ParseError {
+                    message: t.value.clone(),
+                    line: t.line,
+                    col: t.col,
+                });
+            }
+            if is_open(t) {
+                depth += 1;
+            }
+            if is_close(t) {
+                depth = depth.saturating_sub(1);
+            }
+            if t.value == "<"
+                && (generic_depth > 0 || (i > 0 && self.tokens[i - 1].value == "Result"))
+            {
+                generic_depth += 1;
+            } else if generic_depth > 0 && matches!(t.value.as_str(), ">" | ">>" | ">>>") {
+                generic_depth = (generic_depth - t.value.len() as i64).max(0);
+            }
+            if depth > 64 || generic_depth > 64 {
+                return Err(ParseError {
+                    message: "Maximum nesting depth (64) exceeded".into(),
+                    line: t.line,
+                    col: t.col,
+                });
+            }
+        }
         let first = self.peek(0);
         let mut body: Vec<Statement> = Vec::new();
         while !self.at_end() {
@@ -62,6 +100,18 @@ impl Parser {
             col: first.col,
             body,
         })
+    }
+
+    fn require_text(&self, text: &str, description: &str) -> PResult<()> {
+        if text.trim().is_empty() {
+            let t = self.peek(0);
+            return Err(ParseError {
+                message: format!("Expected {}", description),
+                line: t.line,
+                col: t.col,
+            });
+        }
+        Ok(())
     }
 
     /* ── cursor helpers ────────────────────────────────────────────────── */
@@ -105,10 +155,7 @@ impl Parser {
                 None => format!("{:?}", ttype),
             };
             return Err(ParseError {
-                message: format!(
-                    "Expected {} but found {:?} '{}'",
-                    want, t.ttype, t.value
-                ),
+                message: format!("Expected {} but found {:?} '{}'", want, t.ttype, t.value),
                 line: t.line,
                 col: t.col,
             });
@@ -214,15 +261,20 @@ impl Parser {
                         return Ok(Some(self.parse_match()?));
                     }
                 }
-                "output" => {
-                    if n1.value == "(" {
-                        return Ok(Some(self.parse_output()?));
-                    }
+                "output" if n1.value == "(" => {
+                    return Ok(Some(self.parse_output()?));
                 }
                 _ => {}
             }
         }
 
+        if t.ttype == TokenType::RBrace {
+            return Err(ParseError {
+                message: "Unexpected closing brace".into(),
+                line: t.line,
+                col: t.col,
+            });
+        }
         // Everything else: raw TypeScript passthrough.
         Ok(Some(Statement::TSPassthrough(self.parse_raw_statement())))
     }
@@ -233,13 +285,14 @@ impl Parser {
         let start = self.peek(0);
         let start_offset = start.start;
         let mut end_offset = start.end;
+        let mut continuation_offset = start.end;
         let mut depth: i64 = 0;
 
         while !self.at_end() {
             let tk = self.peek(0);
 
             if tk.ttype == TokenType::Newline {
-                if depth == 0 && !self.continues(end_offset) {
+                if depth == 0 && !self.continues(continuation_offset) {
                     self.next();
                     break;
                 }
@@ -247,6 +300,7 @@ impl Parser {
                 continue;
             }
             if tk.ttype == TokenType::Comment {
+                end_offset = tk.end;
                 self.next();
                 continue;
             }
@@ -262,6 +316,7 @@ impl Parser {
             }
 
             end_offset = tk.end;
+            continuation_offset = tk.end;
             self.next();
 
             if depth == 0 && tk.ttype == TokenType::Punctuation && tk.value == ";" {
@@ -279,9 +334,12 @@ impl Parser {
     /// Decide whether a statement continues onto the next line by inspecting the
     /// last consumed source character.
     fn continues(&self, end_offset: usize) -> bool {
-        let text: String = self.src[0..end_offset.min(self.src.len())].iter().collect();
-        let trimmed = text.trim_end();
-        match trimmed.chars().last() {
+        match self.src[..end_offset.min(self.src.len())]
+            .iter()
+            .rev()
+            .find(|c| !c.is_whitespace())
+            .copied()
+        {
             Some(last) => "+-*/%=<>&|^,.([{?:".contains(last),
             None => false,
         }
@@ -342,9 +400,12 @@ impl Parser {
                 |t| {
                     (t.ttype == TokenType::Operator && t.value == "=")
                         || t.ttype == TokenType::Newline
+                        || t.ttype == TokenType::RBrace
+                        || (t.ttype == TokenType::Punctuation && t.value == ";")
                 },
                 true,
             );
+            self.require_text(&ta, "type annotation")?;
             type_annotation = non_empty(ta);
         }
 
@@ -354,10 +415,12 @@ impl Parser {
             let init = self.raw_until(
                 |t| {
                     t.ttype == TokenType::Newline
+                        || t.ttype == TokenType::RBrace
                         || (t.ttype == TokenType::Punctuation && t.value == ";")
                 },
                 false,
             );
+            self.require_text(&init, "initializer")?;
             initializer = non_empty(init);
         }
         if self.check(TokenType::Punctuation, Some(";")) {
@@ -390,6 +453,7 @@ impl Parser {
         if self.check(TokenType::Arrow, None) {
             self.next();
             let rt = self.raw_until(|t| t.ttype == TokenType::LBrace, true);
+            self.require_text(&rt, "return type")?;
             return_type = non_empty(rt);
         }
 
@@ -417,19 +481,19 @@ impl Parser {
         self.skip_newlines();
         while !self.check(TokenType::Punctuation, Some(")")) && !self.at_end() {
             let name_tok = self.peek(0);
-            let name = self.next().value;
+            let name = self.expect(TokenType::Ident, None)?.value;
 
             let mut type_annotation: Option<String> = None;
             if self.check(TokenType::Punctuation, Some(":")) {
                 self.next();
                 let ta = self.raw_until(
                     |t| {
-                        (t.ttype == TokenType::Punctuation
-                            && (t.value == "," || t.value == ")"))
+                        (t.ttype == TokenType::Punctuation && (t.value == "," || t.value == ")"))
                             || (t.ttype == TokenType::Operator && t.value == "=")
                     },
                     true,
                 );
+                self.require_text(&ta, "type annotation")?;
                 type_annotation = non_empty(ta);
             }
 
@@ -437,12 +501,10 @@ impl Parser {
             if self.check(TokenType::Operator, Some("=")) {
                 self.next();
                 let dv = self.raw_until(
-                    |t| {
-                        t.ttype == TokenType::Punctuation
-                            && (t.value == "," || t.value == ")")
-                    },
+                    |t| t.ttype == TokenType::Punctuation && (t.value == "," || t.value == ")"),
                     false,
                 );
+                self.require_text(&dv, "default value")?;
                 default_value = non_empty(dv);
             }
 
@@ -458,6 +520,8 @@ impl Parser {
             if self.check(TokenType::Punctuation, Some(",")) {
                 self.next();
                 self.skip_newlines();
+            } else if !self.check(TokenType::Punctuation, Some(")")) {
+                self.expect(TokenType::Punctuation, Some(","))?;
             }
         }
         self.expect(TokenType::Punctuation, Some(")"))?;
@@ -482,8 +546,11 @@ impl Parser {
 
     fn parse_guard(&mut self) -> PResult<Statement> {
         let kw = self.expect(TokenType::Keyword, Some("guard"))?;
-        let condition =
-            self.raw_until(|t| t.ttype == TokenType::Keyword && t.value == "else", false);
+        let condition = self.raw_until(
+            |t| t.ttype == TokenType::Keyword && t.value == "else",
+            false,
+        );
+        self.require_text(&condition, "guard condition")?;
         self.expect(TokenType::Keyword, Some("else"))?;
         let else_body = self.parse_brace_body()?;
         Ok(Statement::GuardStmt(GuardStmt {
@@ -506,6 +573,7 @@ impl Parser {
             let arm_start = self.peek(0);
             let pattern =
                 self.raw_until(|t| t.ttype == TokenType::Operator && t.value == "=>", false);
+            self.require_text(&pattern, "match pattern")?;
             self.expect(TokenType::Operator, Some("=>"))?;
             let result = self.raw_until(
                 |t| {
@@ -542,8 +610,10 @@ impl Parser {
     fn parse_output(&mut self) -> PResult<Statement> {
         let kw = self.expect(TokenType::Keyword, Some("output"))?;
         self.expect(TokenType::Punctuation, Some("("))?;
-        let argument =
-            self.raw_until(|t| t.ttype == TokenType::Punctuation && t.value == ")", false);
+        let argument = self.raw_until(
+            |t| t.ttype == TokenType::Punctuation && t.value == ")",
+            false,
+        );
         self.expect(TokenType::Punctuation, Some(")"))?;
         if self.check(TokenType::Punctuation, Some(";")) {
             self.next();
@@ -586,13 +656,12 @@ impl Parser {
             self.next();
         }
 
-        let body: Vec<Statement>;
-        if self.peek_skipping_newlines().ttype == TokenType::LBrace {
+        let body = if self.peek_skipping_newlines().ttype == TokenType::LBrace {
             self.skip_newlines();
-            body = self.parse_brace_body()?;
+            self.parse_brace_body()?
         } else {
-            body = self.parse_inline_block()?;
-        }
+            self.parse_inline_block()?
+        };
 
         let is_async = body.iter().any(statement_uses_await);
         Ok(Statement::CellBlock(CellBlock {
@@ -672,7 +741,7 @@ impl Parser {
             if self.check(TokenType::Keyword, Some("view")) {
                 views.push(self.parse_view()?);
             } else {
-                self.next();
+                self.expect(TokenType::Keyword, Some("view"))?;
             }
             self.skip_newlines();
         }
@@ -843,6 +912,7 @@ impl Parser {
             let key = self.next().value;
             self.expect(TokenType::Punctuation, Some(":"))?;
             let value = self.parse_config_value();
+            self.require_text(&value, "config value")?;
             entries.push(ConfigEntry {
                 line: key_tok.line,
                 col: key_tok.col,
@@ -946,9 +1016,19 @@ fn unquote(s: &str) -> String {
 
 /// Heuristically determine whether a statement contains `await`.
 pub fn statement_uses_await(s: &Statement) -> bool {
+    let uses = |raw: &str| {
+        crate::lexer::tokenize(raw)
+            .iter()
+            .any(|t| t.value == "await" && t.ttype == TokenType::Ident)
+    };
     match s {
-        Statement::TSPassthrough(p) => contains_word(&p.raw, "await"),
-        Statement::OutputCall(o) => contains_word(&o.argument, "await"),
+        Statement::TSPassthrough(p) => uses(&p.raw),
+        Statement::OutputCall(o) => uses(&o.argument),
+        Statement::AtomDecl(a) => a.initializer.as_deref().map(uses).unwrap_or(false),
+        Statement::GuardStmt(g) => {
+            uses(&g.condition) || g.else_body.iter().any(statement_uses_await)
+        }
+        Statement::MatchExpr(m) => uses(&m.discriminant) || m.arms.iter().any(|a| uses(&a.result)),
         _ => false,
     }
 }
@@ -996,11 +1076,7 @@ fn render_config_value(tokens: &[Token]) -> String {
             || prev == "["
             || prev == "("
             || prev == ".";
-        parts.push(if no_space {
-            text
-        } else {
-            format!(" {}", text)
-        });
+        parts.push(if no_space { text } else { format!(" {}", text) });
         prev = tk.value.clone();
     }
     parts.join("").trim().to_string()

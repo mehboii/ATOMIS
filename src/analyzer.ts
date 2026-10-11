@@ -12,13 +12,14 @@
  *    must reference declared channels and nodes; transports must be one of
  *    `bluetooth | tcp | ws | ble5`.
  *  - Purity checking — warns when a `pure fn` performs obviously impure work
- *    (await, console/output, assignment to an outer atom, GhostNet calls).
+ *    (await, console/output and selected raw GhostNet call text).
  *
  * Results are returned as a structured {@link AnalysisResult} containing a flat
  * list of {@link Diagnostic} objects plus the collected symbol metadata used by
  * later stages.
  */
 
+import { tokenize, TokenType } from "./lexer";
 import {
   AtomDecl,
   ChannelDecl,
@@ -88,6 +89,7 @@ export class Analyzer {
   private readonly nodeIds = new Map<string, number>();
   private readonly channelIds = new Map<string, number>();
   private readonly meshIds = new Map<string, number>();
+  private readonly generatedNames = new Map<string, string>();
   private scope: Scope = { names: new Map() };
 
   /**
@@ -221,8 +223,10 @@ export class Analyzer {
     const init = stmt.initializer?.trim();
     if (!ty || !init) return;
 
-    const isStringLiteral = /^["'`]/.test(init);
-    const isNumberLiteral = /^-?\d/.test(init);
+    const literalTokens = tokenize(init).filter(t => ![TokenType.EOF, TokenType.COMMENT, TokenType.NEWLINE].includes(t.type));
+    const isLiteral = literalTokens.length === 1 || (literalTokens.length === 2 && literalTokens[0].value === "-" && literalTokens[1].type === TokenType.NUMBER);
+    const isStringLiteral = isLiteral && /^["'`]/.test(init);
+    const isNumberLiteral = isLiteral && /^-?\d/.test(init);
     const isBoolLiteral = init === "true" || init === "false";
     const isArrayLiteral = init.startsWith("[");
 
@@ -280,7 +284,15 @@ export class Analyzer {
 
   /* ── GhostNet checks ───────────────────────────────────────────────── */
 
+  private checkGeneratedName(id: string, kind: string, line: number, col: number): void {
+    const name = "__" + id.replace(/[^A-Za-z0-9_$]/g, "_");
+    const identity = `${kind}:${id}`, existing = this.generatedNames.get(name);
+    if (existing !== undefined && existing !== identity) this.error(`Generated identifier '${name}' for ${identity} collides with ${existing}`, line, col);
+    else this.generatedNames.set(name, identity);
+  }
+
   private visitNode(stmt: NodeDecl): void {
+    this.checkGeneratedName(stmt.id, "node", stmt.line, stmt.col);
     if (this.nodeIds.has(stmt.id)) {
       this.error(`Duplicate node id '${stmt.id}' (first declared on line ${this.nodeIds.get(stmt.id)})`, stmt.line, stmt.col);
     } else {
@@ -289,6 +301,7 @@ export class Analyzer {
   }
 
   private visitChannel(stmt: ChannelDecl): void {
+    this.checkGeneratedName(stmt.id, "channel", stmt.line, stmt.col);
     if (this.channelIds.has(stmt.id)) {
       this.error(`Duplicate channel id '${stmt.id}' (first declared on line ${this.channelIds.get(stmt.id)})`, stmt.line, stmt.col);
     } else {
@@ -297,6 +310,7 @@ export class Analyzer {
   }
 
   private visitMesh(stmt: MeshDecl): void {
+    this.checkGeneratedName(stmt.id, "mesh", stmt.line, stmt.col);
     if (this.meshIds.has(stmt.id)) {
       this.error(`Duplicate mesh id '${stmt.id}' (first declared on line ${this.meshIds.get(stmt.id)})`, stmt.line, stmt.col);
     } else {

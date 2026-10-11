@@ -1,0 +1,22 @@
+[
+  {
+    "path": "vendor/proto/proto_bg.wasm",
+    "bytes": 143302,
+    "sha256": "b2493cc3f9bbc3b39dabdf56e53b5ddbde513a782be5e70370b03496db85c643"
+  },
+  {
+    "path": "vendor/ghostvault/ghostvault_bg.wasm",
+    "bytes": 65359,
+    "sha256": "940d1f123aee630905ec4b8e9e8a6bb4ba7415f0585ca4409906d71afb317a64"
+  },
+  {
+    "path": ".parity-tmp/audit-package/atomis-0.1.0.tgz",
+    "bytes": 149544,
+    "sha256": "adf52210b4341af3f66285191e1b592d6dc2e60a0494a499d8c32bb476b0a022"
+  },
+  {
+    "path": "atomis-rs/target/release/atomis.exe",
+    "bytes": 568832,
+    "sha256": "b7188dd7603d43d874829d204aeea8ebe56d0afb66df8338de1660e3bbdc9760"
+  }
+]

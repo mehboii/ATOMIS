@@ -3,10 +3,9 @@
 //! Faithful port of `src/lexer.ts`. Converts `.ato` source text into a flat
 //! `Token` stream consumed by the parser.
 //!
-//! Source offsets (`start`/`end`) are *character* indices into the source, to
-//! match JavaScript string indexing used by the TS reference for verbatim
-//! passthrough slicing. The source is held as a `Vec<char>` so indexing and
-//! slicing stay consistent with that model.
+//! Source offsets (`start`/`end`) count Unicode scalars into the `Vec<char>`
+//! used by the parser for passthrough slicing. The TypeScript reference counts
+//! UTF-16 units, so astral characters have different offsets/columns there.
 
 /// All token categories produced by the lexer.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -24,6 +23,7 @@ pub enum TokenType {
     Newline,
     Comment,
     Eof,
+    Invalid,
 }
 
 /// A single lexical token with source position.
@@ -61,14 +61,14 @@ const PUNCTUATION: &[char] = &['(', ')', '[', ']', ',', ';', ':', '.', '?', '#']
 /// Multi-character operators, longest first so the scanner is greedy.
 /// Order is significant and must match `MULTI_OPERATORS` in lexer.ts.
 const MULTI_OPERATORS: &[&str] = &[
-    "===", "!==", "**=", "...", "&&=", "||=", "??=", ">>>", "==", "!=", "<=",
-    ">=", "&&", "||", "??", "?.", "+=", "-=", "*=", "/=", "%=", "++", "--",
-    "=>", "<<", ">>",
+    "===", "!==", "**=", "...", "&&=", "||=", "??=", ">>>", "==", "!=", "<=", ">=", "&&", "||",
+    "??", "?.", "+=", "-=", "*=", "/=", "%=", "++", "--", "=>", "<<", ">>",
 ];
 
 /// Single-character operators.
-const SINGLE_OPERATORS: &[char] =
-    &['+', '-', '*', '/', '%', '=', '<', '>', '!', '&', '|', '^', '~'];
+const SINGLE_OPERATORS: &[char] = &[
+    '+', '-', '*', '/', '%', '=', '<', '>', '!', '&', '|', '^', '~',
+];
 
 /// The Atomis lexer. Construct with source text, then call [`Lexer::tokenize`].
 pub struct Lexer {
@@ -221,7 +221,12 @@ impl Lexer {
                 for _ in 0..op.chars().count() {
                     self.advance();
                 }
-                self.push(TokenType::Operator, (*op).to_string(), start_line, start_col);
+                self.push(
+                    TokenType::Operator,
+                    (*op).to_string(),
+                    start_line,
+                    start_col,
+                );
                 return;
             }
         }
@@ -236,13 +241,23 @@ impl Lexer {
         // Punctuation.
         if PUNCTUATION.contains(&ch) {
             self.advance();
-            self.push(TokenType::Punctuation, ch.to_string(), start_line, start_col);
+            self.push(
+                TokenType::Punctuation,
+                ch.to_string(),
+                start_line,
+                start_col,
+            );
             return;
         }
 
         // Unknown character — emit as punctuation to keep scanning resilient.
         self.advance();
-        self.push(TokenType::Punctuation, ch.to_string(), start_line, start_col);
+        self.push(
+            TokenType::Punctuation,
+            ch.to_string(),
+            start_line,
+            start_col,
+        );
     }
 
     /* ── sub-scanners ──────────────────────────────────────────────────── */
@@ -260,8 +275,17 @@ impl Lexer {
         // consume "/*"
         text.push(self.advance());
         text.push(self.advance());
-        while !self.at_end() && !(self.peek(0) == '*' && self.peek(1) == '/') {
+        while !(self.at_end() || self.peek(0) == '*' && self.peek(1) == '/') {
             text.push(self.advance());
+        }
+        if self.at_end() {
+            self.push(
+                TokenType::Invalid,
+                "Unterminated block comment".into(),
+                line,
+                col,
+            );
+            return;
         }
         if !self.at_end() {
             text.push(self.advance()); // *
@@ -286,50 +310,125 @@ impl Lexer {
             }
             text.push(self.advance());
         }
-        if !self.at_end() && self.peek(0) == quote {
-            text.push(self.advance()); // closing quote
+        if self.at_end() || self.peek(0) != quote {
+            self.push(TokenType::Invalid, "Unterminated string".into(), line, col);
+            return;
         }
+        text.push(self.advance()); // closing quote
         self.push(TokenType::String, text, line, col);
     }
 
     /// Scan a template literal, preserving backticks and `${ ... }`
     /// interpolation regions (including nested braces) as a single STRING token.
     fn scan_template(&mut self, line: usize, col: usize) {
-        let mut text = String::new();
-        text.push(self.advance()); // opening backtick
-        while !self.at_end() && self.peek(0) != '`' {
-            if self.peek(0) == '\\' {
-                text.push(self.advance());
-                if !self.at_end() {
-                    text.push(self.advance());
-                }
-                continue;
-            }
-            if self.peek(0) == '$' && self.peek(1) == '{' {
-                text.push(self.advance()); // $
-                text.push(self.advance()); // {
-                let mut depth = 1;
-                while !self.at_end() && depth > 0 {
-                    let c = self.peek(0);
-                    if c == '{' {
-                        depth += 1;
-                    } else if c == '}' {
-                        depth -= 1;
+        let start = self.pos;
+        self.advance();
+        // 0 = template text, positive = interpolation brace depth.
+        let mut contexts = vec![0usize];
+        while !self.at_end() && !contexts.is_empty() {
+            let mode = *contexts.last().unwrap();
+            let c = self.peek(0);
+            if mode == 0 {
+                match c {
+                    '\\' => {
+                        self.advance();
+                        if !self.at_end() {
+                            self.advance();
+                        }
                     }
-                    if depth == 0 {
-                        text.push(self.advance()); // closing }
-                        break;
+                    '`' => {
+                        self.advance();
+                        contexts.pop();
                     }
-                    text.push(self.advance());
+                    '$' if self.peek(1) == '{' => {
+                        self.advance();
+                        self.advance();
+                        contexts.push(1);
+                    }
+                    _ => {
+                        self.advance();
+                    }
                 }
-                continue;
+            } else {
+                match c {
+                    '"' | '\'' => {
+                        let quote = self.advance();
+                        let mut closed = false;
+                        while !self.at_end() {
+                            let c = self.advance();
+                            if c == '\\' {
+                                if !self.at_end() {
+                                    self.advance();
+                                }
+                            } else if c == quote {
+                                closed = true;
+                                break;
+                            } else if c == '\n' {
+                                break;
+                            }
+                        }
+                        if !closed {
+                            break;
+                        }
+                    }
+                    '`' => {
+                        self.advance();
+                        contexts.push(0);
+                    }
+                    '/' if self.peek(1) == '/' => {
+                        while !self.at_end() && self.peek(0) != '\n' {
+                            self.advance();
+                        }
+                    }
+                    '/' if self.peek(1) == '*' => {
+                        self.advance();
+                        self.advance();
+                        while !(self.at_end() || self.peek(0) == '*' && self.peek(1) == '/') {
+                            self.advance();
+                        }
+                        if self.at_end() {
+                            break;
+                        }
+                        self.advance();
+                        self.advance();
+                    }
+                    '{' => {
+                        self.advance();
+                        *contexts.last_mut().unwrap() += 1;
+                    }
+                    '}' => {
+                        self.advance();
+                        *contexts.last_mut().unwrap() -= 1;
+                        if contexts.last() == Some(&0) {
+                            contexts.pop();
+                        }
+                    }
+                    _ => {
+                        self.advance();
+                    }
+                }
             }
-            text.push(self.advance());
+            if contexts.len() > 64 || contexts.last().copied().unwrap_or(0) > 64 {
+                self.push(
+                    TokenType::Invalid,
+                    "Maximum template nesting depth (64) exceeded".into(),
+                    line,
+                    col,
+                );
+                return;
+            }
         }
-        if !self.at_end() && self.peek(0) == '`' {
-            text.push(self.advance()); // closing backtick
+        if !contexts.is_empty() {
+            self.push(
+                TokenType::Invalid,
+                "Unterminated template literal".into(),
+                line,
+                col,
+            );
+        } else {
+            let text = self.src[start..self.pos].iter().collect();
+            self.push(TokenType::String, text, line, col);
         }
-        self.push(TokenType::String, text, line, col);
     }
 
     fn scan_decorator(&mut self, line: usize, col: usize) {
@@ -409,7 +508,7 @@ impl Lexer {
 }
 
 fn is_digit(ch: char) -> bool {
-    ch >= '0' && ch <= '9'
+    ch.is_ascii_digit()
 }
 
 /// Matches `/[A-Za-z_$]/`.
@@ -468,9 +567,16 @@ mod tests {
 
     #[test]
     fn recognizes_atomis_keywords() {
-        for kw in ["fn", "pure", "match", "guard", "node", "channel", "mesh", "connect", "encrypt"] {
+        for kw in [
+            "fn", "pure", "match", "guard", "node", "channel", "mesh", "connect", "encrypt",
+        ] {
             let toks = meaningful(kw);
-            assert_eq!(toks[0].ttype, TokenType::Keyword, "{} should be a KEYWORD", kw);
+            assert_eq!(
+                toks[0].ttype,
+                TokenType::Keyword,
+                "{} should be a KEYWORD",
+                kw
+            );
         }
     }
 
@@ -517,8 +623,10 @@ mod tests {
     #[test]
     fn skips_line_and_block_comments_as_comment_tokens() {
         let all = tokenize("// hi\n/* block */ atom");
-        let comments: Vec<&Token> =
-            all.iter().filter(|t| t.ttype == TokenType::Comment).collect();
+        let comments: Vec<&Token> = all
+            .iter()
+            .filter(|t| t.ttype == TokenType::Comment)
+            .collect();
         assert_eq!(comments.len(), 2);
         let kw = all.iter().find(|t| t.value == "atom").unwrap();
         assert_eq!(kw.ttype, TokenType::Keyword);

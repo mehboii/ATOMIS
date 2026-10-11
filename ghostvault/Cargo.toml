@@ -10,7 +10,8 @@ description = "Sealed-secret vault for ATOMIS (native + wasm). AES-256-GCM AEAD,
 crate-type = ["cdylib", "rlib"]
 
 [features]
-# Exactly one KDF profile must be enabled. It only selects the DEFAULT sealing
+# At least one KDF profile must be enabled; strong takes precedence if both are
+# enabled. The selected profile only sets the DEFAULT sealing
 # parameters; opening always honours the parameters recorded in the blob header,
 # so blobs remain portable across profiles/targets.
 default = ["kdf-strong"]

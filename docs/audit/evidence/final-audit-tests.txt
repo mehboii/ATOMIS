@@ -1,0 +1,162 @@
+> atomis@0.1.0 test:audit
+
+> cargo build --manifest-path atomis-rs/Cargo.toml && node test/audit-tests.mjs && node test/audit-parity.mjs
+
+
+
+npm.cmd :     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
+
+At line:2 char:462
+
++ ... D warnings; npm.cmd test *> docs/audit/evidence/final-npm-test.txt; W ...
+
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    + CategoryInfo          : NotSpecified: (    Finished `d...get(s) in 0.12s:String) [], RemoteException
+
+    + FullyQualifiedErrorId : NativeCommandError
+
+ 
+
+PASS npm entry point exports the compiler
+
+PASS compile blocks semantic errors
+
+PASS Result preserves "Ok(1) Result<T,E>"
+
+PASS Result preserves 'Err(2)'
+
+PASS Result preserves `Ok(3)`
+
+PASS Result preserves // Ok(4)
+
+PASS Result preserves /* Err(5) */
+
+PASS Result balances strings in arguments
+
+PASS nested Result calls
+
+PASS Result type nested and array grouping
+
+PASS import literal retains escaping
+
+PASS import source escape meanings are preserved
+
+PASS empty source
+
+PASS whole-expression literal type checks
+
+PASS trailing comments and statement boundaries are preserved
+
+PASS nested cell await and literal await
+
+PASS atom terminates at enclosing brace
+
+PASS deterministic output and map
+
+PASS Unicode token spans and CRLF
+
+PASS templates ignore braces in interpolation strings and comments
+
+PASS generated GhostNet names cannot collide
+
+PASS Result generic recursion is bounded
+
+PASS vendored protocol validates version and trailing bytes
+
+PASS vendored vault handle does not resurrect
+
+PASS reject malformed construct atom x =
+
+PASS reject malformed construct atom x:
+
+PASS reject malformed construct fn f(a b) {}
+
+PASS reject malformed construct fn f(1) {}
+
+PASS reject malformed construct fn f() -> {}
+
+PASS reject malformed construct guard else {}
+
+PASS reject malformed construct match x { => 1 }
+
+PASS reject malformed construct node "x" { key: }
+
+PASS reject malformed construct @render { rubbish }
+
+PASS conformance function f
+
+PASS conformance async function
+
+PASS conformance /** @pure */
+
+PASS conformance if (!(true))
+
+PASS conformance else
+
+PASS conformance __atomis_meta
+
+PASS conformance __atomis_cell
+
+PASS conformance function Hello
+
+PASS conformance setEncryptionPolicy
+
+PASS conformance for (const x
+
+PASS TS help
+
+PASS TS missing file
+
+PASS TS version and invalid flags
+
+PASS TS trusted run with spaces and shell metacharacters
+
+PASS TS rejects source overwrite
+
+PASS TS rejects "}" without hanging
+
+PASS TS rejects "@cell #x\n}" without hanging
+
+PASS TS rejects "\"unterminated" without hanging
+
+PASS TS rejects "/* unterminated" without hanging
+
+PASS TS rejects "`unterminated" without hanging
+
+PASS TS bounded nesting
+
+PASS TS paths with spaces, map and target execution
+
+PASS Rust help
+
+PASS Rust missing file
+
+PASS Rust version and invalid flags
+
+PASS Rust trusted run with spaces and shell metacharacters
+
+PASS Rust rejects source overwrite
+
+PASS Rust rejects "}" without hanging
+
+PASS Rust rejects "@cell #x\n}" without hanging
+
+PASS Rust rejects "\"unterminated" without hanging
+
+PASS Rust rejects "/* unterminated" without hanging
+
+PASS Rust rejects "`unterminated" without hanging
+
+PASS Rust bounded nesting
+
+PASS Rust paths with spaces, map and target execution
+
+PASS TS watch add/change
+
+PASS Rust watch add/change
+
+69 passed, 0 failed
+
+12 paired checks passed (code, source maps, diagnostics and exit codes; debug)
+
