@@ -109,7 +109,7 @@ try {
     ['async fn f() { await Promise.resolve() }', 'async function'],
     ['pure fn f() { return 1 }', '/** @pure */'],
     ['guard true else { output("no") }', 'if (!(true))'],
-    ['match x { 0 => output("zero"), _ => output("other") }', 'else'],
+    ['match x { 0 => output("zero"), _ => output("other") }', 'default:'],
     ['@meta { name: demo }', '__atomis_meta'],
     ['@cell #one { output(1) }', '__atomis_cell'],
     ['@render { view Hello { <div /> } }', 'function Hello'],

@@ -4,9 +4,20 @@ function classify(n: number): ({ ok: true, value: string } | { ok: false, error:
   return { ok: true, value: "ok" }
 }
 function label(x: number): string {
-  if (x === 0) { "zero" }
-  else if (x === 1) { "one" }
-  else { "many" }
+  switch ((x) as unknown) {
+    case (0): {
+      return "zero"
+      break;
+    }
+    case (1): {
+      return "one"
+      break;
+    }
+    default: {
+      return "many"
+      break;
+    }
+  }
 }
 let parsed: ({ ok: true, value: number } | { ok: false, error: string }) = { ok: true, value: 42 }
 //# sourceMappingURL=features.ts.ato.map

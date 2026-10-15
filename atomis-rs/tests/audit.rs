@@ -206,9 +206,11 @@ fn analyzer_does_not_infer_type_from_expression_prefix() {
 }
 
 #[test]
-fn duplicate_names_warn_and_ghost_ids_and_transports_error() {
+fn duplicate_names_and_ghost_ids_and_transports_error() {
     let r = compile("atom x = 1\natom x = 2", &options()).unwrap();
-    assert_eq!(r.analysis.diagnostics[0].severity, Severity::Warn);
+    assert_eq!(r.analysis.diagnostics[0].severity, Severity::Error);
+    assert!(r.code.is_empty());
+    assert!(r.map.is_none());
     for source in [
         "node \"n\" {}\nnode \"n\" {}",
         "channel \"c\" {}\nchannel \"c\" {}",
@@ -241,7 +243,8 @@ fn atom_before_closing_brace_and_semicolon_type() {
 fn preserves_trailing_comments() {
     let commented = compile("let x = 1 // +\natom y = 2", &options()).unwrap();
     assert_eq!(commented.code, "let x = 1 // +\nlet y = 2\n");
-    let flat = compile(&"let x = 1\n".repeat(10000), &options()).unwrap();
+    let source: String = (0..10000).map(|i| format!("let x_{i} = 1\n")).collect();
+    let flat = compile(&source, &options()).unwrap();
     assert_eq!(flat.code.lines().count(), 10000);
     assert_eq!(
         compile("let x = 1 // keep", &options()).unwrap().code,
@@ -284,6 +287,33 @@ fn golden_examples_match_exactly_except_checkout_line_endings() {
             source_map: true,
         };
         let result = compile(&source, &opts).unwrap();
+        if name == "network" {
+            // This historical emission fixture has no channel value binding.
+            // Keep its golden bytes while asserting the new semantic rejection.
+            assert!(result.analysis.has_errors);
+            assert!(result
+                .analysis
+                .diagnostics
+                .iter()
+                .any(|d| d.message == "Undefined identifier 'channel'"));
+            assert!(result.code.is_empty());
+            assert!(result.map.is_none());
+            let program = parse(tokenize(&source), &source).unwrap();
+            let lowered = atomis::transformer::transform(&program);
+            let emitted = atomis::emitter::emit(
+                &lowered,
+                &atomis::emitter::EmitOptions {
+                    source_file: opts.file_name.clone(),
+                    source_content: source.clone(),
+                    output_file: opts.output_file.clone(),
+                    map_file_name: format!("{name}.ts.ato.map"),
+                    source_map: true,
+                },
+            );
+            assert_eq!(emitted.code.replace("\r\n", "\n"), expected, "{name}");
+            assert!(emitted.map.is_some());
+            continue;
+        }
         assert_eq!(result.code.replace("\r\n", "\n"), expected, "{name}");
         assert!(result.map.is_some());
         assert_eq!(result.code, compile(&source, &opts).unwrap().code);
@@ -312,4 +342,156 @@ fn bounded_generated_input_never_panics_and_spans_stay_valid() {
         }
         let _ = compile(&source, &options());
     }
+}
+
+#[test]
+fn duplicate_parameters_functions_and_mixed_declarations_are_errors() {
+    for source in [
+        "fn f(x: number, x: number) {}",
+        "fn f(x: number) { atom x = 2 }",
+        "fn f() {}\nfn f() {}",
+        "atom f = 1\nfn f() {}",
+    ] {
+        let r = compile(source, &options()).unwrap();
+        assert!(r.analysis.has_errors, "{source}");
+        assert!(r.code.is_empty());
+        assert!(r.map.is_none());
+        assert!(r
+            .analysis
+            .diagnostics
+            .iter()
+            .any(|d| d.severity == Severity::Error && d.message.contains("already declared")));
+    }
+}
+
+#[test]
+fn ghostnet_connects_respect_lexical_scope() {
+    for source in [
+        "fn setup() { node \"n\" {} }\nchannel \"c\" {}\nconnect \"c\" -> \"n\" via tcp",
+        "node \"n\" {}\nguard false else { channel \"c\" {} }\nconnect \"c\" -> \"n\" via tcp",
+        "@cell #setup { node \"n\" {} }\nchannel \"c\" {}\nconnect \"c\" -> \"n\" via tcp",
+        "fn setup() { node \"n\" {} }\nfn use() { channel \"c\" {}\nconnect \"c\" -> \"n\" via tcp }",
+    ] {
+        let r = compile(source, &options()).unwrap();
+        assert!(r.analysis.has_errors, "{source}");
+        assert!(r.code.is_empty());
+        assert!(r.analysis.diagnostics.iter().any(|d| d.message.contains("out-of-scope")));
+    }
+    for source in [
+        "fn setup() { node \"n\" {}\nchannel \"c\" {}\nconnect \"c\" -> \"n\" via tcp }",
+        "node \"n\" {}\nchannel \"c\" {}\nfn use() { connect \"c\" -> \"n\" via tcp }",
+        "node \"n\" {}\nchannel \"c\" {}\nguard false else { connect \"c\" -> \"n\" via tcp }",
+        "node \"n\" {}\nchannel \"c\" {}\n@cell #use { connect \"c\" -> \"n\" via tcp }",
+        "fn use() { connect \"c\" -> \"n\" via tcp }\nnode \"n\" {}\nchannel \"c\" {}",
+    ] {
+        let r = compile(source, &options()).unwrap();
+        assert!(!r.analysis.has_errors, "{source}");
+    }
+}
+
+#[test]
+fn regex_literals_are_opaque_and_division_is_an_operator() {
+    for literal in [
+        r"/}/",
+        r"/Ok(1)|Err(2)|Result<T,E>/",
+        r"/[a-z\d/]+/gim",
+        r"/^(?:ab|cd){2,4}?(x)$/s",
+        r"/\\/",
+        r"/\//",
+        r"/\u{1F600}/u",
+    ] {
+        assert_eq!(tokenize(literal)[0].ttype, TokenType::Regex);
+        assert_eq!(rewrite_result_sugar(literal), literal);
+        let source = format!("fn f() {{ return {literal} }}");
+        assert!(compile(&source, &options()).unwrap().code.contains(literal));
+    }
+    let source = "fn f() { return 8 }\nlet n = f() / 2;\nn /= 2;";
+    assert!(compile(source, &options())
+        .unwrap()
+        .code
+        .contains("f() / 2"));
+}
+
+#[test]
+fn invalid_regex_and_match_are_located_errors() {
+    for source in [
+        "const r = /open",
+        "const r = /[abc/",
+        "const r = /(abc/",
+        "const r = /abc)/",
+        "const r = /a/gg",
+        "const r = /a/z",
+        "match { _ => 1 }",
+        "match x {}",
+        "match x { 1 => }",
+        "match x { _ => 1, 1 => 2 }",
+        "match x { _ => 1, _ => 2 }",
+    ] {
+        let error = compile(source, &options()).err().unwrap();
+        assert!(error.line >= 1 && error.col >= 1, "{source}");
+    }
+}
+
+#[test]
+fn match_emits_single_evaluation_and_separate_arms() {
+    let r = compile(
+        "const get = () => 1; const first = () => {}; const second = () => {}; const fallback = () => {};\nmatch get() { 1 => first(), 2 => second(), _ => fallback() }",
+        &options(),
+    )
+    .unwrap();
+    assert_eq!(r.code.matches("get()").count(), 1);
+    assert_eq!(r.code.matches("break;").count(), 3);
+    assert_eq!(r.code.matches("default:").count(), 1);
+    assert!(r.code.contains("switch ((get()) as unknown)"));
+}
+
+#[test]
+fn import_aliases_preserve_bindings_and_validate_separators() {
+    let r = compile(
+        "@import { basename as leaf, sep, } from \"node:path\"",
+        &options(),
+    )
+    .unwrap();
+    assert_eq!(
+        r.code,
+        "import { basename as leaf, sep } from \"node:path\"\n"
+    );
+    for source in [
+        "@import { a b } from \"proto\"",
+        "@import { a as } from \"proto\"",
+        "@import { 42 } from \"proto\"",
+        "@import { a + b } from \"proto\"",
+        "@import { a } \"proto\"",
+    ] {
+        assert!(compile(source, &options()).is_err(), "{source}");
+    }
+    for source in [
+        "@import { a as x } from \"proto\"\natom x = 1",
+        "@import { a as x, b as x } from \"proto\"",
+    ] {
+        let r = compile(source, &options()).unwrap();
+        assert!(r.analysis.has_errors);
+        assert!(r.code.is_empty());
+    }
+}
+
+#[test]
+fn regex_resources_are_bounded_and_member_keywords_keep_division() {
+    for source in [
+        format!("let r = /{}/", "a".repeat(32770)),
+        format!("let r = /{}a{}/", "(".repeat(65), ")".repeat(65)),
+    ] {
+        assert!(compile(&source, &options()).is_err());
+    }
+    assert!(compile(
+        "const obj = {return: 8, if: () => 8};\nconst n = obj.return / 2;\nconst q = obj.if() / 2;",
+        &options()
+    )
+    .is_ok());
+}
+
+#[test]
+fn cell_async_detection_includes_awaited_match_patterns() {
+    let r = compile("@cell #x { match 1 { await Promise.resolve(1) => console.log(1) } }", &options()).unwrap();
+    assert!(r.code.contains("async () =>"));
 }

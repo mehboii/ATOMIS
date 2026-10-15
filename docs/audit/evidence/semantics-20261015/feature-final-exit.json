@@ -1,0 +1,10 @@
+{
+  "exe": "node",
+  "args": [
+    "--expose-gc",
+    "--max-old-space-size=1024",
+    "test/name-feature-regressions.mjs"
+  ],
+  "status": 0,
+  "signal": null
+}

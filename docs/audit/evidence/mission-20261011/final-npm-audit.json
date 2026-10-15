@@ -1,0 +1,11 @@
+{
+  "cmd": "C:/Program Files/nodejs/node.exe",
+  "args": [
+    "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+    "audit",
+    "--json"
+  ],
+  "code": 0,
+  "stdout": "{\n  \"auditReportVersion\": 2,\n  \"vulnerabilities\": {},\n  \"metadata\": {\n    \"vulnerabilities\": {\n      \"info\": 0,\n      \"low\": 0,\n      \"moderate\": 0,\n      \"high\": 0,\n      \"critical\": 0,\n      \"total\": 0\n    },\n    \"dependencies\": {\n      \"prod\": 33,\n      \"dev\": 0,\n      \"optional\": 0,\n      \"peer\": 0,\n      \"peerOptional\": 0,\n      \"total\": 32\n    }\n  }\n}\n",
+  "stderr": "npm notice\nnpm notice New major version of npm available! 10.9.7 -> 12.2.0\nnpm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0\nnpm notice To update run: npm install -g npm@12.2.0\nnpm notice\n"
+}

@@ -1,0 +1,9 @@
+{
+  "exe": "node",
+  "args": [
+    "test/audit-parity.mjs"
+  ],
+  "status": 0,
+  "stdout": "14 paired checks passed (code, source maps, diagnostics and exit codes; debug)\n",
+  "stderr": ""
+}

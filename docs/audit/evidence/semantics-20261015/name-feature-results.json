@@ -1,0 +1,4953 @@
+{
+  "work": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7",
+  "passed": 101,
+  "failed": 0,
+  "records": [
+    {
+      "name": "undefined-variable",
+      "source": "output(missing)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-variable.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-variable.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-variable.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-variable.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-variable.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-variable.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-variable.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-variable.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-variable.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "undefined-function",
+      "source": "missingFunction()",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missingFunction'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missingFunction'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-function.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-function.ato:1:1 error Undefined identifier 'missingFunction'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-function.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-function.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-function.ato:1:1 error Undefined identifier 'missingFunction'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-function.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-function.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-function.ato:1:1 error Undefined identifier 'missingFunction'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-function.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "local",
+      "source": "fn f() -> number { atom x = 2\nreturn x }\noutput(f())",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\local.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\local.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\local.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\local.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\local.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\local.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "parameter",
+      "source": "fn f(x: number) -> number { return x }\noutput(f(1))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "outer",
+      "source": "atom x = 1\nfn f() -> number { return x }\noutput(f())",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\outer.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\outer.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\outer.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\outer.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\outer.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\outer.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "guard-escape",
+      "source": "fn f() { guard false else { atom hidden = 1 }\noutput(hidden) }",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'hidden'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'hidden'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-escape.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-escape.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-escape.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-escape.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-escape.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-escape.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-escape.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "raw-block-escape",
+      "source": "if (true) { let hidden = 1; }\noutput(hidden)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'hidden'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'hidden'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\raw-block-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\raw-block-escape.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\raw-block-escape.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\raw-block-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\raw-block-escape.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\raw-block-escape.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\raw-block-escape.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\raw-block-escape.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\raw-block-escape.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "duplicate-atom",
+      "source": "atom x = 1\natom x = 2",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "'x' is already declared in this scope",
+            "line": 2,
+            "col": 1,
+            "severity": "error"
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "'x' is already declared in this scope",
+            "line": 2,
+            "col": 1,
+            "severity": "error"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-atom.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-atom.ato:2:1 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-atom.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-atom.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-atom.ato:2:1 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-atom.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-atom.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-atom.ato:2:1 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-atom.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "duplicate-raw",
+      "source": "let x=1;let x=2;",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "'x' is already declared in this scope",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "'x' is already declared in this scope",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-raw.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-raw.ato:1:1 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-raw.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-raw.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-raw.ato:1:1 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-raw.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-raw.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-raw.ato:1:1 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-raw.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "duplicate-parameter",
+      "source": "fn f(x:number,x:number){}",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "'x' is already declared in this scope",
+            "line": 1,
+            "col": 15,
+            "severity": "error"
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "'x' is already declared in this scope",
+            "line": 1,
+            "col": 15,
+            "severity": "error"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-parameter.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-parameter.ato:1:15 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-parameter.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-parameter.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-parameter.ato:1:15 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-parameter.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-parameter.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-parameter.ato:1:15 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\duplicate-parameter.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "parameter-local-duplicate",
+      "source": "fn f(x:number){ atom x=1 }",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "'x' is already declared in this scope",
+            "line": 1,
+            "col": 17,
+            "severity": "error"
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "'x' is already declared in this scope",
+            "line": 1,
+            "col": 17,
+            "severity": "error"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter-local-duplicate.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter-local-duplicate.ato:1:17 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter-local-duplicate.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter-local-duplicate.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter-local-duplicate.ato:1:17 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter-local-duplicate.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter-local-duplicate.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter-local-duplicate.ato:1:17 error 'x' is already declared in this scope\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\parameter-local-duplicate.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "const-assign",
+      "source": "const x=1;\nx=2;",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Cannot assign to constant 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Cannot assign to constant 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-assign.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-assign.ato:2:1 error Cannot assign to constant 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-assign.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-assign.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-assign.ato:2:1 error Cannot assign to constant 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-assign.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-assign.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-assign.ato:2:1 error Cannot assign to constant 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-assign.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "const-update",
+      "source": "const x=1;\nx++;",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Cannot assign to constant 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Cannot assign to constant 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-update.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-update.ato:2:1 error Cannot assign to constant 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-update.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-update.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-update.ato:2:1 error Cannot assign to constant 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-update.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-update.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-update.ato:2:1 error Cannot assign to constant 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-update.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "const-prefix",
+      "source": "const x=1;\n++x;",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Cannot assign to constant 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Cannot assign to constant 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-prefix.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-prefix.ato:2:1 error Cannot assign to constant 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-prefix.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-prefix.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-prefix.ato:2:1 error Cannot assign to constant 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-prefix.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-prefix.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-prefix.ato:2:1 error Cannot assign to constant 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-prefix.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "const-property",
+      "source": "const x={value:1};\nx.value=2;",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-property.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-property.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-property.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-property.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-property.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\const-property.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "mutable",
+      "source": "atom x=1\nx+=2\noutput(x)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\mutable.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\mutable.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\mutable.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\mutable.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\mutable.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\mutable.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "undefined-initializer",
+      "source": "atom x=missing",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-initializer.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-initializer.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-initializer.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-initializer.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-initializer.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-initializer.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-initializer.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-initializer.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-initializer.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "undefined-return",
+      "source": "fn f(){return missing}",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-return.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-return.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-return.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-return.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-return.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-return.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-return.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-return.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-return.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "undefined-default",
+      "source": "fn f(x:number=missing) {return x}",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-default.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-default.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-default.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-default.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-default.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-default.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-default.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-default.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-default.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "undefined-guard",
+      "source": "guard missing else { output(1) }",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-guard.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-guard.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-guard.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-guard.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-guard.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-guard.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-guard.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-guard.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-guard.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "undefined-discriminant",
+      "source": "match missing { _ => console.log(1) }",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-discriminant.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-discriminant.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-discriminant.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-discriminant.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-discriminant.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-discriminant.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-discriminant.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-discriminant.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-discriminant.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "undefined-pattern",
+      "source": "match 1 { missing => console.log(1), _ => console.log(2) }",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-pattern.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-pattern.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-pattern.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-pattern.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-pattern.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-pattern.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-pattern.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-pattern.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-pattern.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "undefined-arm",
+      "source": "match 1 { _ => missing() }",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-arm.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-arm.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-arm.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-arm.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-arm.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-arm.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-arm.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-arm.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-arm.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "undefined-template",
+      "source": "output(`hello ${missing}`)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-template.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-template.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-template.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-template.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-template.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-template.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-template.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-template.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\undefined-template.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "nested-template",
+      "source": "output(`${`${missing}`}`)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-template.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-template.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-template.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-template.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-template.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-template.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-template.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-template.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-template.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "escaped-template",
+      "source": "output(`hello \\${literal}`)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\escaped-template.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\escaped-template.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\escaped-template.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\escaped-template.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\escaped-template.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\escaped-template.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "property",
+      "source": "atom x={value:1}\noutput(x.value)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\property.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\property.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\property.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\property.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\property.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\property.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "computed-property",
+      "source": "atom x={value:1}\noutput(x[missing])",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\computed-property.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\computed-property.ato:2:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\computed-property.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\computed-property.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\computed-property.ato:2:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\computed-property.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\computed-property.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\computed-property.ato:2:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\computed-property.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "object-shorthand",
+      "source": "atom x={missing}",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-shorthand.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-shorthand.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-shorthand.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-shorthand.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-shorthand.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-shorthand.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-shorthand.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-shorthand.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-shorthand.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "object-key",
+      "source": "atom x={\nvalue:1,\nother:2\n}\noutput(x.other)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-key.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-key.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-key.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-key.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-key.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-key.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "object-value",
+      "source": "atom x={value:missing}",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-value.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-value.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-value.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-value.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-value.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-value.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-value.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-value.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\object-value.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "ternary",
+      "source": "output(true ? missing : 1)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\ternary.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\ternary.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\ternary.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\ternary.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\ternary.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\ternary.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\ternary.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\ternary.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\ternary.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "condition",
+      "source": "if (missing) { console.log(1); }",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\condition.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\condition.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\condition.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\condition.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\condition.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\condition.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\condition.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\condition.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\condition.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "assignment-target",
+      "source": "missing=1",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-target.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-target.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-target.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-target.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-target.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-target.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-target.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-target.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-target.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "array",
+      "source": "atom xs=[1,missing]",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "arguments",
+      "source": "fn f(x:number){}\nf(missing)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arguments.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arguments.ato:2:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arguments.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arguments.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arguments.ato:2:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arguments.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arguments.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arguments.ato:2:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arguments.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "regex-opaque",
+      "source": "output(/missing/.test('missing'))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\regex-opaque.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\regex-opaque.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\regex-opaque.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\regex-opaque.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\regex-opaque.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\regex-opaque.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "comment-opaque",
+      "source": "// missing()\noutput('missing')",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\comment-opaque.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\comment-opaque.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\comment-opaque.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\comment-opaque.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\comment-opaque.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\comment-opaque.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "import-alias",
+      "source": "@import { basename as leaf } from \"node:path\"\noutput(leaf(\"a/b\"))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "import-alias-original",
+      "source": "@import { basename as leaf } from \"node:path\"\noutput(basename(\"a/b\"))",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'basename'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'basename'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias-original.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias-original.ato:2:1 error Undefined identifier 'basename'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias-original.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias-original.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias-original.ato:2:1 error Undefined identifier 'basename'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias-original.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias-original.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias-original.ato:2:1 error Undefined identifier 'basename'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\import-alias-original.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "destructure",
+      "source": "const {value: local}={value:1};\noutput(local)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\destructure.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\destructure.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\destructure.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\destructure.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\destructure.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\destructure.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "array-destructure",
+      "source": "const [local]=[1];\noutput(local)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array-destructure.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array-destructure.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array-destructure.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array-destructure.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array-destructure.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\array-destructure.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "catch",
+      "source": "try { throw new Error('x'); } catch (err) { console.log(err); }",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "catch-escape",
+      "source": "try { throw 1; } catch (err) { console.log(err); }\noutput(err)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'err'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'err'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch-escape.ato:2:1 error Undefined identifier 'err'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch-escape.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch-escape.ato:2:1 error Undefined identifier 'err'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch-escape.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch-escape.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch-escape.ato:2:1 error Undefined identifier 'err'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\catch-escape.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "no-parameters",
+      "source": "fn f() -> number { return 1 }\noutput(f())",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\no-parameters.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\no-parameters.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\no-parameters.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\no-parameters.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\no-parameters.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\no-parameters.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "multi-parameters",
+      "source": "fn sum(a:number,b:number)->number {return a+b}\noutput(sum(1,2))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\multi-parameters.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\multi-parameters.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\multi-parameters.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\multi-parameters.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\multi-parameters.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\multi-parameters.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "too-few",
+      "source": "fn f(a:number){}\nf()",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "TS2554: Expected 1 arguments, but got 0.",
+            "severity": "error",
+            "line": 2,
+            "col": 1,
+            "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-few.ato"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-few.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-few.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-few.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-few.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-few.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-few.ato:2:1 error TS2554: Expected 1 arguments, but got 0.\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-few.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "too-many",
+      "source": "fn f(a:number){}\nf(1,2)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "TS2554: Expected 1 arguments, but got 2.",
+            "severity": "error",
+            "line": 2,
+            "col": 1,
+            "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-many.ato"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-many.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-many.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-many.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-many.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-many.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-many.ato:2:1 error TS2554: Expected 1 arguments, but got 2.\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\too-many.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "wrong-argument",
+      "source": "fn f(a:number){}\nf('x')",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
+            "severity": "error",
+            "line": 2,
+            "col": 1,
+            "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-argument.ato"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-argument.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-argument.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-argument.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-argument.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-argument.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-argument.ato:2:1 error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-argument.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "default-argument",
+      "source": "fn f(a:number=2)->number{return a}\noutput(f())",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\default-argument.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\default-argument.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\default-argument.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\default-argument.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\default-argument.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\default-argument.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "wrong-return",
+      "source": "fn f()->number{return 'x'}",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "TS2322: Type 'string' is not assignable to type 'number'.",
+            "severity": "error",
+            "line": 1,
+            "col": 1,
+            "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-return.ato"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-return.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-return.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-return.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-return.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-return.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-return.ato:1:1 error TS2322: Type 'string' is not assignable to type 'number'.\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\wrong-return.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "missing-return",
+      "source": "fn f()->number{}",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "TS2355: A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.",
+            "severity": "error",
+            "line": 1,
+            "col": 1,
+            "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-return.ato"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-return.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-return.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-return.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-return.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-return.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-return.ato:1:1 error TS2355: A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-return.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "empty-return",
+      "source": "fn f()->number{return}",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "TS2322: Type 'undefined' is not assignable to type 'number'.",
+            "severity": "error",
+            "line": 1,
+            "col": 1,
+            "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\empty-return.ato"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\empty-return.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\empty-return.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\empty-return.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\empty-return.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\empty-return.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\empty-return.ato:1:1 error TS2322: Type 'undefined' is not assignable to type 'number'.\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\empty-return.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "guard-return",
+      "source": "fn f(x:number)->number{guard x>0 else{return 0}\nreturn x}",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-return.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-return.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-return.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-return.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-return.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\guard-return.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "nested-function",
+      "source": "fn outer(a:number)->number {fn inner(b:number)->number{return a+b}\nreturn inner(2)}\noutput(outer(1))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "nested-function-escape",
+      "source": "fn outer(){fn inner(){} }\ninner()",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'inner'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'inner'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function-escape.ato:2:1 error Undefined identifier 'inner'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function-escape.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function-escape.ato:2:1 error Undefined identifier 'inner'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function-escape.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function-escape.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function-escape.ato:2:1 error Undefined identifier 'inner'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\nested-function-escape.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "shadow",
+      "source": "atom x=1\nfn f(x:string)->string{return x}\noutput(f('x'))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\shadow.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\shadow.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\shadow.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\shadow.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\shadow.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\shadow.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "block-shadow",
+      "source": "let x=1;\nif(true){let x='a';console.log(x);}\noutput(x)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-shadow.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-shadow.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-shadow.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-shadow.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-shadow.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-shadow.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "scope-reuse",
+      "source": "if(true){let x=1;console.log(x);}\nlet x=2;\noutput(x)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\scope-reuse.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\scope-reuse.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\scope-reuse.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\scope-reuse.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\scope-reuse.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\scope-reuse.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "sibling-escape",
+      "source": "fn a(){let x=1;}\nfn b(){return x}",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\sibling-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\sibling-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\sibling-escape.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\sibling-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\sibling-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\sibling-escape.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\sibling-escape.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\sibling-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\sibling-escape.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "var-function",
+      "source": "fn f(){if(true){var x=1;}\nreturn x}",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\var-function.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\var-function.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\var-function.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\var-function.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\var-function.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\var-function.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "for-zero",
+      "source": "let sum=0;\nfor(let i=0;i<0;i++){sum+=i;}\noutput(sum)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-zero.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-zero.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-zero.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-zero.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-zero.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-zero.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "for-one",
+      "source": "let sum=0;\nfor(let i=0;i<1;i++){sum+=i;}\noutput(sum)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-one.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-one.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-one.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-one.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-one.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-one.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "for-many",
+      "source": "let sum=0;\nfor(let i=0;i<=3;i++){sum+=i;}\noutput(sum)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-many.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-many.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-many.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-many.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-many.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-many.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "for-nested",
+      "source": "let sum=0;\nfor(let i=0;i<3;i++){for(let j=0;j<2;j++){sum+=i+j;}}\noutput(sum)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-nested.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-nested.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-nested.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-nested.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-nested.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-nested.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "for-break-continue",
+      "source": "for(let i=0;i<4;i++){if(i===1)continue;if(i===3)break;console.log(i);}",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-break-continue.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-break-continue.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-break-continue.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-break-continue.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-break-continue.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-break-continue.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "for-escape",
+      "source": "for(let i=0;i<1;i++){console.log(i);}\noutput(i)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'i'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'i'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-escape.ato:2:1 error Undefined identifier 'i'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-escape.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-escape.ato:2:1 error Undefined identifier 'i'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-escape.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-escape.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-escape.ato:2:1 error Undefined identifier 'i'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-escape.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "for-single",
+      "source": "for(let i=0;i<1;i++)console.log(i);\noutput(i)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'i'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'i'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-single.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-single.ato:2:1 error Undefined identifier 'i'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-single.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-single.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-single.ato:2:1 error Undefined identifier 'i'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-single.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-single.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-single.ato:2:1 error Undefined identifier 'i'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-single.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "for-missing",
+      "source": "for(let i=0;i<missing;i++){console.log(i);}",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-missing.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-missing.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-missing.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-missing.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-missing.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-missing.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-missing.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-missing.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-missing.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "for-of",
+      "source": "for(const item of [1,2]){console.log(item);}",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-of.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-of.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-of.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-of.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-of.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-of.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "for-in",
+      "source": "for(const key in {x:1}){console.log(key);}",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-in.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-in.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-in.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-in.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-in.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\for-in.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "while",
+      "source": "let i=0;\nwhile(i<3){i++;}\noutput(i)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\while.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\while.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\while.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\while.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\while.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\while.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "do-while",
+      "source": "let i=0;\ndo{i++;}while(i<1);\noutput(i)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\do-while.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\do-while.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\do-while.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\do-while.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\do-while.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\do-while.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "loop-nonboolean",
+      "source": "while(0){break;}",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-nonboolean.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-nonboolean.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-nonboolean.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-nonboolean.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-nonboolean.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-nonboolean.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "loop-type-error",
+      "source": "for(let i=0;i<{};i++){break;}",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "TS2365: Operator '<' cannot be applied to types 'number' and '{}'.",
+            "severity": "error",
+            "line": 1,
+            "col": 1,
+            "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-type-error.ato"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-type-error.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-type-error.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-type-error.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-type-error.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-type-error.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-type-error.ato:1:1 error TS2365: Operator '<' cannot be applied to types 'number' and '{}'.\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-type-error.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "arithmetic",
+      "source": "output((10-2)*3/2%5)\noutput(2**3)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arithmetic.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arithmetic.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arithmetic.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arithmetic.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arithmetic.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arithmetic.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "compare",
+      "source": "output(1<2 && 2>=1)\noutput(1===1 || false)\noutput(!false)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\compare.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\compare.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\compare.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\compare.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\compare.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\compare.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "string",
+      "source": "atom s='a'+'b'\noutput(`${s}!`)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\string.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\string.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\string.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\string.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\string.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\string.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "invalid-add",
+      "source": "output(true+1)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "TS2365: Operator '+' cannot be applied to types 'boolean' and 'number'.",
+            "severity": "error",
+            "line": 1,
+            "col": 1,
+            "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-add.ato"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-add.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-add.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-add.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-add.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-add.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-add.ato:1:1 error TS2365: Operator '+' cannot be applied to types 'boolean' and 'number'.\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-add.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "invalid-arithmetic",
+      "source": "output('a'-1)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.",
+            "severity": "error",
+            "line": 1,
+            "col": 1,
+            "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-arithmetic.ato"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-arithmetic.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-arithmetic.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-arithmetic.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-arithmetic.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-arithmetic.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-arithmetic.ato:1:1 error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-arithmetic.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "invalid-compare",
+      "source": "output(1<'a')",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "TS2365: Operator '<' cannot be applied to types 'number' and 'string'.",
+            "severity": "error",
+            "line": 1,
+            "col": 1,
+            "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-compare.ato"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-compare.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-compare.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-compare.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-compare.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-compare.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-compare.ato:1:1 error TS2365: Operator '<' cannot be applied to types 'number' and 'string'.\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\invalid-compare.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "assignment-type",
+      "source": "atom x=1\nx='a'",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "TS2322: Type 'string' is not assignable to type 'number'.",
+            "severity": "error",
+            "line": 2,
+            "col": 1,
+            "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-type.ato"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-type.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-type.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-type.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-type.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-type.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-type.ato:2:1 error TS2322: Type 'string' is not assignable to type 'number'.\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assignment-type.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "literal-type",
+      "source": "atom x:number='a'",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Type mismatch: atom 'x' is number but initialized with 'a'",
+            "line": 1,
+            "col": 1,
+            "severity": "error"
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Type mismatch: atom 'x' is number but initialized with 'a'",
+            "line": 1,
+            "col": 1,
+            "severity": "error"
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\literal-type.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\literal-type.ato:1:1 error Type mismatch: atom 'x' is number but initialized with 'a'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\literal-type.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\literal-type.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\literal-type.ato:1:1 error Type mismatch: atom 'x' is number but initialized with 'a'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\literal-type.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\literal-type.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\literal-type.ato:1:1 error Type mismatch: atom 'x' is number but initialized with 'a'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\literal-type.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "conversion",
+      "source": "output(Number('42'))\noutput(String(42))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\conversion.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\conversion.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\conversion.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\conversion.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\conversion.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\conversion.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing-conversion",
+      "source": "output(Int32('42'))",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'Int32'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'Int32'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-conversion.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-conversion.ato:1:1 error Undefined identifier 'Int32'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-conversion.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-conversion.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-conversion.ato:1:1 error Undefined identifier 'Int32'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-conversion.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-conversion.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-conversion.ato:1:1 error Undefined identifier 'Int32'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\missing-conversion.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "number-boundary",
+      "source": "output(Number.MAX_SAFE_INTEGER+1)\noutput(Number.MAX_VALUE*2)\noutput(1/0)\noutput(0/0)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\number-boundary.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\number-boundary.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\number-boundary.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\number-boundary.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\number-boundary.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\number-boundary.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "bigint-zero",
+      "source": "output(1n/0n)",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\bigint-zero.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\bigint-zero.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\bigint-zero.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\bigint-zero.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\bigint-zero.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\bigint-zero.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "assertion-reference",
+      "source": "atom x=1\noutput((x as number)+missing)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assertion-reference.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assertion-reference.ato:2:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assertion-reference.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assertion-reference.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assertion-reference.ato:2:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assertion-reference.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assertion-reference.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assertion-reference.ato:2:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\assertion-reference.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "arrow",
+      "source": "const f=(x:number)=>x+1;\noutput(f(1))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "arrow-escape",
+      "source": "const f=(x:number)=>x+1;\noutput(x)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-escape.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-escape.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-escape.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-escape.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "single-arrow",
+      "source": "const f=(x:number)=>[1].map(y=>x+y);\noutput(f(1))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\single-arrow.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\single-arrow.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\single-arrow.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\single-arrow.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\single-arrow.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\single-arrow.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "block-arrow",
+      "source": "const f=(x:number)=>{return x;};\noutput(f(1))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-arrow.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-arrow.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-arrow.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-arrow.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-arrow.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\block-arrow.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "return-result",
+      "source": "fn f()->Result<number,string>{return Ok(1)}",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\return-result.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\return-result.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\return-result.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\return-result.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\return-result.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\return-result.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "loop-immediate-escape",
+      "source": "for(let i=0;i<1;i++){console.log(i);}i",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'i'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'i'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-immediate-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-immediate-escape.ato:1:1 error Undefined identifier 'i'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-immediate-escape.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-immediate-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-immediate-escape.ato:1:1 error Undefined identifier 'i'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-immediate-escape.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-immediate-escape.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-immediate-escape.ato:1:1 error Undefined identifier 'i'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\loop-immediate-escape.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "arrow-expression-escape",
+      "source": "const x=[1].map(item=>item)+item;",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'item'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'item'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-expression-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-expression-escape.ato:1:1 error Undefined identifier 'item'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-expression-escape.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-expression-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-expression-escape.ato:1:1 error Undefined identifier 'item'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-expression-escape.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-expression-escape.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-expression-escape.ato:1:1 error Undefined identifier 'item'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\arrow-expression-escape.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "named-function",
+      "source": "const f=function local(){return local};\noutput(f())",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "named-function-escape",
+      "source": "const f=function local(){};\noutput(local)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'local'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'local'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function-escape.ato:2:1 error Undefined identifier 'local'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function-escape.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function-escape.ato:2:1 error Undefined identifier 'local'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function-escape.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function-escape.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function-escape.ato:2:1 error Undefined identifier 'local'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\named-function-escape.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "method",
+      "source": "const obj={f(x:number){return x}};\noutput(obj.f(1))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "class",
+      "source": "class C { value:number=1; f(x:number){return this.value+x;} }\noutput(new C().f(2))",
+      "core": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "target": {
+        "errors": false,
+        "diagnostics": []
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\class.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\class.ato — no errors\n",
+        "stderr": ""
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\class.ato"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\class.ato — no errors\n",
+        "stderr": ""
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\class.ato",
+          "--target-check"
+        ],
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\class.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "method-undefined",
+      "source": "const obj={f(x:number){return missing+x}};",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'missing'",
+            "severity": "error",
+            "line": 1,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-undefined.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-undefined.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-undefined.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-undefined.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-undefined.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-undefined.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-undefined.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-undefined.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-undefined.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "method-escape",
+      "source": "const obj={f(x:number){return x}};\noutput(x)",
+      "core": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "target": {
+        "errors": true,
+        "diagnostics": [
+          {
+            "message": "Undefined identifier 'x'",
+            "severity": "error",
+            "line": 2,
+            "col": 1
+          }
+        ]
+      },
+      "rust": {
+        "args": [
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-escape.ato — 1 error(s)\n"
+      },
+      "ts": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-escape.ato"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-escape.ato — 1 error(s)\n"
+      },
+      "checkedCLI": {
+        "args": [
+          "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+          "check",
+          "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-escape.ato",
+          "--target-check"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\names-rFNUi7\\method-escape.ato — 1 error(s)\n"
+      }
+    }
+  ]
+}

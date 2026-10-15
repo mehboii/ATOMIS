@@ -582,11 +582,13 @@ export class Parser {
   private parseMatch(): MatchExpr {
     const kw = this.expect(TokenType.KEYWORD, "match");
     const discriminant = this.rawUntil((t) => t.type === TokenType.LBRACE);
+    this.requireText(discriminant, "match discriminant");
     this.expect(TokenType.LBRACE);
     const arms: MatchArm[] = [];
     this.skipNewlines();
     while (!this.check(TokenType.RBRACE) && !this.atEnd()) {
       const armStart = this.peek();
+      if (arms[arms.length - 1]?.isWildcard) throw new ParseError("Wildcard must be the final match arm", armStart.line, armStart.col);
       const pattern = this.rawUntil(
         (t) => t.type === TokenType.OPERATOR && t.value === "=>",
       );
@@ -598,6 +600,7 @@ export class Parser {
           t.type === TokenType.RBRACE ||
           t.type === TokenType.NEWLINE,
       );
+      this.requireText(result, "match arm body");
       arms.push({
         type: "MatchArm",
         line: armStart.line,
@@ -612,6 +615,7 @@ export class Parser {
         this.skipNewlines();
       }
     }
+    if (!arms.length) { const t = this.peek(); throw new ParseError("Expected at least one match arm", t.line, t.col); }
     this.expect(TokenType.RBRACE);
     return {
       type: "MatchExpr",
@@ -762,7 +766,7 @@ export class Parser {
     if (s.type === "OutputCall") return uses(s.argument);
     if (s.type === "AtomDecl") return uses(s.initializer ?? "");
     if (s.type === "GuardStmt") return uses(s.condition) || s.elseBody.some(x => this.statementUsesAwait(x));
-    if (s.type === "MatchExpr") return uses(s.discriminant) || s.arms.some(a => uses(a.result));
+    if (s.type === "MatchExpr") return uses(s.discriminant) || s.arms.some(a => uses(a.pattern) || uses(a.result));
     return false;
   }
 
@@ -826,20 +830,25 @@ export class Parser {
     const names: string[] = [];
     this.skipNewlines();
     while (!this.check(TokenType.RBRACE) && !this.atEnd()) {
-      if (this.check(TokenType.IDENT) || this.check(TokenType.KEYWORD)) {
-        names.push(this.next().value);
-      } else {
-        this.next();
-      }
+      const token = this.peek();
+      if (![TokenType.IDENT, TokenType.KEYWORD].includes(token.type)) throw new ParseError("Expected import name", token.line, token.col);
+      let binding = this.next().value;
       this.skipNewlines();
-      if (this.check(TokenType.PUNCTUATION, ",")) {
-        this.next();
+      if (this.check(TokenType.IDENT, "as")) {
+        this.next(); this.skipNewlines();
+        const alias = this.peek();
+        if (![TokenType.IDENT, TokenType.KEYWORD].includes(alias.type)) throw new ParseError("Expected import alias", alias.line, alias.col);
+        binding += " as " + this.next().value;
         this.skipNewlines();
       }
+      names.push(binding);
+      if (this.check(TokenType.RBRACE)) break;
+      const separator = this.peek();
+      if (!this.check(TokenType.PUNCTUATION, ",")) throw new ParseError("Expected ',' between imports", separator.line, separator.col);
+      this.next(); this.skipNewlines();
     }
     this.expect(TokenType.RBRACE);
-    // `from "module"`
-    if (this.check(TokenType.IDENT, "from")) this.next();
+    this.expect(TokenType.IDENT, "from");
     const moduleTok = this.expect(TokenType.STRING);
     return {
       type: "ImportDecl",

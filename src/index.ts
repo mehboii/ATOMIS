@@ -2,3 +2,5 @@
 export { compile } from "./compiler";
 export type { CompileOptions, CompileResult } from "./compiler";
 export type { AnalysisResult, Diagnostic } from "./analyzer";
+
+export { validateTarget } from "./target-check";

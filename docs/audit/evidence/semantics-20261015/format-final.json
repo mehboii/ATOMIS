@@ -1,0 +1,14 @@
+{
+  "exe": "cargo",
+  "args": [
+    "fmt",
+    "--manifest-path",
+    "atomis-rs/Cargo.toml",
+    "--all",
+    "--",
+    "--check"
+  ],
+  "status": 1,
+  "stdout": "Diff in \\\\?\\C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\src\\parser.rs:1071:\n         Statement::GuardStmt(g) => {\n             uses(&g.condition) || g.else_body.iter().any(statement_uses_await)\n         }\n\u001b[31m-        Statement::MatchExpr(m) => uses(&m.discriminant) || m.arms.iter().any(|a| uses(&a.pattern) || uses(&a.result)),\n\u001b[0m\u001b[32m+        Statement::MatchExpr(m) => {\n\u001b[0m\u001b[32m+            uses(&m.discriminant) || m.arms.iter().any(|a| uses(&a.pattern) || uses(&a.result))\n\u001b[0m\u001b[32m+        }\n\u001b[0m         _ => false,\n     }\n }\nDiff in \\\\?\\C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\tests\\audit.rs:492:\n \n #[test]\n fn cell_async_detection_includes_awaited_match_patterns() {\n\u001b[31m-    let r = compile(\"@cell #x { match 1 { await Promise.resolve(1) => console.log(1) } }\", &options()).unwrap();\n\u001b[0m\u001b[32m+    let r = compile(\n\u001b[0m\u001b[32m+        \"@cell #x { match 1 { await Promise.resolve(1) => console.log(1) } }\",\n\u001b[0m\u001b[32m+        &options(),\n\u001b[0m\u001b[32m+    )\n\u001b[0m\u001b[32m+    .unwrap();\n\u001b[0m     assert!(r.code.contains(\"async () =>\"));\n }\n \n",
+  "stderr": "warn: could not canonicalize path C:\\Users\\novtw\n"
+}

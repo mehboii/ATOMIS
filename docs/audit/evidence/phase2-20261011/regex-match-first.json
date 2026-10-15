@@ -1,0 +1,9 @@
+{
+  "cmd": "C:/Program Files/nodejs/node.exe",
+  "args": [
+    "test/regex-match-regressions.mjs"
+  ],
+  "code": 1,
+  "stdout": "PASS regex preserved /}/\nPASS regex preserved /Ok(1)|Err(2)|Result<T,E>/\nPASS regex preserved /\\w+\\s\\d/gi\nPASS regex preserved /\\\\/\nPASS regex preserved /\\//\nPASS regex preserved /[a-z\\d/]+/gim\nPASS regex preserved /^(?:ab|cd){2,4}?(x)$/s\nPASS regex preserved /\\u{1F600}/u\nPASS regex preserved /^x$/y\nPASS regex preserved /a/gimsuy\nPASS regex preserved /[\\]{}()]/\nPASS regex preserved /(?<word>a+)\\k<word>/u\nPASS regex in sugar, control flow and interpolation\nPASS division and /= retain behavior\nPASS single evaluation and pattern order\nPASS first overlap wins\nPASS wildcard only evaluates discriminant\nPASS return and nested parsed match\nPASS no generated identifier collision\nPASS independent arm bindings\nPASS break exits match\nPASS reject \"const r = /open\"\nPASS reject \"const r = /[abc/\"\nPASS reject \"const r = /(abc/\"\nPASS reject \"const r = /abc)/\"\nPASS reject \"const r = /a/gg\"\nPASS reject \"const r = /a/z\"\nPASS reject \"const r = /a/d\"\nPASS reject \"const r = /a\\\\\\n/\"\nPASS reject \"match { _ => 1 }\"\nPASS reject \"match x {}\"\nPASS reject \"match x { 1 => }\"\nPASS reject \"match x { _ => 1, 1 => 2 }\"\nPASS reject \"match x { _ => 1, _ => 2 }\"\n34 passed, 1 failed (debug)\n",
+  "stderr": "FAIL unmatched does nothing: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   \"Type '1' is not comparable to type '2'.\"\n+ ]\n- []\n\n"
+}

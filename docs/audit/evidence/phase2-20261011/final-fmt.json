@@ -1,0 +1,14 @@
+{
+  "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+  "args": [
+    "fmt",
+    "--manifest-path",
+    "atomis-rs/Cargo.toml",
+    "--all",
+    "--",
+    "--check"
+  ],
+  "code": 0,
+  "stdout": "",
+  "stderr": "warn: could not canonicalize path C:\\Users\\novtw\n"
+}

@@ -1,0 +1,9 @@
+{
+  "cmd": "C:/Program Files/nodejs/node.exe",
+  "args": [
+    "test/import-regressions.mjs"
+  ],
+  "code": 0,
+  "stdout": "PASS alias parity and runtime @import { basename as leaf } from \"node:path\"\nPASS alias parity and runtime @import { basename as leaf, sep, } from \"node:path\"\nPASS malformed import @import { a b } from \"proto\"\nPASS malformed import @import { a as } from \"proto\"\nPASS malformed import @import { 42 } from \"proto\"\nPASS malformed import @import { a + b } from \"proto\"\nPASS malformed import @import { a } \"proto\"\nPASS duplicate imported local @import { basename as leaf } from \"node:path\"\nPASS duplicate imported local @import { basename as leaf, dirname as leaf } from \"node:path\"\n9 passed, 0 failed (debug)\n",
+  "stderr": ""
+}

@@ -164,33 +164,31 @@ impl Transformer {
     }
 
     fn emit_match(&mut self, stmt: &MatchExpr, indent: usize) {
-        let disc = rewrite_result_sugar(&stmt.discriminant);
-        let mut emitted_if = false;
+        self.emit(
+            &format!(
+                "switch (({}) as unknown) {{",
+                rewrite_result_sugar(&stmt.discriminant)
+            ),
+            indent,
+            stmt.line,
+        );
         for arm in &stmt.arms {
-            let body = format!("{{ {} }}", rewrite_result_sugar(arm.result.trim()));
-            let pattern = rewrite_result_sugar(arm.pattern.trim());
-            if arm.is_wildcard {
-                let line = if emitted_if {
-                    format!("else {}", body)
-                } else {
-                    body
-                };
-                self.emit(&line, indent, arm.line);
-            } else if !emitted_if {
-                self.emit(
-                    &format!("if ({} === {}) {}", disc, pattern, body),
-                    indent,
-                    arm.line,
-                );
-                emitted_if = true;
+            let label = if arm.is_wildcard {
+                "default: {".into()
             } else {
-                self.emit(
-                    &format!("else if ({} === {}) {}", disc, pattern, body),
-                    indent,
-                    arm.line,
-                );
+                format!("case ({}): {{", rewrite_result_sugar(arm.pattern.trim()))
+            };
+            self.emit(&label, indent + 1, arm.line);
+            for (i, row) in rewrite_result_sugar(arm.result.trim())
+                .split('\n')
+                .enumerate()
+            {
+                self.emit(row, indent + 2, arm.line + i);
             }
+            self.emit("break;", indent + 2, arm.line);
+            self.emit("}", indent + 1, arm.line);
         }
+        self.emit("}", indent, stmt.line);
     }
 
     fn emit_output(&mut self, stmt: &OutputCall, indent: usize) {
@@ -515,7 +513,7 @@ fn protected_offsets(text: &str) -> Vec<bool> {
     for token in tokenize(text) {
         if matches!(
             token.ttype,
-            TokenType::String | TokenType::Comment | TokenType::Invalid
+            TokenType::String | TokenType::Regex | TokenType::Comment | TokenType::Invalid
         ) {
             protected[token.start..token.end].fill(true);
         }

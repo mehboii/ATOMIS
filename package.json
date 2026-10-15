@@ -18,7 +18,8 @@
     "prepack": "npm run build",
     "test": "npm run build && npm run test:unit && npm run test:runtime && npm run test:audit",
     "test:runtime": "node test/run-tests.mjs",
-    "test:audit": "cargo build --manifest-path atomis-rs/Cargo.toml && node test/audit-tests.mjs && node test/audit-parity.mjs",
+    "test:audit": "cargo build --manifest-path atomis-rs/Cargo.toml && node test/audit-tests.mjs && node test/audit-parity.mjs && node test/semantic-regressions.mjs && node test/regex-match-regressions.mjs && node test/import-regressions.mjs && node test/target-regressions.mjs && node test/network-regressions.mjs && node test/resource-regressions.mjs",
+    "test:semantics": "node --expose-gc test/name-feature-regressions.mjs && node test/name-output-regressions.mjs",
     "test:unit": "node dist/tests/lexer.test.js && node dist/tests/parser.test.js",
     "atomis": "node dist/cli.js"
   },

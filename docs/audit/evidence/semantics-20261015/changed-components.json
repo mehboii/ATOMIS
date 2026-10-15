@@ -1,0 +1,54 @@
+[
+  {
+    "file": "src/name-check.ts",
+    "lines": 352
+  },
+  {
+    "file": "atomis-rs/src/name_check.rs",
+    "lines": 661
+  },
+  {
+    "file": "src/compiler.ts",
+    "lines": 82
+  },
+  {
+    "file": "atomis-rs/src/compiler.rs",
+    "lines": 81
+  },
+  {
+    "file": "test/name-feature-regressions.mjs",
+    "lines": 38
+  },
+  {
+    "file": "test/name-output-regressions.mjs",
+    "lines": 35
+  },
+  {
+    "file": "test/target-regressions.mjs",
+    "lines": 66
+  },
+  {
+    "file": "atomis-rs/tests/names.rs",
+    "lines": 130
+  },
+  {
+    "file": "docs/LANGUAGE_SPEC.md",
+    "lines": 276
+  },
+  {
+    "file": "docs/TESTING.md",
+    "lines": 157
+  },
+  {
+    "file": "docs/ATOMIS_AUDIT.md",
+    "lines": 197
+  },
+  {
+    "file": "docs/FIRST_PROGRAM_WALKTHROUGH.md",
+    "lines": 194
+  },
+  {
+    "file": "docs/SEMANTIC_EXECUTION_VERIFICATION.md",
+    "lines": 350
+  }
+]

@@ -1,0 +1,125 @@
+{
+  "type": "Program",
+  "line": 1,
+  "col": 1,
+  "body": [
+    {
+      "type": "FnDecl",
+      "line": 1,
+      "col": 1,
+      "name": "describe",
+      "isAsync": false,
+      "params": [
+        {
+          "type": "Param",
+          "line": 1,
+          "col": 13,
+          "name": "total",
+          "typeAnnotation": "number"
+        },
+        {
+          "type": "Param",
+          "line": 1,
+          "col": 28,
+          "name": "threshold",
+          "typeAnnotation": "number"
+        }
+      ],
+      "returnType": "string",
+      "body": [
+        {
+          "type": "GuardStmt",
+          "line": 2,
+          "col": 3,
+          "condition": "total >= threshold",
+          "elseBody": [
+            {
+              "type": "TSPassthrough",
+              "line": 2,
+              "col": 35,
+              "raw": "return \"Below target\""
+            }
+          ]
+        },
+        {
+          "type": "TSPassthrough",
+          "line": 3,
+          "col": 3,
+          "raw": "return \"Target reached\""
+        }
+      ]
+    },
+    {
+      "type": "AtomDecl",
+      "line": 6,
+      "col": 1,
+      "name": "userName",
+      "typeAnnotation": "string",
+      "initializer": "\"Ada\""
+    },
+    {
+      "type": "AtomDecl",
+      "line": 7,
+      "col": 1,
+      "name": "first",
+      "typeAnnotation": "number",
+      "initializer": "18"
+    },
+    {
+      "type": "AtomDecl",
+      "line": 8,
+      "col": 1,
+      "name": "second",
+      "typeAnnotation": "number",
+      "initializer": "24"
+    },
+    {
+      "type": "AtomDecl",
+      "line": 9,
+      "col": 1,
+      "name": "total",
+      "typeAnnotation": "number",
+      "initializer": "first + second"
+    },
+    {
+      "type": "AtomDecl",
+      "line": 10,
+      "col": 1,
+      "name": "threshold",
+      "typeAnnotation": "number",
+      "initializer": "40"
+    },
+    {
+      "type": "AtomDecl",
+      "line": 11,
+      "col": 1,
+      "name": "reached",
+      "typeAnnotation": "boolean",
+      "initializer": "total >= threshold"
+    },
+    {
+      "type": "OutputCall",
+      "line": 12,
+      "col": 1,
+      "argument": "`Hello, ${userName}!`"
+    },
+    {
+      "type": "OutputCall",
+      "line": 13,
+      "col": 1,
+      "argument": "`Total: ${total}`"
+    },
+    {
+      "type": "OutputCall",
+      "line": 14,
+      "col": 1,
+      "argument": "`Reached target: ${reached}`"
+    },
+    {
+      "type": "OutputCall",
+      "line": 15,
+      "col": 1,
+      "argument": "describe(total, threshold)"
+    }
+  ]
+}

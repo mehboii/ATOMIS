@@ -1,0 +1,9 @@
+{
+  "exe": "node",
+  "args": [
+    "--max-old-space-size=768",
+    "test/target-regressions.mjs"
+  ],
+  "status": 0,
+  "signal": null
+}

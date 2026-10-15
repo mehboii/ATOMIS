@@ -3,10 +3,10 @@
 A from-scratch Rust reimplementation of the Atomis **source-to-source
 transpiler** that lives in this repo's TypeScript `src/`. Atomis reads `.ato`
 files and emits **TypeScript** (it is not an interpreter); `atomis run` then
-shells out to `ts-node`/Node to execute the emitted TS.
+launches `ts-node`/Node with direct process arguments to execute the emitted TS.
 
-The TypeScript implementation is the reference and is left untouched. This crate
-exists alongside it so the two can be diffed directly.
+The TypeScript implementation is the maintained reference. Both engines receive
+paired correctness fixes and are tested together.
 
 ## Parity scope
 
@@ -26,7 +26,7 @@ both implementations. Columns and full AST spans are not mapped.
 | [`src/parser.rs`](src/parser.rs) | `parser.ts` | recursive-descent parser; unrecognized input → `TSPassthrough` |
 | [`src/analyzer.rs`](src/analyzer.rs) | `analyzer.ts` | scopes + diagnostics (no transformation) |
 | [`src/transformer.rs`](src/transformer.rs) | `transformer.ts` | AST → TypeScript text |
-| [`src/emitter.rs`](src/emitter.rs) | `emitter.ts` | appends `sourceMappingURL` (VLQ map = hook) |
+| [`src/emitter.rs`](src/emitter.rs) | `emitter.ts` | emits line-level VLQ maps and `sourceMappingURL` |
 | [`src/compiler.rs`](src/compiler.rs) | `compiler.ts` | pipeline orchestration |
 | [`src/cli.rs`](src/cli.rs) | `cli.ts` | `build` / `check` / `run` / `watch` / `repl` |
 | [`src/util.rs`](src/util.rs) | — | `JSON.stringify`-equivalent string quoting |

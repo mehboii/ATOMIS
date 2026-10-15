@@ -67,8 +67,9 @@ The networking example demonstrates emitted syntax, not a runnable standalone
 program. GhostNet constructors and notebook helpers require external bindings
 that this repository does not provide. `atom` currently emits plain `let`;
 reactivity is not implemented. `pure` produces heuristic warnings and a comment,
-not an enforced effect system. `match` emits statement branches, not returned
-values; `examples/features.ato` fails strict TS checking because `label` has no return.
+not an enforced effect system. `match` emits statement branches and requires explicit
+`return` in function arms. The features example is target checked; repeated match
+discriminant evaluation and wildcard ordering remain unresolved.
 
 `check` validates selected Atomis rules, not all TypeScript syntax, imports,
 names or types. Compile emitted TypeScript separately with the target toolchain.
@@ -106,10 +107,16 @@ cargo test --manifest-path atomis-rs/Cargo.toml --all-targets
 ```
 
 The npm entry point exposes `compile`; Rust exposes `atomis::compiler::compile`.
-Both return diagnostics and omit code on semantic errors. They produce TypeScript,
+Both return diagnostics and omit code on semantic errors. Tracked duplicate
+declarations are errors; GhostNet connects must reference declarations in a
+same/enclosing parsed lexical scope. Initialization order is not checked. They produce TypeScript,
 not native executables. See [verification](docs/audit/verification-report.md),
 [capabilities](docs/audit/language-capabilities.md) and [tests](docs/audit/test-plan.md).
 
 ## License
 
 MIT
+
+See the current [audit](docs/ATOMIS_AUDIT.md), [draft language spec](docs/LANGUAGE_SPEC.md),
+[security model](docs/SECURITY.md), [testing guide](docs/TESTING.md) and
+[continuation roadmap](docs/ROADMAP.md).

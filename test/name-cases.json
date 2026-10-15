@@ -1,0 +1,608 @@
+[
+  {
+    "name": "undefined-variable",
+    "source": "output(missing)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "undefined-function",
+    "source": "missingFunction()",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "local",
+    "source": "fn f() -> number { atom x = 2\nreturn x }\noutput(f())",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "parameter",
+    "source": "fn f(x: number) -> number { return x }\noutput(f(1))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "outer",
+    "source": "atom x = 1\nfn f() -> number { return x }\noutput(f())",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "guard-escape",
+    "source": "fn f() { guard false else { atom hidden = 1 }\noutput(hidden) }",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "raw-block-escape",
+    "source": "if (true) { let hidden = 1; }\noutput(hidden)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "duplicate-atom",
+    "source": "atom x = 1\natom x = 2",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "duplicate-raw",
+    "source": "let x=1;let x=2;",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "duplicate-parameter",
+    "source": "fn f(x:number,x:number){}",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "parameter-local-duplicate",
+    "source": "fn f(x:number){ atom x=1 }",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "const-assign",
+    "source": "const x=1;\nx=2;",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "const-update",
+    "source": "const x=1;\nx++;",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "const-prefix",
+    "source": "const x=1;\n++x;",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "const-property",
+    "source": "const x={value:1};\nx.value=2;",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "mutable",
+    "source": "atom x=1\nx+=2\noutput(x)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "undefined-initializer",
+    "source": "atom x=missing",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "undefined-return",
+    "source": "fn f(){return missing}",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "undefined-default",
+    "source": "fn f(x:number=missing) {return x}",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "undefined-guard",
+    "source": "guard missing else { output(1) }",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "undefined-discriminant",
+    "source": "match missing { _ => console.log(1) }",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "undefined-pattern",
+    "source": "match 1 { missing => console.log(1), _ => console.log(2) }",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "undefined-arm",
+    "source": "match 1 { _ => missing() }",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "undefined-template",
+    "source": "output(`hello ${missing}`)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "nested-template",
+    "source": "output(`${`${missing}`}`)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "escaped-template",
+    "source": "output(`hello \\${literal}`)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "property",
+    "source": "atom x={value:1}\noutput(x.value)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "computed-property",
+    "source": "atom x={value:1}\noutput(x[missing])",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "object-shorthand",
+    "source": "atom x={missing}",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "object-key",
+    "source": "atom x={\nvalue:1,\nother:2\n}\noutput(x.other)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "object-value",
+    "source": "atom x={value:missing}",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "ternary",
+    "source": "output(true ? missing : 1)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "condition",
+    "source": "if (missing) { console.log(1); }",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "assignment-target",
+    "source": "missing=1",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "array",
+    "source": "atom xs=[1,missing]",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "arguments",
+    "source": "fn f(x:number){}\nf(missing)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "regex-opaque",
+    "source": "output(/missing/.test('missing'))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "comment-opaque",
+    "source": "// missing()\noutput('missing')",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "import-alias",
+    "source": "@import { basename as leaf } from \"node:path\"\noutput(leaf(\"a/b\"))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "import-alias-original",
+    "source": "@import { basename as leaf } from \"node:path\"\noutput(basename(\"a/b\"))",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "destructure",
+    "source": "const {value: local}={value:1};\noutput(local)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "array-destructure",
+    "source": "const [local]=[1];\noutput(local)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "catch",
+    "source": "try { throw new Error('x'); } catch (err) { console.log(err); }",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "catch-escape",
+    "source": "try { throw 1; } catch (err) { console.log(err); }\noutput(err)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "no-parameters",
+    "source": "fn f() -> number { return 1 }\noutput(f())",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "multi-parameters",
+    "source": "fn sum(a:number,b:number)->number {return a+b}\noutput(sum(1,2))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "too-few",
+    "source": "fn f(a:number){}\nf()",
+    "core": true,
+    "target": false
+  },
+  {
+    "name": "too-many",
+    "source": "fn f(a:number){}\nf(1,2)",
+    "core": true,
+    "target": false
+  },
+  {
+    "name": "wrong-argument",
+    "source": "fn f(a:number){}\nf('x')",
+    "core": true,
+    "target": false
+  },
+  {
+    "name": "default-argument",
+    "source": "fn f(a:number=2)->number{return a}\noutput(f())",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "wrong-return",
+    "source": "fn f()->number{return 'x'}",
+    "core": true,
+    "target": false
+  },
+  {
+    "name": "missing-return",
+    "source": "fn f()->number{}",
+    "core": true,
+    "target": false
+  },
+  {
+    "name": "empty-return",
+    "source": "fn f()->number{return}",
+    "core": true,
+    "target": false
+  },
+  {
+    "name": "guard-return",
+    "source": "fn f(x:number)->number{guard x>0 else{return 0}\nreturn x}",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "nested-function",
+    "source": "fn outer(a:number)->number {fn inner(b:number)->number{return a+b}\nreturn inner(2)}\noutput(outer(1))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "nested-function-escape",
+    "source": "fn outer(){fn inner(){} }\ninner()",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "shadow",
+    "source": "atom x=1\nfn f(x:string)->string{return x}\noutput(f('x'))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "block-shadow",
+    "source": "let x=1;\nif(true){let x='a';console.log(x);}\noutput(x)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "scope-reuse",
+    "source": "if(true){let x=1;console.log(x);}\nlet x=2;\noutput(x)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "sibling-escape",
+    "source": "fn a(){let x=1;}\nfn b(){return x}",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "var-function",
+    "source": "fn f(){if(true){var x=1;}\nreturn x}",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "for-zero",
+    "source": "let sum=0;\nfor(let i=0;i<0;i++){sum+=i;}\noutput(sum)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "for-one",
+    "source": "let sum=0;\nfor(let i=0;i<1;i++){sum+=i;}\noutput(sum)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "for-many",
+    "source": "let sum=0;\nfor(let i=0;i<=3;i++){sum+=i;}\noutput(sum)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "for-nested",
+    "source": "let sum=0;\nfor(let i=0;i<3;i++){for(let j=0;j<2;j++){sum+=i+j;}}\noutput(sum)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "for-break-continue",
+    "source": "for(let i=0;i<4;i++){if(i===1)continue;if(i===3)break;console.log(i);}",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "for-escape",
+    "source": "for(let i=0;i<1;i++){console.log(i);}\noutput(i)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "for-single",
+    "source": "for(let i=0;i<1;i++)console.log(i);\noutput(i)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "for-missing",
+    "source": "for(let i=0;i<missing;i++){console.log(i);}",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "for-of",
+    "source": "for(const item of [1,2]){console.log(item);}",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "for-in",
+    "source": "for(const key in {x:1}){console.log(key);}",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "while",
+    "source": "let i=0;\nwhile(i<3){i++;}\noutput(i)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "do-while",
+    "source": "let i=0;\ndo{i++;}while(i<1);\noutput(i)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "loop-nonboolean",
+    "source": "while(0){break;}",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "loop-type-error",
+    "source": "for(let i=0;i<{};i++){break;}",
+    "core": true,
+    "target": false
+  },
+  {
+    "name": "arithmetic",
+    "source": "output((10-2)*3/2%5)\noutput(2**3)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "compare",
+    "source": "output(1<2 && 2>=1)\noutput(1===1 || false)\noutput(!false)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "string",
+    "source": "atom s='a'+'b'\noutput(`${s}!`)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "invalid-add",
+    "source": "output(true+1)",
+    "core": true,
+    "target": false
+  },
+  {
+    "name": "invalid-arithmetic",
+    "source": "output('a'-1)",
+    "core": true,
+    "target": false
+  },
+  {
+    "name": "invalid-compare",
+    "source": "output(1<'a')",
+    "core": true,
+    "target": false
+  },
+  {
+    "name": "assignment-type",
+    "source": "atom x=1\nx='a'",
+    "core": true,
+    "target": false
+  },
+  {
+    "name": "literal-type",
+    "source": "atom x:number='a'",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "conversion",
+    "source": "output(Number('42'))\noutput(String(42))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "missing-conversion",
+    "source": "output(Int32('42'))",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "number-boundary",
+    "source": "output(Number.MAX_SAFE_INTEGER+1)\noutput(Number.MAX_VALUE*2)\noutput(1/0)\noutput(0/0)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "bigint-zero",
+    "source": "output(1n/0n)",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "assertion-reference",
+    "source": "atom x=1\noutput((x as number)+missing)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "arrow",
+    "source": "const f=(x:number)=>x+1;\noutput(f(1))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "arrow-escape",
+    "source": "const f=(x:number)=>x+1;\noutput(x)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "single-arrow",
+    "source": "const f=(x:number)=>[1].map(y=>x+y);\noutput(f(1))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "block-arrow",
+    "source": "const f=(x:number)=>{return x;};\noutput(f(1))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "return-result",
+    "source": "fn f()->Result<number,string>{return Ok(1)}",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "loop-immediate-escape",
+    "source": "for(let i=0;i<1;i++){console.log(i);}i",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "arrow-expression-escape",
+    "source": "const x=[1].map(item=>item)+item;",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "named-function",
+    "source": "const f=function local(){return local};\noutput(f())",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "named-function-escape",
+    "source": "const f=function local(){};\noutput(local)",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "method",
+    "source": "const obj={f(x:number){return x}};\noutput(obj.f(1))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "class",
+    "source": "class C { value:number=1; f(x:number){return this.value+x;} }\noutput(new C().f(2))",
+    "core": true,
+    "target": true
+  },
+  {
+    "name": "method-undefined",
+    "source": "const obj={f(x:number){return missing+x}};",
+    "core": false,
+    "target": false
+  },
+  {
+    "name": "method-escape",
+    "source": "const obj={f(x:number){return x}};\noutput(x)",
+    "core": false,
+    "target": false
+  }
+]

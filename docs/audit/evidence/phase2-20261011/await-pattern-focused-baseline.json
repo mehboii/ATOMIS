@@ -1,0 +1,10 @@
+{
+  "cmd": "C:/Program Files/nodejs/node.exe",
+  "args": [
+    "-e",
+    "const {compile}=require('./dist/compiler');const r=compile('declare function __atomis_cell(name: string, callback: () => void): void;\\n@cell #x { match 1 { await Promise.resolve(1) => console.log(1) } }',{fileName:'case.ato',outputFile:'case.ts',targetCheck:true});console.log(JSON.stringify(r.analysis.diagnostics));if(!r.analysis.hasErrors)process.exitCode=1;"
+  ],
+  "code": 0,
+  "stdout": "[{\"message\":\"TS1308: 'await' expressions are only allowed within async functions and at the top levels of modules.\",\"severity\":\"error\",\"line\":2,\"col\":1,\"fileName\":\"case.ato\"}]\n",
+  "stderr": ""
+}

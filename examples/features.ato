@@ -5,9 +5,9 @@ pure fn classify(n: number) -> Result<string, Error> {
 
 fn label(x: number) -> string {
   match x {
-    0 => "zero",
-    1 => "one",
-    _ => "many"
+    0 => return "zero",
+    1 => return "one",
+    _ => return "many"
   }
 }
 

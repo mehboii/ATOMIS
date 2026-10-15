@@ -1,0 +1,9 @@
+{
+  "cmd": "where.exe",
+  "args": [
+    "wasm-bindgen"
+  ],
+  "code": 1,
+  "stdout": "",
+  "stderr": "INFO: Could not find files for the given pattern(s).\r\n"
+}

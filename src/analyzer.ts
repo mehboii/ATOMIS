@@ -23,7 +23,6 @@ import { tokenize, TokenType } from "./lexer";
 import {
   AtomDecl,
   ChannelDecl,
-  ConnectStmt,
   FnDecl,
   MeshDecl,
   NodeDecl,
@@ -38,6 +37,8 @@ export type Severity = "error" | "warn";
 
 /** A single structured diagnostic message. */
 export interface Diagnostic {
+  /** File for optional target/import diagnostics; omitted for Atomis-only checks. */
+  fileName?: string;
   /** Human-readable message. */
   message: string;
   /** 1-based source line. */
@@ -133,7 +134,7 @@ export class Analyzer {
 
   private declare(name: string, line: number, col: number): void {
     if (this.scope.names.has(name)) {
-      this.warn(`'${name}' is already declared in this scope`, line, col);
+      this.error(`'${name}' is already declared in this scope`, line, col);
     }
     this.scope.names.set(name, line);
   }
@@ -153,6 +154,9 @@ export class Analyzer {
 
   private preregister(stmt: Statement): void {
     switch (stmt.type) {
+      case "ImportDecl":
+        for (const name of stmt.names) this.declare(name.split(" as ").pop()!, stmt.line, stmt.col);
+        break;
       case "AtomDecl":
         this.declare(stmt.name, stmt.line, stmt.col);
         break;
@@ -318,40 +322,39 @@ export class Analyzer {
     }
   }
 
-  /**
-   * Validate `connect` statements after all declarations have been collected.
-   * Recurses through nested blocks to find every connect statement.
+  /** Validate connections in the lexical blocks emitted by the transformer.
+   * Declarations are collected before uses; this checks visibility, not runtime
+   * initialization order. Global ID uniqueness remains a separate invariant.
    */
   private validateConnects(program: Program): void {
-    const all = this.collectConnects(program.body);
-    for (const c of all) {
-      if (!this.channelIds.has(c.channel)) {
-        this.error(`connect references undeclared channel '${c.channel}'`, c.line, c.col);
-      }
-      if (!this.nodeIds.has(c.node)) {
-        this.error(`connect references undeclared node '${c.node}'`, c.line, c.col);
-      }
-      if (!VALID_TRANSPORTS.has(c.transport)) {
-        this.error(
-          `Invalid transport '${c.transport}'; expected one of bluetooth | tcp | ws | ble5`,
-          c.line,
-          c.col,
-        );
-      }
-    }
+    this.validateConnectBlock(program.body, [], []);
   }
 
-  private collectConnects(body: Statement[]): ConnectStmt[] {
-    const out: ConnectStmt[] = [];
+  private validateConnectBlock(body: Statement[], parentNodes: ReadonlySet<string>[], parentChannels: ReadonlySet<string>[]): void {
+    const nodes = new Set(body.filter((s): s is NodeDecl => s.type === "NodeDecl").map(s => s.id));
+    const channels = new Set(body.filter((s): s is ChannelDecl => s.type === "ChannelDecl").map(s => s.id));
+    const nodeScopes = [...parentNodes, nodes], channelScopes = [...parentChannels, channels];
     for (const s of body) {
-      if (s.type === "ConnectStmt") out.push(s);
-      else if (s.type === "GuardStmt") out.push(...this.collectConnects(s.elseBody));
-      else if (s.type === "CellBlock") out.push(...this.collectConnects(s.body));
-      else if (s.type === "FnDecl" || s.type === "PureFnDecl") {
-        out.push(...this.collectConnects(s.body));
+      if (s.type === "ConnectStmt") {
+        if (!this.channelIds.has(s.channel)) {
+          this.error(`connect references undeclared channel '${s.channel}'`, s.line, s.col);
+        } else if (!channelScopes.some(scope => scope.has(s.channel))) {
+          this.error(`connect references out-of-scope channel '${s.channel}'`, s.line, s.col);
+        }
+        if (!this.nodeIds.has(s.node)) {
+          this.error(`connect references undeclared node '${s.node}'`, s.line, s.col);
+        } else if (!nodeScopes.some(scope => scope.has(s.node))) {
+          this.error(`connect references out-of-scope node '${s.node}'`, s.line, s.col);
+        }
+        if (!VALID_TRANSPORTS.has(s.transport)) {
+          this.error(`Invalid transport '${s.transport}'; expected one of bluetooth | tcp | ws | ble5`, s.line, s.col);
+        }
+      } else if (s.type === "GuardStmt") {
+        this.validateConnectBlock(s.elseBody, nodeScopes, channelScopes);
+      } else if (s.type === "CellBlock" || s.type === "FnDecl" || s.type === "PureFnDecl") {
+        this.validateConnectBlock(s.body, nodeScopes, channelScopes);
       }
     }
-    return out;
   }
 }
 

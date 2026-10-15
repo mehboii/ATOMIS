@@ -1,0 +1,244 @@
+{
+  "compilerBuild": {
+    "command": "node node_modules/typescript/bin/tsc -p tsconfig.json",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "records": [
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "examples/first_program.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/normal"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/first_program.ato → .first-program-GazRM5\\normal\\first_program.ts\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "docs/first-program-evidence/boundary.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/boundary"
+      ],
+      "status": 0,
+      "stdout": "✓ docs/first-program-evidence/boundary.ato → .first-program-GazRM5\\boundary\\boundary.ts\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "docs/first-program-evidence/below.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/below"
+      ],
+      "status": 0,
+      "stdout": "✓ docs/first-program-evidence/below.ato → .first-program-GazRM5\\below\\below.ts\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "docs/first-program-evidence/syntax.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/syntax"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "[2:10] Unterminated string\n"
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "docs/first-program-evidence/undefined.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/undefined"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "docs/first-program-evidence/undefined.ato:9:1 error TS2304: Cannot find name 'missingValue'.\n✗ docs/first-program-evidence/undefined.ato — build failed (1 error(s))\n"
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "docs/first-program-evidence/duplicate.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/duplicate"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "docs/first-program-evidence/duplicate.ato:16:1 error 'first' is already declared in this scope\n✗ docs/first-program-evidence/duplicate.ato — build failed (1 error(s))\n"
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "docs/first-program-evidence/mutable.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/mutable"
+      ],
+      "status": 0,
+      "stdout": "✓ docs/first-program-evidence/mutable.ato → .first-program-GazRM5\\mutable\\mutable.ts\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "docs/first-program-evidence/constant.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/constant"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "docs/first-program-evidence/constant.ato:2:1 error TS2588: Cannot assign to 'fixed' because it is a constant.\n✗ docs/first-program-evidence/constant.ato — build failed (1 error(s))\n"
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "docs/first-program-evidence/loop.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/loop"
+      ],
+      "status": 0,
+      "stdout": "✓ docs/first-program-evidence/loop.ato → .first-program-GazRM5\\loop\\loop.ts\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "check",
+        "docs/first-program-evidence/undefined.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ docs/first-program-evidence/undefined.ato — no errors\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "examples/first_program.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/preserve-syntax"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/first_program.ato → .first-program-GazRM5\\preserve-syntax\\first_program.ts\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        ".first-program-GazRM5/syntax/first_program.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/preserve-syntax"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "[2:10] Unterminated string\n"
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "examples/first_program.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/preserve-undefined"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/first_program.ato → .first-program-GazRM5\\preserve-undefined\\first_program.ts\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        ".first-program-GazRM5/undefined/first_program.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/preserve-undefined"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": ".first-program-GazRM5/undefined/first_program.ato:9:1 error TS2304: Cannot find name 'missingValue'.\n✗ .first-program-GazRM5/undefined/first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        "examples/first_program.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/preserve-duplicate"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/first_program.ato → .first-program-GazRM5\\preserve-duplicate\\first_program.ts\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "dist/cli.js",
+        "build",
+        ".first-program-GazRM5/duplicate/first_program.ato",
+        "--target-check",
+        "--out",
+        ".first-program-GazRM5/preserve-duplicate"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": ".first-program-GazRM5/duplicate/first_program.ato:16:1 error 'first' is already declared in this scope\n✗ .first-program-GazRM5/duplicate/first_program.ato — build failed (1 error(s))\n"
+    }
+  ],
+  "preserved": [
+    {
+      "case": "syntax",
+      "exit": 1,
+      "codeUnchanged": true,
+      "mapUnchanged": true
+    },
+    {
+      "case": "undefined",
+      "exit": 1,
+      "codeUnchanged": true,
+      "mapUnchanged": true
+    },
+    {
+      "case": "duplicate",
+      "exit": 1,
+      "codeUnchanged": true,
+      "mapUnchanged": true
+    }
+  ],
+  "docker": {
+    "status": 1,
+    "stdout": "",
+    "stderr": "WARNING: Error loading config file: open C:\\Users\\novtw\\.docker\\config.json: Access is denied.\nfailed to connect to the docker API at npipe:////./pipe/docker_engine; check if the path is correct and if the daemon is running: open //./pipe/docker_engine: The system cannot find the file specified.\n"
+  },
+  "execution": {
+    "attempted": false,
+    "reason": "No established OS sandbox; Docker daemon unavailable."
+  }
+}

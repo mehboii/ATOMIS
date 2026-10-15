@@ -1,0 +1,10 @@
+{
+  "cmd": "atomis-rs/target/debug/atomis.exe",
+  "args": [
+    "check",
+    "C:/Users/novtw/Music/atomis/docs/audit/evidence/mission-20261011/baseline-invalid.ato"
+  ],
+  "code": 0,
+  "stdout": "✓ C:/Users/novtw/Music/atomis/docs/audit/evidence/mission-20261011/baseline-invalid.ato — no errors\n",
+  "stderr": ""
+}

@@ -1,0 +1,9 @@
+{
+  "cmd": "C:/Program Files/nodejs/node.exe",
+  "args": [
+    "test/target-regressions.mjs"
+  ],
+  "code": 1,
+  "stdout": "",
+  "stderr": "file:///C:/Users/novtw/Music/atomis/test/target-regressions.mjs:30\r\n  ['invalid regex escape','const r = /\\uZZZZ/u',/regex|TS/],\r\n                                      ^^^^^^\r\n\r\nSyntaxError: Invalid Unicode escape sequence\r\n    at compileSourceTextModule (node:internal/modules/esm/utils:346:16)\r\n    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:107:18)\r\n    at #translate (node:internal/modules/esm/loader:546:20)\r\n    at afterLoad (node:internal/modules/esm/loader:596:29)\r\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:601:12)\r\n    at #createModuleJob (node:internal/modules/esm/loader:624:36)\r\n    at #getJobFromResolveResult (node:internal/modules/esm/loader:343:34)\r\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:311:41)\r\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:664:25)\r\n\r\nNode.js v22.22.2\r\n"
+}

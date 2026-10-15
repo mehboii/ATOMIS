@@ -22,6 +22,7 @@ import * as path from "path";
 import * as readline from "readline";
 import { Diagnostic } from "./analyzer";
 import { compile } from "./compiler";
+import { readSourceFile } from "./source-file";
 
 /* chalk v4 is CommonJS-friendly. */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -59,6 +60,7 @@ function dispatch(argv: string[]): void {
   if (["build", "watch", "run", "check"].includes(command)) {
     let positionals = 0;
     for (let i = 0; i < rest.length; i++) {
+      if (rest[i] === "--target-check") continue;
       if (rest[i].startsWith("-")) {
         if (!["build", "watch"].includes(command) || rest[i] !== "--out" || !rest[i+1] || rest[i+1].startsWith("-")) throw new Error(`Invalid or incomplete option: ${rest[i]}`);
         i++;
@@ -140,7 +142,7 @@ function cmdBuild(args: string[]): void {
     for (const file of files) {
       const rel = path.relative(target, file);
       const outPath = path.join(outDir, rel.replace(/\.ato$/, ".ts"));
-      ok = buildFile(file, outPath) && ok;
+      ok = buildFile(file, outPath, flags["target-check"] === "true") && ok;
     }
     console.log(chalk.green(`Built ${files.length} file(s) → ${outDir}`));
     if (!ok) process.exitCode = 1;
@@ -148,7 +150,7 @@ function cmdBuild(args: string[]): void {
     const outPath = flags.out
       ? path.join(flags.out, path.basename(target).replace(/\.ato$/, ".ts"))
       : target.replace(/\.ato$/, ".ts");
-    if (!buildFile(target, outPath)) process.exitCode = 1;
+    if (!buildFile(target, outPath, flags["target-check"] === "true")) process.exitCode = 1;
   }
 }
 
@@ -156,12 +158,13 @@ function cmdBuild(args: string[]): void {
  * Compile a single `.ato` file to a `.ts` file (and `.ato.map`).
  * @returns Whether the build succeeded (no error diagnostics).
  */
-function buildFile(inputPath: string, outputPath: string): boolean {
+function buildFile(inputPath: string, outputPath: string, targetCheck = false): boolean {
   if (!inputPath.endsWith(".ato")) throw new Error("Source file must have .ato extension");
-  const source = fs.readFileSync(inputPath, "utf8");
+  const source = readSourceFile(inputPath);
   const result = compile(source, {
     fileName: inputPath,
     outputFile: outputPath,
+    targetCheck,
   });
 
   printDiagnostics(inputPath, result.analysis.diagnostics);
@@ -201,7 +204,7 @@ function cmdWatch(args: string[]): void {
     const rel = path.relative(dir, file);
     const outPath = path.join(outDir, rel.replace(/\.ato$/, ".ts"));
     try {
-      buildFile(file, outPath);
+      buildFile(file, outPath, flags["target-check"] === "true");
     } catch (err) {
       console.error(chalk.red(`Error building ${file}: ${(err as Error).message}`));
     }
@@ -216,7 +219,7 @@ function cmdWatch(args: string[]): void {
 
 /** Implement the `run` command: transpile to a temp `.ts` and execute it. */
 function cmdRun(args: string[]): void {
-  const { positionals } = parseArgs(args);
+  const { positionals, flags } = parseArgs(args);
   const file = positionals[0];
   if (!file) {
     console.error(chalk.red("Usage: atomis run <file.ato>"));
@@ -224,11 +227,12 @@ function cmdRun(args: string[]): void {
     return;
   }
   if (!file.endsWith(".ato")) throw new Error("Source file must have .ato extension");
-  const source = fs.readFileSync(file, "utf8");
+  const source = readSourceFile(file);
   const tmpPath = path.join(path.dirname(file), `.${path.basename(file)}.${process.pid}.${require("crypto").randomBytes(8).toString("hex")}.ts`);
   const result = compile(source, {
     fileName: file,
     outputFile: tmpPath,
+    targetCheck: flags["target-check"] === "true",
     sourceMap: false,
   });
   printDiagnostics(file, result.analysis.diagnostics);
@@ -249,7 +253,7 @@ function cmdRun(args: string[]): void {
 
 /** Implement the `check` command: analyze only, emit no files. */
 function cmdCheck(args: string[]): void {
-  const { positionals } = parseArgs(args);
+  const { positionals, flags } = parseArgs(args);
   const file = positionals[0];
   if (!file) {
     console.error(chalk.red("Usage: atomis check <file.ato>"));
@@ -257,8 +261,8 @@ function cmdCheck(args: string[]): void {
     return;
   }
   if (!file.endsWith(".ato")) throw new Error("Source file must have .ato extension");
-  const source = fs.readFileSync(file, "utf8");
-  const result = compile(source, { fileName: file, outputFile: file + ".ts", sourceMap: false });
+  const source = readSourceFile(file);
+  const result = compile(source, { fileName: file, outputFile: file + ".ts", sourceMap: false, targetCheck: flags["target-check"] === "true" });
   printDiagnostics(file, result.analysis.diagnostics);
   if (result.analysis.hasErrors) {
     console.error(chalk.red(`✗ ${file} — ${countErrors(result.analysis.diagnostics)} error(s)`));
@@ -298,7 +302,7 @@ function cmdRepl(): void {
 /** Pretty-print diagnostics for a file. */
 function printDiagnostics(file: string, diagnostics: Diagnostic[]): void {
   for (const d of diagnostics) {
-    const loc = chalk.gray(`${file}:${d.line}:${d.col}`);
+    const loc = chalk.gray(`${d.fileName ?? file}:${d.line}:${d.col}`);
     const tag =
       d.severity === "error" ? chalk.red("error") : chalk.yellow("warn");
     console.error(`${loc} ${tag} ${d.message}`);
@@ -328,6 +332,7 @@ function parseArgs(args: string[]): { positionals: string[]; flags: Record<strin
   const flags: Record<string, string> = {};
   for (let i = 0; i < args.length; i++) {
     const a = args[i];
+    if (a === "--target-check") { flags["target-check"] = "true"; continue; }
     if (a.startsWith("--")) {
       const key = a.slice(2);
       const next = args[i + 1];
@@ -355,6 +360,7 @@ ${chalk.bold("Usage:")}
   atomis run <file.ato>              Transpile and execute via ts-node
   atomis check <file.ato>            Semantic check only (no output)
   atomis repl                        Interactive Atomis shell
+  --target-check                     Strict ES2020/Node validation (TS CLI only)
 `);
 }
 

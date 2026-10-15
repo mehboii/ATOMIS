@@ -1,0 +1,45 @@
+[
+  {
+    "name": "undefined",
+    "errors": true,
+    "codeEmpty": true,
+    "mapAbsent": true
+  },
+  {
+    "name": "duplicate",
+    "errors": true,
+    "codeEmpty": true,
+    "mapAbsent": true
+  },
+  {
+    "name": "constant",
+    "errors": true,
+    "codeEmpty": true,
+    "mapAbsent": true
+  },
+  {
+    "name": "syntax",
+    "invalidTsAbsent": true,
+    "invalidMapAbsent": true
+  },
+  {
+    "name": "undefined",
+    "invalidTsAbsent": true,
+    "invalidMapAbsent": true
+  },
+  {
+    "name": "duplicate",
+    "invalidTsAbsent": true,
+    "invalidMapAbsent": true
+  },
+  {
+    "name": "constant",
+    "invalidTsAbsent": true,
+    "invalidMapAbsent": true
+  },
+  {
+    "exampleUnchanged": true,
+    "reportHasAllSections": true,
+    "generatedCopyExact": true
+  }
+]

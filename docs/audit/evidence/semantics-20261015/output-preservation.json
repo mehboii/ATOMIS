@@ -1,0 +1,438 @@
+{
+  "work": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B",
+  "assertions": 30,
+  "records": [
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 0,
+      "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato → C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out\\first_program.ts\n",
+      "stderr": ""
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — no errors\n",
+      "stderr": ""
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Cannot assign to constant 'fixed'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Cannot assign to constant 'fixed'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "[1:8] Unterminated string\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "[1:8] Unterminated string\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out",
+        "--target-check"
+      ],
+      "status": 0,
+      "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato → C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out\\first_program.ts\n",
+      "stderr": ""
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--target-check"
+      ],
+      "status": 0,
+      "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — no errors\n",
+      "stderr": ""
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Cannot assign to constant 'fixed'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Cannot assign to constant 'fixed'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "[1:8] Unterminated string\n"
+    },
+    {
+      "exe": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\novtw\\Music\\atomis\\dist\\cli.js",
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "[1:8] Unterminated string\n"
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 0,
+      "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato → C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out\\first_program.ts\n",
+      "stderr": ""
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — no errors\n",
+      "stderr": ""
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Undefined identifier 'missing'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Cannot assign to constant 'fixed'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:1:1 error Cannot assign to constant 'fixed'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato:2:1 error Undefined identifier 'hidden'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato — build failed (1 error(s))\n"
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "check",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "[1:8] Unterminated string\n"
+    },
+    {
+      "exe": "C:\\Users\\novtw\\Music\\atomis\\atomis-rs\\target\\debug\\atomis.exe",
+      "args": [
+        "build",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\first_program.ato",
+        "--out",
+        "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\name-output-4r8A7B\\out"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "[1:8] Unterminated string\n"
+    }
+  ]
+}

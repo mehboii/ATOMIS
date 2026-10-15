@@ -1,0 +1,10 @@
+{
+  "cmd": "git",
+  "args": [
+    "diff",
+    "--check"
+  ],
+  "code": 0,
+  "stdout": "",
+  "stderr": "warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'atomis-rs/golden/features.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'atomis-rs/src/analyzer.rs', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'atomis-rs/tests/audit.rs', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/audit/architecture.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/audit/findings.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/audit/language-capabilities.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/audit/test-plan.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/audit/verification-report.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/analyzer.ts', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'test/audit-parity.mjs', LF will be replaced by CRLF the next time Git touches it\n"
+}

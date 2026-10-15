@@ -1,0 +1,9 @@
+{
+  "cmd": "C:/Program Files/nodejs/node.exe",
+  "args": [
+    "test/resource-regressions.mjs"
+  ],
+  "code": 0,
+  "stdout": "PASS TS oversized source\nPASS Rust oversized source\nPASS TS malformed UTF-8\nPASS Rust malformed UTF-8\nPASS TS regex length\nPASS Rust regex length\nPASS TS regex depth\nPASS Rust regex depth\nPASS TS empty file\nPASS Rust empty file\n10 passed, 0 failed (debug)\n",
+  "stderr": ""
+}

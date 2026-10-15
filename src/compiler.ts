@@ -11,10 +11,13 @@ import { analyze, AnalysisResult } from "./analyzer";
 import { emit, EmitResult } from "./emitter";
 import { tokenize } from "./lexer";
 import { parse, ParseError } from "./parser";
+import { validateNames } from "./name-check";
 import { transform } from "./transformer";
 
 /** Options for compiling a single source string. */
 export interface CompileOptions {
+  /** Opt in to strict ES2020/Node TypeScript and regex validation. */
+  targetCheck?: boolean;
   /** Logical source file name (used in diagnostics and the source map). */
   fileName: string;
   /** Generated `.ts` output file name (used in the source map). */
@@ -46,6 +49,8 @@ export function compile(source: string, options: CompileOptions): CompileResult 
   const analysis = analyze(program);
   if (analysis.hasErrors) return { code: "", analysis };
   const transformed = transform(program);
+  const names = validateNames(transformed.code, transformed.mappings);
+  if (names.length) return { code: "", analysis: { ...analysis, diagnostics: [...analysis.diagnostics, ...names], hasErrors: true } };
 
   const mapFileName = baseName(options.outputFile) + ".ato.map";
   const emitted: EmitResult = emit(transformed, {
@@ -55,6 +60,12 @@ export function compile(source: string, options: CompileOptions): CompileResult 
     mapFileName,
     sourceMap: options.sourceMap !== false,
   });
+
+  if (options.targetCheck) {
+    const { validateTarget } = require("./target-check") as typeof import("./target-check");
+    const diagnostics = validateTarget(emitted.code, options.fileName, transformed.mappings);
+    if (diagnostics.length) return { code: "", analysis: { ...analysis, diagnostics: [...analysis.diagnostics, ...diagnostics], hasErrors: true } };
+  }
 
   return {
     code: emitted.code,

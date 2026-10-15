@@ -242,21 +242,14 @@ export class Transformer {
   }
 
   private emitMatch(stmt: MatchExpr, indent: number): void {
-    const disc = rewriteResultSugar(stmt.discriminant);
-    let emittedIf = false;
+    this.emit(`switch ((${rewriteResultSugar(stmt.discriminant)}) as unknown) {`, indent, stmt.line);
     for (const arm of stmt.arms) {
-      const body = `{ ${rewriteResultSugar(arm.result.trim())} }`;
-      const pattern = rewriteResultSugar(arm.pattern.trim());
-      if (arm.isWildcard) {
-        // A wildcard with no preceding branch is a standalone block, not `else`.
-        this.emit(emittedIf ? `else ${body}` : body, indent, arm.line);
-      } else if (!emittedIf) {
-        this.emit(`if (${disc} === ${pattern}) ${body}`, indent, arm.line);
-        emittedIf = true;
-      } else {
-        this.emit(`else if (${disc} === ${pattern}) ${body}`, indent, arm.line);
-      }
+      this.emit(arm.isWildcard ? "default: {" : `case (${rewriteResultSugar(arm.pattern.trim())}): {`, indent + 1, arm.line);
+      rewriteResultSugar(arm.result.trim()).split("\n").forEach((row, i) => this.emit(row, indent + 2, arm.line + i));
+      this.emit("break;", indent + 2, arm.line);
+      this.emit("}", indent + 1, arm.line);
     }
+    this.emit("}", indent, stmt.line);
   }
 
   private emitOutput(stmt: OutputCall, indent: number): void {
@@ -476,7 +469,7 @@ function rewriteResultType(text: string): string {
 function protectedMask(text: string): boolean[] {
   const mask = Array<boolean>(text.length).fill(false);
   for (const t of tokenize(text)) {
-    if ([TokenType.STRING, TokenType.COMMENT, TokenType.INVALID].includes(t.type)) mask.fill(true, t.start, t.end);
+    if ([TokenType.STRING, TokenType.REGEX, TokenType.COMMENT, TokenType.INVALID].includes(t.type)) mask.fill(true, t.start, t.end);
   }
   return mask;
 }

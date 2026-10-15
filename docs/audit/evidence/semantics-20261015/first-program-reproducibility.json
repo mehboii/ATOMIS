@@ -1,0 +1,48 @@
+{
+  "commands": [
+    {
+      "exe": "node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tsconfig.json"
+      ],
+      "status": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "build",
+        "examples/first_program.ato",
+        "--target-check",
+        "--out",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/first_program.ato → C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\execution-Crjqut\\first_program.ts\n",
+      "stderr": ""
+    },
+    {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "build",
+        "examples/first_program.ato",
+        "--target-check",
+        "--out",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/first_program.ato → C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\execution-Crjqut\\first_program.ts\n",
+      "stderr": ""
+    }
+  ],
+  "reproducible": {
+    "code": true,
+    "map": true,
+    "sameEarlier": true
+  }
+}

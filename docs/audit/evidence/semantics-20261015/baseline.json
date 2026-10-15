@@ -1,0 +1,67 @@
+{
+  "status": {
+    "exe": "git",
+    "args": [
+      "status",
+      "--short"
+    ],
+    "status": 0,
+    "stdout": " M README.md\n M atomis-rs/README.md\n M atomis-rs/golden/features.ts\n M atomis-rs/src/analyzer.rs\n M atomis-rs/src/cli.rs\n M atomis-rs/src/lexer.rs\n M atomis-rs/src/parser.rs\n M atomis-rs/src/transformer.rs\n M atomis-rs/tests/audit.rs\n M docs/audit/architecture.md\n M docs/audit/findings.md\n M docs/audit/language-capabilities.md\n M docs/audit/test-plan.md\n M docs/audit/verification-report.md\n M examples/features.ato\n M package.json\n M src/analyzer.ts\n M src/cli.ts\n M src/compiler.ts\n M src/index.ts\n M src/lexer.ts\n M src/parser.ts\n M src/transformer.ts\n M test/audit-parity.mjs\n M test/audit-tests.mjs\n?? .claude/\n?? .first-program-GazRM5/\n?? Untitled-1.ts\n?? docs/ATOMIS_AUDIT.md\n?? docs/FIRST_PROGRAM_WALKTHROUGH.md\n?? docs/LANGUAGE_SPEC.md\n?? docs/ROADMAP.md\n?? docs/SECURITY.md\n?? docs/TESTING.md\n?? docs/audit/evidence/mission-20261011/\n?? docs/audit/evidence/phase2-20261011/\n?? docs/first-program-evidence/\n?? examples/first_program.ato\n?? examples/loopback.ato\n?? src/source-file.ts\n?? src/target-check.ts\n?? test/benchmark.mjs\n?? test/cases/proto_demo.ato\n?? test/cases/proto_demo.expected\n?? test/import-regressions.mjs\n?? test/network-regressions.mjs\n?? test/regex-match-regressions.mjs\n?? test/resource-regressions.mjs\n?? test/semantic-regressions.mjs\n?? test/target-regressions.mjs\n",
+    "stderr": "warning: unable to access 'C:\\Users\\novtw/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\novtw/.config/git/ignore': Permission denied\n"
+  },
+  "source": "fn describe(total: number, threshold: number) -> string {\n  guard total >= threshold else { return \"Below target\" }\n  return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + missingValue\natom threshold: number = 40\natom reached: boolean = total >= threshold\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+  "commands": [
+    {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "docs/first-program-evidence/undefined.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ docs/first-program-evidence/undefined.ato — no errors\n",
+      "stderr": ""
+    },
+    {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "docs/first-program-evidence/undefined.ato",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "docs/first-program-evidence/undefined.ato:9:1 error TS2304: Cannot find name 'missingValue'.\n✗ docs/first-program-evidence/undefined.ato — 1 error(s)\n"
+    },
+    {
+      "exe": "node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tsconfig.json"
+      ],
+      "status": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "exe": "node",
+      "args": [
+        "dist/tests/lexer.test.js"
+      ],
+      "status": 0,
+      "stdout": "lexer.test.ts\n  ✓ tokenizes a simple atom declaration\n  ✓ recognizes Atomis keywords\n  ✓ distinguishes -> (ARROW) from => (OPERATOR)\n  ✓ tokenizes decorators\n  ✓ captures double and single quoted strings\n  ✓ captures template literals with interpolation as one token\n  ✓ handles nested braces inside interpolation\n  ✓ skips line and block comments as COMMENT tokens\n  ✓ emits NEWLINE tokens\n  ✓ recognizes braces as LBRACE/RBRACE\n  ✓ tokenizes multi-character operators greedily\n  ✓ tokenizes numbers including floats and hex\n  ✓ records source positions and offsets\n  ✓ always terminates with an EOF token\n\nlexer: 14 passed, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "exe": "node",
+      "args": [
+        "dist/tests/parser.test.js"
+      ],
+      "status": 0,
+      "stdout": "parser.test.ts\n  ✓ parses an atom declaration with type and initializer\n  ✓ parses a fn declaration with params and return type\n  ✓ parses a pure fn\n  ✓ parses a guard statement\n  ✓ parses a match expression with a wildcard arm\n  ✓ parses a node declaration with kind, id and config\n  ✓ parses a channel declaration and preserves boolean values\n  ✓ parses a mesh declaration\n  ✓ parses a connect statement\n  ✓ parses an encrypt declaration\n  ✓ parses an @import decorator\n  ✓ parses an inline @cell block until a blank line\n  ✓ treats unknown TypeScript as passthrough\n  ✓ does not treat channel.send(...) as a channel declaration\n  ✓ parses output() as an OutputCall\n\nparser: 15 passed, 0 failed\n",
+      "stderr": ""
+    }
+  ]
+}
