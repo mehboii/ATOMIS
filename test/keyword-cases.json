@@ -1,0 +1,492 @@
+[
+  {
+    "group": "fn",
+    "name": "no-parameters",
+    "source": "fn f() {}\nf()",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "fn",
+    "name": "one-parameter",
+    "source": "fn f(x: number) { return x }\noutput(f(1))",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "fn",
+    "name": "multiple-typed",
+    "source": "fn add(a: number, b: number) -> number { return a + b }\noutput(add(1, 2))",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "fn",
+    "name": "string-return",
+    "source": "fn label() -> string { return \"ok\" }\noutput(label())",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "fn",
+    "name": "malformed",
+    "source": "fn () {}",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "fn",
+    "name": "keyword-in-raw-binding",
+    "source": "const fn = 1;\noutput(fn)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "atom",
+    "name": "string",
+    "source": "atom text: string = \"Ada\"",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "atom",
+    "name": "number",
+    "source": "atom n: number = 18",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "atom",
+    "name": "boolean",
+    "source": "atom yes: boolean = true",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "atom",
+    "name": "reference",
+    "source": "atom a = 18\natom b = a",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "atom",
+    "name": "arithmetic",
+    "source": "atom a = 18\natom b = 24\natom sum = a + b",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "atom",
+    "name": "duplicate",
+    "source": "atom x = 1\natom x = 2",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "atom",
+    "name": "undefined",
+    "source": "atom x = missing",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "atom",
+    "name": "reassign",
+    "source": "atom x: number = 1\nx = 2",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "types",
+    "name": "optional-atom-type",
+    "source": "atom x = 1",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "types",
+    "name": "optional-return-type",
+    "source": "fn f() { return \"ok\" }",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "types",
+    "name": "untyped-parameter",
+    "source": "fn f(x) { return x }",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "types",
+    "name": "empty-required-annotation",
+    "source": "atom x: = 1",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "types",
+    "name": "empty-return-annotation",
+    "source": "fn f() -> {}",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "types",
+    "name": "string-literal-mismatch",
+    "source": "atom x: string = 1",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "types",
+    "name": "number-literal-mismatch",
+    "source": "atom x: number = \"bad\"",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "types",
+    "name": "boolean-literal-mismatch",
+    "source": "atom x: boolean = \"bad\"",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "types",
+    "name": "number-reassign-string",
+    "source": "atom x: number = 1\nx = \"bad\"",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "types",
+    "name": "string-reassign-number",
+    "source": "atom x: string = \"ok\"\nx = 1",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "types",
+    "name": "boolean-reassign-number",
+    "source": "atom x: boolean = true\nx = 1",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "guard",
+    "name": "true",
+    "source": "guard true else { output(\"branch\") }",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "guard",
+    "name": "false",
+    "source": "guard false else { output(\"branch\") }",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "guard",
+    "name": "with-return",
+    "source": "fn f(n: number) -> string { guard n >= 0 else { return \"negative\" }\nreturn \"ok\" }",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "guard",
+    "name": "without-return",
+    "source": "atom x = 0\nguard false else { x = 1 }\noutput(x)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "guard",
+    "name": "nested",
+    "source": "guard false else { guard false else { output(\"nested\") } }",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "guard",
+    "name": "missing-else",
+    "source": "guard true { output(1) }",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "guard",
+    "name": "empty-condition",
+    "source": "guard else { output(1) }",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "output",
+    "name": "string",
+    "source": "output(\"hello\")",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "output",
+    "name": "number",
+    "source": "output(42)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "output",
+    "name": "boolean",
+    "source": "output(true)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "output",
+    "name": "expression",
+    "source": "output(18 + 24)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "output",
+    "name": "function-result",
+    "source": "fn f() -> string { return \"ok\" }\noutput(f())",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "output",
+    "name": "empty-valid",
+    "source": "output()",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "output",
+    "name": "multiple-valid",
+    "source": "output(\"a\", 1, true)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "output",
+    "name": "undefined-argument",
+    "source": "output(missing)",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "output",
+    "name": "bad-expression",
+    "source": "output(1 +)",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "template",
+    "name": "plain",
+    "source": "output(`hello`)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "template",
+    "name": "variable",
+    "source": "atom userName = \"Ada\"\noutput(`Hello, ${userName}!`)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "template",
+    "name": "number",
+    "source": "atom n = 42\noutput(`${n}`)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "template",
+    "name": "boolean",
+    "source": "atom b = true\noutput(`${b}`)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "template",
+    "name": "multiple",
+    "source": "atom name = \"Ada\"\natom n = 42\noutput(`${name}: ${n} ${true}`)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "template",
+    "name": "escapes",
+    "source": "atom name = \"Ada\"\noutput(`line\\n\\`quoted\\` \\${literal} ${name}`)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "template",
+    "name": "expression",
+    "source": "atom a = 18\natom b = 24\noutput(`${a + b >= 40}`)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "template",
+    "name": "missing-backtick",
+    "source": "output(`unterminated)",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "template",
+    "name": "missing-interpolation-close",
+    "source": "output(`value ${1`)",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "template",
+    "name": "empty-interpolation",
+    "source": "output(`value ${}`)",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "operators",
+    "name": "numeric-add",
+    "source": "output(18 + 24)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "operators",
+    "name": "string-add",
+    "source": "output(\"a\" + \"b\")",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "operators",
+    "name": "bad-add",
+    "source": "output(true + 1)",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "operators",
+    "name": "greater-equal",
+    "source": "atom a = 42\noutput(a >= 40)\noutput(a >= 42)\noutput(a >= 43)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "operators",
+    "name": "bad-comparison",
+    "source": "output(1 >= \"bad\")",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "operators",
+    "name": "references-and-call",
+    "source": "fn f(x: number) -> number { return x }\natom n = 42\noutput(f(n) >= 40)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "operators",
+    "name": "boolean-expression",
+    "source": "atom n = 42\noutput(n >= 40 && !(n >= 43))",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "operators",
+    "name": "precedence",
+    "source": "output(2 + 3 * 4 >= 14)\noutput((2 + 3) * 4 >= 14)",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "returns",
+    "name": "valid",
+    "source": "fn f() -> string { return \"ok\" }",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "returns",
+    "name": "wrong-value",
+    "source": "fn f() -> string { return 1 }",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "returns",
+    "name": "missing",
+    "source": "fn f() -> string {}",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "returns",
+    "name": "empty",
+    "source": "fn f() -> string { return }",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "returns",
+    "name": "guard-and-fallback",
+    "source": "fn f(x: boolean) -> string { guard x else { return \"no\" }\nreturn \"yes\" }",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "returns",
+    "name": "nested-guard",
+    "source": "fn f(x: boolean) -> string { guard x else { guard false else { return \"nested\" }\nreturn \"no\" }\nreturn \"yes\" }",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "returns",
+    "name": "raw-conditional",
+    "source": "fn f(x: boolean) -> string { if (x) { return \"yes\" } else { return \"no\" } }",
+    "core": true,
+    "target": true
+  },
+  {
+    "group": "negative",
+    "name": "unknown-keyword",
+    "source": "mystery answer = 1",
+    "core": false,
+    "target": false
+  },
+  {
+    "group": "negative",
+    "name": "wrong-call-count",
+    "source": "fn f(x: number) {}\nf()",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "negative",
+    "name": "wrong-call-type",
+    "source": "fn f(x: number) {}\nf(\"bad\")",
+    "core": true,
+    "target": false
+  },
+  {
+    "group": "types",
+    "name": "empty-parameter-annotation",
+    "source": "fn f(x: = 1) {}",
+    "core": false,
+    "target": false
+  }
+]

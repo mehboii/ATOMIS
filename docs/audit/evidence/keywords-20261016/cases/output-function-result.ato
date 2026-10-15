@@ -1,0 +1,2 @@
+fn f() -> string { return "ok" }
+output(f())

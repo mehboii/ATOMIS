@@ -1,0 +1,3 @@
+atom name = "Ada"
+atom n = 42
+output(`${name}: ${n} ${true}`)

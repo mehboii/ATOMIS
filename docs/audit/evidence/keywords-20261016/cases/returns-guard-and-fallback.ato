@@ -1,0 +1,2 @@
+fn f(x: boolean) -> string { guard x else { return "no" }
+return "yes" }

@@ -1,0 +1,353 @@
+{
+  "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+  "records": [
+    {
+      "exe": "node",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tsconfig.json"
+      ],
+      "status": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "exe": "cargo",
+      "args": [
+        "build",
+        "--manifest-path",
+        "atomis-rs/Cargo.toml",
+        "--locked"
+      ],
+      "status": 0,
+      "stdout": "",
+      "stderr": "warn: could not canonicalize path C:\\Users\\novtw\n   Compiling atomis v0.1.0 (C:\\Users\\novtw\\Music\\atomis\\atomis-rs)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.90s\n"
+    },
+    {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "examples/keyword_verification.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/keyword_verification.ato — no errors\n",
+      "stderr": ""
+    },
+    {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "examples/keyword_verification.ato",
+        "--target-check"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/keyword_verification.ato — no errors\n",
+      "stderr": ""
+    },
+    {
+      "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+      "args": [
+        "check",
+        "examples/keyword_verification.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/keyword_verification.ato — no errors\n",
+      "stderr": ""
+    },
+    {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "build",
+        "examples/keyword_verification.ato",
+        "--target-check",
+        "--out",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/keywords-u0ZGtZ/ts"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/keyword_verification.ato → C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keywords-u0ZGtZ\\ts\\keyword_verification.ts\n",
+      "stderr": ""
+    },
+    {
+      "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+      "args": [
+        "build",
+        "examples/keyword_verification.ato",
+        "--out",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/keywords-u0ZGtZ/rust"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/keyword_verification.ato → C:/Users/novtw/Music/atomis/.parity-tmp/keywords-u0ZGtZ/rust\\keyword_verification.ts\n",
+      "stderr": ""
+    },
+    {
+      "exe": "C:/Program Files/Docker/Docker/resources/bin/docker.exe",
+      "args": [
+        "--config",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/keywords-u0ZGtZ/docker-config",
+        "image",
+        "ls",
+        "--format",
+        "{{.Repository}}:{{.Tag}}"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "failed to connect to the docker API at npipe:////./pipe/docker_engine; check if the path is correct and if the daemon is running: open //./pipe/docker_engine: The system cannot find the file specified.\n"
+    }
+  ],
+  "same": {
+    "code": true,
+    "map": true
+  },
+  "refs": {
+    "src/lexer.ts": [
+      {
+        "line": 281,
+        "text": "      this.scanTemplate(startLine, startCol);\r"
+      },
+      {
+        "line": 293,
+        "text": "      this.scanNumber(startLine, startCol);\r"
+      },
+      {
+        "line": 299,
+        "text": "      this.scanIdent(startLine, startCol);\r"
+      },
+      {
+        "line": 434,
+        "text": "  private scanTemplate(line: number, col: number): void {\r"
+      },
+      {
+        "line": 498,
+        "text": "  private scanNumber(line: number, col: number): void {\r"
+      },
+      {
+        "line": 530,
+        "text": "  private scanIdent(line: number, col: number): void {\r"
+      }
+    ],
+    "src/parser.ts": [
+      {
+        "line": 199,
+        "text": "      return this.parseFnLike(true);\r"
+      },
+      {
+        "line": 208,
+        "text": "          if (n1.type === TokenType.IDENT) return this.parseAtom();\r"
+      },
+      {
+        "line": 212,
+        "text": "          return this.parseFnLike(false);\r"
+      },
+      {
+        "line": 238,
+        "text": "            return this.parseGuard();\r"
+      },
+      {
+        "line": 248,
+        "text": "          if (n1.value === \"(\") return this.parseOutput();\r"
+      },
+      {
+        "line": 402,
+        "text": "  private parseAtom(): AtomDecl {\r"
+      },
+      {
+        "line": 447,
+        "text": "  private parseFnLike(isAsync: boolean): FnDecl | PureFnDecl {\r"
+      },
+      {
+        "line": 456,
+        "text": "    const params = this.parseParams();\r"
+      },
+      {
+        "line": 482,
+        "text": "  private parseParams(): Param[] {\r"
+      },
+      {
+        "line": 562,
+        "text": "  private parseGuard(): GuardStmt {\r"
+      },
+      {
+        "line": 632,
+        "text": "  private parseOutput(): OutputCall {\r"
+      }
+    ],
+    "src/ast.ts": [],
+    "src/analyzer.ts": [
+      {
+        "line": 218,
+        "text": "    this.checkBasicType(stmt);\r"
+      },
+      {
+        "line": 225,
+        "text": "  private checkBasicType(stmt: AtomDecl): void {\r"
+      }
+    ],
+    "src/name-check.ts": [
+      {
+        "line": 53,
+        "text": "export function validateNames(code: string, mappings: LineMapping[]): Diagnostic[] {"
+      }
+    ],
+    "src/transformer.ts": [
+      {
+        "line": 134,
+        "text": "        this.emitAtom(stmt, indent);\r"
+      },
+      {
+        "line": 137,
+        "text": "        this.emitFn(stmt, indent, false);\r"
+      },
+      {
+        "line": 140,
+        "text": "        this.emitFn(stmt, indent, true);\r"
+      },
+      {
+        "line": 143,
+        "text": "        this.emitGuard(stmt, indent);\r"
+      },
+      {
+        "line": 149,
+        "text": "        this.emitOutput(stmt, indent);\r"
+      },
+      {
+        "line": 196,
+        "text": "  private emitAtom(stmt: AtomDecl, indent: number): void {\r"
+      },
+      {
+        "line": 206,
+        "text": "  private emitFn(stmt: FnDecl | PureFnDecl, indent: number, pure: boolean): void {\r"
+      },
+      {
+        "line": 223,
+        "text": "  private emitGuard(stmt: GuardStmt, indent: number): void {\r"
+      },
+      {
+        "line": 255,
+        "text": "  private emitOutput(stmt: OutputCall, indent: number): void {\r"
+      }
+    ],
+    "src/compiler.ts": [
+      {
+        "line": 14,
+        "text": "import { validateNames } from \"./name-check\";"
+      },
+      {
+        "line": 52,
+        "text": "  const names = validateNames(transformed.code, transformed.mappings);"
+      },
+      {
+        "line": 65,
+        "text": "    const { validateTarget } = require(\"./target-check\") as typeof import(\"./target-check\");"
+      },
+      {
+        "line": 66,
+        "text": "    const diagnostics = validateTarget(emitted.code, options.fileName, transformed.mappings);"
+      }
+    ],
+    "src/emitter.ts": [],
+    "src/target-check.ts": [
+      {
+        "line": 8,
+        "text": "export function validateTarget(code: string, sourceName: string, mappings: LineMapping[] = []): Diagnostic[] {"
+      },
+      {
+        "line": 55,
+        "text": "    const diagnostics = validateTarget(readSourceFile(args[0]), args[0]);"
+      }
+    ],
+    "src/cli.ts": [
+      {
+        "line": 82,
+        "text": "      cmdRun(rest);\r"
+      },
+      {
+        "line": 221,
+        "text": "function cmdRun(args: string[]): void {\r"
+      }
+    ],
+    "atomis-rs/src/parser.rs": [
+      {
+        "line": 211,
+        "text": "            return Ok(Some(self.parse_fn_like(true)?));"
+      },
+      {
+        "line": 220,
+        "text": "                        return Ok(Some(self.parse_atom()?));"
+      },
+      {
+        "line": 224,
+        "text": "                    return Ok(Some(self.parse_fn_like(false)?));"
+      },
+      {
+        "line": 256,
+        "text": "                        return Ok(Some(self.parse_guard()?));"
+      },
+      {
+        "line": 265,
+        "text": "                    return Ok(Some(self.parse_output()?));"
+      },
+      {
+        "line": 392,
+        "text": "    fn parse_atom(&mut self) -> PResult<Statement> {"
+      },
+      {
+        "line": 441,
+        "text": "    fn parse_fn_like(&mut self, is_async: bool) -> PResult<Statement> {"
+      },
+      {
+        "line": 547,
+        "text": "    fn parse_guard(&mut self) -> PResult<Statement> {"
+      },
+      {
+        "line": 627,
+        "text": "    fn parse_output(&mut self) -> PResult<Statement> {"
+      }
+    ],
+    "atomis-rs/src/transformer.rs": [
+      {
+        "line": 80,
+        "text": "            Statement::AtomDecl(s) => self.emit_atom(s, indent),"
+      },
+      {
+        "line": 81,
+        "text": "            Statement::FnDecl(s) => self.emit_fn(s, indent, false),"
+      },
+      {
+        "line": 82,
+        "text": "            Statement::PureFnDecl(s) => self.emit_fn(s, indent, true),"
+      },
+      {
+        "line": 83,
+        "text": "            Statement::GuardStmt(s) => self.emit_guard(s, indent),"
+      },
+      {
+        "line": 85,
+        "text": "            Statement::OutputCall(s) => self.emit_output(s, indent),"
+      },
+      {
+        "line": 111,
+        "text": "    fn emit_atom(&mut self, stmt: &AtomDecl, indent: usize) {"
+      },
+      {
+        "line": 123,
+        "text": "    fn emit_fn(&mut self, stmt: &FnDeclData, indent: usize, pure: bool) {"
+      },
+      {
+        "line": 150,
+        "text": "    fn emit_guard(&mut self, stmt: &GuardStmt, indent: usize) {"
+      },
+      {
+        "line": 194,
+        "text": "    fn emit_output(&mut self, stmt: &OutputCall, indent: usize) {"
+      }
+    ]
+  },
+  "runtime": {
+    "executed": false,
+    "reason": "No suitable OS isolation; Docker daemon unavailable."
+  }
+}

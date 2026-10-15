@@ -1,0 +1,4 @@
+atom a = 42
+output(a >= 40)
+output(a >= 42)
+output(a >= 43)

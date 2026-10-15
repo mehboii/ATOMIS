@@ -1,0 +1,1 @@
+fn f(x: boolean) -> string { if (x) { return "yes" } else { return "no" } }

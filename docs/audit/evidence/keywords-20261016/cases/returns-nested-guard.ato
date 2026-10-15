@@ -1,0 +1,3 @@
+fn f(x: boolean) -> string { guard x else { guard false else { return "nested" }
+return "no" }
+return "yes" }

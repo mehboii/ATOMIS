@@ -1,0 +1,3 @@
+fn f(x: number) -> number { return x }
+atom n = 42
+output(f(n) >= 40)

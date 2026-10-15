@@ -1,0 +1,34 @@
+{
+  "node": {
+    "exe": "node",
+    "args": [
+      "--version"
+    ],
+    "status": 0,
+    "stdout": "v22.22.2\r\n",
+    "stderr": ""
+  },
+  "head": {
+    "exe": "git",
+    "args": [
+      "rev-parse",
+      "HEAD"
+    ],
+    "status": 0,
+    "stdout": "8628a7ec8737c420b3c2351b21508430f3efb36f\n",
+    "stderr": ""
+  },
+  "preserved": {
+    "exe": "git",
+    "args": [
+      "diff",
+      "--name-only",
+      "--",
+      "examples/first_program.ato",
+      "docs/LANGUAGE_SPEC.md"
+    ],
+    "status": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+}

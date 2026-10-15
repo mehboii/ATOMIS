@@ -412,6 +412,7 @@ export class Parser {
           t.type === TokenType.NEWLINE || t.type === TokenType.RBRACE || t.value === ";",
         { angles: true },
       );
+      this.requireText(typeAnnotation, "type annotation");
     }
 
     let initializer: string | undefined;
@@ -423,7 +424,6 @@ export class Parser {
           (t.type === TokenType.PUNCTUATION && t.value === ";"),
       );
     }
-    if (typeAnnotation !== undefined) this.requireText(typeAnnotation, "type annotation");
     if (initializer !== undefined) this.requireText(initializer, "initializer");
     // Consume an optional trailing semicolon.
     if (this.check(TokenType.PUNCTUATION, ";")) this.next();
@@ -496,6 +496,7 @@ export class Parser {
             (t.type === TokenType.OPERATOR && t.value === "="),
           { angles: true },
         );
+        this.requireText(typeAnnotation, "type annotation");
       }
 
       let defaultValue: string | undefined;
@@ -506,7 +507,6 @@ export class Parser {
         );
       }
 
-      if (typeAnnotation !== undefined) this.requireText(typeAnnotation, "type annotation");
       if (defaultValue !== undefined) this.requireText(defaultValue, "default value");
       params.push({
         type: "Param",

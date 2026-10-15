@@ -1,0 +1,2 @@
+atom x: string = "ok"
+x = 1

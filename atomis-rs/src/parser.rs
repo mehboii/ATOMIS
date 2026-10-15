@@ -150,12 +150,19 @@ impl Parser {
     fn expect(&mut self, ttype: TokenType, value: Option<&str>) -> PResult<Token> {
         if !self.check(ttype, value) {
             let t = self.peek(0);
+            // Match the reference lexer's public token labels in diagnostics.
+            let token_name = |kind: TokenType| format!("{kind:?}").to_uppercase();
             let want = match value {
-                Some(v) => format!("{:?} '{}'", ttype, v),
-                None => format!("{:?}", ttype),
+                Some(v) => format!("{} '{}'", token_name(ttype), v),
+                None => token_name(ttype),
             };
             return Err(ParseError {
-                message: format!("Expected {} but found {:?} '{}'", want, t.ttype, t.value),
+                message: format!(
+                    "Expected {} but found {} '{}'",
+                    want,
+                    token_name(t.ttype),
+                    t.value
+                ),
                 line: t.line,
                 col: t.col,
             });

@@ -1,0 +1,2 @@
+fn f(n: number) -> string { guard n >= 0 else { return "negative" }
+return "ok" }
