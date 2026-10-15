@@ -1,0 +1,378 @@
+[
+  {
+    "name": "auxiliary-proto-test.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+    "args": [
+      "test",
+      "--manifest-path",
+      "ghostnet-proto/Cargo.toml",
+      "--all-targets",
+      "--locked"
+    ],
+    "code": 0,
+    "testResults": [
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+    ]
+  },
+  {
+    "name": "auxiliary-vault-test.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+    "args": [
+      "test",
+      "--manifest-path",
+      "ghostvault/Cargo.toml",
+      "--all-targets",
+      "--locked",
+      "--",
+      "--test-threads=1"
+    ],
+    "code": 0,
+    "testResults": [
+      "test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 32.58s",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+    ]
+  },
+  {
+    "name": "baseline-npm-test.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+      "test"
+    ],
+    "code": 0,
+    "testResults": [
+      "lexer: 14 passed, 0 failed",
+      "parser: 15 passed, 0 failed",
+      "4 passed, 0 failed",
+      "69 passed, 0 failed",
+      "12 paired checks passed (code, source maps, diagnostics and exit codes; debug)"
+    ]
+  },
+  {
+    "name": "baseline-rust-duplicate.json",
+    "cmd": "atomis-rs/target/debug/atomis.exe",
+    "args": [
+      "check",
+      "atomis-rs/conformance/dup.ato"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "baseline-rust-scope.json",
+    "cmd": "atomis-rs/target/debug/atomis.exe",
+    "args": [
+      "check",
+      "C:/Users/novtw/Music/atomis/docs/audit/evidence/mission-20261011/baseline-invalid.ato"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "baseline-rust-test.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+    "args": [
+      "test",
+      "--manifest-path",
+      "atomis-rs/Cargo.toml",
+      "--all-targets",
+      "--locked"
+    ],
+    "code": 0,
+    "testResults": [
+      "test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.52s"
+    ]
+  },
+  {
+    "name": "baseline-semantic-corrected-harness.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "test/semantic-regressions.mjs"
+    ],
+    "code": 1,
+    "testResults": [
+      "6 passed, 9 failed (debug)"
+    ]
+  },
+  {
+    "name": "baseline-semantic-regressions.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "test/semantic-regressions.mjs"
+    ],
+    "code": 1,
+    "testResults": [
+      "0 passed, 15 failed (debug)"
+    ]
+  },
+  {
+    "name": "benchmark.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "test/benchmark.mjs",
+      "--release"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "clean-debug-build.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+    "args": [
+      "build",
+      "--manifest-path",
+      "atomis-rs/Cargo.toml",
+      "--locked",
+      "--target-dir",
+      "C:/Users/novtw/Music/atomis/.parity-tmp/mission-clean-5ir6s1"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "final-compiler-check.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+    "args": [
+      "check",
+      "--manifest-path",
+      "atomis-rs/Cargo.toml",
+      "--all-targets",
+      "--locked"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "final-compiler-clippy.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+    "args": [
+      "clippy",
+      "--manifest-path",
+      "atomis-rs/Cargo.toml",
+      "--all-targets",
+      "--all-features",
+      "--locked",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "final-compiler-fmt.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+    "args": [
+      "fmt",
+      "--manifest-path",
+      "atomis-rs/Cargo.toml",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "final-compiler-test.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+    "args": [
+      "test",
+      "--manifest-path",
+      "atomis-rs/Cargo.toml",
+      "--all-targets",
+      "--locked"
+    ],
+    "code": 0,
+    "testResults": [
+      "test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.60s"
+    ]
+  },
+  {
+    "name": "final-diff-check.json",
+    "cmd": "git",
+    "args": [
+      "diff",
+      "--check"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "final-git-diff.json",
+    "cmd": "git",
+    "args": [
+      "diff",
+      "--stat"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "final-npm-audit.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+      "audit",
+      "--json"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "final-npm-test.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+      "test"
+    ],
+    "code": 0,
+    "testResults": [
+      "lexer: 14 passed, 0 failed",
+      "parser: 15 passed, 0 failed",
+      "4 passed, 0 failed",
+      "69 passed, 0 failed",
+      "14 paired checks passed (code, source maps, diagnostics and exit codes; debug)",
+      "16 passed, 0 failed (debug)"
+    ]
+  },
+  {
+    "name": "final-release-build.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+    "args": [
+      "build",
+      "--manifest-path",
+      "atomis-rs/Cargo.toml",
+      "--release",
+      "--locked"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "final-release-parity.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "test/audit-parity.mjs",
+      "--release"
+    ],
+    "code": 0,
+    "testResults": [
+      "14 paired checks passed (code, source maps, diagnostics and exit codes; release)"
+    ]
+  },
+  {
+    "name": "final-release-semantics.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "test/semantic-regressions.mjs",
+      "--release"
+    ],
+    "code": 0,
+    "testResults": [
+      "16 passed, 0 failed (release)"
+    ]
+  },
+  {
+    "name": "final-shared-semantics.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "test/semantic-regressions.mjs"
+    ],
+    "code": 0,
+    "testResults": [
+      "16 passed, 0 failed (debug)"
+    ]
+  },
+  {
+    "name": "final-ts-build.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+      "run",
+      "build"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "final-vault-wasm-no-install.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/wasm-pack.exe",
+    "args": [
+      "test",
+      "--node",
+      "--mode",
+      "no-install",
+      "--no-default-features",
+      "--features",
+      "kdf-portable"
+    ],
+    "code": 1,
+    "testResults": []
+  },
+  {
+    "name": "final-vault-wasm.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/wasm-pack.exe",
+    "args": [
+      "test",
+      "--node",
+      "--no-default-features",
+      "--features",
+      "kdf-portable"
+    ],
+    "code": 1,
+    "testResults": []
+  },
+  {
+    "name": "intermediate-npm-test.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+      "test"
+    ],
+    "code": 1,
+    "testResults": [
+      "lexer: 14 passed, 0 failed",
+      "parser: 15 passed, 0 failed",
+      "4 passed, 0 failed",
+      "69 passed, 0 failed",
+      "14 paired checks passed (code, source maps, diagnostics and exit codes; debug)",
+      "6 passed, 9 failed (debug)"
+    ]
+  },
+  {
+    "name": "intermediate-semantic-regressions.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "test/semantic-regressions.mjs"
+    ],
+    "code": 0,
+    "testResults": [
+      "15 passed, 0 failed (debug)"
+    ]
+  },
+  {
+    "name": "remaining-target-probes.json",
+    "cmd": "C:/Program Files/nodejs/node.exe",
+    "args": [
+      "test/audit-probes.mjs"
+    ],
+    "code": 0,
+    "testResults": []
+  },
+  {
+    "name": "security-tool-availability.json",
+    "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+    "args": [
+      "--list"
+    ],
+    "code": 0,
+    "testResults": []
+  }
+]

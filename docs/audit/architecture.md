@@ -1,5 +1,9 @@
 # Atomis architecture audit
 
+> Prior audit snapshot. Current follow-up verification and changed duplicate/scope
+> behavior are documented in [../ATOMIS_AUDIT.md](../ATOMIS_AUDIT.md),
+> [../LANGUAGE_SPEC.md](../LANGUAGE_SPEC.md) and [../TESTING.md](../TESTING.md).
+
 Discovery recorded 2026-10-11, before implementation changes. No existing `docs/` audit convention was found.
 
 ## Current architecture

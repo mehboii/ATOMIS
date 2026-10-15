@@ -1,0 +1,13 @@
+{
+  "cmd": "C:/Users/novtw/.cargo/bin/wasm-pack.exe",
+  "args": [
+    "test",
+    "--node",
+    "--no-default-features",
+    "--features",
+    "kdf-portable"
+  ],
+  "code": 1,
+  "stdout": "",
+  "stderr": "[INFO]: Checking for the Wasm target...\nwarn: could not canonicalize path C:\\Users\\novtw\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.28s\n[INFO]: Installing wasm-bindgen...\nError: failed to create temp dir for `cargo install wasm-bindgen`\nCaused by: failed to create temp dir for `cargo install wasm-bindgen`\nCaused by: Access is denied. (os error 5)\n"
+}

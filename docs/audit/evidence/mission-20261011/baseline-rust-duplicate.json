@@ -1,0 +1,10 @@
+{
+  "cmd": "atomis-rs/target/debug/atomis.exe",
+  "args": [
+    "check",
+    "atomis-rs/conformance/dup.ato"
+  ],
+  "code": 0,
+  "stdout": "✓ atomis-rs/conformance/dup.ato — no errors\n",
+  "stderr": "atomis-rs/conformance/dup.ato:2:1 warn 'x' is already declared in this scope\natomis-rs/conformance/dup.ato:4:1 warn 'foo' is already declared in this scope\n"
+}

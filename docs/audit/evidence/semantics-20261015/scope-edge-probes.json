@@ -1,0 +1,106 @@
+[
+  {
+    "name": "loop-immediate-escape",
+    "source": "for(let i=0;i<1;i++){console.log(i);}i",
+    "valid": false,
+    "left": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/loop-immediate-escape.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/loop-immediate-escape.ato:1:1 error Undefined identifier 'i'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/loop-immediate-escape.ato — 1 error(s)\n"
+    },
+    "right": {
+      "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+      "args": [
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/loop-immediate-escape.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/loop-immediate-escape.ato:1:1 error Undefined identifier 'i'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/loop-immediate-escape.ato — 1 error(s)\n"
+    }
+  },
+  {
+    "name": "arrow-expression-escape",
+    "source": "const x=[1].map(item=>item)+item;",
+    "valid": false,
+    "left": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/arrow-expression-escape.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/arrow-expression-escape.ato:1:1 error Undefined identifier 'item'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/arrow-expression-escape.ato — 1 error(s)\n"
+    },
+    "right": {
+      "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+      "args": [
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/arrow-expression-escape.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/arrow-expression-escape.ato:1:1 error Undefined identifier 'item'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/arrow-expression-escape.ato — 1 error(s)\n"
+    }
+  },
+  {
+    "name": "named-function",
+    "source": "const f=function local(){return local};\noutput(f())",
+    "valid": true,
+    "left": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/named-function.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/named-function.ato — no errors\n",
+      "stderr": ""
+    },
+    "right": {
+      "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+      "args": [
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/named-function.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/named-function.ato — no errors\n",
+      "stderr": ""
+    }
+  },
+  {
+    "name": "named-function-escape",
+    "source": "const f=function local(){};\noutput(local)",
+    "valid": false,
+    "left": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/named-function-escape.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/named-function-escape.ato:2:1 error Undefined identifier 'local'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/named-function-escape.ato — 1 error(s)\n"
+    },
+    "right": {
+      "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+      "args": [
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/named-function-escape.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/named-function-escape.ato:2:1 error Undefined identifier 'local'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/named-function-escape.ato — 1 error(s)\n"
+    }
+  }
+]

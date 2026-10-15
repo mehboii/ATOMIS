@@ -14,6 +14,7 @@ pub enum TokenType {
     Ident,
     Number,
     String,
+    Regex,
     Operator,
     Punctuation,
     Decorator,
@@ -78,6 +79,10 @@ pub struct Lexer {
     col: usize,
     tokens: Vec<Token>,
     token_start: usize,
+    regex_allowed: bool,
+    control_parens: Vec<bool>,
+    previous_value: String,
+    previous_was_property: bool,
 }
 
 impl Lexer {
@@ -89,6 +94,10 @@ impl Lexer {
             col: 1,
             tokens: Vec::new(),
             token_start: 0,
+            regex_allowed: true,
+            control_parens: Vec::new(),
+            previous_value: String::new(),
+            previous_was_property: false,
         }
     }
 
@@ -126,6 +135,51 @@ impl Lexer {
     }
 
     fn push(&mut self, ttype: TokenType, value: String, line: usize, col: usize) {
+        if !matches!(
+            ttype,
+            TokenType::Newline | TokenType::Comment | TokenType::Eof
+        ) {
+            if value == "(" {
+                self.control_parens.push(
+                    !self.previous_was_property
+                        && ["if", "while", "for", "with", "switch", "catch"]
+                            .contains(&self.previous_value.as_str()),
+                );
+            }
+            self.regex_allowed = if value == ")" {
+                self.control_parens.pop().unwrap_or(false)
+            } else {
+                ttype == TokenType::LBrace
+                    || ttype == TokenType::Operator && !["++", "--", "?."].contains(&value.as_str())
+                    || ![".", "?."].contains(&self.previous_value.as_str())
+                        && [
+                            "(",
+                            "[",
+                            ",",
+                            ";",
+                            ":",
+                            "?",
+                            "return",
+                            "throw",
+                            "case",
+                            "delete",
+                            "void",
+                            "typeof",
+                            "new",
+                            "yield",
+                            "await",
+                            "in",
+                            "instanceof",
+                            "else",
+                            "do",
+                            "match",
+                            "guard",
+                        ]
+                        .contains(&value.as_str())
+            };
+            self.previous_was_property = [".", "?."].contains(&self.previous_value.as_str());
+            self.previous_value = value.clone();
+        }
         self.tokens.push(Token {
             ttype,
             value,
@@ -164,6 +218,27 @@ impl Lexer {
         }
         if ch == '/' && self.peek(1) == '*' {
             self.scan_block_comment(start_line, start_col);
+            return;
+        }
+
+        if ch == '/' && self.previous_value == "}" {
+            self.advance();
+            self.push(TokenType::Invalid, "Ambiguous slash after closing brace; parenthesize the expression or insert a semicolon".into(), start_line, start_col);
+            return;
+        }
+        if ch == '/' && self.regex_allowed {
+            let error = self.consume_regex();
+            let value: String = self.src[self.token_start..self.pos].iter().collect();
+            self.push(
+                if error.is_some() {
+                    TokenType::Invalid
+                } else {
+                    TokenType::Regex
+                },
+                error.unwrap_or(value),
+                start_line,
+                start_col,
+            );
             return;
         }
 
@@ -261,6 +336,74 @@ impl Lexer {
     }
 
     /* ── sub-scanners ──────────────────────────────────────────────────── */
+
+    fn consume_regex(&mut self) -> Option<String> {
+        let regex_start = self.pos + 1;
+        self.advance();
+        let (mut in_class, mut groups, mut closed) = (false, 0i32, false);
+        while !self.at_end() {
+            if self.pos - regex_start > 32768 {
+                return Some("Regex exceeds 32768 character limit".into());
+            }
+            let c = self.advance();
+            if ['\n', '\r', '\u{2028}', '\u{2029}'].contains(&c) {
+                return Some("Unterminated regex literal".into());
+            }
+            if c == '\\' {
+                if self.at_end() || ['\n', '\r', '\u{2028}', '\u{2029}'].contains(&self.peek(0)) {
+                    return Some("Unterminated regex escape".into());
+                }
+                self.advance();
+                continue;
+            }
+            if c == '[' && !in_class {
+                in_class = true;
+            } else if c == ']' && in_class {
+                in_class = false;
+            } else if !in_class && c == '/' {
+                closed = true;
+                break;
+            } else if !in_class && c == '(' {
+                groups += 1;
+                if groups > 64 {
+                    return Some("Maximum regex group nesting depth (64) exceeded".into());
+                }
+            } else if !in_class && c == ')' {
+                groups -= 1;
+                if groups < 0 {
+                    return Some("Unmatched regex group".into());
+                }
+            }
+        }
+        if !closed {
+            return Some(
+                if in_class {
+                    "Unterminated regex character class"
+                } else {
+                    "Unterminated regex literal"
+                }
+                .into(),
+            );
+        }
+        if groups != 0 {
+            return Some("Unterminated regex group".into());
+        }
+        let mut flags = Vec::new();
+        while is_ident_part(self.peek(0)) {
+            let flag = self.advance();
+            if !"gimsuy".contains(flag) {
+                return Some(format!(
+                    "Unsupported regex flag '{}'; expected ES2020 g | i | m | s | u | y",
+                    flag
+                ));
+            }
+            if flags.contains(&flag) {
+                return Some(format!("Duplicate regex flag '{}'", flag));
+            }
+            flags.push(flag);
+        }
+        None
+    }
 
     fn scan_line_comment(&mut self, line: usize, col: usize) {
         let mut text = String::new();
@@ -392,6 +535,12 @@ impl Lexer {
                         self.advance();
                         self.advance();
                     }
+                    '/' if self.template_regex_start() => {
+                        if let Some(error) = self.consume_regex() {
+                            self.push(TokenType::Invalid, error, line, col);
+                            return;
+                        }
+                    }
                     '{' => {
                         self.advance();
                         *contexts.last_mut().unwrap() += 1;
@@ -429,6 +578,28 @@ impl Lexer {
             let text = self.src[start..self.pos].iter().collect();
             self.push(TokenType::String, text, line, col);
         }
+    }
+
+    fn template_regex_start(&self) -> bool {
+        let mut end = self.pos;
+        while end > 0 && self.src[end - 1].is_whitespace() {
+            end -= 1;
+        }
+        if end > 0 && "({[=,:;!?&|+*%~^<>/-".contains(self.src[end - 1]) {
+            return true;
+        }
+        let mut start = end;
+        while start > 0 && is_ident_part(self.src[start - 1]) {
+            start -= 1;
+        }
+        if start > 0 && self.src[start - 1] == '.' {
+            return false;
+        }
+        let word: String = self.src[start..end].iter().collect();
+        [
+            "return", "throw", "case", "yield", "await", "void", "typeof", "delete",
+        ]
+        .contains(&word.as_str())
     }
 
     fn scan_decorator(&mut self, line: usize, col: usize) {

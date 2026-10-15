@@ -1,0 +1,10 @@
+{
+  "exe": "git",
+  "args": [
+    "status",
+    "--short"
+  ],
+  "status": 0,
+  "stdout": " M README.md\n M atomis-rs/README.md\n M atomis-rs/golden/features.ts\n M atomis-rs/src/analyzer.rs\n M atomis-rs/src/cli.rs\n M atomis-rs/src/compiler.rs\n M atomis-rs/src/lexer.rs\n M atomis-rs/src/lib.rs\n M atomis-rs/src/parser.rs\n M atomis-rs/src/transformer.rs\n M atomis-rs/tests/audit.rs\n M docs/audit/architecture.md\n M docs/audit/findings.md\n M docs/audit/language-capabilities.md\n M docs/audit/test-plan.md\n M docs/audit/verification-report.md\n M examples/features.ato\n M package.json\n M src/analyzer.ts\n M src/cli.ts\n M src/compiler.ts\n M src/index.ts\n M src/lexer.ts\n M src/parser.ts\n M src/transformer.ts\n M test/audit-parity.mjs\n M test/audit-tests.mjs\n?? .claude/\n?? .first-program-GazRM5/\n?? Untitled-1.ts\n?? atomis-rs/src/name_check.rs\n?? atomis-rs/tests/names.rs\n?? docs/ATOMIS_AUDIT.md\n?? docs/FIRST_PROGRAM_WALKTHROUGH.md\n?? docs/LANGUAGE_SPEC.md\n?? docs/ROADMAP.md\n?? docs/SECURITY.md\n?? docs/SEMANTIC_EXECUTION_VERIFICATION.md\n?? docs/TESTING.md\n?? docs/audit/evidence/mission-20261011/\n?? docs/audit/evidence/phase2-20261011/\n?? docs/audit/evidence/semantics-20261015/\n?? docs/first-program-evidence/\n?? examples/first_program.ato\n?? examples/loopback.ato\n?? src/name-check.ts\n?? src/source-file.ts\n?? src/target-check.ts\n?? test/benchmark.mjs\n?? test/cases/proto_demo.ato\n?? test/cases/proto_demo.expected\n?? test/import-regressions.mjs\n?? test/name-cases.json\n?? test/name-feature-regressions.mjs\n?? test/name-output-regressions.mjs\n?? test/network-regressions.mjs\n?? test/regex-match-regressions.mjs\n?? test/resource-regressions.mjs\n?? test/semantic-regressions.mjs\n?? test/target-regressions.mjs\n",
+  "stderr": "warning: unable to access 'C:\\Users\\novtw/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\novtw/.config/git/ignore': Permission denied\n"
+}

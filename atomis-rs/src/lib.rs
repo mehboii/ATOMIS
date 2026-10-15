@@ -7,3 +7,5 @@ pub mod lexer;
 pub mod parser;
 pub mod transformer;
 pub mod util;
+
+pub mod name_check;

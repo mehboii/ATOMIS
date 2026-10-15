@@ -8,7 +8,7 @@
 use crate::analyzer::{Diagnostic, Severity};
 use crate::compiler::{compile, CompileOptions};
 use std::collections::HashMap;
-use std::io::{IsTerminal, Write};
+use std::io::{IsTerminal, Read, Write};
 use std::path::{Path, PathBuf};
 use std::time::Duration;
 
@@ -231,7 +231,7 @@ fn build_file(input_path: &str, output_path: &str, c: &Colors) -> bool {
         eprintln!("Source file must have .ato extension");
         return false;
     }
-    let source = match std::fs::read_to_string(input_path) {
+    let source = match read_source_file(input_path) {
         Ok(s) => s,
         Err(e) => {
             eprintln!("{}", c.red(&format!("Cannot read {}: {}", input_path, e)));
@@ -356,7 +356,7 @@ fn cmd_run(args: &[String], c: &Colors) -> i32 {
         eprintln!("Source file must have .ato extension");
         return 1;
     }
-    let source = match std::fs::read_to_string(&file) {
+    let source = match read_source_file(&file) {
         Ok(s) => s,
         Err(e) => {
             eprintln!("{}", c.red(&format!("Cannot read {}: {}", file, e)));
@@ -429,7 +429,7 @@ fn cmd_check(args: &[String], c: &Colors) -> i32 {
         eprintln!("Source file must have .ato extension");
         return 1;
     }
-    let source = match std::fs::read_to_string(&file) {
+    let source = match read_source_file(&file) {
         Ok(s) => s,
         Err(e) => {
             eprintln!("{}", c.red(&format!("Cannot read {}: {}", file, e)));
@@ -597,6 +597,25 @@ fn print_help(c: &Colors) {
         c.bold("atomis"),
         c.bold("Usage:")
     );
+}
+
+/// CLI source reads must remain bounded even if a file grows after metadata.
+fn read_source_file(path: &str) -> std::io::Result<String> {
+    const LIMIT: usize = 8 * 1024 * 1024;
+    let file = std::fs::File::open(path)?;
+    let metadata = file.metadata()?;
+    if !metadata.is_file() {
+        return Err(std::io::Error::other("Source must be a regular file"));
+    }
+    if metadata.len() > LIMIT as u64 {
+        return Err(std::io::Error::other("[1:1] Source exceeds 8 MiB limit"));
+    }
+    let mut bytes = Vec::new();
+    file.take((LIMIT + 1) as u64).read_to_end(&mut bytes)?;
+    if bytes.len() > LIMIT {
+        return Err(std::io::Error::other("[1:1] Source exceeds 8 MiB limit"));
+    }
+    String::from_utf8(bytes).map_err(|_| std::io::Error::other("[1:1] Source must be valid UTF-8"))
 }
 
 /* ── path helpers (mirroring node `path`) ────────────────────────────────── */

@@ -1,0 +1,28 @@
+PASS undefined name
+PASS call arity
+PASS call type
+PASS raw duplicate
+PASS type mismatch
+PASS invalid operator
+PASS immutable assignment
+PASS missing return
+PASS wrong return
+PASS scope escape
+PASS unresolved import
+PASS missing export
+PASS invalid regex range
+PASS invalid regex quantifier
+PASS invalid regex escape
+PASS invalid radix
+PASS valid target fn f(x: number = 2) -> number { ret
+PASS valid target let x = 1;
+fn f() { let x = "inner"
+PASS valid target @import { createServer } from "node
+PASS valid target const r = /[a-z]+/gi;
+PASS valid target @import { basename as leaf } from "
+PASS valid target fn f() -> string { match 2 { 1 => r
+PASS CLI flags, diagnostics and failed output preservation
+PASS target check never executes source
+PASS missing GhostNet runtime is diagnosed
+PASS Rust output can use the standalone target checker
+26 passed, 0 failed

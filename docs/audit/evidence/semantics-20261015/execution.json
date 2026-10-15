@@ -1,0 +1,62 @@
+{
+  "work": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut",
+  "dependencies": {
+    "typescript": "C:\\Users\\novtw\\Music\\atomis\\node_modules\\typescript\\lib\\typescript.js",
+    "tsNode": "C:\\Users\\novtw\\Music\\atomis\\node_modules\\ts-node\\dist\\bin.js"
+  },
+  "commands": [
+    {
+      "exe": "node",
+      "args": [
+        "--version"
+      ],
+      "status": 0,
+      "stdout": "v22.22.2\r\n",
+      "stderr": ""
+    },
+    {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "build",
+        "examples/first_program.ato",
+        "--target-check",
+        "--out",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut"
+      ],
+      "status": 0,
+      "stdout": "✓ examples/first_program.ato → C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\execution-Crjqut\\first_program.ts\n",
+      "stderr": ""
+    },
+    {
+      "exe": "node",
+      "args": [
+        "dist/target-check.js",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/first_program.ts"
+      ],
+      "status": 0,
+      "stdout": "Target check passed (ES2020, Node16 resolution, strict)\n",
+      "stderr": ""
+    },
+    {
+      "exe": "C:/Program Files/Docker/Docker/resources/bin/docker.exe",
+      "args": [
+        "--config",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/docker-config",
+        "image",
+        "ls",
+        "--format",
+        "{{.Repository}}:{{.Tag}}"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "failed to connect to the docker API at npipe:////./pipe/docker_engine; check if the path is correct and if the daemon is running: open //./pipe/docker_engine: The system cannot find the file specified.\n"
+    }
+  ],
+  "generatedTypeScript": "function describe(total: number, threshold: number): string {\n  if (!(total >= threshold)) { return \"Below target\" }\n  return \"Target reached\"\n}\nlet userName: string = \"Ada\"\nlet first: number = 18\nlet second: number = 24\nlet total: number = first + second\nlet threshold: number = 40\nlet reached: boolean = total >= threshold\nconsole.log(`Hello, ${userName}!`)\nconsole.log(`Total: ${total}`)\nconsole.log(`Reached target: ${reached}`)\nconsole.log(describe(total, threshold))\n//# sourceMappingURL=first_program.ts.ato.map\n",
+  "execution": {
+    "attempted": false,
+    "status": "unverified",
+    "reason": "Docker daemon pipe unavailable. No configured OS isolation. Ordinary Node/ts-node and node:vm lack suitable isolation from filesystem, environment, processes and network."
+  }
+}

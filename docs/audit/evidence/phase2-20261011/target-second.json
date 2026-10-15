@@ -1,0 +1,9 @@
+{
+  "cmd": "C:/Program Files/nodejs/node.exe",
+  "args": [
+    "test/target-regressions.mjs"
+  ],
+  "code": 0,
+  "stdout": "PASS undefined name\nPASS call arity\nPASS call type\nPASS raw duplicate\nPASS type mismatch\nPASS invalid operator\nPASS immutable assignment\nPASS missing return\nPASS wrong return\nPASS scope escape\nPASS unresolved import\nPASS missing export\nPASS invalid regex range\nPASS invalid regex quantifier\nPASS invalid regex escape\nPASS invalid radix\nPASS valid target fn f(x: number = 2) -> number { ret\nPASS valid target let x = 1;\nfn f() { let x = \"inner\"\nPASS valid target @import { createServer } from \"node\nPASS valid target const r = /[a-z]+/gi;\nPASS valid target fn f() -> string { match 2 { 1 => r\nPASS CLI flags, diagnostics and failed output preservation\nPASS target check never executes source\nPASS missing GhostNet runtime is diagnosed\nPASS Rust output can use the standalone target checker\n25 passed, 0 failed\n",
+  "stderr": ""
+}

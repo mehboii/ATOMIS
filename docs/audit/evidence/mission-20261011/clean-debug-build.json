@@ -1,0 +1,14 @@
+{
+  "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+  "args": [
+    "build",
+    "--manifest-path",
+    "atomis-rs/Cargo.toml",
+    "--locked",
+    "--target-dir",
+    "C:/Users/novtw/Music/atomis/.parity-tmp/mission-clean-5ir6s1"
+  ],
+  "code": 0,
+  "stdout": "",
+  "stderr": "warn: could not canonicalize path C:\\Users\\novtw\n   Compiling atomis v0.1.0 (C:\\Users\\novtw\\Music\\atomis\\atomis-rs)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.01s\n"
+}

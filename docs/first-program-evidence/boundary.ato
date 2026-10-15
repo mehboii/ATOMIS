@@ -1,0 +1,15 @@
+fn describe(total: number, threshold: number) -> string {
+  guard total >= threshold else { return "Below target" }
+  return "Target reached"
+}
+
+atom userName: string = "Ada"
+atom first: number = 18
+atom second: number = 24
+atom total: number = first + second
+atom threshold: number = 42
+atom reached: boolean = total >= threshold
+output(`Hello, ${userName}!`)
+output(`Total: ${total}`)
+output(`Reached target: ${reached}`)
+output(describe(total, threshold))

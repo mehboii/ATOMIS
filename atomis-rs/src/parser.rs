@@ -566,11 +566,19 @@ impl Parser {
     fn parse_match(&mut self) -> PResult<Statement> {
         let kw = self.expect(TokenType::Keyword, Some("match"))?;
         let discriminant = self.raw_until(|t| t.ttype == TokenType::LBrace, false);
+        self.require_text(&discriminant, "match discriminant")?;
         self.expect(TokenType::LBrace, None)?;
         let mut arms: Vec<MatchArm> = Vec::new();
         self.skip_newlines();
         while !self.check(TokenType::RBrace, None) && !self.at_end() {
             let arm_start = self.peek(0);
+            if arms.last().is_some_and(|a| a.is_wildcard) {
+                return Err(ParseError {
+                    message: "Wildcard must be the final match arm".into(),
+                    line: arm_start.line,
+                    col: arm_start.col,
+                });
+            }
             let pattern =
                 self.raw_until(|t| t.ttype == TokenType::Operator && t.value == "=>", false);
             self.require_text(&pattern, "match pattern")?;
@@ -583,6 +591,7 @@ impl Parser {
                 },
                 false,
             );
+            self.require_text(&result, "match arm body")?;
             arms.push(MatchArm {
                 line: arm_start.line,
                 col: arm_start.col,
@@ -595,6 +604,14 @@ impl Parser {
                 self.next();
                 self.skip_newlines();
             }
+        }
+        if arms.is_empty() {
+            let t = self.peek(0);
+            return Err(ParseError {
+                message: "Expected at least one match arm".into(),
+                line: t.line,
+                col: t.col,
+            });
         }
         self.expect(TokenType::RBrace, None)?;
         Ok(Statement::MatchExpr(MatchExpr {
@@ -788,21 +805,47 @@ impl Parser {
         let mut names: Vec<String> = Vec::new();
         self.skip_newlines();
         while !self.check(TokenType::RBrace, None) && !self.at_end() {
-            if self.check(TokenType::Ident, None) || self.check(TokenType::Keyword, None) {
-                names.push(self.next().value);
-            } else {
-                self.next();
+            let token = self.peek(0);
+            if !matches!(token.ttype, TokenType::Ident | TokenType::Keyword) {
+                return Err(ParseError {
+                    message: "Expected import name".into(),
+                    line: token.line,
+                    col: token.col,
+                });
             }
+            let mut binding = self.next().value;
             self.skip_newlines();
-            if self.check(TokenType::Punctuation, Some(",")) {
+            if self.check(TokenType::Ident, Some("as")) {
                 self.next();
                 self.skip_newlines();
+                let alias = self.peek(0);
+                if !matches!(alias.ttype, TokenType::Ident | TokenType::Keyword) {
+                    return Err(ParseError {
+                        message: "Expected import alias".into(),
+                        line: alias.line,
+                        col: alias.col,
+                    });
+                }
+                binding += &format!(" as {}", self.next().value);
+                self.skip_newlines();
             }
+            names.push(binding);
+            if self.check(TokenType::RBrace, None) {
+                break;
+            }
+            let separator = self.peek(0);
+            if !self.check(TokenType::Punctuation, Some(",")) {
+                return Err(ParseError {
+                    message: "Expected ',' between imports".into(),
+                    line: separator.line,
+                    col: separator.col,
+                });
+            }
+            self.next();
+            self.skip_newlines();
         }
         self.expect(TokenType::RBrace, None)?;
-        if self.check(TokenType::Ident, Some("from")) {
-            self.next();
-        }
+        self.expect(TokenType::Ident, Some("from"))?;
         let module_tok = self.expect(TokenType::String, None)?;
         Ok(Statement::ImportDecl(ImportDecl {
             line: dec.line,
@@ -1028,7 +1071,7 @@ pub fn statement_uses_await(s: &Statement) -> bool {
         Statement::GuardStmt(g) => {
             uses(&g.condition) || g.else_body.iter().any(statement_uses_await)
         }
-        Statement::MatchExpr(m) => uses(&m.discriminant) || m.arms.iter().any(|a| uses(&a.result)),
+        Statement::MatchExpr(m) => uses(&m.discriminant) || m.arms.iter().any(|a| uses(&a.pattern) || uses(&a.result)),
         _ => false,
     }
 }

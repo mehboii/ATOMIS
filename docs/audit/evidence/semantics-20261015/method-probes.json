@@ -1,0 +1,158 @@
+[
+  {
+    "name": "method",
+    "source": "const obj={f(x:number){return x}};\noutput(obj.f(1))",
+    "core": true,
+    "target": true,
+    "ts": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method.ato — no errors\n",
+      "stderr": ""
+    },
+    "rust": {
+      "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+      "args": [
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method.ato — no errors\n",
+      "stderr": ""
+    },
+    "checked": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method.ato",
+        "--target-check"
+      ],
+      "status": 0,
+      "stdout": "✓ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method.ato — no errors\n",
+      "stderr": ""
+    }
+  },
+  {
+    "name": "class",
+    "source": "class C { value:number=1; f(x:number){return this.value+x;} }\noutput(new C().f(2))",
+    "core": true,
+    "target": true,
+    "ts": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/class.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/class.ato — no errors\n",
+      "stderr": ""
+    },
+    "rust": {
+      "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+      "args": [
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/class.ato"
+      ],
+      "status": 0,
+      "stdout": "✓ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/class.ato — no errors\n",
+      "stderr": ""
+    },
+    "checked": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/class.ato",
+        "--target-check"
+      ],
+      "status": 0,
+      "stdout": "✓ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/class.ato — no errors\n",
+      "stderr": ""
+    }
+  },
+  {
+    "name": "method-undefined",
+    "source": "const obj={f(x:number){return missing+x}};",
+    "core": false,
+    "target": false,
+    "ts": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-undefined.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-undefined.ato:1:1 error Undefined identifier 'missing'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-undefined.ato — 1 error(s)\n"
+    },
+    "rust": {
+      "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+      "args": [
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-undefined.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-undefined.ato:1:1 error Undefined identifier 'missing'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-undefined.ato — 1 error(s)\n"
+    },
+    "checked": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-undefined.ato",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-undefined.ato:1:1 error Undefined identifier 'missing'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-undefined.ato — 1 error(s)\n"
+    }
+  },
+  {
+    "name": "method-escape",
+    "source": "const obj={f(x:number){return x}};\noutput(x)",
+    "core": false,
+    "target": false,
+    "ts": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-escape.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-escape.ato — 1 error(s)\n"
+    },
+    "rust": {
+      "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+      "args": [
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-escape.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-escape.ato — 1 error(s)\n"
+    },
+    "checked": {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-escape.ato",
+        "--target-check"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-escape.ato:2:1 error Undefined identifier 'x'\n✗ C:/Users/novtw/Music/atomis/.parity-tmp/execution-Crjqut/method-escape.ato — 1 error(s)\n"
+    }
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "exe": "node",
+    "args": [
+      "--check",
+      "test/name-feature-regressions.mjs"
+    ],
+    "status": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "exe": "node",
+    "args": [
+      "--check",
+      "test/name-output-regressions.mjs"
+    ],
+    "status": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

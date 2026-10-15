@@ -1,0 +1,13 @@
+{
+  "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+  "args": [
+    "test",
+    "--manifest-path",
+    "ghostnet-proto/Cargo.toml",
+    "--all-targets",
+    "--locked"
+  ],
+  "code": 0,
+  "stdout": "\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 9 tests\ntest garbage_is_rejected ... ok\ntest encodes_deterministically ... ok\ntest ack_roundtrip ... ok\ntest peer_announce_roundtrip ... ok\ntest secure_roundtrip ... ok\ntest hello_roundtrip ... ok\ntest trailing_bytes_are_rejected ... ok\ntest unknown_scheme_still_decodes ... ok\ntest unsupported_version_is_rejected ... ok\n\ntest result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+  "stderr": "warn: could not canonicalize path C:\\Users\\novtw\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.23s\n     Running unittests src\\lib.rs (ghostnet-proto\\target\\debug\\deps\\proto-d25b00ef267ea9a7.exe)\n     Running tests\\roundtrip.rs (ghostnet-proto\\target\\debug\\deps\\roundtrip-b91a6e6d41c48f2b.exe)\n"
+}

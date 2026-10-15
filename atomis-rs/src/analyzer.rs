@@ -136,7 +136,7 @@ impl Analyzer {
     fn declare(&mut self, name: &str, line: usize, col: usize) {
         let exists = self.scopes.last().unwrap().names.contains_key(name);
         if exists {
-            self.warn(
+            self.error(
                 format!("'{}' is already declared in this scope", name),
                 line,
                 col,
@@ -164,6 +164,11 @@ impl Analyzer {
 
     fn preregister(&mut self, stmt: &Statement) {
         match stmt {
+            Statement::ImportDecl(s) => {
+                for name in &s.names {
+                    self.declare(name.rsplit(" as ").next().unwrap_or(name), s.line, s.col);
+                }
+            }
             Statement::AtomDecl(s) => self.declare(&s.name, s.line, s.col),
             Statement::FnDecl(s) | Statement::PureFnDecl(s) => self.declare(&s.name, s.line, s.col),
             _ => {}
@@ -407,31 +412,80 @@ impl Analyzer {
     }
 
     fn validate_connects(&mut self, program: &Program) {
-        let all = collect_connects(&program.body);
-        for c in all {
-            if find_id(&self.channel_ids, &c.channel).is_none() {
-                self.error(
-                    format!("connect references undeclared channel '{}'", c.channel),
-                    c.line,
-                    c.col,
-                );
-            }
-            if find_id(&self.node_ids, &c.node).is_none() {
-                self.error(
-                    format!("connect references undeclared node '{}'", c.node),
-                    c.line,
-                    c.col,
-                );
-            }
-            if !VALID_TRANSPORTS.contains(&c.transport.as_str()) {
-                self.error(
-                    format!(
-                        "Invalid transport '{}'; expected one of bluetooth | tcp | ws | ble5",
-                        c.transport
-                    ),
-                    c.line,
-                    c.col,
-                );
+        self.validate_connect_block(&program.body, &[], &[]);
+    }
+
+    // Validate visibility in emitted lexical blocks, not initialization order.
+    fn validate_connect_block(
+        &mut self,
+        body: &[Statement],
+        parent_nodes: &[Vec<String>],
+        parent_channels: &[Vec<String>],
+    ) {
+        let mut node_scopes = parent_nodes.to_vec();
+        let mut channel_scopes = parent_channels.to_vec();
+        node_scopes.push(
+            body.iter()
+                .filter_map(|s| match s {
+                    Statement::NodeDecl(n) => Some(n.id.clone()),
+                    _ => None,
+                })
+                .collect(),
+        );
+        channel_scopes.push(
+            body.iter()
+                .filter_map(|s| match s {
+                    Statement::ChannelDecl(c) => Some(c.id.clone()),
+                    _ => None,
+                })
+                .collect(),
+        );
+        for s in body {
+            match s {
+                Statement::ConnectStmt(c) => {
+                    if find_id(&self.channel_ids, &c.channel).is_none() {
+                        self.error(
+                            format!("connect references undeclared channel '{}'", c.channel),
+                            c.line,
+                            c.col,
+                        );
+                    } else if !channel_scopes
+                        .iter()
+                        .any(|scope| scope.contains(&c.channel))
+                    {
+                        self.error(
+                            format!("connect references out-of-scope channel '{}'", c.channel),
+                            c.line,
+                            c.col,
+                        );
+                    }
+                    if find_id(&self.node_ids, &c.node).is_none() {
+                        self.error(
+                            format!("connect references undeclared node '{}'", c.node),
+                            c.line,
+                            c.col,
+                        );
+                    } else if !node_scopes.iter().any(|scope| scope.contains(&c.node)) {
+                        self.error(
+                            format!("connect references out-of-scope node '{}'", c.node),
+                            c.line,
+                            c.col,
+                        );
+                    }
+                    if !VALID_TRANSPORTS.contains(&c.transport.as_str()) {
+                        self.error(format!("Invalid transport '{}'; expected one of bluetooth | tcp | ws | ble5", c.transport), c.line, c.col);
+                    }
+                }
+                Statement::GuardStmt(g) => {
+                    self.validate_connect_block(&g.else_body, &node_scopes, &channel_scopes)
+                }
+                Statement::CellBlock(c) => {
+                    self.validate_connect_block(&c.body, &node_scopes, &channel_scopes)
+                }
+                Statement::FnDecl(f) | Statement::PureFnDecl(f) => {
+                    self.validate_connect_block(&f.body, &node_scopes, &channel_scopes)
+                }
+                _ => {}
             }
         }
     }
@@ -455,22 +509,6 @@ fn flatten_body(body: &[Statement]) -> Vec<&Statement> {
         match s {
             Statement::GuardStmt(g) => out.extend(flatten_body(&g.else_body)),
             Statement::CellBlock(c) => out.extend(flatten_body(&c.body)),
-            _ => {}
-        }
-    }
-    out
-}
-
-fn collect_connects(body: &[Statement]) -> Vec<&ConnectStmt> {
-    let mut out: Vec<&ConnectStmt> = Vec::new();
-    for s in body {
-        match s {
-            Statement::ConnectStmt(c) => out.push(c),
-            Statement::GuardStmt(g) => out.extend(collect_connects(&g.else_body)),
-            Statement::CellBlock(c) => out.extend(collect_connects(&c.body)),
-            Statement::FnDecl(f) | Statement::PureFnDecl(f) => {
-                out.extend(collect_connects(&f.body))
-            }
             _ => {}
         }
     }

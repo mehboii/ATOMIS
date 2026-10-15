@@ -19,10 +19,13 @@ try{
     const source=join(root,stem+'.ato');
     const left=run('TS',['check',source]),right=run('Rust',['check',source]);
     assert.equal(left.status,right.status);assert.equal(left.stdout,right.stdout);assert.equal(left.stderr,right.stderr);paired++;
-    if(!stem.endsWith('typemismatch')&&!stem.endsWith('ghost')){
+    if(left.status===0){
       for(const engine of ['TS','Rust'])assert.equal(run(engine,['build',source,'--out',join(work,engine)]).status,0);
       const file=basename(stem)+'.ts';
       for(const suffix of ['', '.ato.map'])assert.deepEqual(readFileSync(join(work,'TS',file+suffix)),readFileSync(join(work,'Rust',file+suffix)));paired++;
+    } else {
+      for(const engine of ['TS','Rust']) assert.equal(run(engine,['build',source,'--out',join(work,engine)]).status,1);
+      paired++;
     }
   }
   console.log(`${paired} paired checks passed (code, source maps, diagnostics and exit codes; ${profile})`);

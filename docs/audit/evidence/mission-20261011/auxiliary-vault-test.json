@@ -1,0 +1,15 @@
+{
+  "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+  "args": [
+    "test",
+    "--manifest-path",
+    "ghostvault/Cargo.toml",
+    "--all-targets",
+    "--locked",
+    "--",
+    "--test-threads=1"
+  ],
+  "code": 0,
+  "stdout": "\nrunning 9 tests\ntest tests::cross_profile_blobs_open_either_way ... ok\ntest tests::downgraded_mem_cost_rejected ... ok\ntest tests::empty_passphrase_rejected ... ok\ntest tests::empty_plaintext_roundtrips ... ok\ntest tests::header_layout_is_stable ... ok\ntest tests::oversize_and_truncated_rejected ... ok\ntest tests::roundtrip ... ok\ntest tests::tamper_is_rejected ... ok\ntest tests::wrong_passphrase_fails_generically ... ok\n\ntest result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 32.58s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+  "stderr": "warn: could not canonicalize path C:\\Users\\novtw\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.21s\n     Running unittests src\\lib.rs (ghostvault\\target\\debug\\deps\\ghostvault-854a6380b4bdc6bf.exe)\n     Running tests\\wasm.rs (ghostvault\\target\\debug\\deps\\wasm-8b1a2b2595661c48.exe)\n     Running unittests examples\\gen_vector.rs (ghostvault\\target\\debug\\examples\\gen_vector-bb33bdf157246c16.exe)\n"
+}

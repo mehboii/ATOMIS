@@ -1,0 +1,15 @@
+{
+  "cmd": "C:/Users/novtw/.cargo/bin/wasm-pack.exe",
+  "args": [
+    "test",
+    "--node",
+    "--mode",
+    "no-install",
+    "--no-default-features",
+    "--features",
+    "kdf-portable"
+  ],
+  "code": 1,
+  "stdout": "",
+  "stderr": "warn: could not canonicalize path C:\\Users\\novtw\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s\n[INFO]: Installing wasm-bindgen...\nError: Could not find 'wasm-bindgen-test-runner'.\nCaused by: Could not find 'wasm-bindgen-test-runner'.\n"
+}

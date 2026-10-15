@@ -1,0 +1,9 @@
+{
+  "cmd": "C:/Program Files/nodejs/node.exe",
+  "args": [
+    "test/semantic-regressions.mjs"
+  ],
+  "code": 1,
+  "stdout": "PASS atom shadowing\nPASS nested local connection\nPASS outer capture\nPASS nested guard capture\nPASS nested cell capture\nPASS forward lexical capture\n6 passed, 9 failed (debug)\n",
+  "stderr": "FAIL duplicate atom: Expected values to be strictly equal:\n\nfalse !== true\n\nFAIL duplicate function: Expected values to be strictly equal:\n\nfalse !== true\n\nFAIL mixed declaration: Expected values to be strictly equal:\n\nfalse !== true\n\nFAIL duplicate parameter: Expected values to be strictly equal:\n\nfalse !== true\n\nFAIL parameter/local conflict: Expected values to be strictly equal:\n\nfalse !== true\n\nFAIL node escapes function: Expected values to be strictly equal:\n\nfalse !== true\n\nFAIL channel escapes guard: Expected values to be strictly equal:\n\nfalse !== true\n\nFAIL node escapes cell: Expected values to be strictly equal:\n\nfalse !== true\n\nFAIL sibling function scope: Expected values to be strictly equal:\n\nfalse !== true\n\n"
+}

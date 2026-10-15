@@ -1,0 +1,11 @@
+{
+  "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+  "args": [
+    "check",
+    "examples/first_program.ato",
+    "--target-check"
+  ],
+  "status": 1,
+  "stdout": "",
+  "stderr": "Invalid or incomplete option: --target-check\n"
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "path": "README.md",
+    "bytes": 4430,
+    "sha256": "1cf4c957b94a9c319fb1697442653c8afa7a619cc327f79f8bce3bb35fc31f41"
+  },
+  {
+    "path": "atomis-rs/README.md",
+    "bytes": 3274,
+    "sha256": "c7872b3eb5f975bb1dd3a60bbda410134bac8e24923646ad77e9f266d48526d7"
+  },
+  {
+    "path": "src/analyzer.ts",
+    "bytes": 14119,
+    "sha256": "857682edab6335771603be99c72930492bd17e86219255301edcb2f92b94ebbe"
+  },
+  {
+    "path": "atomis-rs/src/analyzer.rs",
+    "bytes": 18141,
+    "sha256": "663db744d89be0acdd6abfffb82d7642336656f87833c2efc6d55b2213b0e68b"
+  },
+  {
+    "path": "atomis-rs/tests/audit.rs",
+    "bytes": 11635,
+    "sha256": "02f52690e9968e9d7b383e9ba9cf6d5305675db328fed20bbfeeb578f9fa8ee3"
+  },
+  {
+    "path": "examples/features.ato",
+    "bytes": 299,
+    "sha256": "f2f92c1971a2dab44516d720ecfbfb8aa9ab2bed4e58b3b9f578e63e8d18072c"
+  },
+  {
+    "path": "atomis-rs/golden/features.ts",
+    "bytes": 487,
+    "sha256": "52381dc1598d7359a39970c125eabe35691ccd4f0b129f0821701f71502289f8"
+  },
+  {
+    "path": "package.json",
+    "bytes": 1278,
+    "sha256": "70f696dc3dffcb0bf8a49c8f85557786aa9992dc81cec723038c9acae5f39318"
+  },
+  {
+    "path": "test/audit-parity.mjs",
+    "bytes": 1970,
+    "sha256": "15ce319beeb0179dc3be5308d1168219f390385fe577d38f41733d30a180b7a5"
+  },
+  {
+    "path": "test/semantic-regressions.mjs",
+    "bytes": 5909,
+    "sha256": "3022ca810a6e02984e425ecb83817ab8a56eea4c99572224c111c37d22d13b81"
+  },
+  {
+    "path": "test/benchmark.mjs",
+    "bytes": 2597,
+    "sha256": "cedc793cf2fcb67fa2a0e7ffdb76fe0ed8b8dc8cf973048e64e260c7263fc024"
+  },
+  {
+    "path": "docs/ATOMIS_AUDIT.md",
+    "bytes": 9217,
+    "sha256": "ae0e37b52d7bb54fafb55d08e79bd45421d14ed11811715a5545e769ef571b71"
+  },
+  {
+    "path": "docs/LANGUAGE_SPEC.md",
+    "bytes": 8579,
+    "sha256": "778a4058c55e42e84935023f2c3aeee4124714d291a3ef46ffd2c4a4b265b703"
+  },
+  {
+    "path": "docs/SECURITY.md",
+    "bytes": 6293,
+    "sha256": "c4664b8b40c040fd7d22615fe08abd1390113c3ac3e78af2497698befd942767"
+  },
+  {
+    "path": "docs/TESTING.md",
+    "bytes": 5844,
+    "sha256": "18ce7913fdc0a1a01ca2023a005a98b71d94f9d282004c71e1ae5e52466232d0"
+  },
+  {
+    "path": "docs/ROADMAP.md",
+    "bytes": 4835,
+    "sha256": "1f48bc7aca6840e33452bc1b15945ce7e6f60ec81b334e14fbb3fb7ab9735e56"
+  }
+]

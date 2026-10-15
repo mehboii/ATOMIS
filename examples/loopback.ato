@@ -1,0 +1,66 @@
+// Real host-library networking, independent of absent GhostNet constructor helpers.
+@import { createServer, connect as openConnection, Socket } from "node:net"
+@import { encode, decode } from "proto"
+
+async fn main() -> Promise<void> {
+  const peers = new Set<Socket>();
+  let port = 0;
+  const server = createServer({ allowHalfOpen: true }, socket => {
+    peers.add(socket);
+    socket.once("close", () => peers.delete(socket));
+    socket.on("error", () => {}); // The client observes failure; no secret data is logged.
+    socket.setTimeout(2000, () => socket.destroy(new Error("peer timeout")));
+    const chunks: Buffer[] = [];
+    let total = 0;
+    socket.on("data", chunk => {
+      total += chunk.length;
+      if (total > 65536) socket.destroy(new Error("frame too large"));
+      else chunks.push(chunk);
+    });
+    socket.once("end", () => {
+      try { socket.end(encode(decode(new Uint8Array(Buffer.concat(chunks))))); }
+      catch { socket.destroy(new Error("invalid protocol frame")); }
+    });
+  });
+  try {
+    await new Promise<void>((resolve, reject) => {
+      server.once("error", reject);
+      server.listen(0, "127.0.0.1", () => resolve());
+    });
+    const address = server.address();
+    if (!address || typeof address === "string") throw new Error("missing TCP address");
+    port = address.port;
+    const frame = encode({ version: 1, id: 1, body: { Ack: { ack_of: 1, status: "Received", sent_at: 0 } } });
+    const received = await new Promise<Uint8Array>((resolve, reject) => {
+      const socket = openConnection({ host: "127.0.0.1", port: address.port });
+      const chunks: Buffer[] = [];
+      let total = 0;
+      socket.setTimeout(2000, () => socket.destroy(new Error("client timeout")));
+      socket.once("error", reject);
+      socket.once("connect", () => socket.end(frame)); // EOF frames exactly one bounded message.
+      socket.on("data", chunk => {
+        total += chunk.length;
+        if (total > 65536) socket.destroy(new Error("response too large"));
+        else chunks.push(chunk);
+      });
+      socket.once("end", () => resolve(new Uint8Array(Buffer.concat(chunks))));
+    });
+    const reply = decode(received);
+    if (reply.version !== 1 || reply.id !== 1 || reply.body.Ack.status !== "Received") throw new Error("roundtrip mismatch");
+    console.log("loopback proto roundtrip");
+  } finally {
+    for (const peer of peers) peer.destroy();
+    await new Promise<void>(resolve => server.close(() => resolve()));
+  }
+  await new Promise<void>((resolve, reject) => {
+    const socket = openConnection({ host: "127.0.0.1", port });
+    socket.setTimeout(1000, () => socket.destroy(new Error("connection deadline")));
+    socket.once("error", error => {
+      if ((error as NodeJS.ErrnoException).code === "ECONNREFUSED") { console.log("connection refusal handled"); resolve(); }
+      else reject(error);
+    });
+    socket.once("connect", () => { socket.destroy(); reject(new Error("expected refused connection")); });
+  });
+}
+
+main().catch(error => { console.error(error.message); process.exitCode = 1; });

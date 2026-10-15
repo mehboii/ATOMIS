@@ -45,3 +45,13 @@ continuation rules; regex/other raw-source ambiguities remain A012.
 Do not treat Rust output as secure because Rust authored the transpiler: generated TS/Node runs with caller permissions and can read files, use networking or spawn processes. build/check do not intentionally execute the source. CI dependency installation and WASM builds use registry/toolchain access; lockfiles are present, but no complete dependency security inventory or reproducible release attestation was established. No build.rs or unsafe Rust block was found in the three handwritten crates; generated WASM bindings and third-party dependencies were not exhaustively reviewed.
 
 Formal grammar, expression/effect rules, runtime contracts and release platform policy are needed before general conformance can be claimed. Regex correctness, JSX integration, source-span precision, cryptographic threat assumptions and actual GhostNet service authentication remain unverified beyond the described code paths. Rust coverage/fuzz tools were absent; V8 function execution was measured. Seeded property testing does not establish freedom from denial of service.
+
+## Current mission follow-up
+
+See [../ATOMIS_AUDIT.md](../ATOMIS_AUDIT.md) and evidence/mission-20261011/.
+M001 fixes tracked duplicate atoms/functions/parameters from warn to error, preserving
+shadowing. A011 now validates same/enclosing parsed lexical connect visibility in
+both engines; raw TS scopes and runtime initialization order remain outside it.
+A009 is partially addressed: the features example uses explicit returns and passes
+strict target/value assertions; core match repeated evaluation/wildcard issues remain.
+The table above preserves the prior audit state rather than rewriting its evidence.

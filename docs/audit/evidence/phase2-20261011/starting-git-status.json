@@ -1,0 +1,10 @@
+{
+  "cmd": "git",
+  "args": [
+    "status",
+    "--short"
+  ],
+  "code": 0,
+  "stdout": " M README.md\n M atomis-rs/README.md\n M atomis-rs/golden/features.ts\n M atomis-rs/src/analyzer.rs\n M atomis-rs/tests/audit.rs\n M docs/audit/architecture.md\n M docs/audit/findings.md\n M docs/audit/language-capabilities.md\n M docs/audit/test-plan.md\n M docs/audit/verification-report.md\n M examples/features.ato\n M package.json\n M src/analyzer.ts\n M test/audit-parity.mjs\n?? .claude/\n?? Untitled-1.ts\n?? docs/ATOMIS_AUDIT.md\n?? docs/LANGUAGE_SPEC.md\n?? docs/ROADMAP.md\n?? docs/SECURITY.md\n?? docs/TESTING.md\n?? docs/audit/evidence/mission-20261011/\n?? test/benchmark.mjs\n?? test/cases/proto_demo.ato\n?? test/cases/proto_demo.expected\n?? test/semantic-regressions.mjs\n",
+  "stderr": "warning: unable to access 'C:\\Users\\novtw/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\novtw/.config/git/ignore': Permission denied\n"
+}

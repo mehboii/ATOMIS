@@ -1,0 +1,10 @@
+{
+  "cmd": "C:/Program Files/nodejs/node.exe",
+  "args": [
+    "test/audit-parity.mjs",
+    "--release"
+  ],
+  "code": 0,
+  "stdout": "14 paired checks passed (code, source maps, diagnostics and exit codes; release)\n",
+  "stderr": ""
+}

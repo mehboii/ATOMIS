@@ -1,0 +1,10 @@
+{
+  "cmd": "C:/Program Files/nodejs/node.exe",
+  "args": [
+    "test/semantic-regressions.mjs",
+    "--release"
+  ],
+  "code": 0,
+  "stdout": "PASS features example strict target and actual returned values\nPASS duplicate atom\nPASS duplicate function\nPASS mixed declaration\nPASS duplicate parameter\nPASS parameter/local conflict\nPASS node escapes function\nPASS channel escapes guard\nPASS node escapes cell\nPASS sibling function scope\nPASS atom shadowing\nPASS nested local connection\nPASS outer capture\nPASS nested guard capture\nPASS nested cell capture\nPASS forward lexical capture\n16 passed, 0 failed (release)\n",
+  "stderr": ""
+}

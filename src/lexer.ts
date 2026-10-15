@@ -24,6 +24,7 @@ export enum TokenType {
   IDENT = "IDENT",
   NUMBER = "NUMBER",
   STRING = "STRING",
+  REGEX = "REGEX",
   OPERATOR = "OPERATOR",
   PUNCTUATION = "PUNCTUATION",
   DECORATOR = "DECORATOR",
@@ -165,6 +166,10 @@ export class Lexer {
   private readonly tokens: Token[] = [];
   /** Character offset where the token currently being scanned began. */
   private tokenStart = 0;
+  private regexAllowed = true;
+  private readonly controlParens: boolean[] = [];
+  private previousValue = "";
+  private previousWasProperty = false;
 
   /**
    * @param source Raw `.ato` source text.
@@ -208,6 +213,15 @@ export class Lexer {
   }
 
   private push(type: TokenType, value: string, line = this.line, col = this.col): void {
+    if (![TokenType.NEWLINE, TokenType.COMMENT, TokenType.EOF].includes(type)) {
+      if (value === "(") this.controlParens.push(!this.previousWasProperty && ["if", "while", "for", "with", "switch", "catch"].includes(this.previousValue));
+      if (value === ")") this.regexAllowed = this.controlParens.pop() ?? false;
+      else this.regexAllowed = type === TokenType.LBRACE ||
+        type === TokenType.OPERATOR && !["++", "--", "?."].includes(value) ||
+        ![".", "?."].includes(this.previousValue) && ["(", "[", ",", ";", ":", "?", "return", "throw", "case", "delete", "void", "typeof", "new", "yield", "await", "in", "instanceof", "else", "do", "match", "guard"].includes(value);
+      this.previousWasProperty = [".", "?."].includes(this.previousValue);
+      this.previousValue = value;
+    }
     this.tokens.push({
       type,
       value,
@@ -247,6 +261,15 @@ export class Lexer {
     if (ch === "/" && this.peek(1) === "*") {
       this.scanBlockComment(startLine, startCol);
       return;
+    }
+
+    // A brace can end an object or a statement/function body in raw TS.
+    if (ch === "/" && this.previousValue === "}") {
+      this.advance(); this.push(TokenType.INVALID, "Ambiguous slash after closing brace; parenthesize the expression or insert a semicolon", startLine, startCol); return;
+    }
+    if (ch === "/" && this.regexAllowed) {
+      const error = this.consumeRegex();
+      this.push(error ? TokenType.INVALID : TokenType.REGEX, error ?? this.src.slice(this.tokenStart, this.pos), startLine, startCol); return;
     }
 
     // Strings.
@@ -327,6 +350,37 @@ export class Lexer {
 
   /* ── sub-scanners ──────────────────────────────────────────────────── */
 
+  /** Consume an opaque ES2020 regex, without ever evaluating/matching it. */
+  private consumeRegex(): string | undefined {
+    const regexStart = this.pos + 1;
+    this.advance();
+    let inClass = false, groups = 0, closed = false;
+    while (!this.atEnd()) {
+      if (this.pos - regexStart > 32768) return "Regex exceeds 32768 character limit";
+      const c = this.advance();
+      if (["\n", "\r", "\u2028", "\u2029"].includes(c)) return "Unterminated regex literal";
+      if (c === "\\") {
+        if (this.atEnd() || ["\n", "\r", "\u2028", "\u2029"].includes(this.peek())) return "Unterminated regex escape";
+        this.advance(); continue;
+      }
+      if (c === "[" && !inClass) inClass = true;
+      else if (c === "]" && inClass) inClass = false;
+      else if (!inClass && c === "/") { closed = true; break; }
+      else if (!inClass && c === "(") { if (++groups > 64) return "Maximum regex group nesting depth (64) exceeded"; }
+      else if (!inClass && c === ")") { if (--groups < 0) return "Unmatched regex group"; }
+    }
+    if (!closed) return inClass ? "Unterminated regex character class" : "Unterminated regex literal";
+    if (groups !== 0) return "Unterminated regex group";
+    const flags = new Set<string>();
+    while (this.isIdentPart(this.peek())) {
+      const flag = this.advance();
+      if (!"gimsuy".includes(flag)) return "Unsupported regex flag '" + flag + "'; expected ES2020 g | i | m | s | u | y";
+      if (flags.has(flag)) return "Duplicate regex flag '" + flag + "'";
+      flags.add(flag);
+    }
+    return undefined;
+  }
+
   private scanLineComment(line: number, col: number): void {
     let text = "";
     while (!this.atEnd() && this.peek() !== "\n") {
@@ -406,6 +460,9 @@ export class Lexer {
           while (!(this.atEnd() || this.peek() === "*" && this.peek(1) === "/")) this.advance();
           if (this.atEnd()) break;
           this.advance(); this.advance();
+        } else if (c === "/" && this.templateRegexStart()) {
+          const error = this.consumeRegex();
+          if (error) { this.push(TokenType.INVALID, error, line, col); return; }
         } else if (c === "{") { this.advance(); contexts[contexts.length-1]++; }
         else if (c === "}") { this.advance(); if (--contexts[contexts.length-1] === 0) contexts.pop(); }
         else this.advance();
@@ -416,6 +473,16 @@ export class Lexer {
     }
     if (contexts.length) this.push(TokenType.INVALID, "Unterminated template literal", line, col);
     else this.push(TokenType.STRING, this.src.slice(start, this.pos), line, col);
+  }
+
+  private templateRegexStart(): boolean {
+    let end = this.pos;
+    while (end > 0 && /\s/.test(this.src[end - 1])) end--;
+    if ("({[=,:;!?&|+*%~^<>/-".includes(this.src[end - 1] ?? "\0")) return true;
+    let start = end;
+    while (start > 0 && this.isIdentPart(this.src[start - 1])) start--;
+    if (this.src[start - 1] === ".") return false;
+    return ["return", "throw", "case", "yield", "await", "void", "typeof", "delete"].includes(this.src.slice(start, end));
   }
 
   private scanDecorator(line: number, col: number): void {

@@ -1,0 +1,17 @@
+{
+  "cmd": "C:/Users/novtw/.cargo/bin/cargo.exe",
+  "args": [
+    "clippy",
+    "--manifest-path",
+    "atomis-rs/Cargo.toml",
+    "--all-targets",
+    "--all-features",
+    "--locked",
+    "--",
+    "-D",
+    "warnings"
+  ],
+  "code": 0,
+  "stdout": "",
+  "stderr": "warn: could not canonicalize path C:\\Users\\novtw\n    Checking atomis v0.1.0 (C:\\Users\\novtw\\Music\\atomis\\atomis-rs)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.90s\n"
+}

@@ -1,0 +1,6 @@
+{
+  "runtime": "No suitable OS sandbox; Docker daemon pipe absent.",
+  "resourceSuite": "Automatic approval review rejected execution of test/resource-regressions.mjs because it contains runtime/run paths and no suitable OS sandbox was available. Not retried.",
+  "fullNpmTest": "Not run because it invokes generated-code runtime suites.",
+  "preliminaryRuns": "Inspection tool timeout reset the kernel and interrupted preliminary background runs; partial logs are not passed results."
+}

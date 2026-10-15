@@ -1,0 +1,59 @@
+{
+  "counts": {
+    "cases": 101,
+    "passed": 101,
+    "failed": 0,
+    "coreRejected": 44,
+    "targetRejected": 55
+  },
+  "featureExit": 0,
+  "outputPreservationExit": 0,
+  "targetExit": 0,
+  "typescriptUnits": 29,
+  "rustTests": 59,
+  "parityChecks": 14,
+  "execution": "unverified; not attempted",
+  "format": "two preserved pre-existing differences",
+  "hashes": [
+    {
+      "file": "src/name-check.ts",
+      "sha256": "b67af8568efc0e6a7043cf0951301ae73f0dc33723fa6b608849fca5b9c25569"
+    },
+    {
+      "file": "atomis-rs/src/name_check.rs",
+      "sha256": "3bfd94e4e14f966386e327e9b637700c995f559cae1abac8b346694bb70bf01f"
+    },
+    {
+      "file": "src/compiler.ts",
+      "sha256": "564018bee796bf6cb5c87f83a6d7420b6aa09e8f78352ca449226f6023e28639"
+    },
+    {
+      "file": "atomis-rs/src/compiler.rs",
+      "sha256": "62b120a5e1cd7667f1a6a017ce63b40a58ad105cc9f1cb95f6b33c9cae2ab424"
+    },
+    {
+      "file": "test/name-cases.json",
+      "sha256": "4a6de56362f097f62b80b7d91d300f05ee39cd755efbbc8fc52cd1bc874a9be9"
+    },
+    {
+      "file": "test/name-feature-regressions.mjs",
+      "sha256": "28a9d838f20a62fa10dd4460d96fcf680fc5041e7c823db62571d0282336ceae"
+    },
+    {
+      "file": "test/name-output-regressions.mjs",
+      "sha256": "cc04b2075adebe9fc365922f9e8ad7c53884801860e498d5a98f8fbdee8336af"
+    },
+    {
+      "file": "atomis-rs/tests/names.rs",
+      "sha256": "f5d4dc27ac17773c1798e7ff07474438e8e42a15edfc4b0ba0a1decef5057a8b"
+    },
+    {
+      "file": "test/target-regressions.mjs",
+      "sha256": "509c7ee15ba548f6ebf2fa65b26a83beb7caba70acefc53b94ca120863632dce"
+    },
+    {
+      "file": "examples/first_program.ato",
+      "sha256": "7caac84bf8dc723445abc76b94a3a2dc042bc78b101b4d951cd94483acfbedf7"
+    }
+  ]
+}

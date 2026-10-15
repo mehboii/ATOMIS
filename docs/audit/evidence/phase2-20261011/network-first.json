@@ -1,0 +1,9 @@
+{
+  "cmd": "C:/Program Files/nodejs/node.exe",
+  "args": [
+    "test/network-regressions.mjs"
+  ],
+  "code": 0,
+  "stdout": "PASS loopback generated code/maps agree\nPASS TS binary protocol roundtrip, refusal and cleanup\nPASS Rust binary protocol roundtrip, refusal and cleanup\nPASS loopback target validation\nPASS TS actual socket timeout\nPASS Rust actual socket timeout\nPASS TS absent GhostNet runtime fails\nPASS Rust absent GhostNet runtime fails\n8 passed, 0 failed (debug)\n",
+  "stderr": ""
+}

@@ -35,7 +35,7 @@ pub fn compile(source: &str, options: &CompileOptions) -> Result<CompileResult, 
     }
     let tokens = tokenize(source);
     let program = parse(tokens, source)?;
-    let analysis = analyze(&program);
+    let mut analysis = analyze(&program);
     if analysis.has_errors {
         return Ok(CompileResult {
             code: String::new(),
@@ -44,6 +44,16 @@ pub fn compile(source: &str, options: &CompileOptions) -> Result<CompileResult, 
         });
     }
     let transformed = transform(&program);
+    let names = crate::name_check::validate_names(&transformed.code, &transformed.mappings);
+    if !names.is_empty() {
+        analysis.diagnostics.extend(names);
+        analysis.has_errors = true;
+        return Ok(CompileResult {
+            code: String::new(),
+            map: None,
+            analysis,
+        });
+    }
 
     let map_file_name = format!("{}.ato.map", base_name(&options.output_file));
     let emitted = emit(

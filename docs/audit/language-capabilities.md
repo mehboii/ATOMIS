@@ -1,5 +1,9 @@
 # Language capabilities
 
+> Prior audit snapshot. Current follow-up verification and changed duplicate/scope
+> behavior are documented in [../ATOMIS_AUDIT.md](../ATOMIS_AUDIT.md),
+> [../LANGUAGE_SPEC.md](../LANGUAGE_SPEC.md) and [../TESTING.md](../TESTING.md).
+
 Initial discovery, 2026-10-11. Evidence: `src/{ast,parser,analyzer,transformer}.ts` and mirrored `atomis-rs/src/*.rs`. Tested status is updated in verification-report.md.
 
 | Construct | Actual behavior / status |

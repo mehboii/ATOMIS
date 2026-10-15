@@ -1,5 +1,9 @@
 # Verification report
 
+> Prior audit snapshot. Current follow-up verification and changed duplicate/scope
+> behavior are documented in [../ATOMIS_AUDIT.md](../ATOMIS_AUDIT.md),
+> [../LANGUAGE_SPEC.md](../LANGUAGE_SPEC.md) and [../TESTING.md](../TESTING.md).
+
 Audit: 2026-10-11, Windows x86_64. Toolchains observed: Rust/Cargo 1.96.0,
 Node 22.22.2, npm 10.9.7, wasm-pack 0.15.0; wasm32-unknown-unknown installed.
 Source discovery and baseline were recorded before implementation edits.
