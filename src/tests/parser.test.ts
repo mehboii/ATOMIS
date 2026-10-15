@@ -23,7 +23,7 @@ import {
   Program,
 } from "../ast";
 import { tokenize } from "../lexer";
-import { parse } from "../parser";
+import { parse, ParseError } from "../parser";
 
 let passed = 0;
 let failed = 0;
@@ -172,6 +172,13 @@ test("parses output() as an OutputCall", () => {
   const out = ast.body[0] as OutputCall;
   assert.strictEqual(out.type, "OutputCall");
   assert.strictEqual(out.argument, "`Found ${n} peers`");
+});
+
+test("reports empty annotations at the equals sign before reading defaults", () => {
+  for (const source of ["atom x: = 1", "fn f(x: = 1) {}"]) {
+    assert.throws(() => p(source), (error: unknown) =>
+      error instanceof ParseError && error.message === "[1:9] Expected type annotation" && error.line === 1 && error.col === 9);
+  }
 });
 
 console.log(`\nparser: ${passed} passed, ${failed} failed`);

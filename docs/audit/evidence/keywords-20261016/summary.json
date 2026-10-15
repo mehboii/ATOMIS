@@ -1,0 +1,35 @@
+{
+  "counts": {
+    "independent": 70,
+    "coreRejected": 15,
+    "targetRejected": 28,
+    "normalPreserved": 15,
+    "targetPreserved": 28,
+    "rustPreserved": 15,
+    "uncheckedTsReplaced": 13,
+    "uncheckedRustReplaced": 13
+  },
+  "artifactCheck": {
+    "exe": "node",
+    "args": [
+      "test/keyword-artifacts.mjs"
+    ],
+    "status": 0,
+    "stdout": "55 accepted fixtures passed AST/token/emission assertions\n",
+    "stderr": ""
+  },
+  "runtime": {
+    "executed": false,
+    "stdout": null,
+    "stderr": null,
+    "exitCode": null
+  },
+  "wholeProgramPassed": true,
+  "coreCodeMapParity": true,
+  "bugsFixed": [
+    "Rust token labels normalized to reference categories",
+    "TS missing type annotations located before initializer/default parsing"
+  ],
+  "specUnchanged": true,
+  "firstProgramUnchanged": true
+}

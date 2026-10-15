@@ -1,0 +1,2 @@
+atom x: boolean = true
+x = 1

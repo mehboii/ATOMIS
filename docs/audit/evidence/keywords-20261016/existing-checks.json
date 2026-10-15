@@ -1,0 +1,53 @@
+{
+  "rustAllTargets": {
+    "command": "cargo test --manifest-path atomis-rs/Cargo.toml --all-targets --locked",
+    "status": 0,
+    "tests": 61
+  },
+  "checks": [
+    {
+      "exe": "node",
+      "args": [
+        "dist/tests/lexer.test.js"
+      ],
+      "status": 0,
+      "stdout": "lexer.test.ts\n  ✓ tokenizes a simple atom declaration\n  ✓ recognizes Atomis keywords\n  ✓ distinguishes -> (ARROW) from => (OPERATOR)\n  ✓ tokenizes decorators\n  ✓ captures double and single quoted strings\n  ✓ captures template literals with interpolation as one token\n  ✓ handles nested braces inside interpolation\n  ✓ skips line and block comments as COMMENT tokens\n  ✓ emits NEWLINE tokens\n  ✓ recognizes braces as LBRACE/RBRACE\n  ✓ tokenizes multi-character operators greedily\n  ✓ tokenizes numbers including floats and hex\n  ✓ records source positions and offsets\n  ✓ always terminates with an EOF token\n\nlexer: 14 passed, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "exe": "node",
+      "args": [
+        "dist/tests/parser.test.js"
+      ],
+      "status": 0,
+      "stdout": "parser.test.ts\n  ✓ parses an atom declaration with type and initializer\n  ✓ parses a fn declaration with params and return type\n  ✓ parses a pure fn\n  ✓ parses a guard statement\n  ✓ parses a match expression with a wildcard arm\n  ✓ parses a node declaration with kind, id and config\n  ✓ parses a channel declaration and preserves boolean values\n  ✓ parses a mesh declaration\n  ✓ parses a connect statement\n  ✓ parses an encrypt declaration\n  ✓ parses an @import decorator\n  ✓ parses an inline @cell block until a blank line\n  ✓ treats unknown TypeScript as passthrough\n  ✓ does not treat channel.send(...) as a channel declaration\n  ✓ parses output() as an OutputCall\n\nparser: 15 passed, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "exe": "node",
+      "args": [
+        "test/audit-parity.mjs"
+      ],
+      "status": 0,
+      "stdout": "14 paired checks passed (code, source maps, diagnostics and exit codes; debug)\n",
+      "stderr": ""
+    },
+    {
+      "exe": "cargo",
+      "args": [
+        "clippy",
+        "--manifest-path",
+        "atomis-rs/Cargo.toml",
+        "--all-targets",
+        "--all-features",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "status": 0,
+      "stdout": "",
+      "stderr": "warn: could not canonicalize path C:\\Users\\novtw\n    Checking atomis v0.1.0 (C:\\Users\\novtw\\Music\\atomis\\atomis-rs)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.08s\n"
+    }
+  ]
+}

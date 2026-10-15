@@ -1,0 +1,2 @@
+atom userName = "Ada"
+output(`Hello, ${userName}!`)

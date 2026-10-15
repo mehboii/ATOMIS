@@ -1,0 +1,2 @@
+fn add(a: number, b: number) -> number { return a + b }
+output(add(1, 2))

@@ -1,0 +1,494 @@
+{
+  "passed": 16,
+  "records": [
+    {
+      "name": "exact",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": true,
+        "target": true
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        },
+        {
+          "targetCheck": true,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        }
+      ],
+      "rust": {
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "boundary",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 42\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": true,
+        "target": true
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        },
+        {
+          "targetCheck": true,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        }
+      ],
+      "rust": {
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "below",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 43\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": true,
+        "target": true
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        },
+        {
+          "targetCheck": true,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        }
+      ],
+      "rust": {
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "mutable",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n\nfirst = 20\n",
+      "expected": {
+        "core": true,
+        "target": true
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        },
+        {
+          "targetCheck": true,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        }
+      ],
+      "rust": {
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "boolean literal",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = true\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": true,
+        "target": true
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        },
+        {
+          "targetCheck": true,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        }
+      ],
+      "rust": {
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "missing fn name",
+      "source": "fn (total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": false,
+        "target": false
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": false,
+          "parseError": "[1:4] Expected IDENT but found PUNCTUATION '('"
+        },
+        {
+          "targetCheck": true,
+          "ok": false,
+          "parseError": "[1:4] Expected IDENT but found PUNCTUATION '('"
+        }
+      ],
+      "rust": {
+        "status": 1,
+        "stdout": "",
+        "stderr": "[1:4] Expected Ident but found Punctuation '('\n"
+      }
+    },
+    {
+      "name": "missing return annotation",
+      "source": "fn describe(total: number, threshold: number) -> {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": false,
+        "target": false
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": false,
+          "parseError": "[1:50] Expected return type"
+        },
+        {
+          "targetCheck": true,
+          "ok": false,
+          "parseError": "[1:50] Expected return type"
+        }
+      ],
+      "rust": {
+        "status": 1,
+        "stdout": "",
+        "stderr": "[1:50] Expected return type\n"
+      }
+    },
+    {
+      "name": "missing guard else",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": false,
+        "target": false
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": false,
+          "parseError": "[19:1] Expected KEYWORD 'else' but found EOF ''"
+        },
+        {
+          "targetCheck": true,
+          "ok": false,
+          "parseError": "[19:1] Expected KEYWORD 'else' but found EOF ''"
+        }
+      ],
+      "rust": {
+        "status": 1,
+        "stdout": "",
+        "stderr": "[19:1] Expected Keyword 'else' but found Eof ''\n"
+      }
+    },
+    {
+      "name": "missing atom type",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": false,
+        "target": false
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": false,
+          "parseError": "[9:17] Expected type annotation"
+        },
+        {
+          "targetCheck": true,
+          "ok": false,
+          "parseError": "[9:17] Expected type annotation"
+        }
+      ],
+      "rust": {
+        "status": 1,
+        "stdout": "",
+        "stderr": "[9:13] Expected type annotation\n"
+      }
+    },
+    {
+      "name": "unterminated string",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": false,
+        "target": false
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": false,
+          "parseError": "[8:25] Unterminated string"
+        },
+        {
+          "targetCheck": true,
+          "ok": false,
+          "parseError": "[8:25] Unterminated string"
+        }
+      ],
+      "rust": {
+        "status": 1,
+        "stdout": "",
+        "stderr": "[8:25] Unterminated string\n"
+      }
+    },
+    {
+      "name": "undefined call",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(unknownDescribe(total, threshold))\n",
+      "expected": {
+        "core": false,
+        "target": false
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": false,
+          "diagnostics": [
+            {
+              "message": "Undefined identifier 'unknownDescribe'",
+              "severity": "error",
+              "line": 18,
+              "col": 1
+            }
+          ],
+          "withheld": true
+        },
+        {
+          "targetCheck": true,
+          "ok": false,
+          "diagnostics": [
+            {
+              "message": "Undefined identifier 'unknownDescribe'",
+              "severity": "error",
+              "line": 18,
+              "col": 1
+            }
+          ],
+          "withheld": true
+        }
+      ],
+      "rust": {
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato:18:1 error Undefined identifier 'unknownDescribe'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "undefined interpolation",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${unknownName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": false,
+        "target": false
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": false,
+          "diagnostics": [
+            {
+              "message": "Undefined identifier 'unknownName'",
+              "severity": "error",
+              "line": 15,
+              "col": 1
+            }
+          ],
+          "withheld": true
+        },
+        {
+          "targetCheck": true,
+          "ok": false,
+          "diagnostics": [
+            {
+              "message": "Undefined identifier 'unknownName'",
+              "severity": "error",
+              "line": 15,
+              "col": 1
+            }
+          ],
+          "withheld": true
+        }
+      ],
+      "rust": {
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato:15:1 error Undefined identifier 'unknownName'\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato — 1 error(s)\n"
+      }
+    },
+    {
+      "name": "wrong call arity",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total))\n",
+      "expected": {
+        "core": true,
+        "target": false
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        },
+        {
+          "targetCheck": true,
+          "ok": false,
+          "diagnostics": [
+            {
+              "message": "TS2554: Expected 2 arguments, but got 1.",
+              "severity": "error",
+              "line": 18,
+              "col": 1,
+              "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato"
+            }
+          ],
+          "withheld": true
+        }
+      ],
+      "rust": {
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "wrong return type",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return 7\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": true,
+        "target": false
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        },
+        {
+          "targetCheck": true,
+          "ok": false,
+          "diagnostics": [
+            {
+              "message": "TS2322: Type 'number' is not assignable to type 'string'.",
+              "severity": "error",
+              "line": 5,
+              "col": 1,
+              "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato"
+            }
+          ],
+          "withheld": true
+        }
+      ],
+      "rust": {
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "invalid addition",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = 18\natom second: number = 24\natom total: number = true + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": true,
+        "target": false
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": true,
+          "diagnostics": [],
+          "withheld": false
+        },
+        {
+          "targetCheck": true,
+          "ok": false,
+          "diagnostics": [
+            {
+              "message": "TS2365: Operator '+' cannot be applied to types 'boolean' and 'number'.",
+              "severity": "error",
+              "line": 11,
+              "col": 1,
+              "fileName": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato"
+            }
+          ],
+          "withheld": true
+        }
+      ],
+      "rust": {
+        "status": 0,
+        "stdout": "✓ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato — no errors\n",
+        "stderr": ""
+      }
+    },
+    {
+      "name": "literal mismatch",
+      "source": "fn describe(total: number, threshold: number) -> string {\n    guard total >= threshold else {\n        return \"Below target\"\n    }\n    return \"Target reached\"\n}\n\natom userName: string = \"Ada\"\natom first: number = true\natom second: number = 24\natom total: number = first + second\natom threshold: number = 40\natom reached: boolean = total >= threshold\n\noutput(`Hello, ${userName}!`)\noutput(`Total: ${total}`)\noutput(`Reached target: ${reached}`)\noutput(describe(total, threshold))\n",
+      "expected": {
+        "core": false,
+        "target": false
+      },
+      "modes": [
+        {
+          "targetCheck": false,
+          "ok": false,
+          "diagnostics": [
+            {
+              "message": "Type mismatch: atom 'first' is number but initialized with true",
+              "line": 9,
+              "col": 1,
+              "severity": "error"
+            }
+          ],
+          "withheld": true
+        },
+        {
+          "targetCheck": true,
+          "ok": false,
+          "diagnostics": [
+            {
+              "message": "Type mismatch: atom 'first' is number but initialized with true",
+              "line": 9,
+              "col": 1,
+              "severity": "error"
+            }
+          ],
+          "withheld": true
+        }
+      ],
+      "rust": {
+        "status": 1,
+        "stdout": "",
+        "stderr": "C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato:9:1 error Type mismatch: atom 'first' is number but initialized with true\n✗ C:\\Users\\novtw\\Music\\atomis\\.parity-tmp\\keyword-tests-oU6Jtn\\case.ato — 1 error(s)\n"
+      }
+    }
+  ],
+  "generatedProgramExecuted": false
+}

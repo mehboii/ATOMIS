@@ -1,0 +1,3 @@
+atom a = 18
+atom b = 24
+atom sum = a + b

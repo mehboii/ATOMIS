@@ -1,0 +1,30 @@
+{
+  "source": "fn f(x: = 1) {}\n",
+  "before": [
+    {
+      "exe": "node",
+      "args": [
+        "dist/cli.js",
+        "check",
+        "C:/Users/novtw/Music/atomis/docs/audit/evidence/keywords-20261016/empty-parameter-before.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "[1:12] Expected type annotation\n"
+    },
+    {
+      "exe": "C:/Users/novtw/Music/atomis/atomis-rs/target/debug/atomis.exe",
+      "args": [
+        "check",
+        "C:/Users/novtw/Music/atomis/docs/audit/evidence/keywords-20261016/empty-parameter-before.ato"
+      ],
+      "status": 1,
+      "stdout": "",
+      "stderr": "[1:9] Expected type annotation\n"
+    }
+  ],
+  "atom": {
+    "ts": "[1:12] Expected type annotation",
+    "rust": "[1:9] Expected type annotation"
+  }
+}

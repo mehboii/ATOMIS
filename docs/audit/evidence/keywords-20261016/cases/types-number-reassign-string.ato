@@ -1,0 +1,2 @@
+atom x: number = 1
+x = "bad"

@@ -1,0 +1,2 @@
+atom name = "Ada"
+output(`line\n\`quoted\` \${literal} ${name}`)
