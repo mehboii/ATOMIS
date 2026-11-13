@@ -25,6 +25,6 @@ try {
  // Fixed trusted input, local ephemeral port, client deadline, no external service.
  const timeoutFile=join(work,'timeout.ato');writeFileSync(timeoutFile,'@import { createServer, connect as openConnection } from "node:net"\nconst server = createServer(socket => { socket.on("error", () => {}); socket.resume(); });\nserver.listen(0,"127.0.0.1",() => { const address = server.address(); if(!address || typeof address === "string") throw new Error("address"); const socket = openConnection({host:"127.0.0.1",port:address.port}); socket.on("error",()=>{}); socket.setTimeout(100,()=>{ console.log("timeout handled"); socket.destroy(); server.close(); }); });');
  for(const engine of ['TS','Rust'])test(engine+' actual socket timeout',()=>{const r=cli(engine,['run',timeoutFile]);assert.equal(r.status,0,r.stderr);assert.equal(r.stdout,'timeout handled\n');});
- for(const engine of ['TS','Rust'])test(engine+' absent GhostNet runtime fails',()=>{const r=cli(engine,['run',join(root,'examples/network.ato')]);assert.equal(r.status,1);assert.match(r.stderr,/ghostnet|GhostNode|__atomis_cell/);});
+ for(const engine of ['TS','Rust'])test(engine+' absent Kryptos runtime fails',()=>{const r=cli(engine,['run',join(root,'examples/network.ato')]);assert.equal(r.status,1);assert.match(r.stderr,/kryptos|GhostNode|__atomis_cell/);});
 }finally{rmSync(work,{recursive:true,force:true});}
 console.log(passed+' passed, '+failed+' failed ('+profile+')');process.exitCode=failed?1:0;

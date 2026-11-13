@@ -1,6 +1,6 @@
-# ghostnet-proto — wire format SCHEMA
+# kryptos-proto — wire format SCHEMA
 
-This is the one document you read to learn the entire GhostNet wire format.
+This is the one document you read to learn the entire Kryptos wire format.
 The authoritative spec is the Rust types in [`src/lib.rs`](src/lib.rs); this file
 explains them in prose with worked byte-level examples.
 
@@ -80,7 +80,7 @@ scheme made it, and you are never locked out by an unknown one.
 | Value | Constant | Meaning |
 |------:|----------|---------|
 | `0` | `SCHEME_UNSPECIFIED` | Unspecified / reserved. |
-| `1` | `SCHEME_X25519_AES256GCM` | X25519 key agreement + AES-256-GCM (current GhostNet stack). |
+| `1` | `SCHEME_X25519_AES256GCM` | X25519 key agreement + AES-256-GCM (current Kryptos stack). |
 
 ## Message: `Ack`
 Acknowledges a previously received message.

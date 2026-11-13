@@ -45,11 +45,11 @@ enough memory for the recorded `mem_cost`.
 
 ## Crypto
 
-- **AEAD:** AES-256-GCM (`aes-gcm`) — matches the existing ghostnet stack's cipher.
+- **AEAD:** AES-256-GCM (`aes-gcm`) — matches the existing kryptos stack's cipher.
 - **KDF:** Argon2id (`argon2`), parallelism fixed at 1.
 - Provided by vetted RustCrypto crates behind the private `CryptoProvider` trait.
-  A future Rust `ghostnet-crypto` can be dropped in by implementing that trait
-  with **no call-site changes**. (The current `ghostnet-crypto` is TypeScript,
+  A future Rust `kryptos-crypto` can be dropped in by implementing that trait
+  with **no call-site changes**. (The current `kryptos-crypto` is TypeScript,
   built on `@noble/*`; it is not a Rust crate and cannot be a Rust dependency,
   so it could not be used directly here.)
 

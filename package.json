@@ -1,7 +1,7 @@
 {
   "name": "atomis",
   "version": "0.1.0",
-  "description": "Atomis \u00e2\u20ac\u201d a transpiled language that compiles to TypeScript with GhostNet network primitives.",
+  "description": "Atomis \u00e2\u20ac\u201d a transpiled language that compiles to TypeScript with Kryptos network primitives.",
   "license": "MIT",
   "bin": {
     "atomis": "dist/cli.js"

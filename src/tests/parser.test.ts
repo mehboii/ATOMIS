@@ -139,11 +139,11 @@ test("parses an encrypt declaration", () => {
 });
 
 test("parses an @import decorator", () => {
-  const ast = p(`@import { mesh, GhostChannel } from "ghostnet/core"`);
+  const ast = p(`@import { mesh, GhostChannel } from "kryptos/core"`);
   const imp = ast.body[0] as ImportDecl;
   assert.strictEqual(imp.type, "ImportDecl");
   assert.deepStrictEqual(imp.names, ["mesh", "GhostChannel"]);
-  assert.strictEqual(imp.module, "ghostnet/core");
+  assert.strictEqual(imp.module, "kryptos/core");
 });
 
 test("parses an inline @cell block until a blank line", () => {

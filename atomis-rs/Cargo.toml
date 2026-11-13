@@ -1,7 +1,7 @@
 [package]
 name = "atomis"
 version = "0.1.0"
-description = "Atomis — a transpiled language that compiles to TypeScript with GhostNet network primitives. (Rust port of the TypeScript reference transpiler.)"
+description = "Atomis — a transpiled language that compiles to TypeScript with Kryptos network primitives. (Rust port of the TypeScript reference transpiler.)"
 license = "MIT"
 edition = "2021"
 

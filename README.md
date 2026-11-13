@@ -1,19 +1,27 @@
 # Atomis
 
-A transpiled language that compiles to **TypeScript**, with first-class
-**GhostNet** network primitives. File extension: `.ato`.
+Atomis is an experimental language in the **Kryptos** ecosystem that compiles
+to **TypeScript**. It adds language sugar and network primitives to `.ato`
+source files, with a TypeScript reference compiler and a Rust port.
 
 Atomis has three syntax layers:
 
 1. **Layer 1 — Passthrough:** unrecognized statements are preserved as TypeScript text. Compatibility is partial; regex literals and other lexical ambiguities are not reliably supported.
 2. **Layer 2 — Sugar:** `fn`, `atom`, `match`, `guard`, `pure`, `Result` / `Ok` / `Err`.
-3. **Layer 3 — GhostNet:** `node`, `channel`, `mesh`, `connect`, `encrypt`.
+3. **Layer 3 — Kryptos:** `node`, `channel`, `mesh`, `connect`, `encrypt`.
 
 ## Install
 
 ```bash
 npm ci --ignore-scripts
 npm run build      # compiles src/*.ts -> dist/
+```
+
+Run a standalone example after building:
+
+```bash
+node dist/cli.js run test/cases/hello.ato
+# hello atomis
 ```
 
 ## CLI
@@ -24,6 +32,7 @@ node dist/cli.js build <dir> --out <dir>   # transpile a project
 node dist/cli.js watch <dir>               # watch + hot transpile
 node dist/cli.js run <file.ato>            # transpile + execute via ts-node
 node dist/cli.js check <file.ato>          # semantic check only
+node dist/cli.js check <file.ato> --target-check # also validate TypeScript
 node dist/cli.js repl                      # interactive shell
 ```
 
@@ -32,7 +41,7 @@ Or link the `atomis` binary globally with `npm link`, then use `atomis <cmd>`.
 ## Example
 
 ```
-@import { mesh, GhostChannel } from "ghostnet/core"
+@import { mesh, GhostChannel } from "kryptos/core"
 
 atom activeNodes: Node[] = []
 
@@ -64,19 +73,56 @@ Transpiles to clean TypeScript (`new GhostNode(...)`, `new GhostChannel(...)`,
 `__atomis_cell(...)`, `if (!(...)) { ... }`, etc.) plus a `.ato.map` source map.
 
 The networking example demonstrates emitted syntax, not a runnable standalone
-program. GhostNet constructors and notebook helpers require external bindings
+program. Kryptos constructors and notebook helpers require external bindings
 that this repository does not provide. `atom` currently emits plain `let`;
 reactivity is not implemented. `pure` produces heuristic warnings and a comment,
 not an enforced effect system. `match` emits statement branches and requires explicit
 `return` in function arms. The features example is target checked; repeated match
 discriminant evaluation and wildcard ordering remain unresolved.
 
-`check` validates selected Atomis rules, not all TypeScript syntax, imports,
-names or types. Compile emitted TypeScript separately with the target toolchain.
+`check` validates selected Atomis rules. Add `--target-check` to the TypeScript
+CLI's `build`, `check` or `run` command to also validate emitted TypeScript
+against the ES2020/Node target, including imports and types. The Rust CLI can
+use the standalone checker described in the [testing guide](docs/TESTING.md).
 `run` executes trusted source through ts-node with normal user permissions.
 The REPL displays transpiled text. Compilation accepts at most 8 MiB of UTF-8
 source and 64 levels of parsed bracket/Result/template nesting. Errors carry
 1-based coordinates; source maps currently map lines only.
+
+## Kryptos configuration and libraries
+
+The CLI reads `atomis.config.json`. The network target is `kryptos`, and SDK
+settings use the `kryptos` key:
+
+```json
+{
+  "target": "kryptos",
+  "outDir": "./dist",
+  "srcDir": "./src",
+  "kryptos": {
+    "sdkPath": "./kryptos-sdk",
+    "platform": "node"
+  }
+}
+```
+
+These settings do not install an SDK or supply runtime bindings. Networking
+imports use `kryptos/core`; the SDK is an external dependency.
+
+Two independent Rust libraries have vendored Node/WASM packages installed with
+the root npm dependencies:
+
+| Library | Atomis import | Purpose |
+|---------|---------------|---------|
+| [kryptos-proto](kryptos-proto/README.md) | `@import { encode, decode } from "proto"` | CBOR wire format for Kryptos messages |
+| [ghostvault](ghostvault/README.md) | `@import * as vault from "ghostvault"` | Passphrase-protected sealed secrets |
+
+Try their standalone examples:
+
+```bash
+node dist/cli.js run test/cases/proto.ato
+node dist/cli.js run test/cases/vault.ato
+```
 
 ## Architecture
 
@@ -85,7 +131,7 @@ source and 64 levels of parsed bracket/Result/template nesting. Errors carry
 | `src/lexer.ts` | Hand-written tokenizer |
 | `src/parser.ts` | Recursive-descent parser → Atomis AST |
 | `src/ast.ts` | AST node type definitions |
-| `src/analyzer.ts` | Scope/atom tracking, GhostNet & purity validation |
+| `src/analyzer.ts` | Scope/atom tracking, Kryptos & purity validation |
 | `src/transformer.ts` | Atomis AST → TypeScript source |
 | `src/emitter.ts` | Final emission + Source Map v3 |
 | `src/cli.ts` | Command-line interface |
@@ -108,7 +154,7 @@ cargo test --manifest-path atomis-rs/Cargo.toml --all-targets
 
 The npm entry point exposes `compile`; Rust exposes `atomis::compiler::compile`.
 Both return diagnostics and omit code on semantic errors. Tracked duplicate
-declarations are errors; GhostNet connects must reference declarations in a
+declarations are errors; Kryptos connects must reference declarations in a
 same/enclosing parsed lexical scope. Initialization order is not checked. They produce TypeScript,
 not native executables. See [verification](docs/audit/verification-report.md),
 [capabilities](docs/audit/language-capabilities.md) and [tests](docs/audit/test-plan.md).

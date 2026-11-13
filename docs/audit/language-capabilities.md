@@ -31,7 +31,7 @@ Both compilers now reject malformed termination and selected incomplete sugar,
 bound source/nesting, withhold emitted code on semantic errors, preserve quoted
 Result text, expand tested nested Result calls/types, and emit line-only source
 maps. Nested guard await correctly makes a cell async; literal "await" does not.
-Import literal escaping and generated GhostNet identifier collisions have
+Import literal escaping and generated Kryptos identifier collisions have
 regression coverage. The CLI validates file extensions/options, reports version,
 and uses unique exclusive execution files with direct Node invocation.
 
@@ -41,6 +41,6 @@ arithmetic/string/type behaviors are target checked or executed. Network/JSX/
 notebook emission is not evidence of runtime implementation. See verification
 for final counts. Planned/unknown rows above remain limits, not newly implemented
 features. In particular match, regex passthrough, full semantic checking and
-GhostNet lexical scopes remain incomplete.
+Kryptos lexical scopes remain incomplete.
 
 No language release roadmap with specified additional constructs was found. Rust source maps are explicitly deferred; swapping the vault crypto provider is a future integration hook. Native compilation, optimization, general type inference, sandboxed execution, full TS compatibility and networking runtime correctness are not established capabilities.

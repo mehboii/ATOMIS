@@ -249,7 +249,7 @@ impl Transformer {
         }
     }
 
-    /* ── Layer 3: GhostNet ─────────────────────────────────────────────── */
+    /* ── Layer 3: Kryptos ─────────────────────────────────────────────── */
 
     fn emit_node(&mut self, stmt: &NodeDecl, indent: usize) {
         let ident = id_to_ident(&stmt.id);
@@ -341,7 +341,7 @@ fn is_inlineable(stmt: &Statement) -> bool {
     }
 }
 
-/// Build the synthetic `id: "<id>"` config entry for GhostNet objects.
+/// Build the synthetic `id: "<id>"` config entry for Kryptos objects.
 fn id_entry(id: &str, line: usize) -> ConfigEntry {
     ConfigEntry {
         line,
@@ -351,7 +351,7 @@ fn id_entry(id: &str, line: usize) -> ConfigEntry {
     }
 }
 
-/// Convert a GhostNet string id into a safe TS identifier.
+/// Convert a Kryptos string id into a safe TS identifier.
 pub fn id_to_ident(id: &str) -> String {
     let mapped: String = id
         .chars()

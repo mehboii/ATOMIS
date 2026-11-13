@@ -4,7 +4,7 @@
 //! represented here:
 //!  - Layer 1: TypeScript passthrough  (`TSPassthrough`)
 //!  - Layer 2: Atomis sugar            (atom, fn, pure, match, guard, Result)
-//!  - Layer 3: GhostNet primitives     (node, channel, mesh, connect, encrypt)
+//!  - Layer 3: Kryptos primitives     (node, channel, mesh, connect, encrypt)
 //!
 //! Every node carries 1-based `line`/`col` source coordinates, matching the TS
 //! reference, so diagnostics line up exactly.
@@ -123,7 +123,7 @@ pub struct ImportDecl {
     pub module: String,
 }
 
-/// A single `key: value` entry inside a GhostNet config block or `@meta`.
+/// A single `key: value` entry inside a Kryptos config block or `@meta`.
 #[derive(Debug, Clone)]
 pub struct ConfigEntry {
     pub line: usize,
@@ -141,7 +141,7 @@ pub struct MetaBlock {
     pub entries: Vec<ConfigEntry>,
 }
 
-/// A GhostNet node declaration: `node <kind> "<id>" { ...config }`.
+/// A Kryptos node declaration: `node <kind> "<id>" { ...config }`.
 #[derive(Debug, Clone)]
 pub struct NodeDecl {
     pub line: usize,
@@ -151,7 +151,7 @@ pub struct NodeDecl {
     pub config: Vec<ConfigEntry>,
 }
 
-/// A GhostNet channel declaration: `channel "<id>" { ...config }`.
+/// A Kryptos channel declaration: `channel "<id>" { ...config }`.
 #[derive(Debug, Clone)]
 pub struct ChannelDecl {
     pub line: usize,
@@ -160,7 +160,7 @@ pub struct ChannelDecl {
     pub config: Vec<ConfigEntry>,
 }
 
-/// A GhostNet mesh declaration: `mesh "<id>" { ...config }`.
+/// A Kryptos mesh declaration: `mesh "<id>" { ...config }`.
 #[derive(Debug, Clone)]
 pub struct MeshDecl {
     pub line: usize,

@@ -86,7 +86,7 @@ try {
       const tokens=tokenize(source); assert.equal(tokens[0].type,'STRING'); assert.equal(tokens[0].value,source); assert.equal(tokens.length,2);
     }
   });
-  test('generated GhostNet names cannot collide', () => {
+  test('generated Kryptos names cannot collide', () => {
     for (const source of ['node "a-b" {}\nnode "a_b" {}','node "same" {}\nchannel "same" {}']) assert.equal(compile(source,options).analysis.hasErrors,true);
   });
   test('Result generic recursion is bounded', () => assert.throws(() => compile('let x: '+'Result<'.repeat(300)+'number'+',Error>'.repeat(300),options),/nesting/));

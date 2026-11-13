@@ -33,14 +33,14 @@ interface AtomisConfig {
   target?: string;
   outDir?: string;
   srcDir?: string;
-  ghostnet?: { sdkPath?: string; platform?: string };
+  kryptos?: { sdkPath?: string; platform?: string };
   notebook?: { runtime?: string; outputFormat?: string };
   strict?: boolean;
 }
 
 /** Default config used when no `atomis.config.json` is found. */
 const DEFAULT_CONFIG: AtomisConfig = {
-  target: "ghostnet",
+  target: "kryptos",
   outDir: "./dist",
   srcDir: "./src",
   strict: false,

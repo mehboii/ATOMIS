@@ -7,7 +7,7 @@
  * Atomis has three syntax layers, all represented here:
  *  - Layer 1: TypeScript passthrough  ({@link TSPassthrough})
  *  - Layer 2: Atomis sugar            (atom, fn, pure, match, guard, Result)
- *  - Layer 3: GhostNet primitives     (node, channel, mesh, connect, encrypt)
+ *  - Layer 3: Kryptos primitives     (node, channel, mesh, connect, encrypt)
  *
  * Every node extends {@link ASTNode} so that source positions are always
  * available for diagnostics and source-map generation.
@@ -60,7 +60,7 @@ export interface ASTNode {
 
 /**
  * Root node. A program is an ordered list of top-level statements,
- * each of which may be a passthrough chunk or an Atomis/GhostNet construct.
+ * each of which may be a passthrough chunk or an Atomis/Kryptos construct.
  */
 export interface Program extends ASTNode {
   type: "Program";
@@ -255,11 +255,11 @@ export interface MetaBlock extends ASTNode {
 }
 
 /* ────────────────────────────────────────────────────────────────────────
- * Layer 3 — GhostNet primitives
+ * Layer 3 — Kryptos primitives
  * ──────────────────────────────────────────────────────────────────────── */
 
 /**
- * A single `key: value` entry inside a GhostNet config block or `@meta`.
+ * A single `key: value` entry inside a Kryptos config block or `@meta`.
  * `value` is the raw, already-normalized TypeScript expression text
  * (identifiers are quoted where appropriate by the parser).
  */
@@ -272,7 +272,7 @@ export interface ConfigEntry extends ASTNode {
 }
 
 /**
- * A GhostNet node declaration: `node <kind> "<id>" { ...config }`.
+ * A Kryptos node declaration: `node <kind> "<id>" { ...config }`.
  * Transpiles to `const __<id> = new GhostNode({ id, ...config })`.
  */
 export interface NodeDecl extends ASTNode {
@@ -286,7 +286,7 @@ export interface NodeDecl extends ASTNode {
 }
 
 /**
- * A GhostNet channel declaration: `channel "<id>" { ...config }`.
+ * A Kryptos channel declaration: `channel "<id>" { ...config }`.
  * Transpiles to `const __<id> = new GhostChannel({ id, ...config })`.
  */
 export interface ChannelDecl extends ASTNode {
@@ -298,7 +298,7 @@ export interface ChannelDecl extends ASTNode {
 }
 
 /**
- * A GhostNet mesh declaration: `mesh "<id>" { ...config }`.
+ * A Kryptos mesh declaration: `mesh "<id>" { ...config }`.
  * Transpiles to `const __<id> = new GhostMesh({ id, ...config })`.
  */
 export interface MeshDecl extends ASTNode {
@@ -309,7 +309,7 @@ export interface MeshDecl extends ASTNode {
   config: ConfigEntry[];
 }
 
-/** Allowed GhostNet transport identifiers. */
+/** Allowed Kryptos transport identifiers. */
 export type Transport = "bluetooth" | "tcp" | "ws" | "ble5";
 
 /**

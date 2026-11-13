@@ -47,12 +47,12 @@ try {
   const marker=join(work,'must-not-exist');writeFileSync(opts.fileName,'@import { writeFileSync } from "node:fs"\nwriteFileSync('+JSON.stringify(marker)+', "executed")');
   const r=cli(['check',opts.fileName,'--target-check']);assert.equal(r.status,0,r.stderr);assert.equal(existsSync(marker),false);
  });
- test('missing GhostNet runtime is diagnosed',()=>{
+ test('missing Kryptos runtime is diagnosed',()=>{
   const source=readFileSync(join(root,'examples/network.ato'),'utf8');
   const core=compile(source,{...opts,targetCheck:false});assert.ok(core.analysis.diagnostics.some(d=>d.message==="Undefined identifier 'channel'"));
   // Supply only the missing value declaration to reach the independent target-stage dependency checks. No runtime mock is executed.
   const r=compile('declare const channel: { send(...args: unknown[]): void };\n'+source,{...opts,fileName:join(root,'examples/network.ato')});
-  assert.equal(r.analysis.hasErrors,true);assert.equal(r.code,'');assert.ok(r.analysis.diagnostics.some(d=>/ghostnet\/core|GhostNode|__atomis_cell/.test(d.message)));
+  assert.equal(r.analysis.hasErrors,true);assert.equal(r.code,'');assert.ok(r.analysis.diagnostics.some(d=>/kryptos\/core|GhostNode|__atomis_cell/.test(d.message)));
  });
  test('Rust output can use the standalone target checker',()=>{
   const file=opts.fileName;writeFileSync(file,'const x: number = "bad"');

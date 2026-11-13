@@ -365,7 +365,7 @@ fn duplicate_parameters_functions_and_mixed_declarations_are_errors() {
 }
 
 #[test]
-fn ghostnet_connects_respect_lexical_scope() {
+fn kryptos_connects_respect_lexical_scope() {
     for source in [
         "fn setup() { node \"n\" {} }\nchannel \"c\" {}\nconnect \"c\" -> \"n\" via tcp",
         "node \"n\" {}\nguard false else { channel \"c\" {} }\nconnect \"c\" -> \"n\" via tcp",

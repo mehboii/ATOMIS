@@ -288,7 +288,7 @@ export class Transformer {
     }
   }
 
-  /* ── Layer 3: GhostNet ─────────────────────────────────────────────── */
+  /* ── Layer 3: Kryptos ─────────────────────────────────────────────── */
 
   private emitNode(stmt: NodeDecl, indent: number): void {
     const ident = idToIdent(stmt.id);
@@ -328,7 +328,7 @@ export class Transformer {
 
   /* ── shared helpers ────────────────────────────────────────────────── */
 
-  /** Build the synthetic `id: "<id>"` config entry for GhostNet objects. */
+  /** Build the synthetic `id: "<id>"` config entry for Kryptos objects. */
   private idEntry(id: string, line: number): ConfigEntry {
     return {
       type: "ConfigEntry",
@@ -351,7 +351,7 @@ export class Transformer {
 /* ── module-level utilities ──────────────────────────────────────────── */
 
 /**
- * Convert a GhostNet string id into a safe TS identifier, e.g.
+ * Convert a Kryptos string id into a safe TS identifier, e.g.
  * `"node-01"` → `"__node_01"`.
  * @param id The raw id string.
  * @returns A valid TypeScript identifier.

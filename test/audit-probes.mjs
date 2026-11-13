@@ -13,7 +13,7 @@ const probes={
   'regex Result corruption':'const re = /Ok(1)/;',
   'Result whitespace':'output(Ok (1))',
   'Result template interpolation':'output(`${Ok(1)}`)',
-  'GhostNet lexical scope':'fn setup() { node "n" {} }\nchannel "c" {}\nconnect "c" -> "n" via tcp',
+  'Kryptos lexical scope':'fn setup() { node "n" {} }\nchannel "c" {}\nconnect "c" -> "n" via tcp',
   'match repeated evaluation':'match get() { 0 => output(0), 1 => output(1) }',
   'match wildcard ordering':'match x { _ => output(0), 1 => output(1) }',
   'cell nested await':'@cell #x { guard true else { await Promise.resolve() } }',

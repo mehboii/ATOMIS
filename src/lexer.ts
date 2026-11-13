@@ -6,7 +6,7 @@
  *
  * It converts `.ato` source text into a flat {@link Token} stream consumed by
  * the parser. The lexer recognizes a subset of TypeScript lexical forms
- * plus additional Atomis / GhostNet keywords and
+ * plus additional Atomis / Kryptos keywords and
  * the `->` arrow operator.
  *
  * Notable handling:
@@ -54,7 +54,7 @@ export interface Token {
 }
 
 /**
- * Atomis-specific and GhostNet keywords. TypeScript keywords that matter for
+ * Atomis-specific and Kryptos keywords. TypeScript keywords that matter for
  * the sugar layer are also included; everything else (e.g. `class`,
  * `interface`) is lexed as IDENT and handled as passthrough by the parser.
  */
@@ -68,7 +68,7 @@ export const ATOMIS_KEYWORDS: ReadonlySet<string> = new Set([
   "view",
   "output",
   "else",
-  // Layer 3 — GhostNet
+  // Layer 3 — Kryptos
   "node",
   "channel",
   "mesh",
