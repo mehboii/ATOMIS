@@ -342,7 +342,7 @@ impl Analyzer {
         }
     }
 
-    /* ── GhostNet checks ───────────────────────────────────────────────── */
+    /* ── Kryptos checks ───────────────────────────────────────────────── */
 
     fn check_generated_name(&mut self, id: &str, kind: &str, line: usize, col: usize) {
         let name = crate::transformer::id_to_ident(id);

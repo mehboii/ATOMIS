@@ -8,11 +8,11 @@
  *  - Scope resolution — tracks declared names per lexical scope.
  *  - Atom tracking — records every `atom` for reactivity wiring.
  *  - Basic type checking — flags a few obvious mismatches.
- *  - GhostNet validation — unique node/channel/mesh ids; `connect` statements
+ *  - Kryptos validation — unique node/channel/mesh ids; `connect` statements
  *    must reference declared channels and nodes; transports must be one of
  *    `bluetooth | tcp | ws | ble5`.
  *  - Purity checking — warns when a `pure fn` performs obviously impure work
- *    (await, console/output and selected raw GhostNet call text).
+ *    (await, console/output and selected raw Kryptos call text).
  *
  * Results are returned as a structured {@link AnalysisResult} containing a flat
  * list of {@link Diagnostic} objects plus the collected symbol metadata used by
@@ -62,17 +62,17 @@ export interface AnalysisResult {
   diagnostics: Diagnostic[];
   /** Atoms discovered (for reactivity wiring). */
   atoms: AtomInfo[];
-  /** Declared GhostNet node ids. */
+  /** Declared Kryptos node ids. */
   nodeIds: string[];
-  /** Declared GhostNet channel ids. */
+  /** Declared Kryptos channel ids. */
   channelIds: string[];
-  /** Declared GhostNet mesh ids. */
+  /** Declared Kryptos mesh ids. */
   meshIds: string[];
   /** Whether any error-severity diagnostic was produced. */
   hasErrors: boolean;
 }
 
-/** Valid GhostNet transports. */
+/** Valid Kryptos transports. */
 const VALID_TRANSPORTS = new Set(["bluetooth", "tcp", "ws", "ble5"]);
 
 /** A lexical scope mapping declared names to the line they were declared on. */
@@ -286,7 +286,7 @@ export class Analyzer {
     return out;
   }
 
-  /* ── GhostNet checks ───────────────────────────────────────────────── */
+  /* ── Kryptos checks ───────────────────────────────────────────────── */
 
   private checkGeneratedName(id: string, kind: string, line: number, col: number): void {
     const name = "__" + id.replace(/[^A-Za-z0-9_$]/g, "_");

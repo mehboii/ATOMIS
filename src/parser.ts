@@ -9,7 +9,7 @@
  * the three-layer language model:
  *
  *  - At every statement boundary it tries to recognize a Layer-2 (Atomis sugar)
- *    or Layer-3 (GhostNet) construct from the leading token(s).
+ *    or Layer-3 (Kryptos) construct from the leading token(s).
  *  - Anything it does not recognize is collected verbatim as a
  *    {@link TSPassthrough} node (Layer 1), preserving the exact source text by
  *    slicing the original source between token offsets.
@@ -871,7 +871,7 @@ export class Parser {
     };
   }
 
-  /* ── Layer 3: GhostNet ─────────────────────────────────────────────── */
+  /* ── Layer 3: Kryptos ─────────────────────────────────────────────── */
 
   /** Parse `node <kind> "<id>" { config }`. */
   private parseNode(): NodeDecl {

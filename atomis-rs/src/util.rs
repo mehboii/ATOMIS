@@ -2,7 +2,7 @@
 
 /// Faithful reimplementation of JavaScript's `JSON.stringify(string)` for a
 /// single string value. Used wherever the TS reference quotes bare identifiers
-/// / ids / transports (parser `renderConfigValue`, transformer GhostNet emit).
+/// / ids / transports (parser `renderConfigValue`, transformer Kryptos emit).
 ///
 /// Wraps the input in double quotes and escapes per the JSON spec; control
 /// characters below 0x20 without a short escape become `\u00XX`. Non-ASCII

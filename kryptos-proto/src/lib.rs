@@ -1,6 +1,6 @@
-//! # ghostnet-proto — the shared GhostNet wire format
+//! # kryptos-proto — the shared Kryptos wire format
 //!
-//! Everything in GhostNet speaks this format. The whole spec is **these Rust
+//! Everything in Kryptos speaks this format. The whole spec is **these Rust
 //! types** plus [`SCHEMA.md`](../SCHEMA.md) — there is no separate schema
 //! language and no codegen step. If you can read this file, you understand the
 //! wire format.
@@ -43,12 +43,12 @@ pub const PROTO_VERSION: u16 = 1;
 
 /// Scheme not specified / unknown. Reserved.
 pub const SCHEME_UNSPECIFIED: u16 = 0;
-/// X25519 key agreement + AES-256-GCM (the current GhostNet/ghostvault stack).
+/// X25519 key agreement + AES-256-GCM (the current Kryptos/ghostvault stack).
 pub const SCHEME_X25519_AES256GCM: u16 = 1;
 
 /* ── the envelope ─────────────────────────────────────────────────────────── */
 
-/// The outer wrapper around every message sent on GhostNet.
+/// The outer wrapper around every message sent on Kryptos.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Envelope {
     /// Wire-format version. A decoder checks this first; see [`PROTO_VERSION`].
@@ -70,7 +70,7 @@ impl Envelope {
     }
 }
 
-/// The set of messages GhostNet understands. On the wire this is a single-key
+/// The set of messages Kryptos understands. On the wire this is a single-key
 /// CBOR map, e.g. `{"Hello": {...}}`, so the type is self-evident.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Message {
@@ -176,7 +176,7 @@ impl std::error::Error for ProtoError {}
 pub fn encode(envelope: &Envelope) -> Vec<u8> {
     let mut buf = Vec::new();
     ciborium::ser::into_writer(envelope, &mut buf)
-        .expect("encoding ghostnet-proto types to a Vec is infallible");
+        .expect("encoding kryptos-proto types to a Vec is infallible");
     buf
 }
 

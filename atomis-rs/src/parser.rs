@@ -872,7 +872,7 @@ impl Parser {
         }))
     }
 
-    /* ── Layer 3: GhostNet ─────────────────────────────────────────────── */
+    /* ── Layer 3: Kryptos ─────────────────────────────────────────────── */
 
     fn parse_node(&mut self) -> PResult<Statement> {
         let kw = self.expect(TokenType::Keyword, Some("node"))?;
@@ -1273,11 +1273,11 @@ mod tests {
 
     #[test]
     fn parses_import_decorator() {
-        let ast = p(r#"@import { mesh, GhostChannel } from "ghostnet/core""#);
+        let ast = p(r#"@import { mesh, GhostChannel } from "kryptos/core""#);
         match &ast.body[0] {
             Statement::ImportDecl(i) => {
                 assert_eq!(i.names, vec!["mesh", "GhostChannel"]);
-                assert_eq!(i.module, "ghostnet/core");
+                assert_eq!(i.module, "kryptos/core");
             }
             other => panic!("expected ImportDecl, got {:?}", other),
         }

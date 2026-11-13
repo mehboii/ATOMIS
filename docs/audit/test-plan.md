@@ -22,7 +22,7 @@ cargo clippy --manifest-path atomis-rs/Cargo.toml --all-targets --all-features -
 Independent libraries:
 
 ```powershell
-cargo test --manifest-path ghostnet-proto/Cargo.toml --all-targets --locked
+cargo test --manifest-path kryptos-proto/Cargo.toml --all-targets --locked
 cargo test --manifest-path ghostvault/Cargo.toml --all-targets --locked -- --test-threads=1
 # From ghostvault/ (requires wasm-pack, wasm32-unknown-unknown, Node):
 wasm-pack test --node --no-default-features --features kdf-portable
@@ -36,7 +36,7 @@ Repeat fmt/check/clippy against each library manifest. Both vault KDF features m
 | --- | --- | --- |
 | Lexer | 14 tests in each implementation: keywords, operators, token categories, simple spans/comments/templates/numbers | EOF and arbitrary bounded input, Unicode scalar versus UTF-16 spans, CRLF, malformed termination, interpolation quoting/comments, nesting limits |
 | Parser/AST | 15 tests in each implementation; selected node fields asserted | Mandatory fields/separators, unexpected braces, empty/missing-EOF streams, adjacent closing braces, malformed render/config, import escaping, nested await |
-| Analyzer | No baseline unit suite | Semantic emission gate, duplicate-name warnings, GhostNet duplicate IDs/transports, generated-name collisions, scope/purity observations, expression-prefix false positives |
+| Analyzer | No baseline unit suite | Semantic emission gate, duplicate-name warnings, Kryptos duplicate IDs/transports, generated-name collisions, scope/purity observations, expression-prefix false positives |
 | Transformer/emitter/compiler | No baseline Rust assertions | Nested Result calls/types, protected literals/comments, union grouping, deterministic output, exact golden examples, map JSON/source contents; public Rust library integration tests |
 | CLI | Four npm runtime fixtures, including the user's untracked proto_demo fixture | Help/version/errors/flags, missing files, extension rejection, spaces/metacharacters, preserved predictable-temp sentinel, output directory creation, real watcher add/change events |
 | Target | Runtime fixtures | TS parser checks and trusted arithmetic executed with Node; strict TypeScript checker probes in `audit-probes.mjs` |
@@ -52,7 +52,7 @@ Rust integration tests generate 1,000 deterministic inputs of at most 95 Unicode
 
 `cargo fuzz` and `cargo llvm-cov` were unavailable. No coverage-guided fuzz campaign or Rust coverage measurement was performed, and no coverage percentage is claimed. A suitable future fuzz target is `compile(valid UTF-8 <= 64 KiB)` in an isolated subprocess, with malformed token-stream testing separate from the normal lexer-to-parser contract. Add cargo-fuzz only with a justified maintenance workflow. Low-level transform APIs accept trusted AST/text and are not the supported untrusted-source boundary.
 
-Remaining coverage needs: regex/JSX ambiguity, complete TypeScript grammar, generic/default/type edge cases, import aliases/resolution, match exhaustiveness and evaluation semantics, GhostNet lexical visibility, purity/effects, path permissions and symlink/junction loops, watcher removal/mtime races, concurrent run failures, reproducible WASM/native release builds, and Linux/macOS execution. Updated CI adds Rust and the npm audit suite to its OS matrix; the remote workflow was not run in this session.
+Remaining coverage needs: regex/JSX ambiguity, complete TypeScript grammar, generic/default/type edge cases, import aliases/resolution, match exhaustiveness and evaluation semantics, Kryptos lexical visibility, purity/effects, path permissions and symlink/junction loops, watcher removal/mtime races, concurrent run failures, reproducible WASM/native release builds, and Linux/macOS execution. Updated CI adds Rust and the npm audit suite to its OS matrix; the remote workflow was not run in this session.
 
 ## Available JavaScript coverage measurement
 

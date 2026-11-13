@@ -1,4 +1,4 @@
-import { mesh, GhostChannel } from "ghostnet/core"
+import { mesh, GhostChannel } from "kryptos/core"
 let activeNodes: Node[] = []
 const __node_01 = new GhostNode({
   id: "node-01",

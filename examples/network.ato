@@ -1,4 +1,4 @@
-@import { mesh, GhostChannel } from "ghostnet/core"
+@import { mesh, GhostChannel } from "kryptos/core"
 
 atom activeNodes: Node[] = []
 

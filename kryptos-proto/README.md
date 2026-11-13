@@ -1,7 +1,7 @@
-# ghostnet-proto (`proto`)
+# kryptos-proto (`proto`)
 
-The shared **wire format** for GhostNet: how messages are turned into bytes and
-back. Everything in GhostNet uses it.
+The shared **wire format** for Kryptos: how messages are turned into bytes and
+back. Everything in Kryptos uses it.
 
 - **Encoding:** deterministic **CBOR** (via `ciborium`). Same message
   → same bytes, every time.

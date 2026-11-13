@@ -1,9 +1,9 @@
 {
-  "target": "ghostnet",
+  "target": "kryptos",
   "outDir": "./dist",
   "srcDir": "./src",
-  "ghostnet": {
-    "sdkPath": "./ghostnet-sdk",
+  "kryptos": {
+    "sdkPath": "./kryptos-sdk",
     "platform": "node"
   },
   "notebook": {

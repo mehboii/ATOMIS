@@ -1,4 +1,4 @@
-// Real host-library networking, independent of absent GhostNet constructor helpers.
+// Real host-library networking, independent of absent Kryptos constructor helpers.
 @import { createServer, connect as openConnection, Socket } from "node:net"
 @import { encode, decode } from "proto"
 

@@ -24,7 +24,7 @@ output(missing)
 ~~~
 
 The original [analyzer](../src/analyzer.ts) / [Rust analyzer](../atomis-rs/src/analyzer.rs)
-registered parsed names and validated selected literal/GhostNet/purity rules,
+registered parsed names and validated selected literal/Kryptos/purity rules,
 but never resolved references in raw expressions. The [CLI](../src/cli.ts) passed
 targetCheck only when the flag was present. Only the downstream strict
 [target validator](../src/target-check.ts) caught this undefined identifier.

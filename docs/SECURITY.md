@@ -57,7 +57,7 @@ third-party dependencies; proto/vault do. cargo-audit and cargo-deny are not
 installed, so Rust advisory review was not performed. No custom crypto was added.
 No plugin/macro/build.rs implementation was found among handwritten crate files;
 third-party dependency build scripts/toolchain provenance remain outside reviewed
-source. No TLS/socket state machine or live GhostNet authentication was available
+source. No TLS/socket state machine or live Kryptos authentication was available
 to test. Generated bindings were consumed through fixtures, not exhaustively audited.
 
 Native proto/vault tests and vendored WASM fixtures passed. Fresh wasm-pack Node
@@ -91,7 +91,7 @@ remain limitations. No custom cryptography or security certification was introdu
 
 The loopback example uses 127.0.0.1 on an ephemeral port, EOF framing for exactly
 one <=64 KiB message, 2-second socket deadlines and cleanup. It is a demonstration,
-not a public authenticated server; no TLS, replay protection or GhostNet constructor
+not a public authenticated server; no TLS, replay protection or Kryptos constructor
 binding is supplied. Actual roundtrip/refusal/client timeout/missing-runtime tests
 pass. Oversized/malformed network payload branches are code-reviewed but not yet
 black-box fault-injected; the network test is not a protocol security audit.

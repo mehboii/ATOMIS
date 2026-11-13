@@ -124,7 +124,7 @@ Null/undefined, optional values, casts and conversions follow target semantics
 and are not independently checked by Atomis. These host semantics were not all
 runtime-tested in this batch and confer no soundness guarantee.
 
-## GhostNet and notebook integration
+## Kryptos and notebook integration
 
 node/channel/mesh emit const __normalized_id = new Ghost* constructors with
 config. Punctuation in IDs becomes underscore; normalized collisions and global
@@ -157,7 +157,7 @@ concurrency memory model, sandbox or formal memory safety theorem is provided.
 Version reporting is package/crate 0.1.0; separate language-version selection and
 compatibility guarantees are missing. This batch intentionally changes duplicate
 tracked declarations from warnings to errors and rejects out-of-scope connect.
-Migration: rename/remove duplicates; place referenced GhostNet declarations in a
+Migration: rename/remove duplicates; place referenced Kryptos declarations in a
 same/enclosing scope. No accepted syntax or public result shape changed.
 
 Unresolved decisions: complete target validation contract, remaining regex/TS lexical ambiguity,
@@ -215,7 +215,7 @@ run alone requests execution through ts-node; no check/build/target-validation
 operation automatically runs supplied programs. No native backend is introduced.
 The loopback example uses node:net plus proto: one EOF-framed message, 64 KiB caps,
 local ephemeral TCP, socket deadlines and explicit cleanup. It is a host-library
-example and does not provide missing GhostNet constructors/notebook/TLS helpers.
+example and does not provide missing Kryptos constructors/notebook/TLS helpers.
 Sugar inside raw TS try/loop/match-arm bodies is not recursively parsed; use TS
 statements there or existing parsed function/guard/cell blocks.
 
@@ -226,7 +226,7 @@ lowered statement buffer **before emission**, regardless of --target-check.
 This uses the Atomis lexer and lexical binding tables, not TypeScript diagnostic
 filtering, type inference, module loading, or execution. The additional pass is
 src/name-check.ts / atomis-rs/src/name_check.rs, called by each compiler module.
-The structural analyzer still owns Atomis declaration/GhostNet/purity rules.
+The structural analyzer still owns Atomis declaration/Kryptos/purity rules.
 
 The verified binding forms are atom/lowered let, raw let/const/var, fn/lowered
 functions and parameters/defaults, nested functions, named function expressions,

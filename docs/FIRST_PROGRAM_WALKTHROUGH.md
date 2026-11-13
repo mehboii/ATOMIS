@@ -169,7 +169,7 @@ Separate fixtures also compile-check mutable reassignment and a raw TS for loop,
 
 No native code, standalone runtime, built-in sandbox, reactive atom updates, ownership/borrow checking, or independent comprehensive Atomis type system. Ordinary TS const/let, if/else, arithmetic/comparison operators and loops are passthrough/target semantics, not special Atomis expression constructs. Only + and >= were exercised in the final example; do not infer all operator combinations passed. Arrays, bigint, objects and external types are described by the spec but not exercised here. Atomis sugar is not recursively parsed inside raw TS loop/try/match-arm blocks.
 
-match, Result/Ok/Err, async, pure, imports and notebook/render features were not exercised. GhostNet network.ato is an emission example with missing runtime helpers, not a standalone networking app. No services, private credentials, packages, network application, Rust CLI, full repository suite or unrelated library tests were used. All actual program runtime behavior, including boundary branches and printing, remains unverified because isolation was unavailable.
+match, Result/Ok/Err, async, pure, imports and notebook/render features were not exercised. Kryptos network.ato is an emission example with missing runtime helpers, not a standalone networking app. No services, private credentials, packages, network application, Rust CLI, full repository suite or unrelated library tests were used. All actual program runtime behavior, including boundary branches and printing, remains unverified because isolation was unavailable.
 
 ## H. Bugs and limitations discovered
 

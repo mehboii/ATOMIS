@@ -29,11 +29,11 @@ exact golden examples and 1,000 deterministic bounded source inputs. Rust golden
 comparisons normalize only CRLF; existing runtime harness trims whitespace.
 
 New shared corpus verifies duplicate atom/function/parameter errors, parameter
-conflicts, nested shadowing, GhostNet declarations escaping parsed functions/
+conflicts, nested shadowing, Kryptos declarations escaping parsed functions/
 guards/cells/sibling scopes, valid same/enclosing captures, located CLI diagnostic
 parity, exit codes, failed-output preservation and generated map/code equality.
 Valid scope output is checked with the real strict TypeScript checker and only
-ambient declarations for missing GhostNet/helper interfaces, not a mock networking
+ambient declarations for missing Kryptos/helper interfaces, not a mock networking
 runtime. types: [] disables unrelated automatic Node ambient package loading in
 those dependency-free target tests; it does not skip target type checking.
 Features has strict checking and six asserted values from its inspected example.
@@ -41,7 +41,7 @@ Fixed example execution uses a timeout and no supplied host bindings; VM is not
 an isolation guarantee for hostile programs.
 
 ~~~powershell
-cargo test --manifest-path ghostnet-proto/Cargo.toml --all-targets --locked
+cargo test --manifest-path kryptos-proto/Cargo.toml --all-targets --locked
 cargo test --manifest-path ghostvault/Cargo.toml --all-targets --locked -- --test-threads=1
 # Run inside ghostvault/; needs wasm32 target, wasm-pack and wasm-bindgen runner:
 wasm-pack test --node --no-default-features --features kdf-portable
@@ -81,7 +81,7 @@ was regenerated from the changed example with explicit returns, not hand-edited.
 node test/audit-probes.mjs is observational, exits successfully while recording
 known target failures; it is not a passing conformance suite. Fresh evidence
 shows regex brace rejection/corruption, Result spacing/interpolation failure,
-undefined raw names, malformed numeric/escape acceptance, unresolved GhostNet
+undefined raw names, malformed numeric/escape acceptance, unresolved Kryptos
 runtime and match defects. Hello/features pass target checks. Network does not.
 
 ~~~powershell

@@ -8,7 +8,7 @@ Discovery recorded 2026-10-11, before implementation changes. No existing `docs/
 
 ## Current architecture
 
-The root npm package is the TypeScript reference; `atomis-rs/` is a standalone Rust binary crate, not a Cargo workspace. Both target TypeScript. `ghostvault/` and `ghostnet-proto/` are independent library crates exposed through checked-in WASM/JavaScript packages in `vendor/`. They are not compiler dependencies.
+The root npm package is the TypeScript reference; `atomis-rs/` is a standalone Rust binary crate, not a Cargo workspace. Both target TypeScript. `ghostvault/` and `kryptos-proto/` are independent library crates exposed through checked-in WASM/JavaScript packages in `vendor/`. They are not compiler dependencies.
 
 ```
 source -> lexer tokens -> parser Program -> analyzer diagnostics
@@ -21,7 +21,7 @@ source -> lexer tokens -> parser Program -> analyzer diagnostics
 | lexer | Keywords, strings/templates, comments, operators; token values, offsets, 1-based line/column. Rust offsets count Unicode scalars; TS offsets count UTF-16 units. |
 | ast | Statement nodes, parameters/config entries. Expressions/types mostly remain strings; nodes have start coordinates, not full spans. |
 | parser | Recognizes Atomis constructs at statement boundaries; otherwise collects raw TypeScript. Recursive brace bodies, iterative expression collection. No expression precedence tree or recovery. |
-| analyzer | Two-pass declaration registration; duplicate-name warnings, literal-prefix type checks, purity heuristics, GhostNet IDs and connect transports. No general TypeScript name/type checking. |
+| analyzer | Two-pass declaration registration; duplicate-name warnings, literal-prefix type checks, purity heuristics, Kryptos IDs and connect transports. No general TypeScript name/type checking. |
 | transformer | Direct text generation, Result sugar rewriting and per-line mappings. No optimization or intermediate representation. |
 | emitter | Newline/map comment; TS emits Source Map v3. Rust currently returns no map despite its comment. |
 | compiler | Orchestrates all stages. At discovery it transforms even when analysis has errors. |
@@ -38,7 +38,7 @@ Confirmed from source: top-level `}` can leave the parser cursor unchanged; stri
 
 ## Boundaries and limitations
 
-No formal grammar/spec beyond READMEs, code comments, examples, and tests. Full TypeScript passthrough compatibility is an aspiration, not demonstrated. No independent Atomis expression type system, native backend, optimizer, embedded GhostNet runtime, notebook runtime, or interpreter was found. Node kind is stored but not emitted. Several config keys are descriptive only. Vendored WASM provenance and live GhostNet behavior require separate verification.
+No formal grammar/spec beyond READMEs, code comments, examples, and tests. Full TypeScript passthrough compatibility is an aspiration, not demonstrated. No independent Atomis expression type system, native backend, optimizer, embedded Kryptos runtime, notebook runtime, or interpreter was found. Node kind is stored but not emitted. Several config keys are descriptive only. Vendored WASM provenance and live Kryptos behavior require separate verification.
 
 User changes present at discovery: `Untitled-1.ts`, `test/cases/proto_demo.ato`, and `test/cases/proto_demo.expected` are untracked and must be preserved.
 

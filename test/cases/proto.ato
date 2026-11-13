@@ -1,4 +1,4 @@
-// proto.ato — proves ghostnet-proto is importable and usable from ATOMIS code.
+// proto.ato — proves kryptos-proto is importable and usable from ATOMIS code.
 // Run it with:  atomis run test/cases/proto.ato
 @import { encode, decode } from "proto"
 

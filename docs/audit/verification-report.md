@@ -40,7 +40,7 @@ Fixed parser stalls, bounded nesting/source/config parsing, explicit malformed
 literal/comment diagnostics, mandatory syntax fields, atom brace/semicolon
 termination, semantic emission gating, tested Result/literal/type grouping,
 import escaping, nested cell await, type-prefix false positives, generated
-GhostNet name collisions, Rust line maps, CLI options/version/file preservation,
+Kryptos name collisions, Rust line maps, CLI options/version/file preservation,
 shell-free execution, sorted/link-skipping builds, npm entry-point/runtime
 dependency packaging and CI coverage. No tests were removed or weakened.
 
@@ -107,7 +107,7 @@ WASM test command actually executes the three tests.
 See findings.md for evidence, impact, recommendation, risks and required tests.
 Highest remaining issues are regex passthrough/rewrite corruption (A012), match
 evaluation/value/wildcard semantics and invalid features example (A009), missing
-JSX/network runtime integration (A010), and global-versus-lexical GhostNet scope
+JSX/network runtime integration (A010), and global-versus-lexical Kryptos scope
 validation (A011). General TypeScript syntax/types/imports, whitespace/template
 Result sugar, malformed numeric/escape forms and full source spans remain partial.
 The strict target probes in `evidence/remaining-probes.json` confirm that a

@@ -42,11 +42,11 @@ pub struct Token {
     pub end: usize,
 }
 
-/// Atomis-specific and GhostNet keywords (matches `ATOMIS_KEYWORDS`).
+/// Atomis-specific and Kryptos keywords (matches `ATOMIS_KEYWORDS`).
 const ATOMIS_KEYWORDS: &[&str] = &[
     // Layer 2 — sugar
     "atom", "fn", "pure", "match", "guard", "view", "output", "else",
-    // Layer 3 — GhostNet
+    // Layer 3 — Kryptos
     "node", "channel", "mesh", "connect", "encrypt", "via",
     // Result / network type identifiers
     "Ok", "Err", "Result", "Node", "Channel", "Mesh", "Packet", "KeyPair",

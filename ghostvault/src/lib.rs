@@ -12,7 +12,7 @@
 //!
 //! Crypto is supplied by vetted RustCrypto crates (AES-256-GCM via `aes-gcm`,
 //! Argon2id via `argon2`) behind the private [`CryptoProvider`] trait, so a
-//! future Rust `ghostnet-crypto` can be substituted without touching call sites.
+//! future Rust `kryptos-crypto` can be substituted without touching call sites.
 //!
 //! ## Sealed-blob format (self-describing, target-independent)
 //! ```text
@@ -136,7 +136,7 @@ fn fill_random(buf: &mut [u8]) -> VResult<()> {
     getrandom::getrandom(buf).map_err(|_| VaultError::e())
 }
 
-/* ── crypto provider boundary (swap point for a future Rust ghostnet-crypto)  */
+/* ── crypto provider boundary (swap point for a future Rust kryptos-crypto)  */
 
 trait CryptoProvider {
     fn kdf_derive(

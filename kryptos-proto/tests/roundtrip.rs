@@ -1,4 +1,4 @@
-//! Worked examples / tutorial for ghostnet-proto.
+//! Worked examples / tutorial for kryptos-proto.
 //!
 //! Every test follows the same three steps you'll use in real code:
 //!   1. build a message (an `Envelope` wrapping a `Message`),

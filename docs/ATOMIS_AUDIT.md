@@ -22,7 +22,7 @@ CLI run additionally invokes ts-node/Node. check calls the compiler but writes
 nothing; success does not establish complete target validity.
 
 Root package.json/package-lock.json and tsconfig.json define npm builds.
-atomis-rs, ghostvault and ghostnet-proto have separate Cargo manifests/locks;
+atomis-rs, ghostvault and kryptos-proto have separate Cargo manifests/locks;
 there is no root Cargo workspace. The compiler has no third-party Rust crates.
 The auxiliary crates supply vault crypto and a CBOR wire codec, not a socket
 runtime. vendor/ contains maintained distribution copies of generated WASM
@@ -42,7 +42,7 @@ The new semantic corpus reproduced nine failures; six valid cases passed.
 The initial version of that harness also had ambient Node type-resolution and
 diagnostic-format mistakes, recorded separately and corrected without changing
 compiler expectations. Baseline CLI evidence independently shows Rust accepting
-both duplicate bindings and an inaccessible GhostNet node.
+both duplicate bindings and an inaccessible Kryptos node.
 
 ## Capability status
 
@@ -119,7 +119,7 @@ dependency upgrade or handwritten WASM modification occurred.
 | A009 P1 fixed statement behavior | Repeated discriminant and wildcard double execution violated a dependable ordered match. Spec was defined before changes. switch evaluates once, tests cases in order, uses separate blocks/break and a final-only wildcard. | Shared strict-target/runtime tests count discriminant/pattern side effects, overlap, unmatched cases, return, nesting and wildcard-only evaluation. Empty/bodiless/wildcard-shadowed matches fail with coordinates. Only features golden was regenerated through compiler. |
 | P1 named import corruption fixed | Real networking exposed connect as openConnection emitted as three imports. Both parsers now preserve aliases and require names/commas/from; analyzers track imported local names. | import-regressions.mjs pairs output/maps/runtime and malformed/duplicate-local failures; Rust audit.rs. |
 | A020 P1/P2 partial, target stage implemented | Atomis-only semantics remain partial. Optional strict ES2020/Node validation catches general names/calls/types/operators/const/returns/imports/literals and regex grammar without execution. | target-regressions.mjs checks no-code/map error results, CLI exit codes, locations, preserved TS/map outputs, and a must-not-execute marker. Rust can validate emitted files with standalone tool; pre-write Rust CLI integration missing. |
-| Host networking P2 useful integration verified | GhostNet constructors/helpers remain absent; no architecture was invented. examples/loopback.ato uses existing node:net plus vendored proto for a real bounded TCP binary roundtrip. | network-regressions.mjs tests TS/Rust execution, exact output/maps, refusal, actual socket timeout, cleanup and missing GhostNet runtime failures. Local loopback only; no TLS/live GhostNet claim. |
+| Host networking P2 useful integration verified | Kryptos constructors/helpers remain absent; no architecture was invented. examples/loopback.ato uses existing node:net plus vendored proto for a real bounded TCP binary roundtrip. | network-regressions.mjs tests TS/Rust execution, exact output/maps, refusal, actual socket timeout, cleanup and missing Kryptos runtime failures. Local loopback only; no TLS/live Kryptos claim. |
 | Source/resource P2 fixed tested boundary | Both CLIs read entire source before size rejection; TS decoded malformed UTF-8 with replacement. Reads now use one descriptor, bounded 8 MiB + sentinel byte, strict UTF-8 and regular-file checks. Regex pattern/group limits prevent unbounded opaque pattern nesting before target parsing. | resource-regressions.mjs verifies oversized/malformed/deep/long rejection, preserved output, exact accepted boundaries and empty files; Rust integration tests. File-growth protection reviewed, not race-stress-tested. |
 
 Implementation retains direct AST-to-TS architecture and existing public compile
@@ -132,7 +132,7 @@ closing brace requires disambiguation; oversized regex and invalid UTF-8 reject.
 Current partial/missing areas: full TS/JSX lexical compatibility (including brace
 slash ambiguity and newer regex flags), recursive sugar inside raw TS blocks,
 Rust integrated pre-write target checking, precise diagnostic spans/columns,
-Atomis module graph/.ato imports, GhostNet/helper runtime and TLS/authentication,
+Atomis module graph/.ato imports, Kryptos/helper runtime and TLS/authentication,
 target-check quotas for imported graphs, atomic output pairs and exhaustive crypto
 review. Optional target checking is not a security sandbox and does not prove
 production readiness. Final command/test details are recorded in phase-two logs.
@@ -161,7 +161,7 @@ direct constant rebinding and duplicate bindings. Additional type/call/return/
 operator/module checks still belong to optional strict target checking.
 Full raw TS binding/type/value namespace compatibility, initialization analysis,
 advanced classes/types/labels and precise expression spans remain partial.
-Recognition of external GhostNet/notebook helper names does not provide runtimes.
+Recognition of external Kryptos/notebook helper names does not provide runtimes.
 
 Fresh completed checks: TS build and 29 lexer/parser units; 59 Rust compiler
 tests including golden/conformance/native name cases; 14 paired parity checks;
