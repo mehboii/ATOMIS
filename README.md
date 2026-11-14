@@ -2,7 +2,7 @@
 
 Atomis is an experimental language in the **Kryptos** ecosystem that compiles
 to **TypeScript**. It adds language sugar and network primitives to `.ato`
-source files, with a TypeScript reference compiler and a Rust port.
+source files, with a TypeScript reference compiler and a Rust port
 
 Atomis has three syntax layers:
 
